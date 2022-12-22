@@ -1,0 +1,74 @@
+/** =================================================================
+*
+*    Initial CSS States
+*
+*    Removes all default margin and padding for all objects on the page.
+*    This ensures that all spacing becomes intentional.
+*
+*  ================================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-padding-top: 125px; /* height of sticky header */
+    padding-top: 125px; /* Padding top to stop the fixed navbars overlapping the body */
+}
+
+/* This is the root element
+All rem units will refer to this font size */
+html,
+body {
+    /*min-height: 100vh;*/
+    background: #d6004a08;
+    color: #0c0833;
+    font-family: canada-type-gibson, Helvetica, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-multi-display {
+    font-family: multi-display, Helvetica, sans-serif;
+    color: #d6004a;
+}
+
+h1 {
+    font-size: 50px;
+}
+
+h2 {
+    font-size: 40px;
+}
+
+a {
+    color: #d6004a;
+}
+
+/** =================================================================
+*
+*    Site: top bar
+*
+*  ================================================================= */
+
+header.fixed-top {
+    background: #d6004a;
+}
+
+/** =================================================================
+*
+*    Site: side bar
+*
+*  ================================================================= */
+
+.nav-link {
+    color: #d6004a;
+}
