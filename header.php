@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="https://use.typekit.net/unv5bor.css">
 
     <!-- Custom CSS / JS -->
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
 
     <title>Playm8</title>
     <link rel="icon" type="image/x-icon" href="./assets/images/Playm8_favicon_32x32.png">
@@ -37,7 +37,7 @@
         <nav id="main-navbar" class="navbar navbar-expand-lg">
             <div class="container">
                 <a class="navbar-brand" href="./index.html">
-                    <img src="/assets/images/logo.svg" alt="Logo" class="img-fluid logo">
+                    <img src="./assets/images/logo.svg" alt="Logo" class="img-fluid logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="bar"></span>
@@ -47,7 +47,7 @@
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav align-items-center">
                         <li class="nav-item d-none d-md-block">
-                            <a class="nav-link btn btn-register nav-btn" href="./register.php" role="button">
+                            <a class="nav-link btn btn-register nav-btn" href="./signup.php" role="button">
                                 Register
                             </a>
                         </li>
