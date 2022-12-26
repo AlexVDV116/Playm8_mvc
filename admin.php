@@ -1,15 +1,5 @@
 <?php
-
-require_once 'model/Account.php';
-require_once 'model/userProfile.php';
-require_once 'model/roleManager.php';
-require_once 'model/Role.php';
-require_once 'model/Permission.php';
-
-
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="nl">
