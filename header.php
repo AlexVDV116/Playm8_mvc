@@ -1,4 +1,5 @@
 <?php
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +37,7 @@
     <header id="branding" class="fixed-top">
         <nav id="main-navbar" class="navbar navbar-expand-lg">
             <div class="container">
-                <a class="navbar-brand" href="./index.html">
+                <a class="navbar-brand" href="./index.php">
                     <img src="./assets/images/logo.svg" alt="Logo" class="img-fluid logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,16 +47,38 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav align-items-center">
-                        <li class="nav-item d-none d-md-block">
-                            <a class="nav-link btn btn-register nav-btn" href="./signup.php" role="button">
-                                Register
-                            </a>
-                        </li>
-                        <li class="nav-item d-none d-md-block">
-                            <a class="nav-link btn btn-login nav-btn" href="./login.php" role="button">
-                                Log in
-                            </a>
-                        </li>
+                        <!-- If user is logged in show account name and logout button -->
+                        <!-- Else show regular register and login button -->
+                        <?php
+                        if (isset($_SESSION["accountid"])) {
+                        ?>
+                            <li class="nav-item d-none d-md-block">
+                                <a class="nav-link btn btn-register nav-btn" href="#" role="button">
+                                    <?php echo $_SESSION["accountid"]; ?>
+                                </a>
+                            </li>
+                            <li class="nav-item d-none d-md-block">
+                                <a class="nav-link btn btn-login nav-btn" href="./includes/logout.inc.php" role="button">
+                                    Log out
+                                </a>
+                            </li>
+                        <?php
+                        } else {
+                        ?>
+                            <li class="nav-item d-none d-md-block">
+                                <a class="nav-link btn btn-register nav-btn" href="./signup.php" role="button">
+                                    Register
+                                </a>
+                            </li>
+                            <li class="nav-item d-none d-md-block">
+                                <a class="nav-link btn btn-login nav-btn" href="./login.php" role="button">
+                                    Log in
+                                </a>
+                            </li>
+                        <?php
+                        }
+                        ?>
+                    </ul>
                 </div>
             </div>
         </nav>

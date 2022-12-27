@@ -1,5 +1,8 @@
 <?php
 include_once 'header.php';
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 ?>
 
 <section>
@@ -14,7 +17,7 @@ include_once 'header.php';
                     <div class="card-body bg-light">
 
                         <div class="container">
-                            <form action="login.inc.php" method="post" class="needs-validation" novalidate>
+                            <form action="./includes/login.inc.php" method="post" class="needs-validation" novalidate>
                                 <div class="row justify-content-center">
                                     <div class="col-md-12">
                                         <div class="form-group">
