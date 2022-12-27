@@ -1,5 +1,6 @@
 <?php
-include_once './header.php';
+$ROOT = './'; // Setting the ROOT directory so the relative path in the included header.php will still work
+include_once 'header.php';
 ?>
 
 <main role="main" class="col-md-12 ml-sm-auto col-lg-12 pt-3 px-4">
@@ -18,5 +19,5 @@ include_once './header.php';
 
 
 <?php
-include_once './footer.php';
+include_once 'footer.php';
 ?>

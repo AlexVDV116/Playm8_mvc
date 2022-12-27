@@ -27,7 +27,7 @@ session_start();
     <link rel="stylesheet" href="https://use.typekit.net/unv5bor.css">
 
     <!-- Custom CSS / JS -->
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo $ROOT; ?>assets/css/style.css">
 
     <title>Playm8</title>
     <link rel="icon" type="image/x-icon" href="./assets/images/Playm8_favicon_32x32.png">
@@ -37,8 +37,8 @@ session_start();
     <header id="branding" class="fixed-top">
         <nav id="main-navbar" class="navbar navbar-expand-lg">
             <div class="container">
-                <a class="navbar-brand" href="./index.php">
-                    <img src="./assets/images/logo.svg" alt="Logo" class="img-fluid logo">
+                <a class="navbar-brand" href="<?php echo $ROOT; ?>index.php">
+                    <img src="<?php echo $ROOT; ?>/assets/images/logo.svg" alt="Logo" class="img-fluid logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="bar"></span>
@@ -58,7 +58,7 @@ session_start();
                                 </a>
                             </li>
                             <li class="nav-item d-none d-md-block">
-                                <a class="nav-link btn btn-login nav-btn" href="./includes/logout.inc.php" role="button">
+                                <a class="nav-link btn btn-login nav-btn" href="<?php echo $ROOT; ?>includes/logout.inc.php" role="button">
                                     Log out
                                 </a>
                             </li>
@@ -66,12 +66,12 @@ session_start();
                         } else {
                         ?>
                             <li class="nav-item d-none d-md-block">
-                                <a class="nav-link btn btn-register nav-btn" href="./signup.php" role="button">
+                                <a class="nav-link btn btn-register nav-btn" href="<?php echo $ROOT; ?>view/signup.php" role="button">
                                     Register
                                 </a>
                             </li>
                             <li class="nav-item d-none d-md-block">
-                                <a class="nav-link btn btn-login nav-btn" href="./login.php" role="button">
+                                <a class="nav-link btn btn-login nav-btn" href="<?php echo $ROOT; ?>view/login.php" role="button">
                                     Log in
                                 </a>
                             </li>

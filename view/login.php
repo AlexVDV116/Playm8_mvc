@@ -1,8 +1,6 @@
 <?php
-include_once 'header.php';
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+$ROOT = '../'; // Setting the ROOT directory so the relative path in the included header.php will still work
+include_once '../header.php';
 ?>
 
 <section>
@@ -17,7 +15,7 @@ error_reporting(E_ALL);
                     <div class="card-body bg-light">
 
                         <div class="container">
-                            <form action="./includes/login.inc.php" method="post" class="needs-validation" novalidate>
+                            <form action="../includes/login.inc.php" method="post" class="needs-validation" novalidate>
                                 <div class="row justify-content-center">
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -59,5 +57,5 @@ error_reporting(E_ALL);
 
 
 <?php
-include_once 'footer.php';
+include_once './footer.php';
 ?>

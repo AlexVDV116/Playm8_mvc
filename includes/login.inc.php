@@ -1,6 +1,5 @@
 <?php
-// .inc refers to that this is an include file - naming convention
-// this means that the user does not see the file it just has a basic php script that runs
+// An include file contains a PHP script that the user will never see 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -12,9 +11,9 @@ if (isset($_POST["submit"])) {
     $password = $_POST["password"];
 
     // Instantiate the LoginCont class
-    include "../classes/dbh.classes.php";
-    include "../classes/login.classes.php";
-    include "../classes/login-contr.classes.php";
+    include "../model/dbh.classes.php";
+    include "../model/login.classes.php";
+    include "../controller/login-contr.classes.php";
     $signup = new LoginContr($email, $password);
 
     // Running error handlers and user login

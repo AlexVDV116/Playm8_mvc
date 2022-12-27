@@ -10,9 +10,9 @@ if (isset($_POST["submit"])) {
     $passwordrepeat = $_POST["passwordrepeat"];
 
     // Instantiate the SignupContr class
-    include "../classes/dbh.classes.php";
-    include "../classes/signup.classes.php";
-    include "../classes/signup-contr.classes.php";
+    include "../model/dbh.classes.php";
+    include "../model/signup.classes.php";
+    include "../controller/signup-contr.classes.php";
     $signup = new SignupContr($email, $password, $passwordrepeat);
 
     // Running error handlers and user signup

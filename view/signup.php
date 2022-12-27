@@ -1,5 +1,6 @@
 <?php
-include_once 'header.php';
+$ROOT = '../'; // Setting the ROOT directory so the relative path in the included header.php will still work
+include_once '../header.php';
 ?>
 
 <section>
@@ -7,7 +8,7 @@ include_once 'header.php';
         <div class="text-center mt-2">
             <h1>Registratieformulier</h1>
         </div>
-        <form action="./includes/signup.inc.php" method="post">
+        <form action="../includes/signup.inc.php" method="post">
             <input type="text" name="email" placeholder="Email">
             <input type="password" name="password" placeholder="Password">
             <input type="password" name="passwordrepeat" placeholder="Password">
@@ -17,5 +18,5 @@ include_once 'header.php';
 </section>
 
 <?php
-include_once 'footer.php';
+include_once '../footer.php';
 ?>
