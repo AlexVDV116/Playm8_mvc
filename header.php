@@ -54,12 +54,12 @@ session_start();
                         ?>
                             <li class="nav-item d-none d-md-block">
                                 <a class="nav-link btn btn-register nav-btn" href="#" role="button">
-                                    <?php echo $_SESSION["accountid"]; ?>
+                                    <?php echo $_SESSION["accountname"]; ?>
                                 </a>
                             </li>
                             <li class="nav-item d-none d-md-block">
                                 <a class="nav-link btn btn-login nav-btn" href="<?php echo $ROOT; ?>includes/logout.inc.php" role="button">
-                                    Log out
+                                    Uitloggen
                                 </a>
                             </li>
                         <?php
@@ -67,12 +67,12 @@ session_start();
                         ?>
                             <li class="nav-item d-none d-md-block">
                                 <a class="nav-link btn btn-register nav-btn" href="<?php echo $ROOT; ?>view/signup.php" role="button">
-                                    Register
+                                    Registreren
                                 </a>
                             </li>
                             <li class="nav-item d-none d-md-block">
                                 <a class="nav-link btn btn-login nav-btn" href="<?php echo $ROOT; ?>view/login.php" role="button">
-                                    Log in
+                                    Inloggen
                                 </a>
                             </li>
                         <?php

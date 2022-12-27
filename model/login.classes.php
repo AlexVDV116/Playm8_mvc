@@ -59,6 +59,7 @@ class Login extends Dbh
             // Create a new session with a session super global of accountid
             session_start();
             $_SESSION["accountid"] = $user[0]["account_id"];
+            $_SESSION["accountname"] = $user[0]["account_name"];
         }
 
         $stmt = null;

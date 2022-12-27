@@ -3,12 +3,14 @@
 class SignupContr extends Signup
 {
 
+    private string $name;
     private string $email;
     private string $password;
     private string $passwordrepeat;
 
-    function __construct($email, $password, $passwordrepeat)
+    function __construct($name, $email, $password, $passwordrepeat)
     {
+        $this->name = $name;
         $this->email = $email;
         $this->password = $password;
         $this->passwordrepeat = $passwordrepeat;
@@ -37,13 +39,13 @@ class SignupContr extends Signup
             exit();
         }
 
-        $this->setUser($this->email, $this->password);
+        $this->setUser($this->name, $this->email, $this->password);
     }
 
     private function emptyInput()
     {
         $result = null;
-        if (empty($this->email) || empty($this->password) || empty($this->passwordrepeat)) {
+        if (empty($this->name) || empty($this->email) || empty($this->password) || empty($this->passwordrepeat)) {
             $result = false;
         } else {
             $result = true;

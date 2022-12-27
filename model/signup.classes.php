@@ -3,15 +3,15 @@
 class Signup extends Dbh
 {
     // Check database for already registered email
-    protected function setUser($email, $password)
+    protected function setUser($name, $email, $password)
     {
         // Prepared statement to prevent SQL injection
-        $stmt = $this->connect()->prepare('INSERT INTO accounts (account_email, account_password) VALUES (? ,?);');
+        $stmt = $this->connect()->prepare('INSERT INTO accounts (account_name, account_email, account_password) VALUES (?, ? ,?);');
 
         // Use PHP built in method to generate a password hash
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        if (!$stmt->execute(array($email, $hashedPassword))) {
+        if (!$stmt->execute(array($name, $email, $hashedPassword))) {
             $stmt = null;
             header("location: ../index.php?error=stmtfailed");
             exit;
