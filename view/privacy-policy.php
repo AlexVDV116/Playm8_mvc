@@ -1,95 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+$ROOT = '../'; // Setting the ROOT directory so the relative path in the included header.php will still work
+include_once '../header.php';
+?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-
-    <!-- Bootstrap JS Bundle -->
-    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
-            crossorigin="anonymous"></script>
-
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-
-    <!-- Fontawesome Icons Kit-->
-    <script src="https://kit.fontawesome.com/485b2b0d16.js" crossorigin="anonymous"></script>
-
-    <!-- Typekit font -->
-    <link rel="stylesheet" href="https://use.typekit.net/unv5bor.css">
-
-    <!-- Custom CSS / JS -->
-    <link rel="stylesheet" href="assets/css/style.css">
-
-    <title>Playm8</title>
-    <link rel="icon" type="image/x-icon" href="./assets/images/Playm8_favicon_32x32.png">
-</head>
-
-<body>
-<header id="branding" class="fixed-top">
-    <nav id="top-bar" class="navbar">
-        <div class="container navbar-expand">
-            <ul class="navbar-nav align-items-center usp-nav my-0 px-0">
-                <li class="nav-item me-3">
-                    <i class="fa-solid fa-map-location me-2"></i>
-                    <span>Alles voor je dier op de wandelkaart</span>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-    <nav id="main-navbar" class="navbar navbar-expand-xl">
-        <div class="container">
-            <a class="navbar-brand" href="./index.html">
-                <img src="/assets/images/logo.svg" alt="Logo" class="img-fluid logo">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav align-items-center">
-                    <li class="nav-item px-3">
-                        <a class="nav-link transform active" href="./index.html#about-section" data-action="about-section">
-                            Over</a>
-                    </li>
-                    <li class="nav-item px-3">
-                        <a class="nav-link transform" href="./index.html#features-section" data-action="features-section">
-                            Features</a>
-                    </li>
-                    <li class="nav-item px-3">
-                        <a class="nav-link transform" href="./index.html#impression-section" data-action="impression-section">
-                            Impressie</a>
-                    </li>
-                    <li class="nav-item px-3">
-                        <a class="nav-link transform" href="./index.html#credits-section" data-action="credits-section">
-                            Credits</a>
-                    </li>
-                    <li class="nav-item d-none d-md-block">
-                        <a class="nav-link btn btn-alfa nav-btn" href="./index.html#tester-section"
-                           data-action="tester-section">
-                            Word Alfatester
-                        </a>
-                    </li>
-                    <li class="nav-item d-none d-md-block">
-                        <a class="nav-link btn btn-contact nav-btn" href="./index.html#footer-section"
-                           data-action="footer-section">
-                            Contact
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
 <section>
     <div class="container">
         <div class="row">
@@ -102,8 +15,7 @@
                 <p>If you choose to use our Service, then you agree to the collection and use of information in
                     relation with this policy. The Personal Information that we collect are used for providing
                     and improving the Service. We will not use or share your information with anyone except as
-                    described in this Privacy Policy. Our Privacy Policy was created with the help of the <a
-                            href="https://www.privacypolicytemplate.net/">Privacy Policy Template Generator</a>.</p>
+                    described in this Privacy Policy. Our Privacy Policy was created with the help of the <a href="https://www.privacypolicytemplate.net/">Privacy Policy Template Generator</a>.</p>
                 <p>The terms used in this Privacy Policy have the same meanings as in our Terms and Conditions,
                     which is accessible at https://www.playm8.eu, unless otherwise defined in this Privacy
                     Policy.</p>
@@ -162,40 +74,14 @@
                 <h2>Contact Us</h2>
                 <p>If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact
                     us.</p>
-                <hr/>
+                <hr />
                 <p>Generated using <a href="https://www.privacypolicytemplate.net">Privacy Policy Template</a>
                 </p>
             </div>
         </div>
     </div>
 </section>
-<section id="footer-section">
-    <div class="container">
-        <div class="row text-center">
-            <h4 class="pb-3">
-                Heeft u vragen, problemen of feedback voor ons?
-            </h4>
-            <p>
-                Contacteer ons via onze socials of e-mail.
-            </p>
-            <div class="social-container mt-4">
-                <ul class="social-icons">
-                    <li><a href="https://instagram.com/" target="_blank"><i class="fa fa-instagram"></i></a></li>
-                    <li><a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="https://github.com/" target="_blank"><i class="fa fa-github"></i></a></li>
-                    <li><a href="mailto:playm8@email.com" target="_blank"><i class="fa-regular fa-envelope"></i></a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col text-center mt-3">
-                <hr>
-            </div>
-        </div>
-    </div>
-</section>
 
-<script src="assets/js/scripts.js"></script>
-<script src="assets/js/notifications.js"></script>
-</body>
-
-</html>
+<?php
+include_once '../footer.php';
+?>

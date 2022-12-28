@@ -260,7 +260,7 @@ include_once 'header.php';
                         <div class="form-check form-switch mt-4">
                             <input class="form-check-input" type="checkbox" role="switch" name="privacy-policy" id="privacy-policy" value="agreed" required>
                             <label class="form-check-label" for="privacy-policy">
-                                Ik ga akkoord met het <a href="./view/privacy-policy.html" target=”_blank”>privacy
+                                Ik ga akkoord met het <a href="./view/privacy-policy.php" target=”_blank”>privacy
                                     beleid</a>.
                             </label>
                             <div class="invalid-feedback">
@@ -270,7 +270,7 @@ include_once 'header.php';
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" role="switch" name="terms-and-conditions" id="terms-and-conditions" value="agreed" required>
                             <label class="form-check-label" for="terms-and-conditions">
-                                Ik ga akkoord met de <a href="./view/terms-and-conditions.html" target="_blank">algemene
+                                Ik ga akkoord met de <a href="./view/terms-and-conditions.php" target="_blank">algemene
                                     voorwaarden</a>.
                             </label>
                             <div class="invalid-feedback">

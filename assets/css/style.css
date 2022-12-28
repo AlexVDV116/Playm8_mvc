@@ -82,8 +82,6 @@ header.fixed-top {
 }
 
 #top-bar .nav-item,
-#main-navbar .btn-beta,
-#main-navbar .btn-contact:hover,
 .btn-credits,
 .btn-credits:hover,
 .social-icons i,
@@ -618,39 +616,14 @@ button.btn.btn-credits,
     }
 
     #main-navbar .nav-btn {
-        padding: 12px 20px 8px;
+        padding: 12px 20px 12px;
         border-radius: 30px;
         margin-left: 20px;
-    }
-
-    #main-navbar .btn-beta {
-        background-color: #ffffff;
-        border: 2px solid #ffffff;
-        color: #d6004a;
     }
 
     #main-navbar .nav-btn:hover {
         cursor: pointer;
         border: 2px solid inherit;
-    }
-
-    #main-navbar .btn-beta:hover {
-        background-color: #d6004a;
-        color: #ffffff;
-    }
-
-    #main-navbar .btn-contact {
-        border: 2px solid #fff;
-        color: #fff;
-    }
-
-    #main-navbar .btn-contact:hover {
-        background-color: #fff;
-    }
-
-    #main-navbar .btn-beta,
-    #main-navbar .btn-contact:hover {
-        color: #d6004a;
     }
 }
 
