@@ -108,6 +108,11 @@ header.fixed-top {
     color: #ffffff;
 }
 
+.menu-items-mobile {
+    background-color: #d6004a;
+    font-weight: 900;
+}
+
 #main-navbar .btn-login {
     color: #ffffff;
 }
@@ -190,6 +195,13 @@ a:is(:link, :active, :visited):not(.nav-btn).active {
 a:is(:link, :active, :visited):not(.nav-btn).active::after {
     content: " ";
     border-bottom: 2px solid #f6bfd5;
+}
+
+.navbar-collapse {
+    transition: all 0.5s;
+}
+.navbar-toggler:focus {
+    box-shadow: none;
 }
 
 /** =================================================================

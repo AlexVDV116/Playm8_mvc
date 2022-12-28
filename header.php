@@ -30,7 +30,7 @@ session_start();
     <link rel="stylesheet" href="<?php echo $ROOT; ?>assets/css/style.css">
 
     <title>Playm8</title>
-    <link rel="icon" type="image/x-icon" href="./assets/images/Playm8_favicon_32x32.png">
+    <link rel="icon" type="image/x-icon" href="<?php echo $ROOT; ?>assets/images/Playm8_favicon_32x32.png">
 </head>
 
 <body>
@@ -47,7 +47,7 @@ session_start();
             </div>
         </nav>
 
-        <nav id="main-navbar" class="navbar navbar-expand-lg">
+        <nav id="main-navbar" class="navbar navbar-expand-xl">
             <div class="container">
                 <a class="navbar-brand" href="<?php echo $ROOT; ?>index.php">
                     <img src="<?php echo $ROOT; ?>/assets/images/logo.svg" alt="Logo" class="img-fluid logo">
@@ -60,23 +60,23 @@ session_start();
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav align-items-center">
                         <li class="nav-item px-3">
-                            <a class="nav-link transform active" href="<?php echo $ROOT; ?>index.php#about-section" data-action="about-section">
+                            <a class="nav-link active" href="<?php echo $ROOT; ?>index.php#about-section" data-action="about-section">
                                 Over</a>
                         </li>
                         <li class="nav-item px-3">
-                            <a class="nav-link transform" href="<?php echo $ROOT; ?>index.php#features-section" data-action="features-section">
+                            <a class="nav-link" href="<?php echo $ROOT; ?>index.php#features-section" data-action="features-section">
                                 Features</a>
                         </li>
                         <li class="nav-item px-3">
-                            <a class="nav-link transform" href="<?php echo $ROOT; ?>index.php#impression-section" data-action="impression-section">
+                            <a class="nav-link" href="<?php echo $ROOT; ?>index.php#impression-section" data-action="impression-section">
                                 Impressie</a>
                         </li>
                         <li class="nav-item px-3">
-                            <a class="nav-link transform" href="<?php echo $ROOT; ?>index.php#credits-section" data-action="credits-section">
+                            <a class="nav-link" href="<?php echo $ROOT; ?>index.php#credits-section" data-action="credits-section">
                                 Credits</a>
                         </li>
                         <li class="nav-item px-3">
-                            <a class="nav-link transform" href="<?php echo $ROOT; ?>index.php#tester-section" data-action="tester-section">
+                            <a class="nav-link" href="<?php echo $ROOT; ?>index.php#tester-section" data-action="tester-section">
                                 Betatester</a>
                         </li>
                         <!-- If user is logged in show account name and logout button -->
@@ -84,12 +84,12 @@ session_start();
                         <?php
                         if (isset($_SESSION["account_username"])) {
                         ?>
-                            <li class="nav-item d-none d-md-block">
+                            <li class="nav-item px-3">
                                 <a class="nav-link btn btn-register nav-btn" href="#" role="button">
                                     <?php echo $_SESSION["account_username"]; ?>
                                 </a>
                             </li>
-                            <li class="nav-item d-none d-md-block">
+                            <li class="nav-item px-3">
                                 <a class="nav-link btn btn-login nav-btn" href="<?php echo $ROOT; ?>includes/logout.inc.php" role="button">
                                     Uitloggen
                                 </a>
@@ -97,12 +97,12 @@ session_start();
                         <?php
                         } else {
                         ?>
-                            <li class="nav-item d-none d-md-block">
+                            <li class="nav-item px-3">
                                 <a class="nav-link btn btn-register nav-btn" href="<?php echo $ROOT; ?>view/signup.php" role="button">
                                     Registreren
                                 </a>
                             </li>
-                            <li class="nav-item d-none d-md-block">
+                            <li class="nav-item px-3">
                                 <a class="nav-link btn btn-login nav-btn" href="<?php echo $ROOT; ?>view/login.php" role="button">
                                     Inloggen
                                 </a>
