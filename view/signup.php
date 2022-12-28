@@ -19,8 +19,8 @@ include_once '../header.php';
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input id="form_name" type="text" name="name" class="form-control">
-                                            <label for="form_name" class="form-label">Naam</label>
+                                            <input id="form_username" type="text" name="username" class="form-control">
+                                            <label for="form_username" class="form-label">Gebruikersnaam</label>
                                         </div>
                                     </div>
 

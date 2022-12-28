@@ -1,22 +1,24 @@
 <?php
 
+// This class performs several error checks on the data the user supplies to us when signing up
+// If there are no errors it will use the setUser method inherited from the Signup class
 class SignupContr extends Signup
 {
 
-    private string $name;
+    private string $username;
     private string $email;
     private string $password;
     private string $passwordrepeat;
 
-    function __construct($name, $email, $password, $passwordrepeat)
+    public function __construct($username, $email, $password, $passwordrepeat)
     {
-        $this->name = $name;
+        $this->username = $username;
         $this->email = $email;
         $this->password = $password;
         $this->passwordrepeat = $passwordrepeat;
     }
 
-    public function signupUser()
+    public function signupUser(): void
     {
         if ($this->emptyInput() == false) {
             // echo "Empty input!";
@@ -39,13 +41,13 @@ class SignupContr extends Signup
             exit();
         }
 
-        $this->setUser($this->name, $this->email, $this->password);
+        $this->setUser($this->username, $this->email, $this->password);
     }
 
-    private function emptyInput()
+    private function emptyInput(): bool
     {
         $result = null;
-        if (empty($this->name) || empty($this->email) || empty($this->password) || empty($this->passwordrepeat)) {
+        if (empty($this->username) || empty($this->email) || empty($this->password) || empty($this->passwordrepeat)) {
             $result = false;
         } else {
             $result = true;
@@ -54,7 +56,7 @@ class SignupContr extends Signup
     }
 
     // Method that uses the PHP built-in filter_var with the email filter to check user email input
-    private function invalidEmail()
+    private function invalidEmail(): bool
     {
         $result = null;
         if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
@@ -66,7 +68,7 @@ class SignupContr extends Signup
     }
 
     // Method to check if both password fields input match
-    private function passwordMatch()
+    private function passwordMatch(): bool
     {
         $result = null;
         if ($this->password !== $this->passwordrepeat) {
@@ -77,7 +79,7 @@ class SignupContr extends Signup
         return $result;
     }
 
-    private function emailTakenCheck()
+    private function emailTakenCheck(): bool
     {
         $result = null;
         if (!$this->checkEmail($this->email)) {

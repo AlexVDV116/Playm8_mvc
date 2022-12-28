@@ -1,9 +1,12 @@
 <?php
 
+// This class interacts with the database to check if the given credentials match the ones in the database
+// It uses prepared statements to prevent SQL injection
+// After checking if the password hash and email match it logs in the user and starts a session
 class Login extends Dbh
 {
-    // Check database if given user credentials match database
-    protected function getUser($email, $password)
+    // Check database if given user credentials match database  
+    protected function getUser($email, $password): void
     {
         // Prepared statement to prevent SQL injection
         $stmt = $this->connect()->prepare('SELECT account_password FROM accounts WHERE account_email = ?;');
@@ -19,7 +22,7 @@ class Login extends Dbh
         if ($stmt->rowCount() == 0) {
             echo $stmt;
             $stmt = null;
-            header("location: ../index.php?error=usernotfound");
+            header("location: ../index.php?error=accountnotfound");
             exit();
         }
 
@@ -47,7 +50,7 @@ class Login extends Dbh
             // Before logging in the user i want to check if the database query retrieves any results
             if ($stmt->rowCount() == 0) {
                 $stmt = null;
-                header("location: ../index.php?error=usernotfound2");
+                header("location: ../index.php?error=accountnotfound2");
                 exit();
             }
 
@@ -56,10 +59,10 @@ class Login extends Dbh
             // This user variable thus contains all data from the database belonging to the account
             $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            // Create a new session with a session super global of accountid
+            // Create a new session with a session super global of accountid and account_username
             session_start();
-            $_SESSION["accountid"] = $user[0]["account_id"];
-            $_SESSION["accountname"] = $user[0]["account_name"];
+            $_SESSION["account_id"] = $user[0]["account_id"];
+            $_SESSION["account_username"] = $user[0]["account_username"];
         }
 
         $stmt = null;

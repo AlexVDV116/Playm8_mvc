@@ -50,11 +50,11 @@ session_start();
                         <!-- If user is logged in show account name and logout button -->
                         <!-- Else show regular register and login button -->
                         <?php
-                        if (isset($_SESSION["accountid"])) {
+                        if (isset($_SESSION["account_username"])) {
                         ?>
                             <li class="nav-item d-none d-md-block">
                                 <a class="nav-link btn btn-register nav-btn" href="#" role="button">
-                                    <?php echo $_SESSION["accountname"]; ?>
+                                    <?php echo $_SESSION["account_username"]; ?>
                                 </a>
                             </li>
                             <li class="nav-item d-none d-md-block">

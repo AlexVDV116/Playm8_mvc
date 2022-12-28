@@ -1,6 +1,6 @@
 <?php
 
-// Database class that opens up the database connection
+// Databasehandler class that opens up the database connection
 class Dbh
 {
 

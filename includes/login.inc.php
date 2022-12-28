@@ -1,8 +1,6 @@
 <?php
-// An include file contains a PHP script that the user will never see 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// An include file which contains the PHP script that the gets the data from the form and uses it to instantiate the LoginController class
+// After instantiating the LoginController class it uses the loginUser method and redirect the user to the index page 
 
 if (isset($_POST["submit"])) {
 

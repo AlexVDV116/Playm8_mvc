@@ -1,17 +1,21 @@
 <?php
 
+// This class interacts with the database and will store the account credentials in them
+// It uses prepared statements to prevent SQL injection
+// It performs a check to see if the email already exists in our database
 class Signup extends Dbh
 {
-    // Check database for already registered email
-    protected function setUser($name, $email, $password)
+    // Generates a password hash using the PHP in built password_hash method (bcrypt algorithm)
+    protected function setUser($username, $email, $password): void
     {
         // Prepared statement to prevent SQL injection
-        $stmt = $this->connect()->prepare('INSERT INTO accounts (account_name, account_email, account_password) VALUES (?, ? ,?);');
+        $stmt = $this->connect()->prepare('INSERT INTO accounts (account_username, account_email, account_password) VALUES (?, ? ,?);');
 
         // Use PHP built in method to generate a password hash
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        if (!$stmt->execute(array($name, $email, $hashedPassword))) {
+        // Exectute prepared statement with the hashed password
+        if (!$stmt->execute(array($username, $email, $hashedPassword))) {
             $stmt = null;
             header("location: ../index.php?error=stmtfailed");
             exit;
@@ -19,12 +23,13 @@ class Signup extends Dbh
         $stmt = null;
     }
 
-    // Check database for already registered email
-    protected function checkEmail($email)
+    // Check database for already registered email returns true or false
+    protected function checkEmail($email): bool
     {
         // Prepared statement to prevent SQL injection
         $stmt = $this->connect()->prepare('SELECT account_id FROM accounts WHERE account_email = ?;');
 
+        // Exectute prepared statement if
         if (!$stmt->execute(array($email))) {
             $stmt = null;
             header("location: ../index.php?error=stmtfailed");
