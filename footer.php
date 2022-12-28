@@ -5,14 +5,14 @@
                 Heeft u vragen, problemen of feedback voor ons?
             </h4>
             <p>
-                Contacteer ons via onze socials of gebruik ons <a href="./view/contact.php">contactformulier</a>.
+                Contacteer ons via onze socials of gebruik ons <a href="<?php echo $ROOT; ?>view/contact.php">contactformulier</a>.
             </p>
             <div class="social-container mt-4">
                 <ul class="social-icons">
                     <li><a href="https://instagram.com/" target="_blank"><i class="fa fa-instagram"></i></a></li>
                     <li><a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a></li>
                     <li><a href="https://github.com/" target="_blank"><i class="fa fa-github"></i></a></li>
-                    <li><a href="./view/contact.php"><i class="fa-regular fa-envelope"></i></a>
+                    <li><a href="<?php echo $ROOT; ?>view/contact.php"><i class="fa-regular fa-envelope"></i></a>
                     </li>
                 </ul>
             </div>
