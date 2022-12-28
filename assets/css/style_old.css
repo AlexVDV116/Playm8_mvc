@@ -1,0 +1,175 @@
+/** =================================================================
+*
+*    Initial CSS States
+*
+*    Removes all default margin and padding for all objects on the page.
+*    This ensures that all spacing becomes intentional.
+*
+*  ================================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-padding-top: 80.58px; /* height of sticky header */
+    padding-top: 80.58px; /* Padding top to stop the fixed navbars overlapping the body */
+}
+
+/* This is the root element
+All rem units will refer to this font size */
+html,
+body {
+    /*min-height: 100vh;*/
+    background: #d6004a08;
+    color: #0c0833;
+    font-family: canada-type-gibson, Helvetica, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-multi-display {
+    font-family: multi-display, Helvetica, sans-serif;
+    color: #d6004a;
+}
+
+h1 {
+    font-size: 50px;
+}
+
+h2 {
+    font-size: 40px;
+}
+
+a {
+    color: #d6004a;
+}
+
+/** =================================================================
+*
+*    Site: top bar
+*
+*  ================================================================= */
+
+header.fixed-top {
+    background: #d6004a;
+}
+
+#main-navbar .nav-btn {
+    padding: 12px 20px 8px;
+    border-radius: 30px;
+    margin-left: 20px;
+}
+
+#main-navbar .btn-register {
+    color: #ffffff;
+}
+
+#main-navbar .btn-login {
+    color: #ffffff;
+}
+
+#main-navbar .btn-register:hover {
+    background-color: #d6004a;
+    color: #ffffff;
+}
+
+#main-navbar .btn-login:hover {
+    background-color: #ffffff;
+    color: #d6004a;
+}
+
+/** =================================================================
+*
+*    Site: NavBar
+*
+*  ================================================================= */
+
+.nav-link {
+    color: #d6004a;
+}
+
+/** =================================================================
+*
+*    Navbar toggler
+*
+*  ================================================================= */
+
+.navbar-toggler {
+    display: block;
+    cursor: pointer;
+    padding: 12px 14px;
+    border: 2px solid #ffffff;
+}
+
+.navbar-toggler:focus {
+    /*box-shadow: 0 0 0 0.25rem #ffffff02;*/
+    box-shadow: none;
+}
+
+.nav-link {
+    display: inline-block;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    transition: all 0.3s ease-in-out;
+    background-color: #ffffff;
+}
+
+.navbar-toggler.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.navbar-toggler.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.navbar-toggler.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+@media (min-width: 992px) {
+    #main-navbar .btn-register {
+        background-color: #ffffff;
+        border: 2px solid #ffffff;
+        color: #d6004a;
+    }
+
+    #main-navbar .btn-login {
+        background-color: #d6004a;
+        color: #ffffff;
+        border: 2px solid #ffffff;
+    }
+}
+
+/** =================================================================
+*
+*    Form
+*
+*  ================================================================= */
+
+button.btn.btn-credits,
+.btn.btn-lg.btn-credits {
+    background-color: #d6004a;
+    border: 2px solid #d6004a !important;
+    color: #fff;
+    border-radius: 25px;
+}
+
+@media (max-width: 992px) {
+    .form-img {
+        display: none;
+    }
+}

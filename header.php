@@ -35,6 +35,18 @@ session_start();
 
 <body>
     <header id="branding" class="fixed-top">
+
+        <nav id="top-bar" class="navbar">
+            <div class="container navbar-expand">
+                <ul class="navbar-nav align-items-center usp-nav my-0 px-0">
+                    <li class="nav-item me-3">
+                        <i class="fa-solid fa-map-location me-2"></i>
+                        <span>Alles voor je dier op de wandelkaart</span>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
         <nav id="main-navbar" class="navbar navbar-expand-lg">
             <div class="container">
                 <a class="navbar-brand" href="<?php echo $ROOT; ?>index.php">
@@ -47,6 +59,22 @@ session_start();
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav align-items-center">
+                        <li class="nav-item px-3">
+                            <a class="nav-link transform active" href="index.php#about-section" data-action="about-section">
+                                Over</a>
+                        </li>
+                        <li class="nav-item px-3">
+                            <a class="nav-link transform" href="index.php#features-section" data-action="features-section">
+                                Features</a>
+                        </li>
+                        <li class="nav-item px-3">
+                            <a class="nav-link transform" href="index.php#impression-section" data-action="impression-section">
+                                Impressie</a>
+                        </li>
+                        <li class="nav-item px-3">
+                            <a class="nav-link transform" href="index.php#credits-section" data-action="credits-section">
+                                Credits</a>
+                        </li>
                         <!-- If user is logged in show account name and logout button -->
                         <!-- Else show regular register and login button -->
                         <?php
