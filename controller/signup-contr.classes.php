@@ -9,13 +9,15 @@ class SignupContr extends Signup
     private string $email;
     private string $password;
     private string $passwordrepeat;
+    private bool $enabled;
 
-    public function __construct($username, $email, $password, $passwordrepeat)
+    public function __construct($username, $email, $password, $passwordrepeat, $enabled)
     {
         $this->username = $username;
         $this->email = $email;
         $this->password = $password;
         $this->passwordrepeat = $passwordrepeat;
+        $this->enabled = $enabled;
     }
 
     public function signupUser(): void
@@ -41,7 +43,7 @@ class SignupContr extends Signup
             exit();
         }
 
-        $this->setUser($this->username, $this->email, $this->password);
+        $this->setUser($this->username, $this->email, $this->password, $this->enabled);
     }
 
     private function emptyInput(): bool

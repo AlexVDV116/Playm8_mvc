@@ -6,16 +6,16 @@
 class Signup extends Dbh
 {
     // Generates a password hash using the PHP in built password_hash method (bcrypt algorithm)
-    protected function setUser($username, $email, $password): void
+    protected function setUser($username, $email, $password, $enabled): void
     {
         // Prepared statement to prevent SQL injection
-        $stmt = $this->connect()->prepare('INSERT INTO accounts (account_username, account_email, account_password) VALUES (?, ? ,?);');
+        $stmt = $this->connect()->prepare('INSERT INTO accounts (account_username, account_email, account_password, account_enabled) VALUES (?, ? ,?, ?);');
 
         // Use PHP built in method to generate a password hash
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         // Exectute prepared statement with the hashed password
-        if (!$stmt->execute(array($username, $email, $hashedPassword))) {
+        if (!$stmt->execute(array($username, $email, $hashedPassword, $enabled))) {
             $stmt = null;
             header("location: ../index.php?error=stmtfailed");
             exit;
