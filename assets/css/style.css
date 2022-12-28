@@ -91,7 +91,8 @@ header.fixed-top {
 
 #main-navbar .nav-link {
     color: #ffffff;
-    padding: 0.75rem 0.5rem;
+    padding: 0.75rem 0.3rem;
+    font-size: 1.1rem;
 }
 
 .logo {
@@ -628,7 +629,7 @@ button.btn.btn-credits,
     }
 
     #main-navbar .nav-btn {
-        padding: 12px 20px 12px;
+        padding: 11px 18px 11px;
         border-radius: 30px;
         margin-left: 20px;
     }
@@ -639,7 +640,6 @@ button.btn.btn-credits,
     }
 }
 
-/* fix header */
 @media (max-width: 1200px) {
     h1 {
         font-size: 40px;
@@ -660,10 +660,6 @@ button.btn.btn-credits,
 
     #main-navbar .navbar-nav {
         align-items: start !important;
-    }
-
-    .nav-item.px-3 {
-        padding: 0;
     }
 
     .nav-item {
