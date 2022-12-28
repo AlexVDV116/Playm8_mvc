@@ -60,23 +60,23 @@ session_start();
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav align-items-center">
                         <li class="nav-item px-3">
-                            <a class="nav-link transform active" href="index.php#about-section" data-action="about-section">
+                            <a class="nav-link transform active" href="<?php echo $ROOT; ?>index.php#about-section" data-action="about-section">
                                 Over</a>
                         </li>
                         <li class="nav-item px-3">
-                            <a class="nav-link transform" href="index.php#features-section" data-action="features-section">
+                            <a class="nav-link transform" href="<?php echo $ROOT; ?>index.php#features-section" data-action="features-section">
                                 Features</a>
                         </li>
                         <li class="nav-item px-3">
-                            <a class="nav-link transform" href="index.php#impression-section" data-action="impression-section">
+                            <a class="nav-link transform" href="<?php echo $ROOT; ?>index.php#impression-section" data-action="impression-section">
                                 Impressie</a>
                         </li>
                         <li class="nav-item px-3">
-                            <a class="nav-link transform" href="index.php#credits-section" data-action="credits-section">
+                            <a class="nav-link transform" href="<?php echo $ROOT; ?>index.php#credits-section" data-action="credits-section">
                                 Credits</a>
                         </li>
                         <li class="nav-item px-3">
-                            <a class="nav-link transform" href="index.php#tester-section" data-action="tester-section">
+                            <a class="nav-link transform" href="<?php echo $ROOT; ?>index.php#tester-section" data-action="tester-section">
                                 Betatester</a>
                         </li>
                         <!-- If user is logged in show account name and logout button -->

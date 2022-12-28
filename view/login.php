@@ -1,5 +1,5 @@
 <?php
-$ROOT = '../'; // Setting the ROOT directory so the relative path in the included header.php will still work
+$ROOT = '../'; // Setting the ROOT directory for this file so the relative paths used in included pages will still work
 include_once '../header.php';
 ?>
 
@@ -7,7 +7,7 @@ include_once '../header.php';
     <div class="container h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-lg-12 col-xl-11">
-                <div class="card rounded-4 my-5">
+                <div class="card rounded-4">
                     <div class="card-body p-md-5">
                         <div class="row justify-content-center">
                             <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">

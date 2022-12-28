@@ -1,5 +1,5 @@
 <?php
-$ROOT = './'; // Setting the ROOT directory so the relative path in the included header.php will still work
+$ROOT = './'; // Setting the ROOT directory for this file so the relative paths used in included pages will still work
 include_once 'header.php';
 ?>
 
