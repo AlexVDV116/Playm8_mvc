@@ -59,23 +59,23 @@ session_start();
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav align-items-center">
-                        <li class="nav-item px-3">
+                        <li class="nav-item pt-2 px-3">
                             <a class="nav-link active" href="<?php echo $ROOT; ?>index.php#about-section" data-action="about-section">
                                 Over</a>
                         </li>
-                        <li class="nav-item px-3">
+                        <li class="nav-item pt-2 px-3">
                             <a class="nav-link" href="<?php echo $ROOT; ?>index.php#features-section" data-action="features-section">
                                 Features</a>
                         </li>
-                        <li class="nav-item px-3">
+                        <li class="nav-item pt-2 px-3">
                             <a class="nav-link" href="<?php echo $ROOT; ?>index.php#impression-section" data-action="impression-section">
                                 Impressie</a>
                         </li>
-                        <li class="nav-item px-3">
+                        <li class="nav-item pt-2 px-3">
                             <a class="nav-link" href="<?php echo $ROOT; ?>index.php#credits-section" data-action="credits-section">
                                 Credits</a>
                         </li>
-                        <li class="nav-item px-3">
+                        <li class="nav-item pt-2 px-3">
                             <a class="nav-link" href="<?php echo $ROOT; ?>index.php#tester-section" data-action="tester-section">
                                 Betatester</a>
                         </li>
