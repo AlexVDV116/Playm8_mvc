@@ -84,12 +84,12 @@ session_start();
                         <?php
                         if (isset($_SESSION["account_username"])) {
                         ?>
-                            <li class="nav-item px-3">
+                            <li class="nav-item pl-3 pr-1">
                                 <a class="nav-link btn btn-register nav-btn" href="#" role="button">
                                     <?php echo $_SESSION["account_username"]; ?>
                                 </a>
                             </li>
-                            <li class="nav-item px-3">
+                            <li class="nav-item px-2">
                                 <a class="nav-link btn btn-login nav-btn" href="<?php echo $ROOT; ?>includes/logout.inc.php" role="button">
                                     Uitloggen
                                 </a>
@@ -97,12 +97,12 @@ session_start();
                         <?php
                         } else {
                         ?>
-                            <li class="nav-item px-3">
+                            <li class="nav-item pl-3 pr-1">
                                 <a class="nav-link btn btn-register nav-btn" href="<?php echo $ROOT; ?>view/signup.php" role="button">
                                     Registreren
                                 </a>
                             </li>
-                            <li class="nav-item px-3">
+                            <li class="nav-item px-2">
                                 <a class="nav-link btn btn-login nav-btn" href="<?php echo $ROOT; ?>view/login.php" role="button">
                                     Inloggen
                                 </a>
