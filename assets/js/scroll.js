@@ -15,19 +15,19 @@ const changeNav = (entries, observer) => {
             // find matching link
             var newLink = document.querySelector(`[data-action="${id}"]`);
 
-            //  if they match add active class, else set about-section active
+            //  if they match add the active class, else set about-section active
             if (newLink !== null) {
                 newLink.classList.add("active");
-            } else {
+            } else if (id == "hero-section") {
                 document
                     .querySelector(`[data-action="about-section"]`)
                     .classList.add("active");
             }
 
-            // keep active state on credits section
+            // keep active state on tester section once at the footer
             if (id == "tester-section" || id == "footer-section") {
                 document
-                    .querySelector(`[data-action="credits-section"]`)
+                    .querySelector(`[data-action="tester-section"]`)
                     .classList.add("active");
             }
         }

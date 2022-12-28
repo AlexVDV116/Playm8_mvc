@@ -75,6 +75,10 @@ session_start();
                             <a class="nav-link transform" href="index.php#credits-section" data-action="credits-section">
                                 Credits</a>
                         </li>
+                        <li class="nav-item px-3">
+                            <a class="nav-link transform" href="index.php#tester-section" data-action="tester-section">
+                                Betatester</a>
+                        </li>
                         <!-- If user is logged in show account name and logout button -->
                         <!-- Else show regular register and login button -->
                         <?php
