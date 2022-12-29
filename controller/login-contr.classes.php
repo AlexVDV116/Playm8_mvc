@@ -14,7 +14,7 @@ class LoginContr extends Login
         $this->password = $password;
     }
 
-    // Method that calls the emptyInput method and if true exectue header and exit code else getUser
+    // Method that check for any empty inputs, if false run the getUser method with given credentials
     public function loginUser(): void
     {
         if ($this->emptyInput() == true) {
@@ -25,7 +25,7 @@ class LoginContr extends Login
         $this->getUser($this->email, $this->password);
     }
 
-    // Method that checks for empty input returns bool
+    // Method that checks for empty input returns true if empty
     private function emptyInput(): bool
     {
         $result = null;
