@@ -96,7 +96,7 @@ session_start();
             <hr>
             <ul class="nav flex-column mb-auto">
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="?view=ListAccounts" class="nav-link">
                         Users
                     </a>
                 </li>
@@ -105,17 +105,17 @@ session_start();
                         Dashboard
                     </a>
                 </li>
-                <li>
+                <li class="nav-item">
                     <a href="#" class="nav-link">
                         Orders
                     </a>
                 </li>
-                <li>
+                <li class="nav-item">
                     <a href="#" class="nav-link">
                         Products
                     </a>
                 </li>
-                <li>
+                <li class="nav-item">
                     <a href="#" class="nav-link">
                         Customers
                     </a>
