@@ -47,7 +47,7 @@ session_start();
             </div>
         </nav>
 
-        <nav id="main-navbar" class="navbar navbar-expand-xl">
+        <nav id="main-navbar" class="navbar navbar-expand-xxl">
             <div class="container">
                 <a class="navbar-brand" href="<?php echo $ROOT; ?>index.php">
                     <img src="<?php echo $ROOT; ?>/assets/images/logo.svg" alt="Logo" class="img-fluid logo">
