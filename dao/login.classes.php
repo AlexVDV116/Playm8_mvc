@@ -20,7 +20,6 @@ class Login extends Dbh
 
         // If query gets no result exit script and redirect user to index with error message
         if ($stmt->rowCount() == 0) {
-            echo $stmt;
             $stmt = null;
             header("location: ../index.php?error=accountnotfound");
             exit();

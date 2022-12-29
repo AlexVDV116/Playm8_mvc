@@ -19,10 +19,10 @@ include_once '../header.php';
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input id="form_email" type="text" name="email" class="form-control" required>
+                                            <input id="form_email" type="email" name="email" class="form-control" required>
                                             <label for="form_email" class="form-label">E-mailadres</label>
                                             <div class="invalid-feedback">
-                                                Dit veld is verplicht.
+                                                Voer een geldig e-mailadres in.
                                             </div>
                                         </div>
                                     </div>
