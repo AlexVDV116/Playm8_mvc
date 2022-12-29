@@ -1,9 +1,30 @@
 <?php
 $ROOT = '../'; // Setting the ROOT directory for this file so the relative paths used in included pages will still work
-?>
-
-<?php
 session_start();
+ini_set('display_errors', 1);
+header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1
+header("Pragma: no-cache"); // HTTP 1.0
+header("Expires: 0"); // Proxies
+// set include path to work from any directory level
+set_include_path('./' . PATH_SEPARATOR . '../');
+
+
+$title = 'Eboost Manager Area';
+
+$controller = filter_input(INPUT_GET, 'controller');
+if (!empty($controller)) {
+    require "controller/{$controller}.php";
+    exit;
+}
+
+$view = filter_input(INPUT_GET, 'view');
+if (empty($view)) {
+    $view = 'Home';
+}
+$menu = [
+    'Home' => '?view=Home',
+    'UserProfiles' => '?view=UserProfileList',
+];
 ?>
 
 <!DOCTYPE html>
@@ -89,48 +110,50 @@ session_start();
         </nav>
     </header>
 
-
-    <div id="sideBarNav" class="container ml-5">
-        <div class="d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
-            <h2>Admin area</h2>
-            <hr>
-            <ul class="nav flex-column mb-auto">
-                <li class="nav-item">
-                    <a href="?view=ListAccounts" class="nav-link">
-                        Users
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="nav-link">
-                        Dashboard
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        Orders
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        Products
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        Customers
-                    </a>
-                </li>
-            </ul>
-            <hr>
+    <div class="container">
+        <div class="row">
+            <nav id="sideBarNav" class=" col-4 ml-5">
+                <div class="p-3" style="width: 280px;">
+                    <h2>Admin area</h2>
+                    <hr>
+                    <ul class="nav flex-column mb-auto">
+                        <li class="nav-item">
+                            <a href="?view=ListAccounts" class="nav-link">
+                                Bekijk accounts
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link">
+                                Betatesters
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                Rollen en Permissies
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                Downloads
+                            </a>
+                        </li>
+                    </ul>
+                    <hr>
+                </div>
+            </nav>
+            <div class="col-8 pt-5">
+                <?php require "{$view}.php"; ?>
+            </div>
         </div>
-    </div>
 
-    <script src="./assets/js/scripts.js"></script>
-    <script src="./assets/js/notifications.js"></script>
-    <!-- <script src="./assets/js/features.js"></script> -->
-    <script src="./assets/js/features-new.js"></script>
-    <script src="./assets/js/scroll.js"></script>
-    <script src="./assets/js/form.js"></script>
+
+
+
+        <script src="<?php echo $ROOT; ?>assets/js/scripts.js"></script>
+        <!-- <script src="./assets/js/features.js"></script> -->
+        <script src="<?php echo $ROOT; ?>assets/js/features-new.js"></script>
+        <script src="<?php echo $ROOT; ?>assets/js/scroll.js"></script>
+        <script src="<?php echo $ROOT; ?>assets/js/form.js"></script>
 
 </body>
 

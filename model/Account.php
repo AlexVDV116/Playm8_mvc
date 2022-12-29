@@ -1,23 +1,21 @@
 <?php
-class Account
+
+require_once 'framework/Model.php';
+
+class Account extends Model
 {
 
-    private string $accountID;
-    private string $account_username;
-    private string $email;
-    private string $password;
-    private bool $enabled;
-    private array $roles;
-    private userProfile $userProfile;
+    protected $account_id = '';
+    protected $account_username = '';
+    protected $account_email = '';
+    protected $account_password = '';
+    protected $account_enabled = '';
+    protected $account_roles = [];
+    protected $account_userProfile = '';
 
-    public function __construct($account_username, $email, $password, $enabled)
+    public function __construct(?array $data = null)
     {
-        $this->accountID = uniqid("AID");
-        $this->account_username = $account_username;
-        $this->email = $email;
-        $this->password = $password;
-        $this->enabled = $enabled;
-        $this->roles = array();
+        parent::__construct($data);
     }
 
     public function createUserProfile($firstName, $lastName, $location, $phoneNumber, $dateOfBirth, $age)
@@ -28,17 +26,31 @@ class Account
 
     public function getAccountID(): string
     {
-        return $this->accountID;
+        return $this->account_id;
     }
 
-    public function logIn(): void
+    public function getName(): string
     {
-        $this->isLoggedIn = true;
+        return $this->account_username;
     }
 
-    public function logOut(): void
+    public function getEmail(): string
     {
-        $this->isLoggedIn = false;
+        return $this->account_email;
+    }
+
+    public function getEnabled(): string
+    {
+        if ($this->account_enabled === 1) {
+            return "Yes";
+        } else {
+            return "No";
+        }
+    }
+
+    public function getRoles(): array
+    {
+        return $this->account_roles;
     }
 
     public function addRole(Role $role): void

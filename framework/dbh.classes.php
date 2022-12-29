@@ -1,19 +1,40 @@
 <?php
 
+require_once 'data/secret.php';
+
 // Databasehandler class that opens up the database connection
 class Dbh
 {
 
-    protected function connect()
+    private static $pdo = null;
+    static $debug = false;
+
+    function __construct()
+    {
+        if (self::$pdo === null) {
+            $this->connect(Secret::DB_HOST, Secret::DB_NAME, Secret::DB_USERNAME, Secret::DB_PASSWORD);
+        }
+    }
+
+    protected function connect($host, $dbname, $user, $pass): void
     {
         try {
-            $username = "root";
-            $password = "";
-            $dbh = new PDO('mysql:host=localhost;dbname=ooplogin', $username, $password);
-            return $dbh;
+            $dsn = "mysql:dbname=$dbname;host=$host;charset=utf8";
+            self::$pdo = new PDO($dsn, $user, $pass, null);
+            self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            print "Error!: " . $e->getMessage() . "<br/>";
-            die();
+            die('SQLProvider connection failed: ' . $e->getMessage());
         }
+    }
+
+    function prepare($sql)
+    {
+        return self::$pdo->prepare($sql);
+    }
+
+    function execute($sql, $args = [])
+    {
+        $stmt = $this->prepare($sql);
+        return $stmt->execute($args);
     }
 }
