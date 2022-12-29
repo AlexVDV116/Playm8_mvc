@@ -22,17 +22,17 @@ class SignupContr extends Signup
 
     public function signupUser(): void
     {
-        if ($this->emptyInput() == false) {
+        if ($this->emptyInput() == true) {
             // echo "Empty input!";
             header("location: ../index.php?error=emptyinput");
             exit();
         }
-        if ($this->invalidEmail() == false) {
+        if ($this->invalidEmail() == true) {
             // echo "Invalid Email!";
             header("location: ../index.php?error=invalidemail");
             exit();
         }
-        if ($this->emailTakenCheck() == false) {
+        if ($this->emailTakenCheck() == true) {
             // echo "Email already exists in our database!";
             header("location: ../index.php?error=emailalreadyexists");
             exit();
@@ -50,9 +50,9 @@ class SignupContr extends Signup
     {
         $result = null;
         if (empty($this->username) || empty($this->email) || empty($this->password) || empty($this->passwordrepeat)) {
-            $result = false;
-        } else {
             $result = true;
+        } else {
+            $result = false;
         }
         return $result;
     }
@@ -62,9 +62,9 @@ class SignupContr extends Signup
     {
         $result = null;
         if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
-            $result = false;
-        } else {
             $result = true;
+        } else {
+            $result = false;
         }
         return $result;
     }
@@ -84,10 +84,10 @@ class SignupContr extends Signup
     private function emailTakenCheck(): bool
     {
         $result = null;
-        if (!$this->checkEmail($this->email)) {
-            $result = false;
-        } else {
+        if ($this->checkEmail($this->email)) {
             $result = true;
+        } else {
+            $result = false;
         }
         return $result;
     }

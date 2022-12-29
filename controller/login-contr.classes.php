@@ -17,7 +17,7 @@ class LoginContr extends Login
     // Method that calls the emptyInput method and if true exectue header and exit code else getUser
     public function loginUser(): void
     {
-        if ($this->emptyInput() == false) {
+        if ($this->emptyInput() == true) {
             // echo "Empty input!";
             header("location: ../index.php?error=emptyinput");
             exit();
@@ -30,9 +30,9 @@ class LoginContr extends Login
     {
         $result = null;
         if (empty($this->email) || empty($this->password)) {
-            $result = false;
-        } else {
             $result = true;
+        } else {
+            $result = false;
         }
         return $result;
     }

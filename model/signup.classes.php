@@ -39,9 +39,9 @@ class Signup extends Dbh
         // If the statement returns a row from the database the email already exists in the database
         $resultCheck = null;
         if ($stmt->rowCount() > 0) {
-            $resultCheck - false;
-        } else {
             $resultCheck = true;
+        } else {
+            $resultCheck = false;
         }
         return $resultCheck;
     }
