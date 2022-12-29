@@ -23,7 +23,7 @@ class Signup extends Dbh
         $stmt = null;
     }
 
-    // Check database for already registered email returns true or false
+    // Check database for already registered email returns true if email already found
     protected function checkEmail($email): bool
     {
         // Prepared statement to prevent SQL injection

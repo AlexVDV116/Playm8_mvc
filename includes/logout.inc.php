@@ -1,6 +1,8 @@
 <?php
 
+// Regenerate session id and unseet and destroy to prevent session-fixation by malicious user
 session_start();
+session_regenerate_id();
 session_unset();
 session_destroy();
 

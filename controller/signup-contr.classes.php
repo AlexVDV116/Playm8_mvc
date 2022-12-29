@@ -46,6 +46,7 @@ class SignupContr extends Signup
         $this->setUser($this->username, $this->email, $this->password, $this->enabled);
     }
 
+    // Method that checks if there are any empty inputs, returns true if any inputs
     private function emptyInput(): bool
     {
         $result = null;
@@ -57,7 +58,7 @@ class SignupContr extends Signup
         return $result;
     }
 
-    // Method that uses the PHP built-in filter_var with the email filter to check user email input
+    // Method that uses the PHP built-in filter_var with the email filter to check user email input, returns true if invalid
     private function invalidEmail(): bool
     {
         $result = null;
@@ -69,7 +70,7 @@ class SignupContr extends Signup
         return $result;
     }
 
-    // Method to check if both password fields input match
+    // Method to check if both password fields input match return true if they match
     private function passwordMatch(): bool
     {
         $result = null;
@@ -81,6 +82,7 @@ class SignupContr extends Signup
         return $result;
     }
 
+    // Check database for already registered email returns true if email already found
     private function emailTakenCheck(): bool
     {
         $result = null;

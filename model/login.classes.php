@@ -59,8 +59,11 @@ class Login extends Dbh
             // This user variable thus contains all data from the database belonging to the account
             $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+
             // Create a new session with a session super global of accountid and account_username
             session_start();
+            // Regenerate session id to prevent session fixation-by malicious user
+            session_regenerate_id();
             $_SESSION["account_id"] = $user[0]["account_id"];
             $_SESSION["account_username"] = $user[0]["account_username"];
         }
