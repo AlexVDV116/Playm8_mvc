@@ -9,7 +9,7 @@ error_reporting(E_ALL);
 if (isset($_POST["submit"])) {
 
     // Grabbing the data
-    $naam = $_POST["naam"];
+    $name = $_POST["name"];
     $email = $_POST["email"];
 
 
@@ -17,7 +17,7 @@ if (isset($_POST["submit"])) {
     include "../framework/dbh.classes.php";
     include "../dao/form.classes.php";
     include "../controller/form-contr.classes.php";
-    $beta = new formContr($naam, $email);
+    $beta = new formContr($name, $email);
 
     // Running error handlers and user login
     $beta->betaUserChecks();

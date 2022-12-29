@@ -6,13 +6,13 @@
 class Form extends Dbh
 {
     // Check database if given user credentials match database  
-    protected function signUpBetaUser($naam, $email): void
+    protected function signUpBetaUser($name, $email): void
     {
         // Prepared statement to prevent SQL injection
         $stmt = $this->connect()->prepare('INSERT INTO betaAccounts (betaAccount_name, betaAccount_email) VALUES (?, ?);');
 
         // Exectute prepared statement with the hashed password
-        if (!$stmt->execute(array($naam, $email))) {
+        if (!$stmt->execute(array($name, $email))) {
             $stmt = null;
             header("location: ../index.php?error=stmtfailed");
             exit;

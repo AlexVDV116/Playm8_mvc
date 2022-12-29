@@ -5,12 +5,12 @@
 class FormContr extends Form
 {
 
-    private string $naam;
+    private string $name;
     private string $email;
 
-    public function __construct($naam, $email)
+    public function __construct($name, $email)
     {
-        $this->naam = $naam;
+        $this->name = $name;
         $this->email = $email;
     }
 
@@ -32,14 +32,14 @@ class FormContr extends Form
             exit();
         }
 
-        $this->signUpBetaUser($this->naam, $this->email);
+        $this->signUpBetaUser($this->name, $this->email);
     }
 
     // Method that checks if there are any empty inputs, returns true if any inputs
     private function emptyInput(): bool
     {
         $result = null;
-        if (empty($this->naam) || empty($this->email)) {
+        if (empty($this->name) || empty($this->email)) {
             $result = true;
         } else {
             $result = false;

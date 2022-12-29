@@ -246,7 +246,7 @@ include_once 'header.php';
                     <h2>Registreer je nu!</h2>
                     <form action="<?php echo $ROOT; ?>includes/betaform.inc.php" method="post" class="needs-validation" novalidate>
                         <div class="col">
-                            <input type="text" class="form-control mt-5 border-0" id="naam" name="naam" placeholder="Naam" required>
+                            <input type="text" class="form-control mt-5 border-0" id="name" name="name" placeholder="Naam" required>
                             <div class="invalid-feedback">
                                 Dit veld is verplicht.
                             </div>
