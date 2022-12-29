@@ -13,18 +13,8 @@ function addEventListenerOnFormSubmit(form) {
  * submission values of the form
  */
 function onFormSubmit(event) {
-    event.preventDefault();
-
     // make array out of form elements
     let formElements = Array.from(this.elements);
-
-    // Extract values from the form
-    formElements.forEach((element) => {
-        // has value
-        if (element.value)
-            // Log these values (send to server in a later stage)
-            console.log(element.value);
-    });
 
     // Give user feedback on form submission
     this.classList.add("was-validated");
@@ -37,14 +27,12 @@ function onFormSubmit(event) {
         formElements.forEach((element) => {
             if (element.id === "naam") {
                 name = element.value;
-                console.log(element.id);
                 notify("success", `Bedankt voor je registratie, ${name}`);
             }
 
             if (element.id === "form_name") {
                 name = element.value;
                 subject = document.getElementById("form_need").value;
-                console.log(element.id);
                 notify(
                     "success",
                     `Bedankt voor uw contactopname, ${name}, uw ${subject} is in behandeling genomen.`

@@ -244,15 +244,15 @@ include_once 'header.php';
             <div class="col-lg-6 order-2 order-lg-1 d-flex flex-row justify-content-center">
                 <div class="container register-form">
                     <h2>Registreer je nu!</h2>
-                    <form class="needs-validation" novalidate>
+                    <form action="<?php echo $ROOT; ?>includes/betaform.inc.php" method="post" class="needs-validation" novalidate>
                         <div class="col">
-                            <input type="text" class="form-control mt-5 border-0" id="naam" placeholder="Naam" required>
+                            <input type="text" class="form-control mt-5 border-0" id="naam" name="naam" placeholder="Naam" required>
                             <div class="invalid-feedback">
                                 Dit veld is verplicht.
                             </div>
                         </div>
                         <div class="col">
-                            <input type="email" class="form-control mt-2 border-0" id="email" placeholder="E-mail" required>
+                            <input type="email" class="form-control mt-2 border-0" id="email" name="email" placeholder="E-mail" required>
                             <div class="invalid-feedback">
                                 Voer een geldig email-adress in.
                             </div>
@@ -281,7 +281,7 @@ include_once 'header.php';
                             Bedankt voor uw registratie.
                         </div>
                         <div class="form-button-row d-flex flex-row mt-3">
-                            <button class="btn btn-credits shadow-sm my-2" type="submit">Verzenden</button>
+                            <button class="btn btn-credits shadow-sm my-2" type="submit" name="submit">Verzenden</button>
                         </div>
                     </form>
                 </div>
