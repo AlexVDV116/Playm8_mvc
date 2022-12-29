@@ -9,8 +9,8 @@ if (isset($_POST["submit"])) {
     $password = $_POST["password"];
 
     // Instantiate the LoginCont class
-    include "../model/dbh.classes.php";
-    include "../model/login.classes.php";
+    include "../framework/dbh.classes.php";
+    include "../dao/login.classes.php";
     include "../controller/login-contr.classes.php";
     $signup = new LoginContr($email, $password);
 

@@ -16,8 +16,8 @@ if (isset($_POST["submit"])) {
     $enabled = true;
 
     // Instantiate the SignupContr class
-    include "../model/dbh.classes.php";
-    include "../model/signup.classes.php";
+    include "../framework/dbh.classes.php";
+    include "../dao/signup.classes.php";
     include "../controller/signup-contr.classes.php";
     $signup = new SignupContr($username, $email, $password, $passwordrepeat, $enabled);
 
