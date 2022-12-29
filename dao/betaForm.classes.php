@@ -3,7 +3,7 @@
 // This class interacts with the database to check if the given credentials match the ones in the database
 // It uses prepared statements to prevent SQL injection
 // After checking if the password hash and email match it logs in the user and starts a session
-class Form extends Dbh
+class betaForm extends Dbh
 {
     // Check database if given user credentials match database  
     protected function signUpBetaUser($name, $email): void

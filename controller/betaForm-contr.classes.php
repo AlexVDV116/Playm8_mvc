@@ -2,7 +2,7 @@
 
 // This class performs several error checks on the data the user supplies to us when signing up
 // If there are no errors it will use the setUser method inherited from the Signup class
-class FormContr extends Form
+class betaFormContr extends betaForm
 {
 
     private string $name;
