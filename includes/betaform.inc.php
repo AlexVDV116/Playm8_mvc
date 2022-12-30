@@ -16,7 +16,7 @@ if (isset($_POST["submit"])) {
     // Instantiate the FormContr class
     include "../framework/dbh.classes.php";
     include "../dao/betaForm.classes.php";
-    include "../controller/betaForm-contr.classes.php";
+    include "../controller/betaFormController.classes.php";
     $beta = new betaFormContr($name, $email);
 
     // Running error handlers and user login

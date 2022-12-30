@@ -2,25 +2,19 @@
 
 // This class performs several error checks on the data the user supplies to us when signing up
 // If there are no errors it will use the setUser method inherited from the Signup class
-class SignupContr extends Signup
+class betaFormController extends betaForm
 {
 
-    private string $username;
+    private string $name;
     private string $email;
-    private string $password;
-    private string $passwordrepeat;
-    private bool $enabled;
 
-    public function __construct($username, $email, $password, $passwordrepeat, $enabled)
+    public function __construct($name, $email)
     {
-        $this->username = $username;
+        $this->name = $name;
         $this->email = $email;
-        $this->password = $password;
-        $this->passwordrepeat = $passwordrepeat;
-        $this->enabled = $enabled;
     }
 
-    public function signupUser(): void
+    public function betaUserChecks(): void
     {
         if ($this->emptyInput() == true) {
             // echo "Empty input!";
@@ -37,20 +31,15 @@ class SignupContr extends Signup
             header("location: ../index.php?error=emailalreadyexists");
             exit();
         }
-        if ($this->passwordMatch() == false) {
-            // echo "Passwords do not match!";
-            header("location: ../index.php?error=passwordmatch");
-            exit();
-        }
 
-        $this->setUser($this->username, $this->email, $this->password, $this->enabled);
+        $this->signUpBetaUser($this->name, $this->email);
     }
 
     // Method that checks if there are any empty inputs, returns true if any inputs
     private function emptyInput(): bool
     {
         $result = null;
-        if (empty($this->username) || empty($this->email) || empty($this->password) || empty($this->passwordrepeat)) {
+        if (empty($this->name) || empty($this->email)) {
             $result = true;
         } else {
             $result = false;
@@ -66,18 +55,6 @@ class SignupContr extends Signup
             $result = true;
         } else {
             $result = false;
-        }
-        return $result;
-    }
-
-    // Method to check if both password fields input match return true if they match
-    private function passwordMatch(): bool
-    {
-        $result = null;
-        if ($this->password !== $this->passwordrepeat) {
-            $result = false;
-        } else {
-            $result = true;
         }
         return $result;
     }
