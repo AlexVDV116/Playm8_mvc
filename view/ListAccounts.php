@@ -13,7 +13,7 @@ error_reporting(E_ALL);
 class ListAccounts extends View
 {
 
-    function show()
+    public function show()
     {
         $accountDAO = new accountDAO;
         $accountDAO->startList();

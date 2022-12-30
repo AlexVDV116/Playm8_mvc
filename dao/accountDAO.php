@@ -8,19 +8,19 @@ class accountDAO extends DAO
 
     private static $select = 'SELECT * FROM `accounts`';
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct('Account');
     }
 
-    function startList(): void
+    public function startList(): void
     {
         $sql = self::$select;
         $sql .= ' ORDER BY `accounts`.`account_id`';
         $this->startListSql($sql);
     }
 
-    function get(?string $account_id)
+    public function get(?string $account_id)
     {
         if (empty($account_id)) {
             return new Account;
@@ -31,7 +31,7 @@ class accountDAO extends DAO
         }
     }
 
-    function delete(int $account_id)
+    public function delete(int $account_id)
     {
         $sql = 'DELETE FROM `accounts` '
             . ' WHERE `accounts_id` = ?';
@@ -41,7 +41,7 @@ class accountDAO extends DAO
         $this->execute($sql, $args);
     }
 
-    function insert(Account $account)
+    public function insert(Account $account)
     {
         $sql = 'INSERT INTO `accounts` '
             . ' (account_username, account_email, account_password, account_enabled)'
@@ -55,7 +55,7 @@ class accountDAO extends DAO
         $this->execute($sql, $args);
     }
 
-    function update(Account $account)
+    public function update(Account $account)
     {
         $sql = 'UPDATE `accounts` '
             . ' SET account_username = ?, account_email = ?, account_enabled = ?'
@@ -69,7 +69,7 @@ class accountDAO extends DAO
         $this->execute($sql, $args);
     }
 
-    function save(Account $account)
+    public function save(Account $account)
     {
         if (empty($account->getAccountID())) {
             $this->insert($account);
@@ -79,7 +79,7 @@ class accountDAO extends DAO
     }
 
     // Check database for already registered email returns true if email already found
-    function checkEmail($account_email)
+    public function checkEmail($account_email): bool
     {
         $stmt = $this->prepare("SELECT * FROM accounts WHERE account_email = ?");
         $stmt->execute([$account_email]);
