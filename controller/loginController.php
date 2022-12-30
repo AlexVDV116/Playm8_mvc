@@ -1,8 +1,11 @@
 <?php
 
+require_once '../framework/Controller.php';
+require_once '../dao/loginDAO.php';
+
 // This class performs several error checks on the data the user supplies to us when logging in
 // If there are no errors it will use the getUser method inherited from the Login class
-class LoginContr extends Login
+class LoginController extends Controller
 {
 
     private string $email;
@@ -15,14 +18,15 @@ class LoginContr extends Login
     }
 
     // Method that calls the emptyInput method and if true exectue header and exit code else getUser
-    public function loginUser(): void
+    public function run(): void
     {
         if ($this->emptyInput() == true) {
             // echo "Empty input!";
             header("location: ../index.php?error=emptyinput");
             exit();
         }
-        $this->getUser($this->email, $this->password);
+        $loginDAO = new loginDAO();
+        $loginDAO->getUser($this->email, $this->password);
     }
 
     // Method that checks for empty input returns bool

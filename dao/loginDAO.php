@@ -1,34 +1,36 @@
 <?php
 
+require_once '../framework/DAO.php';
+require_once '../model/Account.php';
+
 // This class interacts with the database to check if the given credentials match the ones in the database
 // It uses prepared statements to prevent SQL injection
 // After checking if the password hash and email match it logs in the user and starts a session
-class Login extends Dbh
+class loginDAO extends DAO
 {
-    // Check database if given user credentials match database  
-    protected function getUser($email, $password): void
-    {
-        // Prepared statement to prevent SQL injection
-        $stmt = $this->connect()->prepare('SELECT account_password FROM accounts WHERE account_email = ?;');
+    private static $select = 'SELECT * FROM `accounts`';
 
-        // Execute the statement with the given email value
-        if (!$stmt->execute(array($email))) {
-            $stmt = null;
-            header("location: ../index.php?error=stmtfailed");
-            exit;
-        }
+    public function __construct()
+    {
+        parent::__construct('Account');
+    }
+
+    // Check database if given user credentials match database  
+    public function getUser($email, $password): void
+    {
+        $stmt = $this->prepare("SELECT * FROM accounts WHERE account_email = ?");
+        $stmt->execute([$email]);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         // If query gets no result exit script and redirect user to index with error message
-        if ($stmt->rowCount() == 0) {
-            $stmt = null;
+        if (!$result) {
             header("location: ../index.php?error=accountnotfound");
             exit();
+        } else {
         }
 
-        // Fetch associative array with the hashed user password from database
-        $hashedPassword = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        // use PHP built in method to check if the given hash matches the user given password (returns bool)
-        $checkPwd = password_verify($password, $hashedPassword[0]["account_password"]);
+        // use PHP built in method to check if the given password matches the hashed password stored in the DB (returns bool)
+        $checkPwd = password_verify($password, $result[0]["account_password"]);
 
         // If the password match
         if ($checkPwd == false) {
@@ -36,11 +38,11 @@ class Login extends Dbh
             header("location: ../index.php?error=wrongpassword");
             exit();
         } elseif ($checkPwd == true) {
-            // Prepared satement that selects all collums in the accounts table where user credentials match the given credentials
-            $stmt = $this->connect()->prepare('SELECT * FROM accounts WHERE account_email = ? AND account_password = ?;');
+            // Prepared satement that selects all rows in the accounts table where user credentials match the given credentials
+            $stmt = $this->prepare('SELECT * FROM accounts WHERE account_email = ? AND account_password = ?;');
 
             // If they do not match, set statement to null and redirect user to index with error message
-            if (!$stmt->execute(array($email, $hashedPassword[0]["account_password"]))) {
+            if (!$stmt->execute(array($email, $result[0]["account_password"]))) {
                 $stmt = null;
                 header("location: ../index.php?error=stmtfailed");
                 exit;
