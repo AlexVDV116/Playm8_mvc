@@ -1,7 +1,7 @@
 <?php
 
-require_once 'framework/DAO.php';
-require_once 'model/Account.php';
+require_once '../framework/DAO.php';
+require_once '../model/Account.php';
 
 class accountDAO extends DAO
 {
@@ -44,13 +44,13 @@ class accountDAO extends DAO
     function insert(Account $account)
     {
         $sql = 'INSERT INTO `accounts` '
-            . ' (account_id, account_username, account_email, account_enabled)'
+            . ' (account_username, account_email, account_password, account_enabled)'
             . ' VALUES (?, ?, ?, ?)';
         $args = [
-            $account->getAccountID(),
             $account->getName(),
             $account->getEmail(),
-            $account->getEnabled()
+            $account->getPassword(),
+            1
         ];
         $this->execute($sql, $args);
     }
@@ -76,5 +76,22 @@ class accountDAO extends DAO
         } else {
             $this->update($account);
         }
+    }
+
+    // Check database for already registered email returns true if email already found
+    function checkEmail($account_email)
+    {
+        $stmt = $this->prepare("SELECT * FROM accounts WHERE account_email = ?");
+        $stmt->execute([$account_email]);
+        $result = $stmt->fetch();
+
+        // If the statement returns a row from the database the email already exists in the database
+        $resultCheck = null;
+        if ($result) {
+            $resultCheck = true;
+        } else {
+            $resultCheck = false;
+        }
+        return $resultCheck;
     }
 }

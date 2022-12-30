@@ -1,18 +1,18 @@
 <?php
 
-require_once 'framework/Model.php';
+require_once '../framework/Model.php';
 
 
 class Account extends Model
 {
 
-    protected $account_id = '';
-    protected $account_username = '';
-    protected $account_email = '';
-    protected $account_password = '';
-    protected $account_enabled = '';
-    protected $account_roles = [];
-    protected $account_userProfile = '';
+    public string $account_id = '';
+    public string $account_username = '';
+    public string $account_email = '';
+    public string $account_password = '';
+    public bool $account_enabled = true;
+    public array $account_roles = [];
+    public ?userProfile $account_userProfile = null;
 
     public function __construct(?array $data = null)
     {
@@ -38,6 +38,11 @@ class Account extends Model
     public function getEmail(): string
     {
         return $this->account_email;
+    }
+
+    public function getPassword(): string
+    {
+        return $this->account_password;
     }
 
     // return string instead of bool 1/0 for user experience

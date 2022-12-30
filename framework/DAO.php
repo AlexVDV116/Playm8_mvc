@@ -1,6 +1,6 @@
 <?php
 
-require_once 'framework/dbh.classes.php';
+require_once '../framework/dbh.classes.php';
 
 abstract class DAO extends Dbh
 {
