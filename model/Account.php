@@ -2,6 +2,7 @@
 
 require_once 'framework/Model.php';
 
+
 class Account extends Model
 {
 
@@ -39,6 +40,7 @@ class Account extends Model
         return $this->account_email;
     }
 
+    // return string instead of bool 1/0 for user experience
     public function getEnabled(): string
     {
         if ($this->account_enabled === 1) {

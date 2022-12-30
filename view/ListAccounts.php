@@ -7,6 +7,9 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+/**
+ * @property Account $account
+ */
 class ListAccounts extends View
 {
 
@@ -32,6 +35,7 @@ class ListAccounts extends View
                         $account = $accountListDAO->getNext();
                     ?>
                         <tr onclick="">
+                            <!-- PHP shorthand to echo the data in the table -->
                             <td><?= $account->getAccountID() ?></td>
                             <td><?= $account->getName() ?></td>
                             <td><?= $account->getEmail() ?></td>
