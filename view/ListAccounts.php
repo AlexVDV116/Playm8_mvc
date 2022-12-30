@@ -1,7 +1,7 @@
 <?php
 require_once 'framework/View.php';
 require_once 'model/Account.php';
-require_once 'dao/AccountListDAO.php';
+require_once 'dao/accountDAO.php';
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -15,8 +15,8 @@ class ListAccounts extends View
 
     function show()
     {
-        $accountListDAO = new accountListDAO;
-        $accountListDAO->startList();
+        $accountDAO = new accountDAO;
+        $accountDAO->startList();
 ?>
 
         <div class="class-responsive">
@@ -31,8 +31,8 @@ class ListAccounts extends View
                 </thead>
                 <tbody>
                     <?php
-                    while ($accountListDAO->hasNext()) {
-                        $account = $accountListDAO->getNext();
+                    while ($accountDAO->hasNext()) {
+                        $account = $accountDAO->getNext();
                     ?>
                         <tr onclick="">
                             <!-- PHP shorthand to echo the data in the table -->

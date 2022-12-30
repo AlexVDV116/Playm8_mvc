@@ -3,7 +3,7 @@
 require_once 'framework/DAO.php';
 require_once 'model/Account.php';
 
-class accountListDAO extends DAO
+class accountDAO extends DAO
 {
 
     private static $select = 'SELECT * FROM `accounts`';
