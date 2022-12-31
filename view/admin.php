@@ -1,10 +1,10 @@
 <?php
-$ROOT = '../'; // Setting the ROOT directory for this file so the relative paths used in included pages will still work
 session_start();
 ini_set('display_errors', 1);
 header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1
-header("Pragma: no-cache"); // HTTP 1.0
-header("Expires: 0"); // Proxies
+header("Pragma: no-cache"); // HTTP 1.0 clients (IE6 / pre 1997)
+header("Expires: 0"); // HTTP 1.0 Proxies
+
 // set include path to work from any directory level
 set_include_path('./' . PATH_SEPARATOR . '../');
 
@@ -52,10 +52,10 @@ $menu = [
     <link rel="stylesheet" href="https://use.typekit.net/unv5bor.css">
 
     <!-- Custom CSS / JS -->
-    <link rel="stylesheet" href="<?php echo $ROOT; ?>assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 
     <title>Playm8</title>
-    <link rel="icon" type="image/x-icon" href="<?php echo $ROOT; ?>assets/images/Playm8_favicon_32x32.png">
+    <link rel="icon" type="image/x-icon" href="../assets/images/Playm8_favicon_32x32.png">
 </head>
 
 <body>
@@ -63,8 +63,8 @@ $menu = [
 
         <nav id="main-navbar" class="navbar navbar-expand-xxl">
             <div class="container">
-                <a class="navbar-brand" href="<?php echo $ROOT; ?>index.php">
-                    <img src="<?php echo $ROOT; ?>/assets/images/logo.svg" alt="Logo" class="img-fluid logo">
+                <a class="navbar-brand" href="../index.php">
+                    <img src="../assets/images/logo.svg" alt="Logo" class="img-fluid logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="bar"></span>
@@ -84,7 +84,7 @@ $menu = [
                                 </a>
                             </li>
                             <li class="nav-item px-2">
-                                <a class="nav-link btn btn-login nav-btn" href="<?php echo $ROOT; ?>includes/logout.inc.php" role="button">
+                                <a class="nav-link btn btn-login nav-btn" href="../includes/logout.inc.php" role="button">
                                     Uitloggen
                                 </a>
                             </li>
@@ -92,12 +92,12 @@ $menu = [
                         } else {
                         ?>
                             <li class="nav-item pl-3 pr-1">
-                                <a class="nav-link btn btn-register nav-btn" href="<?php echo $ROOT; ?>view/signup.php" role="button">
+                                <a class="nav-link btn btn-register nav-btn" href="../view/signup.php" role="button">
                                     Registreren
                                 </a>
                             </li>
                             <li class="nav-item px-2">
-                                <a class="nav-link btn btn-login nav-btn" href="<?php echo $ROOT; ?>view/login.php" role="button">
+                                <a class="nav-link btn btn-login nav-btn" href="../view/login.php" role="button">
                                     Inloggen
                                 </a>
                             </li>
@@ -149,11 +149,11 @@ $menu = [
 
 
 
-        <script src="<?php echo $ROOT; ?>assets/js/scripts.js"></script>
+        <script src="../assets/js/scripts.js"></script>
         <!-- <script src="./assets/js/features.js"></script> -->
-        <script src="<?php echo $ROOT; ?>assets/js/features-new.js"></script>
-        <script src="<?php echo $ROOT; ?>assets/js/scroll.js"></script>
-        <script src="<?php echo $ROOT; ?>assets/js/form.js"></script>
+        <script src="../assets/js/features-new.js"></script>
+        <script src="../assets/js/scroll.js"></script>
+        <script src="../assets/js/form.js"></script>
 
 </body>
 

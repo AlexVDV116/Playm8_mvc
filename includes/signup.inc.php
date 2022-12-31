@@ -1,6 +1,7 @@
 <?php
-// An include file which contains the PHP script that the gets the data from the form and uses it to instantiate the SignupCont class
-// After instantiating the SignupContr class it uses the signupUser method and redirect the user to the index page if no errors occur
+// Gets the data from the signup form
+// Instantiates the accountController class
+// If no errors, redirect user to index page 
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
