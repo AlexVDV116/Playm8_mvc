@@ -10,7 +10,8 @@ class Account extends Model
     public string $account_username = '';
     public string $account_email = '';
     public string $account_password = '';
-    public bool $account_enabled = true;
+    public ?bool $account_enabled = null;
+    public ?bool $acocunt_beta_user = null;
     public array $account_roles = [];
     public ?userProfile $account_userProfile = null;
 
@@ -45,14 +46,14 @@ class Account extends Model
         return $this->account_password;
     }
 
-    // return string instead of bool 1/0 for user experience
-    public function getEnabled(): string
+    public function getEnabled()
     {
-        if ($this->account_enabled === 1) {
-            return "Yes";
-        } else {
-            return "No";
-        }
+        return $this->account_enabled;
+    }
+
+    public function getBetaUser()
+    {
+        return $this->acocunt_beta_user;
     }
 
     public function getRoles(): array

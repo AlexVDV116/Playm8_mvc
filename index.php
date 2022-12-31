@@ -246,7 +246,7 @@ include_once 'header.php';
                     <h2>Registreer je nu!</h2>
                     <form action="<?php echo $ROOT; ?>includes/betaform.inc.php" method="post" class="needs-validation" novalidate>
                         <div class="col">
-                            <input type="text" class="form-control mt-5 border-0" id="name" name="name" placeholder="Naam" required>
+                            <input type="text" class="form-control mt-5 border-0" id="name" name="name" placeholder="Gebruikersnaam" required>
                             <div class="invalid-feedback">
                                 Dit veld is verplicht.
                             </div>
@@ -293,6 +293,7 @@ include_once 'header.php';
                     Beta-tester willen worden. Met ons Beta-test programma willen wij de functionaliteit en de
                     bruikbaarheid van onze mobiele applicatie testen. Issues en bugs worden direct met onze
                     software-ontwikkelaars teruggekoppeld wat bijdraagt aan de kwaliteit van ons product.</p>
+                <p>Meld je aan met de gebruikersnaam en het e-mailadres van je Playm8 account!</p>
             </div>
         </div>
     </div>

@@ -20,14 +20,14 @@ class accountDAO extends DAO
         $this->startListSql($sql);
     }
 
-    public function get(?string $account_id)
+    public function get(?string $account_email)
     {
         if (empty($account_id)) {
             return new Account;
         } else {
             $sql = self::$select;
-            $sql .= ' WHERE `accounts`.`account_id` = ?';
-            return $this->getObjectSql($sql, [$account_id]);
+            $sql .= ' WHERE `accounts`.`account_email` = ?';
+            return $this->getObjectSql($sql, [$account_email]);
         }
     }
 
@@ -44,13 +44,12 @@ class accountDAO extends DAO
     public function insert(Account $account)
     {
         $sql = 'INSERT INTO `accounts` '
-            . ' (account_username, account_email, account_password, account_enabled)'
-            . ' VALUES (?, ?, ?, ?)';
+            . ' (account_username, account_email, account_password)'
+            . ' VALUES (?, ?, ?)';
         $args = [
             $account->getName(),
             $account->getEmail(),
-            $account->getPassword(),
-            1
+            $account->getPassword()
         ];
         $this->execute($sql, $args);
     }
@@ -58,12 +57,13 @@ class accountDAO extends DAO
     public function update(Account $account)
     {
         $sql = 'UPDATE `accounts` '
-            . ' SET account_username = ?, account_email = ?, account_enabled = ?'
+            . ' SET account_username = ?, account_email = ?, account_enabled = ?, account_beta_user = ?'
             . ' WHERE account_id = ?';
         $args = [
             $account->getName(),
             $account->getEmail(),
             $account->getEnabled(),
+            $account->getBetaUser(),
             $account->getAccountID()
         ];
         $this->execute($sql, $args);

@@ -14,13 +14,13 @@ if (isset($_POST["submit"])) {
 
 
     // Instantiate the FormContr class
-    include "../framework/dbh.classes.php";
-    include "../dao/betaForm.classes.php";
-    include "../controller/betaFormController.classes.php";
-    $beta = new betaFormContr($name, $email);
+    include "../framework/databaseHandler.php";
+    include "../dao/accountDAO.php";
+    include "../controller/betaFormController.php";
+    $beta = new betaFormController($name, $email);
 
-    // Running error handlers and user login
-    $beta->betaUserChecks();
+    // Running error handlers 
+    $beta->run();
 
     // Redirect user back to the front page when sucsessfull
     header("location: ../index.php?error=none");

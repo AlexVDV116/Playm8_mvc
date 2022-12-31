@@ -1,8 +1,10 @@
 <?php
 
+require_once '../framework/Controller.php';
+require_once '../dao/loginDAO.php';
 // This class performs several error checks on the data the user supplies to us when signing up
 // If there are no errors it will use the setUser method inherited from the Signup class
-class betaFormController extends betaForm
+class betaFormController extends Controller
 {
 
     private string $name;
@@ -14,7 +16,7 @@ class betaFormController extends betaForm
         $this->email = $email;
     }
 
-    public function betaUserChecks(): void
+    public function run(): void
     {
         if ($this->emptyInput() == true) {
             // echo "Empty input!";
@@ -26,13 +28,17 @@ class betaFormController extends betaForm
             header("location: ../index.php?error=invalidemail");
             exit();
         }
-        if ($this->emailTakenCheck() == true) {
+        if ($this->emailTakenCheck() == false) {
             // echo "Email already exists in our database!";
-            header("location: ../index.php?error=emailalreadyexists");
+            header("location: ../index.php?error=unknownuser");
             exit();
         }
 
-        $this->signUpBetaUser($this->name, $this->email);
+        $accountDAO = new accountDAO();
+        $accountDAO->startList();
+        $account = $accountDAO->get($this->email);
+        $account->account_beta_user = true;
+        $accountDAO->update($account);
     }
 
     // Method that checks if there are any empty inputs, returns true if any inputs
@@ -59,11 +65,13 @@ class betaFormController extends betaForm
         return $result;
     }
 
+    // Use formDAO method because it accesses the database
     // Check database for already registered email returns true if email already found
     private function emailTakenCheck(): bool
     {
         $result = null;
-        if ($this->checkEmail($this->email)) {
+        $accountDAO = new accountDAO;
+        if ($accountDAO->checkEmail($this->email)) {
             $result = true;
         } else {
             $result = false;

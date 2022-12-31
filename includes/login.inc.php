@@ -13,7 +13,7 @@ if (isset($_POST["submit"])) {
     $password = $_POST["password"];
 
     // Instantiate the LoginCont class
-    include "../framework/dbh.classes.php";
+    include "../framework/databaseHandler.php";
     include "../dao/loginDAO.php";
     include "../controller/loginController.php";
     $login = new LoginController($email, $password);
