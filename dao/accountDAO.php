@@ -22,7 +22,7 @@ class accountDAO extends DAO
 
     public function get(?string $account_email)
     {
-        if (empty($account_id)) {
+        if (empty($account_email)) {
             return new Account;
         } else {
             $sql = self::$select;

@@ -53,7 +53,7 @@ class Account extends Model
 
     public function getBetaUser()
     {
-        return $this->acocunt_beta_user;
+        return $this->account_beta_user;
     }
 
     public function getRoles(): array

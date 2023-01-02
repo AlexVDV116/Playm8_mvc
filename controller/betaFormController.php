@@ -34,10 +34,17 @@ class betaFormController extends Controller
             exit();
         }
 
+        // Create an account DAO
         $accountDAO = new accountDAO();
         $accountDAO->startList();
+
+        // Get the account information from database (accountDAO extends DAO and DAO will construct a Account Model)
         $account = $accountDAO->get($this->email);
+
+        // Set account_beta_user collum to true
         $account->account_beta_user = true;
+
+        // Update the account info and store in database
         $accountDAO->update($account);
     }
 
