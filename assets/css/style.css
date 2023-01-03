@@ -129,7 +129,7 @@ header.fixed-top {
     color: #d6004a;
 }
 
-@media (min-width: 992px) {
+@media (width >= 992px) {
     #main-navbar .btn-register {
         background-color: #ffffff;
         border: 2px solid #ffffff;
@@ -606,7 +606,7 @@ button.btn.btn-credits,
     border-radius: 25px;
 }
 
-@media (max-width: 992px) {
+@media (width <= 992px) {
     .form-img {
         display: none;
     }
@@ -626,7 +626,7 @@ button.btn.btn-credits,
 *
 *  ================================================================= */
 
-@media (min-width: 1200px) {
+@media (width >= 1200px) {
     #main-navbar .nav-link:not(.nav-btn)::after {
         content: " ";
         width: 140%;
@@ -653,7 +653,7 @@ button.btn.btn-credits,
     }
 }
 
-@media (max-width: 1200px) {
+@media (width <= 1200px) {
     h1 {
         font-size: 40px;
     }
@@ -711,14 +711,14 @@ button.btn.btn-credits,
     }
 }
 
-@media (max-width: 940px) {
+@media (width <= 940px) {
     .register-form.container {
         width: 100%;
         margin-top: 1.5rem;
     }
 }
 
-@media (max-width: 480px) {
+@media (width <= 480px) {
     html {
         scroll-padding-top: 78px; /* height of sticky header */
         padding-top: 78px; /* Padding top to stop the fixed navbars overlapping the body */
@@ -755,7 +755,7 @@ button.btn.btn-credits,
     }
 }
 
-@media (min-width: 481px) {
+@media (width >= 481px) {
     #outsider {
         overflow: hidden;
     }
@@ -764,7 +764,7 @@ button.btn.btn-credits,
     }
 }
 
-@media (min-width: 992px) {
+@media (width >= 992px) {
     .container {
         text-align: left;
     }
