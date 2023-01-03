@@ -27,6 +27,7 @@ class ListAccounts extends View
                         <th>Naam</th>
                         <th>Email</th>
                         <th>Enabled</th>
+                        <th>Beta</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,6 +41,7 @@ class ListAccounts extends View
                             <td><?= $account->getName() ?></td>
                             <td><?= $account->getEmail() ?></td>
                             <td><?= $account->getEnabled() ?></td>
+                            <td><?= $account->getBetaUser() ?></td>
                         </tr>
                     <?php
                     }

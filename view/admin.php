@@ -114,26 +114,29 @@ $menu = [
         <div class="row">
             <nav id="sideBarNav" class=" col-4 ml-5">
                 <div class="p-3" style="width: 280px;">
-                    <h2>Admin area</h2>
-                    <hr>
                     <ul class="nav flex-column mb-auto">
+                        <li class="nav-item">
+                            <a href="?view=Home" class="nav-link">
+                                <h4>Admin area</h4>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a href="?view=ListAccounts" class="nav-link">
                                 Bekijk accounts
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="nav-link">
+                            <a href="?view=Home" class="nav-link">
                                 Betatesters
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="?view=Home" class="nav-link">
                                 Rollen en Permissies
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="?view=Home" class="nav-link">
                                 Downloads
                             </a>
                         </li>
