@@ -284,9 +284,24 @@ include_once 'header.php';
                             <button class="btn btn-credits shadow-sm my-2" type="submit" name="submit">Verzenden</button>
                         </div>
                         <?php
-                        if (isset($_GET["beta"])) {
-                            if ($_GET["beta"] == "success") {
-                                echo '<p class="contact-form-success">Bedankt voor je inschrijving als betatester.<br> Wij behandelen je verzoek zo snel mogelijk. </p>';
+                        if (isset($_GET["error"])) {
+                            if ($_GET["error"] == "none") {
+                                echo '<p class="Bedankt voor je inschrijving als betatester.<br> Wij behandelen je verzoek zo snel mogelijk. </p>';
+                            }
+                            if ($_GET["error"] == "emptyinput") {
+                                echo '<p class="form-error">Alle velden zijn verplicht.</p>';
+                            }
+                            if ($_GET["error"] == "invalidemail") {
+                                echo '<p class="form-error">Onjuist email format.</p>';
+                            }
+                            if ($_GET["error"] == "unknownuser") {
+                                echo '<p class="form-error">Dit e-mailadres is niet bij ons bekend.</p>';
+                            }
+                            if ($_GET["error"] == "alreadybeta") {
+                                echo '<p class="form-error">Dit account staat al ingeschreven als beta-tester.</p>';
+                            }
+                            if ($_GET["error"] == "accountdisabled") {
+                                echo '<p class="form-error">Dit account is inactief.</p>';
                             }
                         } ?>
                     </form>

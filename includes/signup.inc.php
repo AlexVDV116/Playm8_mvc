@@ -27,5 +27,5 @@ if (isset($_POST["submit"])) {
     $signup->run();
 
     // Redirect user back to the front page when sucsessfull
-    header("location: ../index.php?error=none");
+    header("location: ../view/signup.php?error=none");
 }

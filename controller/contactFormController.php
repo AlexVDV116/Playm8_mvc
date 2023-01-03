@@ -34,6 +34,11 @@ class contactFormController extends Controller
             header("location: ../view/contact.php?error=invalidemail");
             exit();
         }
+        if ($this->getMessageLength() < 20 || $this->getMessageLength() > 500) {
+            // echo "Uw bericht moet tussen de 20 tot 500 karakters bevatten!";
+            header("location: ../view/contact.php?error=messagelength");
+            exit();
+        }
 
         // Send data to our contact e-mailadress
         $mailname = $this->name . " " . $this->lastname;
@@ -60,6 +65,12 @@ class contactFormController extends Controller
             $result = false;
         }
         return $result;
+    }
+
+    // Method that checks if there are any empty inputs, returns true if any inputs
+    private function getMessageLength(): int
+    {
+        return strlen($this->message);
     }
 
     // Method that uses the PHP built-in filter_var with the email filter to check user email input, returns true if invalid

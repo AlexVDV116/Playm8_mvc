@@ -24,22 +24,22 @@ class accountController extends Controller
     {
         if ($this->hasEmptyInput() == true) {
             // echo "Empty input!";
-            header("location: ../index.php?error=emptyinput");
+            header("location: ../view/signup.php?error=emptyinput");
             exit();
         }
         if ($this->hasInvalidEmail() == true) {
             // echo "Invalid Email!";
-            header("location: ../index.php?error=invalidemail");
+            header("location: ../view/signup.php?error=invalidemail");
             exit();
         }
         if ($this->isKnownEmail() == true) {
             // echo "Email already exists in our database!";
-            header("location: ../index.php?error=emailalreadyexists");
+            header("location: ../view/signup.php?error=emailalreadyexists");
             exit();
         }
         if ($this->passwordMatch() == false) {
             // echo "Passwords do not match!";
-            header("location: ../index.php?error=passwordmatch");
+            header("location: ../view/signup.php?error=passwordmatch");
             exit();
         }
 

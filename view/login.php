@@ -50,6 +50,15 @@ include_once '../header.php';
                                     <div class="form-button-row d-flex justify-content-center flex-row mt-3">
                                         <button class="btn btn-credits shadow-sm my-2" type="submit" name="submit">Inloggen</button>
                                     </div>
+                                    <?php
+                                    if (isset($_GET["error"])) {
+                                        if ($_GET["error"] == "emptyinput") {
+                                            echo '<p class="form-error">Alle velden zijn verplicht.</p>';
+                                        }
+                                        if ($_GET["error"] == "invalidemail") {
+                                            echo '<p class="form-error">Onjuist email format.</p>';
+                                        }
+                                    } ?>
                                 </form>
                             </div>
                             <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">

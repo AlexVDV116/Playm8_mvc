@@ -612,8 +612,12 @@ button.btn.btn-credits,
     }
 }
 
-.contact-form-success {
+.form-success {
     color: #198754;
+}
+
+.form-error {
+    color: #dc3545;
 }
 
 /** =================================================================

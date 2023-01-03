@@ -20,27 +20,27 @@ class betaFormController extends Controller
     {
         if ($this->hasEmptyInput() == true) {
             // echo "Empty input!";
-            header("location: ../index.php?error=emptyinput");
+            header("location: ../index.php?error=emptyinput#tester-section");
             exit();
         }
         if ($this->hasInvalidEmail() == true) {
             // echo "Invalid Email!";
-            header("location: ../index.php?error=invalidemail");
+            header("location: ../index.php?error=invalidemail#tester-section");
             exit();
         }
         if ($this->isKnownEmail() == false) {
             // echo "User unknown!";
-            header("location: ../index.php?error=unknownuser");
+            header("location: ../index.php?error=unknownuser#tester-section");
             exit();
         }
         if ($this->isAlreadyBeta() == true) {
             // echo "User already signed up as a beta user!";
-            header("location: ../index.php?error=alreadybeta");
+            header("location: ../index.php?error=alreadybeta#tester-section");
             exit();
         }
         if ($this->isAccountEnabled() == false) {
             // echo "User account disabled";
-            header("location: ../index.php?error=accountdisabled");
+            header("location: ../index.php?error=accountdisabled#tester-section");
             exit();
         }
 

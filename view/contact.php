@@ -78,9 +78,9 @@ include_once '../header.php';
 									<div class="col-md-12">
 										<div class="form-group">
 											<label for="form_message">Bericht:</label>
-											<textarea id="form_message" name="message" class="form-control border-0" placeholder="Schrijf hier uw bericht..." rows="4" required></textarea>
+											<textarea id="form_message" name="message" class="form-control border-0" placeholder="Schrijf hier uw bericht. (20 -500 karakters)" rows="4" required></textarea>
 											<div class="invalid-feedback">
-												Dit veld is verplicht.
+												Dit veld is verplicht. (20 - 500 karakters)
 											</div>
 										</div>
 									</div>
@@ -100,9 +100,18 @@ include_once '../header.php';
 										<button class="btn btn-credits shadow-sm my-2" name="submit" type="submit">Verzenden</button>
 									</div>
 									<?php
-									if (isset($_GET["contact"])) {
-										if ($_GET["contact"] == "success") {
-											echo '<p class="contact-form-success">Bedankt voor je contactopname. Wij behandelen je bericht zo snel mogelijk. </p>';
+									if (isset($_GET["error"])) {
+										if ($_GET["error"] == "none") {
+											echo '<p class="form-success">Bedankt voor je contactopname. Wij behandelen je bericht zo snel mogelijk. </p>';
+										}
+										if ($_GET["error"] == "emptyinput") {
+											echo '<p class="form-error">Alle velden zijn verplicht.</p>';
+										}
+										if ($_GET["error"] == "invalidemail") {
+											echo '<p class="form-error">Onjuist email format.</p>';
+										}
+										if ($_GET["error"] == "messagelength") {
+											echo '<p class="form-error">Uw bericht moet tussen de 20 - 500 karakters bevatten.</p>';
 										}
 									} ?>
 								</div>

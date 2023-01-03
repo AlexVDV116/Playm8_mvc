@@ -23,5 +23,5 @@ if (isset($_POST["submit"])) {
     $beta->run();
 
     // Redirect user back to the front page when sucsessfull
-    header("location: ../index.php?beta=success#tester-section");
+    header("location: ../index.php?error=none#tester-section");
 }

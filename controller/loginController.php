@@ -22,7 +22,12 @@ class LoginController extends Controller
     {
         if ($this->emptyInput() == true) {
             // echo "Empty input!";
-            header("location: ../index.php?error=emptyinput");
+            header("location: ../view/login.php?error=emptyinput");
+            exit();
+        }
+        if ($this->invalidEmail() == true) {
+            // echo "Invalid Email!";
+            header("location: ../view/login.php?error=invalidemail");
             exit();
         }
         $loginDAO = new loginDAO();
@@ -34,6 +39,18 @@ class LoginController extends Controller
     {
         $result = null;
         if (empty($this->email) || empty($this->password)) {
+            $result = true;
+        } else {
+            $result = false;
+        }
+        return $result;
+    }
+
+    // Method that uses the PHP built-in filter_var with the email filter to check user email input, returns true if invalid
+    private function invalidEmail(): bool
+    {
+        $result = null;
+        if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
             $result = true;
         } else {
             $result = false;

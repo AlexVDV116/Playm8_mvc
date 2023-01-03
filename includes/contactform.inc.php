@@ -25,5 +25,5 @@ if (isset($_POST["submit"])) {
     // Running error handlers 
     $contact->run();
 
-    header("Location: ../view/contact.php?contact=success");
+    header("Location: ../view/contact.php?error=none");
 }
