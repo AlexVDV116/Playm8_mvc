@@ -24,13 +24,13 @@ include_once '../header.php';
 					<div class="card-body bg-light">
 
 						<div class="container">
-							<form class="needs-validation" novalidate>
+							<form action="../includes/contactform.inc.php" method="post" class="needs-validation" novalidate>
 
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="form_name">Voornaam:</label>
-											<input id="form_name" type="text" name="naam" class="form-control border-0" placeholder="Voer uw voornaam in" required>
+											<input id="form_name" type="text" name="name" class="form-control border-0" placeholder="Voer uw voornaam in" required>
 											<div class="invalid-feedback">
 												Dit veld is verplicht.
 											</div>
@@ -39,7 +39,7 @@ include_once '../header.php';
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="form_lastname">Achternaam:</label>
-											<input id="form_lastname" type="text" name="surname" class="form-control border-0" placeholder="Voer uw achternaam in" required>
+											<input id="form_lastname" type="text" name="lastname" class="form-control border-0" placeholder="Voer uw achternaam in" required>
 											<div class="invalid-feedback">
 												Dit veld is verplicht.
 											</div>
@@ -97,13 +97,17 @@ include_once '../header.php';
 									</div>
 
 									<div class="form-button-row d-flex flex-row mt-3">
-										<button class="btn btn-credits shadow-sm my-2" type="submit">Verzenden</button>
+										<button class="btn btn-credits shadow-sm my-2" name="submit" type="submit">Verzenden</button>
 									</div>
+									<?php
+									if (isset($_GET["contact"])) {
+										if ($_GET["contact"] == "success") {
+											echo '<p class="contact-form-success">Bedankt voor je contactopname. Wij behandelen je bericht zo snel mogelijk. </p>';
+										}
+									} ?>
 								</div>
-
 							</form>
 						</div>
-
 					</div>
 				</div>
 			</div>

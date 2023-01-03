@@ -79,13 +79,47 @@ class accountDAO extends DAO
     }
 
     // Check database for already registered email returns true if email already found
-    public function checkEmail($account_email): bool
+    public function knownEmail($account_email): bool
     {
         $stmt = $this->prepare("SELECT * FROM accounts WHERE account_email = ?");
         $stmt->execute([$account_email]);
         $result = $stmt->fetch();
 
         // If the statement returns a row from the database the email already exists in the database
+        $resultCheck = null;
+        if ($result) {
+            $resultCheck = true;
+        } else {
+            $resultCheck = false;
+        }
+        return $resultCheck;
+    }
+
+    // Check database if account already signed up as beta user
+    public function isBeta($account_email): bool
+    {
+        $stmt = $this->prepare("SELECT * FROM accounts WHERE account_email = ? AND account_beta_user = 1");
+        $stmt->execute([$account_email]);
+        $result = $stmt->fetch();
+
+        // If the statement returns a row from the database then the acount is already signed up as a beta user
+        $resultCheck = null;
+        if ($result) {
+            $resultCheck = true;
+        } else {
+            $resultCheck = false;
+        }
+        return $resultCheck;
+    }
+
+    // Check database if account already signed up as beta user
+    public function isEnabled($account_email): bool
+    {
+        $stmt = $this->prepare("SELECT * FROM accounts WHERE account_email = ? AND account_enabled = 1");
+        $stmt->execute([$account_email]);
+        $result = $stmt->fetch();
+
+        // If the statement returns a row from the database then the acount exists and is enabled
         $resultCheck = null;
         if ($result) {
             $resultCheck = true;

@@ -612,6 +612,10 @@ button.btn.btn-credits,
     }
 }
 
+.contact-form-success {
+    color: #198754;
+}
+
 /** =================================================================
 *
 *    Media queries => Responsive elements

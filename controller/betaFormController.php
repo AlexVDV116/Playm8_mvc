@@ -1,9 +1,9 @@
 <?php
 
 require_once '../framework/Controller.php';
-require_once '../dao/loginDAO.php';
-// This class performs several error checks on the data the user supplies to us when signing up
-// If there are no errors it will use the setUser method inherited from the Signup class
+
+// This class performs several error checks on the data the user supplies to us when signing up as beta user
+// If there are no errors it will set the account_beta_user param to true and update the account info in the database
 class betaFormController extends Controller
 {
 
@@ -18,19 +18,29 @@ class betaFormController extends Controller
 
     public function run(): void
     {
-        if ($this->emptyInput() == true) {
+        if ($this->hasEmptyInput() == true) {
             // echo "Empty input!";
             header("location: ../index.php?error=emptyinput");
             exit();
         }
-        if ($this->invalidEmail() == true) {
+        if ($this->hasInvalidEmail() == true) {
             // echo "Invalid Email!";
             header("location: ../index.php?error=invalidemail");
             exit();
         }
-        if ($this->emailTakenCheck() == false) {
-            // echo "Email already exists in our database!";
+        if ($this->isKnownEmail() == false) {
+            // echo "User unknown!";
             header("location: ../index.php?error=unknownuser");
+            exit();
+        }
+        if ($this->isAlreadyBeta() == true) {
+            // echo "User already signed up as a beta user!";
+            header("location: ../index.php?error=alreadybeta");
+            exit();
+        }
+        if ($this->isAccountEnabled() == false) {
+            // echo "User account disabled";
+            header("location: ../index.php?error=accountdisabled");
             exit();
         }
 
@@ -49,7 +59,7 @@ class betaFormController extends Controller
     }
 
     // Method that checks if there are any empty inputs, returns true if any inputs
-    private function emptyInput(): bool
+    private function hasEmptyInput(): bool
     {
         $result = null;
         if (empty($this->name) || empty($this->email)) {
@@ -61,7 +71,7 @@ class betaFormController extends Controller
     }
 
     // Method that uses the PHP built-in filter_var with the email filter to check user email input, returns true if invalid
-    private function invalidEmail(): bool
+    private function hasInvalidEmail(): bool
     {
         $result = null;
         if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
@@ -72,13 +82,38 @@ class betaFormController extends Controller
         return $result;
     }
 
-    // Use formDAO method because it accesses the database
+    // Use accountDAO method because it accesses the database
     // Check database for already registered email returns true if email already found
-    private function emailTakenCheck(): bool
+    private function isKnownEmail(): bool
     {
         $result = null;
         $accountDAO = new accountDAO;
-        if ($accountDAO->checkEmail($this->email)) {
+        if ($accountDAO->knownEmail($this->email)) {
+            $result = true;
+        } else {
+            $result = false;
+        }
+        return $result;
+    }
+
+    // Method that uses the PHP built-in filter_var with the email filter to check user email input, returns true if invalid
+    private function isAlreadyBeta(): bool
+    {
+        $result = null;
+        $accountDAO = new accountDAO;
+        if ($accountDAO->isBeta($this->email)) {
+            $result = true;
+        } else {
+            $result = false;
+        }
+        return $result;
+    }
+
+    private function isAccountEnabled(): bool
+    {
+        $result = null;
+        $accountDAO = new accountDAO;
+        if ($accountDAO->isEnabled($this->email)) {
             $result = true;
         } else {
             $result = false;

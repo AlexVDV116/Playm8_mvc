@@ -10,18 +10,20 @@ if (isset($_POST["submit"])) {
 
     // Grabbing the data
     $name = $_POST["name"];
+    $lastname = $_POST["lastname"];
     $email = $_POST["email"];
+    $need = $_POST["need"];
+    $message = $_POST["message"];
+
 
 
     // Instantiate the FormContr class
     include "../framework/databaseHandler.php";
-    include "../dao/accountDAO.php";
-    include "../controller/betaFormController.php";
-    $beta = new betaFormController($name, $email);
+    include "../controller/contactFormController.php";
+    $contact = new contactFormController($name, $lastname, $email, $need, $message);
 
     // Running error handlers 
-    $beta->run();
+    $contact->run();
 
-    // Redirect user back to the front page when sucsessfull
-    header("location: ../index.php?beta=success#tester-section");
+    header("Location: ../view/contact.php?contact=success");
 }

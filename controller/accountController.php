@@ -22,17 +22,17 @@ class accountController extends Controller
 
     public function run(): void
     {
-        if ($this->emptyInput() == true) {
+        if ($this->hasEmptyInput() == true) {
             // echo "Empty input!";
             header("location: ../index.php?error=emptyinput");
             exit();
         }
-        if ($this->invalidEmail() == true) {
+        if ($this->hasInvalidEmail() == true) {
             // echo "Invalid Email!";
             header("location: ../index.php?error=invalidemail");
             exit();
         }
-        if ($this->emailTakenCheck() == true) {
+        if ($this->isKnownEmail() == true) {
             // echo "Email already exists in our database!";
             header("location: ../index.php?error=emailalreadyexists");
             exit();
@@ -60,7 +60,7 @@ class accountController extends Controller
 
 
     // Method that checks if there are any empty inputs, returns true if any inputs
-    private function emptyInput(): bool
+    private function hasEmptyInput(): bool
     {
         $result = null;
         if (empty($this->username) || empty($this->email) || empty($this->password) || empty($this->passwordrepeat)) {
@@ -72,7 +72,7 @@ class accountController extends Controller
     }
 
     // Method that uses the PHP built-in filter_var with the email filter to check user email input, returns true if invalid
-    private function invalidEmail(): bool
+    private function hasInvalidEmail(): bool
     {
         $result = null;
         if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
@@ -97,11 +97,11 @@ class accountController extends Controller
 
     // Use accountDAO method because it accesses the database
     // Check database for already registered email returns true if email already found
-    private function emailTakenCheck(): bool
+    private function isKnownEmail(): bool
     {
         $result = null;
         $accountDAO = new accountDAO;
-        if ($accountDAO->checkEmail($this->email)) {
+        if ($accountDAO->knownEmail($this->email)) {
             $result = true;
         } else {
             $result = false;

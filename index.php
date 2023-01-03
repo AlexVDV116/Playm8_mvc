@@ -283,6 +283,12 @@ include_once 'header.php';
                         <div class="form-button-row d-flex flex-row mt-3">
                             <button class="btn btn-credits shadow-sm my-2" type="submit" name="submit">Verzenden</button>
                         </div>
+                        <?php
+                        if (isset($_GET["beta"])) {
+                            if ($_GET["beta"] == "success") {
+                                echo '<p class="contact-form-success">Bedankt voor je inschrijving als betatester.<br> Wij behandelen je verzoek zo snel mogelijk. </p>';
+                            }
+                        } ?>
                     </form>
                 </div>
             </div>
