@@ -58,6 +58,12 @@ include_once '../header.php';
                                         if ($_GET["error"] == "invalidemail") {
                                             echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Onjuist email format.</p>';
                                         }
+                                        if ($_GET["error"] == "accountnotfound") {
+                                            echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Onbekend e-mailadres.</p>';
+                                        }
+                                        if ($_GET["error"] == "wrongpassword") {
+                                            echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Onjuist wachtwoord.</p>';
+                                        }
                                     } ?>
                                 </form>
                             </div>

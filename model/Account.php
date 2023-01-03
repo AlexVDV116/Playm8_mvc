@@ -1,7 +1,8 @@
 <?php
 
-require_once '../framework/Model.php';
+// Account class with several methods to get it's own attributes
 
+require_once '../framework/Model.php';
 
 class Account extends Model
 {

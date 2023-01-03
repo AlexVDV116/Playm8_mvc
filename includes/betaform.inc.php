@@ -1,6 +1,11 @@
 <?php
-// An include file which contains the PHP script that the gets the data from the form and uses it to instantiate the formContr class
-// After instantiating the formContr class it uses the betaUserChecks method and redirects the user to the index page 
+
+// An include file that runs a PHP script
+// Gets the data from the betaform trough the $_POST method
+// Uses this data to instantiate a betaFormController object
+// The betaFormController will run several server side validations
+// If no errors return user to the index.php with a success message
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -13,15 +18,15 @@ if (isset($_POST["submit"])) {
     $email = $_POST["email"];
 
 
-    // Instantiate the FormContr class
+    // Instantiate the betaFormController class
     include "../framework/databaseHandler.php";
     include "../dao/accountDAO.php";
     include "../controller/betaFormController.php";
     $beta = new betaFormController($name, $email);
 
-    // Running error handlers 
+    // Running server side validation and error handling
     $beta->run();
 
-    // Redirect user back to the front page when sucsessfull
+    // Redirect user back to the front page when successfull with a success message
     header("location: ../index.php?error=none#tester-section");
 }

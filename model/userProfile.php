@@ -1,5 +1,9 @@
 <?php
 
+// userProfile class with several methods to get it's own attributes
+
+require_once '../framework/Model.php';
+
 class userProfile extends Model
 {
     private string $userProfileID;

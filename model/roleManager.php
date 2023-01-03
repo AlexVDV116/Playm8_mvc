@@ -1,5 +1,9 @@
 <?php
 
+// roleManager class
+
+require_once '../framework/Model.php';
+
 class roleManager
 {
     public function giveRole(Account $account, Role $role): void

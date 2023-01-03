@@ -1,9 +1,12 @@
 <?php
 
+// Server side user input validation when submitting the contact form
+// Gets the data from the contactform.inc.php
+// If no errors found, send mail to Playm8 e-mailadress (WIP needs to be tested)
+
 require_once '../framework/Controller.php';
 
-// This class performs several error checks on the data the user supplies to us when filling in the contact form
-// If there are no errors it will send the information in a format to our e-mailadress
+
 class contactFormController extends Controller
 {
 
@@ -25,12 +28,12 @@ class contactFormController extends Controller
     public function run(): void
     {
         if ($this->hasEmptyInput() == true) {
-            // echo "Empty input!";
+            // echo "Alle velden zijn verplicht.";
             header("location: ../view/contact.php?error=emptyinput");
             exit();
         }
         if ($this->hasInvalidEmail() == true) {
-            // echo "Invalid Email!";
+            // echo "Onjuist email format.";
             header("location: ../view/contact.php?error=invalidemail");
             exit();
         }
@@ -40,7 +43,7 @@ class contactFormController extends Controller
             exit();
         }
 
-        // Send data to our contact e-mailadress
+        // Send data to our contact e-mailadress (WIP needs to be tested)
         $mailname = $this->name . " " . $this->lastname;
 
         $to = $this->email;
@@ -55,7 +58,7 @@ class contactFormController extends Controller
         mail($to, $subject, $message, $headers);
     }
 
-    // Method that checks if there are any empty inputs, returns true if any inputs
+    // Method that checks if for any empty inputs: returns true if empty inputs found
     private function hasEmptyInput(): bool
     {
         $result = null;
@@ -67,7 +70,7 @@ class contactFormController extends Controller
         return $result;
     }
 
-    // Method that uses the PHP built-in filter_var with the email filter to check user email input, returns true if invalid
+    // Method that uses the PHP built-in filter_var method to check user email input: returns true if invalid email given
     private function hasInvalidEmail(): bool
     {
         $result = null;
@@ -79,7 +82,7 @@ class contactFormController extends Controller
         return $result;
     }
 
-    // Method that checks if there are any empty inputs, returns true if any inputs
+    // Method that uses the strlen() method to return the bytes in a string (including whitespace and special characters)
     private function getMessageLength(): int
     {
         return strlen($this->message);

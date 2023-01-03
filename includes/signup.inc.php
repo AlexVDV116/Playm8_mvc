@@ -1,7 +1,10 @@
 <?php
-// Gets the data from the signup form
-// Instantiates the accountController class
-// If no errors, redirect user to index page 
+
+// An include file that runs a PHP script
+// Gets the data from the signup form trough the $_POST method
+// Uses this data to instantiate a accountController object
+// The accountController will run several server side validations
+// If no errors return user to the signup.php with a success message
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -16,14 +19,13 @@ if (isset($_POST["submit"])) {
     $passwordrepeat = $_POST["passwordrepeat"];
     $enabled = true;
 
-
-    // Instantiate the SignupContr class
+    // Instantiate the accountController class
     include "../framework/databaseHandler.php";
     include "../dao/accountDAO.php";
     include "../controller/accountController.php";
     $signup = new accountController($username, $email, $password, $passwordrepeat, $enabled);
 
-    // Running error handlers and user signup
+    // Running server side validation, error handling and user sign up
     $signup->run();
 
     // Redirect user back to the front page when sucsessfull

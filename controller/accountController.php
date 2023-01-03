@@ -1,5 +1,10 @@
 <?php
 
+// Server side user input validation when signing up.
+// Creates an empty Account object
+// Instantiates an accountDAO object
+// Uses the insert method to insert the user data into the database
+
 require_once '../framework/Controller.php';
 require_once '../dao/accountDAO.php';
 
@@ -23,22 +28,22 @@ class accountController extends Controller
     public function run(): void
     {
         if ($this->hasEmptyInput() == true) {
-            // echo "Empty input!";
+            // echo "Alle velden zijn verplicht.";
             header("location: ../view/signup.php?error=emptyinput");
             exit();
         }
         if ($this->hasInvalidEmail() == true) {
-            // echo "Invalid Email!";
+            // echo "Onjuist email format.";
             header("location: ../view/signup.php?error=invalidemail");
             exit();
         }
         if ($this->isKnownEmail() == true) {
-            // echo "Email already exists in our database!";
+            // echo "Email bestaat al in ons bestand.";
             header("location: ../view/signup.php?error=emailalreadyexists");
             exit();
         }
         if ($this->passwordMatch() == false) {
-            // echo "Passwords do not match!";
+            // echo "Wachtwoorden komen niet overeen.";
             header("location: ../view/signup.php?error=passwordmatch");
             exit();
         }
@@ -49,18 +54,22 @@ class accountController extends Controller
         // Create a new empty Account object
         $account = new Account();
 
+        // Set the account object variables to the user input
         $account->username = $this->username;
         $account->email = $this->email;
         $account->password = $hashedPassword;
         $account->isEnabled = 1;
         $account->isBetaUser = 0;
 
+        // Instantiate an accountDAO object
         $accountDAO = new accountDAO();
+
+        // Insert the account object data into the database
         $accountDAO->insert($account);
     }
 
 
-    // Method that checks if there are any empty inputs, returns true if any inputs
+    // Method that checks if for any empty inputs: returns true if empty inputs found
     private function hasEmptyInput(): bool
     {
         $result = null;
@@ -72,7 +81,7 @@ class accountController extends Controller
         return $result;
     }
 
-    // Method that uses the PHP built-in filter_var with the email filter to check user email input, returns true if invalid
+    // Method that uses the PHP built-in filter_var method to check user email input: returns true if invalid email given
     private function hasInvalidEmail(): bool
     {
         $result = null;
@@ -84,7 +93,7 @@ class accountController extends Controller
         return $result;
     }
 
-    // Method to check if both password fields input match return true if they match
+    // Method to check if both password fields input match: return true if they match
     private function passwordMatch(): bool
     {
         $result = null;
@@ -96,8 +105,8 @@ class accountController extends Controller
         return $result;
     }
 
-    // Use accountDAO method because it accesses the database
-    // Check database for already registered email returns true if email already found
+    // Method that uses the accountDAO knownEmail method because it has to access the database
+    // Checks if a record with this email is already known in our database: returns true if email found
     private function isKnownEmail(): bool
     {
         $result = null;

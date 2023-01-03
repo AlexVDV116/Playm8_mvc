@@ -1,5 +1,8 @@
 <?php
 
+// Data Abstraction Object for an Account object
+// Can access the database create, read, update, or delete data (CRUD)
+
 require_once '../framework/DAO.php';
 require_once '../model/Account.php';
 
@@ -13,6 +16,69 @@ class accountDAO extends DAO
         parent::__construct('Account');
     }
 
+    // Method that checks if the account exists in our database
+    // If true, check if password matches the hashed password in our database
+    // If true log user in 
+    public function logInUser($email, $password): void
+    {
+        $stmt = $this->prepare("SELECT * FROM accounts WHERE account_email = ?");
+        $stmt->execute([$email]);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // If query gets no result exit script and redirect user to index with error message
+        if (!$result) {
+            // echo "Onbekend e-mailadres..";
+            header("location: ../view/login.php?error=accountnotfound");
+            exit();
+        } else {
+        }
+
+        // use PHP built in method to check if the given password matches the hashed password stored in the DB (returns bool)
+        $checkPwd = password_verify($password, $result[0]["account_password"]);
+
+        // If the password match
+        if ($checkPwd == false) {
+            $stmt = null;
+            // echo "Onjuist wachtwoord.";
+            header("location: ../view/login.php?error=wrongpassword");
+            exit();
+        } elseif ($checkPwd == true) {
+            // Prepared satement that selects all rows in the accounts table where user credentials match the given credentials
+            $stmt = $this->prepare('SELECT * FROM accounts WHERE account_email = ? AND account_password = ?;');
+
+            // If they do not match, set statement to null and redirect user to index with error message
+            if (!$stmt->execute(array($email, $result[0]["account_password"]))) {
+                $stmt = null;
+                // echo "Onjuist wachtwoord.";
+                header("location: ../view/login.php?error=wrongpassword");
+                exit;
+            }
+
+            // Before logging in the user check if the database query retrieves any results
+            if ($stmt->rowCount() == 0) {
+                $stmt = null;
+                header("location: ../view/login.php?error=accountnotfound");
+                exit();
+            }
+
+            // Log user in
+            // Create a user variable with the results from the statement and return these results in an associative array
+            // This user variable now contains all data from the database belonging to the account
+            $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+            // Create a new session with a session super global of accountid and account_username
+            session_start();
+            // Regenerate session id to prevent session fixation-by malicious user
+            session_regenerate_id();
+            $_SESSION["account_id"] = $user[0]["account_id"];
+            $_SESSION["account_username"] = $user[0]["account_username"];
+        }
+
+        $stmt = null;
+    }
+
+    // Select all records from accounts table and order them by account_id
     public function startList(): void
     {
         $sql = self::$select;
@@ -20,6 +86,9 @@ class accountDAO extends DAO
         $this->startListSql($sql);
     }
 
+    // Returns a new Account object if no email provided
+    // Else select all records from accounts table where the email mathes the given email
+    // Returns an instance of the Account model with the property names set to the data from the selected record
     public function get(?string $account_email)
     {
         if (empty($account_email)) {
@@ -31,6 +100,7 @@ class accountDAO extends DAO
         }
     }
 
+    // Deletes a the record from the accounts table where the account_id matches
     public function delete(int $account_id): void
     {
         $sql = 'DELETE FROM `accounts` '
@@ -41,6 +111,7 @@ class accountDAO extends DAO
         $this->execute($sql, $args);
     }
 
+    // Inserts a new record into the accounts table with the data from Account object
     public function insert(Account $account): void
     {
         $sql = 'INSERT INTO `accounts` '
@@ -54,6 +125,7 @@ class accountDAO extends DAO
         $this->execute($sql, $args);
     }
 
+    // Updates the record in the accounts table with the data from the Account object
     public function update(Account $account): void
     {
         $sql = 'UPDATE `accounts` '
@@ -69,6 +141,7 @@ class accountDAO extends DAO
         $this->execute($sql, $args);
     }
 
+    // ...
     public function save(Account $account): void
     {
         if (empty($account->getAccountID())) {
@@ -78,14 +151,13 @@ class accountDAO extends DAO
         }
     }
 
-    // Check database for already registered email returns true if email already found
+    // Select all records with a matchin e-mailadress: return true if a row is returned
     public function knownEmail(string $account_email): bool
     {
         $stmt = $this->prepare("SELECT * FROM accounts WHERE account_email = ?");
         $stmt->execute([$account_email]);
         $result = $stmt->fetch();
 
-        // If the statement returns a row from the database the email already exists in the database
         $resultCheck = null;
         if ($result) {
             $resultCheck = true;
@@ -95,14 +167,13 @@ class accountDAO extends DAO
         return $resultCheck;
     }
 
-    // Check database if account already signed up as beta user
+    // Select all records with a matchin e-mailadress AND account_beta_user set to 1: return true if a row is returned
     public function isBeta(string $account_email): bool
     {
         $stmt = $this->prepare("SELECT * FROM accounts WHERE account_email = ? AND account_beta_user = 1");
         $stmt->execute([$account_email]);
         $result = $stmt->fetch();
 
-        // If the statement returns a row from the database then the acount is already signed up as a beta user
         $resultCheck = null;
         if ($result) {
             $resultCheck = true;
@@ -112,14 +183,13 @@ class accountDAO extends DAO
         return $resultCheck;
     }
 
-    // Check database if account already signed up as beta user
+    // Select all records with a matchin e-mailadress AND account_enabled set to 1: return true if a row is returned
     public function isEnabled(string $account_email): bool
     {
         $stmt = $this->prepare("SELECT * FROM accounts WHERE account_email = ? AND account_enabled = 1");
         $stmt->execute([$account_email]);
         $result = $stmt->fetch();
 
-        // If the statement returns a row from the database then the acount exists and is enabled
         $resultCheck = null;
         if ($result) {
             $resultCheck = true;

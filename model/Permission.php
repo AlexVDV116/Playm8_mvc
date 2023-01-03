@@ -1,5 +1,9 @@
 <?php
 
+// Permission class
+
+require_once '../framework/Model.php';
+
 class Permission extends Model
 {
     private string $permissionName;

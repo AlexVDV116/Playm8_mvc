@@ -1,9 +1,13 @@
 <?php
 
+// Server side user input validation when signing up as a beta user
+// Instantiates an accountDAO object
+// Retrieves the user information from the database
+// Set the account_beta_user table to true
+// Use the accountDAO update method to update the data in the database
+
 require_once '../framework/Controller.php';
 
-// This class performs several error checks on the data the user supplies to us when signing up as beta user
-// If there are no errors it will set the account_beta_user param to true and update the account info in the database
 class betaFormController extends Controller
 {
 
@@ -19,36 +23,36 @@ class betaFormController extends Controller
     public function run(): void
     {
         if ($this->hasEmptyInput() == true) {
-            // echo "Empty input!";
+            // echo "Alle velden zijn verplicht.";
             header("location: ../index.php?error=emptyinput#tester-section");
             exit();
         }
         if ($this->hasInvalidEmail() == true) {
-            // echo "Invalid Email!";
+            // echo "Onjuist email format.";
             header("location: ../index.php?error=invalidemail#tester-section");
             exit();
         }
         if ($this->isKnownEmail() == false) {
-            // echo "User unknown!";
+            // echo "Dit e-mailadres is niet bij ons bekend.";
             header("location: ../index.php?error=unknownuser#tester-section");
             exit();
         }
         if ($this->isAlreadyBeta() == true) {
-            // echo "User already signed up as a beta user!";
+            // echo "Dit account staat al ingeschreven als beta-tester.";
             header("location: ../index.php?error=alreadybeta#tester-section");
             exit();
         }
         if ($this->isAccountEnabled() == false) {
-            // echo "User account disabled";
+            // echo "Dit account is inactief.";
             header("location: ../index.php?error=accountdisabled#tester-section");
             exit();
         }
 
-        // Create an account DAO
+        // Instantiate an account DAO
         $accountDAO = new accountDAO();
         $accountDAO->startList();
 
-        // Get the account information from database (accountDAO extends DAO and DAO will construct a Account Model)
+        // Get the account information from database (accountDAO extends DAO and DAO will construct a new Account object)
         $account = $accountDAO->get($this->email);
 
         // Set account_beta_user collum to true
@@ -58,7 +62,7 @@ class betaFormController extends Controller
         $accountDAO->update($account);
     }
 
-    // Method that checks if there are any empty inputs, returns true if any inputs
+    // Method that checks if for any empty inputs: returns true if empty inputs found
     private function hasEmptyInput(): bool
     {
         $result = null;
@@ -70,7 +74,7 @@ class betaFormController extends Controller
         return $result;
     }
 
-    // Method that uses the PHP built-in filter_var with the email filter to check user email input, returns true if invalid
+    // Method that uses the PHP built-in filter_var method to check user email input: returns true if invalid email given
     private function hasInvalidEmail(): bool
     {
         $result = null;
@@ -82,8 +86,8 @@ class betaFormController extends Controller
         return $result;
     }
 
-    // Use accountDAO method because it accesses the database
-    // Check database for already registered email returns true if email already found
+    // Method that uses the accountDAO knownEmail method because it has to access the database
+    // Checks if a record with this email is already known in our database: returns true if email found
     private function isKnownEmail(): bool
     {
         $result = null;
@@ -96,7 +100,8 @@ class betaFormController extends Controller
         return $result;
     }
 
-    // Method that uses the PHP built-in filter_var with the email filter to check user email input, returns true if invalid
+    // Method that uses the accountDAO isBeta method because it has to access the database
+    // Checks if a record with this email AND account_beta_user set to true exists in our database: returns true if record found
     private function isAlreadyBeta(): bool
     {
         $result = null;
@@ -109,6 +114,9 @@ class betaFormController extends Controller
         return $result;
     }
 
+
+    // Method that uses the accountDAO isEnabled method because it has to access the database
+    // Checks if a record with this email AND account_enabled set to false is known in our database: returns true if record found
     private function isAccountEnabled(): bool
     {
         $result = null;

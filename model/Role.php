@@ -1,5 +1,9 @@
 <?php
 
+// Role class
+
+require_once '../framework/Model.php';
+
 class Role extends Model
 {
     private string $roleName;

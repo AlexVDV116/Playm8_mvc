@@ -1,8 +1,9 @@
 <?php
-$ROOT = '../'; // Setting the ROOT directory for this file so the relative paths used in included pages will still work
-require_once '../data/secret.php';
 
 // Databasehandler class that opens up the database connection
+
+require_once '../data/secret.php';
+
 class databaseHandler
 {
 
