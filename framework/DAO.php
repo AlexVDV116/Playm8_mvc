@@ -2,12 +2,12 @@
 
 require_once '../framework/databaseHandler.php';
 
-abstract class DAO extends Dbh
+abstract class DAO extends databaseHandler
 {
 
-    private $class;
-    private $object;
-    private $stmt;
+    private string $class;
+    private Object $object;
+    private Object $stmt;
 
     function __construct($class)
     {

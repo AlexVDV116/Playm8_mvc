@@ -48,7 +48,7 @@ class loginDAO extends DAO
                 exit;
             }
 
-            // Before logging in the user i want to check if the database query retrieves any results
+            // Before logging in the user check if the database query retrieves any results
             if ($stmt->rowCount() == 0) {
                 $stmt = null;
                 header("location: ../index.php?error=accountnotfound2");

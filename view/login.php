@@ -53,10 +53,10 @@ include_once '../header.php';
                                     <?php
                                     if (isset($_GET["error"])) {
                                         if ($_GET["error"] == "emptyinput") {
-                                            echo '<p class="form-error">Alle velden zijn verplicht.</p>';
+                                            echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Alle velden zijn verplicht.</p>';
                                         }
                                         if ($_GET["error"] == "invalidemail") {
-                                            echo '<p class="form-error">Onjuist email format.</p>';
+                                            echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Onjuist email format.</p>';
                                         }
                                     } ?>
                                 </form>

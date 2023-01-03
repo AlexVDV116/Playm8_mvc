@@ -102,16 +102,16 @@ include_once '../header.php';
 									<?php
 									if (isset($_GET["error"])) {
 										if ($_GET["error"] == "none") {
-											echo '<p class="form-success">Bedankt voor je contactopname. Wij behandelen je bericht zo snel mogelijk. </p>';
+											echo '<p class="form-success"><i class="fa-regular fa-circle-check"></i> Bedankt voor je contactopname. Wij behandelen je bericht zo snel mogelijk. </p>';
 										}
 										if ($_GET["error"] == "emptyinput") {
-											echo '<p class="form-error">Alle velden zijn verplicht.</p>';
+											echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Alle velden zijn verplicht.</p>';
 										}
 										if ($_GET["error"] == "invalidemail") {
-											echo '<p class="form-error">Onjuist email format.</p>';
+											echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Onjuist email format.</p>';
 										}
 										if ($_GET["error"] == "messagelength") {
-											echo '<p class="form-error">Uw bericht moet tussen de 20 - 500 karakters bevatten.</p>';
+											echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Uw bericht moet tussen de 20 - 500 karakters bevatten.</p>';
 										}
 									} ?>
 								</div>

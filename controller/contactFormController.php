@@ -24,12 +24,12 @@ class contactFormController extends Controller
 
     public function run(): void
     {
-        if ($this->emptyInput() == true) {
+        if ($this->hasEmptyInput() == true) {
             // echo "Empty input!";
             header("location: ../view/contact.php?error=emptyinput");
             exit();
         }
-        if ($this->invalidEmail() == true) {
+        if ($this->hasInvalidEmail() == true) {
             // echo "Invalid Email!";
             header("location: ../view/contact.php?error=invalidemail");
             exit();
@@ -56,10 +56,22 @@ class contactFormController extends Controller
     }
 
     // Method that checks if there are any empty inputs, returns true if any inputs
-    private function emptyInput(): bool
+    private function hasEmptyInput(): bool
     {
         $result = null;
         if (empty($this->name) || empty($this->lastname) || empty($this->email) || empty($this->need) || empty($this->message)) {
+            $result = true;
+        } else {
+            $result = false;
+        }
+        return $result;
+    }
+
+    // Method that uses the PHP built-in filter_var with the email filter to check user email input, returns true if invalid
+    private function hasInvalidEmail(): bool
+    {
+        $result = null;
+        if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
             $result = true;
         } else {
             $result = false;
@@ -71,17 +83,5 @@ class contactFormController extends Controller
     private function getMessageLength(): int
     {
         return strlen($this->message);
-    }
-
-    // Method that uses the PHP built-in filter_var with the email filter to check user email input, returns true if invalid
-    private function invalidEmail(): bool
-    {
-        $result = null;
-        if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
-            $result = true;
-        } else {
-            $result = false;
-        }
-        return $result;
     }
 }

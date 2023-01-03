@@ -82,19 +82,19 @@ include_once '../header.php';
                                     <?php
                                     if (isset($_GET["error"])) {
                                         if ($_GET["error"] == "none") {
-                                            echo '<p class="form-success">Bedankt voor uw registratie. U kunt nu inloggen.</p>';
+                                            echo '<p class="form-success"><i class="fa-regular fa-circle-check"></i> Bedankt voor uw registratie. U kunt nu inloggen.</p>';
                                         }
                                         if ($_GET["error"] == "emptyinput") {
-                                            echo '<p class="form-error">Alle velden zijn verplicht.</p>';
+                                            echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Alle velden zijn verplicht.</p>';
                                         }
                                         if ($_GET["error"] == "invalidemail") {
-                                            echo '<p class="form-error">Onjuist email format.</p>';
+                                            echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Onjuist email format.</p>';
                                         }
                                         if ($_GET["error"] == "emailalreadyexists") {
-                                            echo '<p class="form-error">Email bestaat al in ons bestand.</p>';
+                                            echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Email bestaat al in ons bestand.</p>';
                                         }
                                         if ($_GET["error"] == "passwordmatch") {
-                                            echo '<p class="form-error">Wachtwoorden komen niet overeen.</p>';
+                                            echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Wachtwoorden komen niet overeen.</p>';
                                         }
                                     } ?>
                                 </form>

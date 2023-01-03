@@ -1,6 +1,6 @@
 <?php
 
-class userProfile
+class userProfile extends Model
 {
     private string $userProfileID;
     private string $firstName;
@@ -19,5 +19,40 @@ class userProfile
         $this->phoneNumber = $phoneNumber;
         $this->dateOfBirth = $dateOfBirth;
         $this->age = $age;
+    }
+
+    public function getUserProfileID(): string
+    {
+        return $this->userProfileID;
+    }
+
+    public function getFirstName(): string
+    {
+        return $this->firstName;
+    }
+
+    public function getLastName(): string
+    {
+        return $this->lastName;
+    }
+
+    public function getLocation(): string
+    {
+        return $this->location;
+    }
+
+    public function getPhoneNumber(): string
+    {
+        return $this->phoneNumber;
+    }
+
+    public function getDateOfBirth(): string
+    {
+        return $this->dateOfBirth;
+    }
+
+    public function getAge(): string
+    {
+        return $this->age;
     }
 }

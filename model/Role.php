@@ -1,6 +1,6 @@
 <?php
 
-class Role
+class Role extends Model
 {
     private string $roleName;
     private string $roleDescription;

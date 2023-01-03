@@ -286,24 +286,25 @@ include_once 'header.php';
                         <?php
                         if (isset($_GET["error"])) {
                             if ($_GET["error"] == "none") {
-                                echo '<p class="Bedankt voor je inschrijving als betatester.<br> Wij behandelen je verzoek zo snel mogelijk. </p>';
+                                echo '<p class="form-success"><i class="fa-regular fa-circle-check"></i> Bedankt voor je inschrijving als betatester.<br> Wij behandelen je verzoek zo snel mogelijk.</p>';
                             }
                             if ($_GET["error"] == "emptyinput") {
-                                echo '<p class="form-error">Alle velden zijn verplicht.</p>';
+                                echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Alle velden zijn verplicht.</p>';
                             }
                             if ($_GET["error"] == "invalidemail") {
-                                echo '<p class="form-error">Onjuist email format.</p>';
+                                echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Onjuist email format.</p>';
                             }
                             if ($_GET["error"] == "unknownuser") {
-                                echo '<p class="form-error">Dit e-mailadres is niet bij ons bekend.</p>';
+                                echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Dit e-mailadres is niet bij ons bekend.</p>';
                             }
                             if ($_GET["error"] == "alreadybeta") {
-                                echo '<p class="form-error">Dit account staat al ingeschreven als beta-tester.</p>';
+                                echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Dit account staat al ingeschreven als beta-tester.</p>';
                             }
                             if ($_GET["error"] == "accountdisabled") {
-                                echo '<p class="form-error">Dit account is inactief.</p>';
+                                echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Dit account is inactief.</p>';
                             }
-                        } ?>
+                        }
+                        ?>
                     </form>
                 </div>
             </div>

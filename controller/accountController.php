@@ -49,10 +49,11 @@ class accountController extends Controller
         // Create a new empty Account object
         $account = new Account();
 
-        $account->account_username = $this->username;
-        $account->account_email = $this->email;
-        $account->account_password = $hashedPassword;
-        $account->account_enabled = 1;
+        $account->username = $this->username;
+        $account->email = $this->email;
+        $account->password = $hashedPassword;
+        $account->isEnabled = 1;
+        $account->isBetaUser = 0;
 
         $accountDAO = new accountDAO();
         $accountDAO->insert($account);

@@ -6,14 +6,14 @@ require_once '../framework/Model.php';
 class Account extends Model
 {
 
-    public string $account_id = '';
-    public string $account_username = '';
-    public string $account_email = '';
-    public string $account_password = '';
-    public bool $account_enabled = true;
-    public bool $acocunt_beta_user = false;
-    public array $account_roles = [];
-    public ?userProfile $account_userProfile = null;
+    public string $accountID = '';
+    public string $username = '';
+    public string $email = '';
+    public string $password = '';
+    public bool $isEnabled = true;
+    public bool $isBetaUser = false;
+    public array $roles = [];
+    public ?userProfile $UserProfile = null;
 
     public function __construct(?array $data = null)
     {
@@ -28,40 +28,40 @@ class Account extends Model
 
     public function getAccountID(): string
     {
-        return $this->account_id;
+        return $this->accountID;
     }
 
     public function getName(): string
     {
-        return $this->account_username;
+        return $this->username;
     }
 
     public function getEmail(): string
     {
-        return $this->account_email;
+        return $this->email;
     }
 
     public function getPassword(): string
     {
-        return $this->account_password;
+        return $this->password;
     }
 
     public function getEnabled(): bool
     {
-        return $this->account_enabled;
+        return $this->isEnabled;
     }
 
     public function getBetaUser(): bool
     {
-        return $this->account_beta_user;
+        return $this->isBetaUser;
     }
 
     public function getRoles(): array
     {
-        return $this->account_roles;
+        return $this->roles;
     }
 
-    public function addRole(Role $role): void
+    public function addRoles(Role $role): void
     {
         array_push($this->roles, $role);
     }
@@ -69,11 +69,6 @@ class Account extends Model
     public function deleteRole(Role $role): void
     {
         unset($this->roles[array_search($role, $this->roles)]);
-    }
-
-    public function getRole(): array
-    {
-        return $this->roles;
     }
 
     public function hasPermission(Permission $permission): bool
@@ -84,5 +79,10 @@ class Account extends Model
             }
         }
         return false;
+    }
+
+    public function getUserProfile(): userProfile
+    {
+        return $this->userProfile;
     }
 }

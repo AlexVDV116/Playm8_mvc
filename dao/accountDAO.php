@@ -31,7 +31,7 @@ class accountDAO extends DAO
         }
     }
 
-    public function delete(int $account_id)
+    public function delete(int $account_id): void
     {
         $sql = 'DELETE FROM `accounts` '
             . ' WHERE `accounts_id` = ?';
@@ -41,7 +41,7 @@ class accountDAO extends DAO
         $this->execute($sql, $args);
     }
 
-    public function insert(Account $account)
+    public function insert(Account $account): void
     {
         $sql = 'INSERT INTO `accounts` '
             . ' (account_username, account_email, account_password)'
@@ -54,7 +54,7 @@ class accountDAO extends DAO
         $this->execute($sql, $args);
     }
 
-    public function update(Account $account)
+    public function update(Account $account): void
     {
         $sql = 'UPDATE `accounts` '
             . ' SET account_username = ?, account_email = ?, account_enabled = ?, account_beta_user = ?'
@@ -69,7 +69,7 @@ class accountDAO extends DAO
         $this->execute($sql, $args);
     }
 
-    public function save(Account $account)
+    public function save(Account $account): void
     {
         if (empty($account->getAccountID())) {
             $this->insert($account);
@@ -79,7 +79,7 @@ class accountDAO extends DAO
     }
 
     // Check database for already registered email returns true if email already found
-    public function knownEmail($account_email): bool
+    public function knownEmail(string $account_email): bool
     {
         $stmt = $this->prepare("SELECT * FROM accounts WHERE account_email = ?");
         $stmt->execute([$account_email]);
@@ -96,7 +96,7 @@ class accountDAO extends DAO
     }
 
     // Check database if account already signed up as beta user
-    public function isBeta($account_email): bool
+    public function isBeta(string $account_email): bool
     {
         $stmt = $this->prepare("SELECT * FROM accounts WHERE account_email = ? AND account_beta_user = 1");
         $stmt->execute([$account_email]);
@@ -113,7 +113,7 @@ class accountDAO extends DAO
     }
 
     // Check database if account already signed up as beta user
-    public function isEnabled($account_email): bool
+    public function isEnabled(string $account_email): bool
     {
         $stmt = $this->prepare("SELECT * FROM accounts WHERE account_email = ? AND account_enabled = 1");
         $stmt->execute([$account_email]);

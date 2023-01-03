@@ -18,7 +18,7 @@ if (isset($_POST["submit"])) {
 
 
     // Instantiate the SignupContr class
-    include "../framework/dbh.classes.php";
+    include "../framework/databaseHandler.php";
     include "../dao/accountDAO.php";
     include "../controller/accountController.php";
     $signup = new accountController($username, $email, $password, $passwordrepeat, $enabled);

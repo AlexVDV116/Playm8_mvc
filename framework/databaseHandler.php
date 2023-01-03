@@ -3,7 +3,7 @@ $ROOT = '../'; // Setting the ROOT directory for this file so the relative paths
 require_once '../data/secret.php';
 
 // Databasehandler class that opens up the database connection
-class Dbh
+class databaseHandler
 {
 
     private static $pdo = null;

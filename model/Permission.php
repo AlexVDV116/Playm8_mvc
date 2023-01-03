@@ -1,6 +1,6 @@
 <?php
 
-class Permission
+class Permission extends Model
 {
     private string $permissionName;
     private string $permissionDescription;

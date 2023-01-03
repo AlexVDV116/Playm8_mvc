@@ -20,12 +20,12 @@ class LoginController extends Controller
     // Method that calls the emptyInput method and if true exectue header and exit code else getUser
     public function run(): void
     {
-        if ($this->emptyInput() == true) {
+        if ($this->hasEmptyInput() == true) {
             // echo "Empty input!";
             header("location: ../view/login.php?error=emptyinput");
             exit();
         }
-        if ($this->invalidEmail() == true) {
+        if ($this->hasInvalidEmail() == true) {
             // echo "Invalid Email!";
             header("location: ../view/login.php?error=invalidemail");
             exit();
@@ -35,7 +35,7 @@ class LoginController extends Controller
     }
 
     // Method that checks for empty input returns bool
-    private function emptyInput(): bool
+    private function hasEmptyInput(): bool
     {
         $result = null;
         if (empty($this->email) || empty($this->password)) {
@@ -47,7 +47,7 @@ class LoginController extends Controller
     }
 
     // Method that uses the PHP built-in filter_var with the email filter to check user email input, returns true if invalid
-    private function invalidEmail(): bool
+    private function hasInvalidEmail(): bool
     {
         $result = null;
         if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {

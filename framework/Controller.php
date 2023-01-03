@@ -9,7 +9,7 @@ abstract class Controller
     {
         header('Content-type: text/plain'); // make sql-errors readable
         $next = $this->run();
-        if (!Dbh::$debug) {
+        if (!databaseHandler::$debug) {
             header('location: ?' . $next);
         }
         exit;
