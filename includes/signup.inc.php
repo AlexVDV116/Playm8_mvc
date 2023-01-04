@@ -36,6 +36,5 @@ if (isset($_POST["submit"])) {
 
     // Redirect user back to the front page when sucsessfull
     header("location: ../view/login.php?error=none");
-    session_unset();
-    session_destroy();
+    unset($_SESSION['signup_form']);
 }

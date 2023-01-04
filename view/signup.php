@@ -98,9 +98,6 @@ include_once '../header.php';
                                     </div>
                                     <?php
                                     if (isset($_GET["error"])) {
-                                        if ($_GET["error"] == "none") {
-                                            echo '<p class="form-success"><i class="fa-regular fa-circle-check"></i> Bedankt voor uw registratie. U kunt nu inloggen.</p>';
-                                        }
                                         if ($_GET["error"] == "emptyinput") {
                                             echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Alle velden zijn verplicht.</p>';
                                         }

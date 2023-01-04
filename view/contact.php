@@ -119,8 +119,7 @@ include_once '../header.php';
 									if (isset($_GET["error"])) {
 										if ($_GET["error"] == "none") {
 											echo '<p class="form-success"><i class="fa-regular fa-circle-check"></i> Bedankt voor je contactopname. Wij behandelen je bericht zo snel mogelijk. </p>';
-											session_unset();
-											session_destroy();
+											$form_data = null;
 										}
 										if ($_GET["error"] == "emptyinput") {
 											echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Alle velden zijn verplicht.</p>';
