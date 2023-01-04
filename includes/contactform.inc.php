@@ -6,10 +6,11 @@
 // The contactFormController will run several server side validations
 // If no errors return user to the contact.php with a success message
 
+session_start();
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
 
 if (isset($_POST["submit"])) {
 
@@ -19,6 +20,13 @@ if (isset($_POST["submit"])) {
     $email = $_POST["email"];
     $need = $_POST["need"];
     $message = $_POST["message"];
+
+    // Assign all posted values to a session variable array
+    if (!empty($_POST)) {
+        foreach ($_POST as $key => $value) {
+            $_SESSION['contact_form'][$key] = $value;
+        }
+    }
 
     // Instantiate the contactFormController class
     include "../framework/databaseHandler.php";
@@ -30,4 +38,6 @@ if (isset($_POST["submit"])) {
 
     // Redirect user back to the contact page when successfull with a success message
     header("Location: ../view/contact.php?error=none");
+    session_unset();
+    session_destroy();
 }

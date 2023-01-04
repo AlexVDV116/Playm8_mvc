@@ -1,15 +1,28 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 $ROOT = '../'; // Setting the ROOT directory for this file so the relative paths used in included pages will still work
 
-ini_set('display_errors', 1);
 header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1
 header("Pragma: no-cache"); // HTTP 1.0 clients (IE6 / pre 1997)
 header("Expires: 0"); // HTTP 1.0 Proxies
+
+// If a session variable array exists store the contents in the form_data variable
+// So we can retain the form values for better user experience
+session_start();
+if (isset($_SESSION['signup_form']) && !empty($_SESSION['signup_form'])) {
+    $username = $_SESSION['signup_form']['username'];
+    $email = $_SESSION['signup_form']['email'];
+    unset($_SESSION['your_form']);
+}
 
 // set include path to work from any directory level
 set_include_path('./' . PATH_SEPARATOR . '../');
 
 include_once '../header.php';
+
 ?>
 
 <section>
@@ -28,7 +41,9 @@ include_once '../header.php';
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input id="form_username" type="text" name="username" class="form-control" required>
+                                            <input id="username" type="text" name="username" class="form-control" value="<?php if (isset($username)) {
+                                                                                                                                echo $username;
+                                                                                                                            } ?>" required>
                                             <label for="form_username" class="form-label">Gebruikersnaam</label>
                                             <div class="invalid-feedback">
                                                 Dit veld is verplicht.
@@ -39,7 +54,9 @@ include_once '../header.php';
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input id="form_email" type="email" name="email" class="form-control" required>
+                                            <input id="form_email" type="email" name="email" class="form-control" value="<?php if (isset($email)) {
+                                                                                                                                echo $email;
+                                                                                                                            } ?>" required>
                                             <label for="form_email" class="form-label">E-mailadres</label>
                                             <div class="invalid-feedback">
                                                 Voer een geldig e-mailadres in.
@@ -95,6 +112,9 @@ include_once '../header.php';
                                         }
                                         if ($_GET["error"] == "passwordmatch") {
                                             echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Wachtwoorden komen niet overeen.</p>';
+                                        }
+                                        if ($_GET["error"] == "passwordstrength") {
+                                            echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Uw wachtwoord moet uit ten minste 8 tekens (maximaal 32) en ten minste één cijfer, één letter en één speciaal karakter bestaan.</p>';
                                         }
                                     } ?>
                                 </form>

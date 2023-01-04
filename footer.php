@@ -35,7 +35,6 @@
 </section>
 
 <script src="<?php echo $ROOT; ?>assets/js/scripts.js"></script>
-<script src="<?php echo $ROOT; ?>assets/js/notifications.js"></script>
 <script src="<?php echo $ROOT; ?>assets/js/features-new.js"></script>
 <script src="<?php echo $ROOT; ?>assets/js/scroll.js"></script>
 <script src="<?php echo $ROOT; ?>assets/js/form.js"></script>

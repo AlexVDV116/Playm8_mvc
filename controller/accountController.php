@@ -5,6 +5,8 @@
 // Instantiates an accountDAO object
 // Uses the insert method to insert the user data into the database
 
+session_start();
+
 require_once '../framework/Controller.php';
 require_once '../dao/accountDAO.php';
 
@@ -45,6 +47,11 @@ class accountController extends Controller
         if ($this->passwordMatch() == false) {
             // echo "Wachtwoorden komen niet overeen.";
             header("location: ../view/signup.php?error=passwordmatch");
+            exit();
+        }
+        if ($this->isPasswordStrong() == false) {
+            // echo "Uw wachtwoord moet uit ten minste 8 tekens (maximaal 32) en ten minste één cijfer, één letter en één speciaal karakter bestaan.";
+            header("location: ../view/signup.php?error=passwordstrength");
             exit();
         }
 
@@ -98,6 +105,25 @@ class accountController extends Controller
     {
         $result = null;
         if ($this->password !== $this->passwordrepeat) {
+            $result = false;
+        } else {
+            $result = true;
+        }
+        return $result;
+    }
+
+    // Method to check if both password fields input match: return true if they match
+    private function isPasswordStrong(): bool
+    {
+        // Validate password strenght
+        $uppercase = preg_match('@[A-Z]@', $this->password);
+        $lowercase = preg_match('@[a-z]@', $this->password);
+        $number    = preg_match('@[0-9]@', $this->password);
+        $specialChars = preg_match('@[^\w]@', $this->password);
+
+
+        $result = null;
+        if (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($this->password) < 8 || strlen($this->password) > 32) {
             $result = false;
         } else {
             $result = true;

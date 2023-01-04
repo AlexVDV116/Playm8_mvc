@@ -6,6 +6,8 @@
 // The accountController will run several server side validations
 // If no errors return user to the signup.php with a success message
 
+session_start();
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -19,6 +21,10 @@ if (isset($_POST["submit"])) {
     $passwordrepeat = $_POST["passwordrepeat"];
     $enabled = true;
 
+    // Assign session variables to retain form values for username and password after error handling
+    $_SESSION['signup_form']['username'] = $username;
+    $_SESSION['signup_form']['email'] = $email;
+
     // Instantiate the accountController class
     include "../framework/databaseHandler.php";
     include "../dao/accountDAO.php";
@@ -29,5 +35,7 @@ if (isset($_POST["submit"])) {
     $signup->run();
 
     // Redirect user back to the front page when sucsessfull
-    header("location: ../view/signup.php?error=none");
+    header("location: ../view/login.php?error=none");
+    session_unset();
+    session_destroy();
 }
