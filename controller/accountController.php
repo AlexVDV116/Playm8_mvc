@@ -46,27 +46,23 @@ class accountController extends Controller
         }
         if ($this->passwordMatch() == false) {
             // echo "Wachtwoorden komen niet overeen.";
-            header("location: ../view/signup.php?error=passwordmatch");
+            header("location: ../view/signup.php?error=passwordnomatch");
             exit();
         }
         if ($this->isPasswordStrong() == false) {
             // echo "Uw wachtwoord moet uit ten minste 8 tekens (maximaal 32) en ten minste één cijfer, één letter en één speciaal karakter bestaan.";
-            header("location: ../view/signup.php?error=passwordstrength");
+            header("location: ../view/signup.php?error=passwordnotstrong");
             exit();
         }
 
         // Use PHP built in method to generate a password hash
         $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
 
-        // Create a new empty Account object
-        $account = new Account();
+        // Assocaitive array containing the user data
+        $data = array("username" => $this->username, "email" => $this->email, "password" => $hashedPassword, "isEnabled" => true, "isBetaUser" => 0);
 
-        // Set the account object variables to the user input
-        $account->username = $this->username;
-        $account->email = $this->email;
-        $account->password = $hashedPassword;
-        $account->isEnabled = 1;
-        $account->isBetaUser = 0;
+        // Create a new empty Account object with the user data
+        $account = new Account($data);
 
         // Instantiate an accountDAO object
         $accountDAO = new accountDAO();
