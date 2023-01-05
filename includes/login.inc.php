@@ -27,5 +27,5 @@ if (isset($_POST["submit"])) {
     $login->run();
 
     // Redirect user back to the front page when sucsessfull
-    header("location: ../index.php?error=none");
+    header("location: ../index.php");
 }
