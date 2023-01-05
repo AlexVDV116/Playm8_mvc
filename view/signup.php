@@ -107,10 +107,10 @@ include_once '../header.php';
                                         if ($_GET["error"] == "emailalreadyexists") {
                                             echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Email bestaat al in ons bestand.</p>';
                                         }
-                                        if ($_GET["error"] == "passwordmatch") {
+                                        if ($_GET["error"] == "passwordnomatch") {
                                             echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Wachtwoorden komen niet overeen.</p>';
                                         }
-                                        if ($_GET["error"] == "passwordstrength") {
+                                        if ($_GET["error"] == "passwordnotstrong") {
                                             echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Uw wachtwoord moet uit ten minste 8 tekens (maximaal 32) en ten minste één cijfer, één letter en één speciaal karakter bestaan.</p>';
                                         }
                                     } ?>
