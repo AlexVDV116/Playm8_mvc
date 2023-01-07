@@ -46,12 +46,12 @@ class accountController extends Controller
         }
         if ($this->passwordMatch() == false) {
             // echo "Wachtwoorden komen niet overeen.";
-            header("location: ../view/signup.php?error=passwordnomatch");
+            header("location: ../view/signup.php?error=passwordmatch");
             exit();
         }
         if ($this->isPasswordStrong() == false) {
             // echo "Uw wachtwoord moet uit ten minste 8 tekens (maximaal 32) en ten minste één cijfer, één letter en één speciaal karakter bestaan.";
-            header("location: ../view/signup.php?error=passwordnotstrong");
+            header("location: ../view/signup.php?error=passwordstrength");
             exit();
         }
 
