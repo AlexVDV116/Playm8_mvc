@@ -285,7 +285,7 @@ include_once 'header.php';
                         </div>
                         <?php
                         if (isset($_GET["error"])) {
-                            if ($_GET["error"] == "none") {
+                            if ($_GET["beta"] == "success") {
                                 echo '<p class="form-success"><i class="fa-regular fa-circle-check"></i> Bedankt voor je inschrijving als betatester.<br> Wij behandelen je verzoek zo snel mogelijk.</p>';
                             }
                             if ($_GET["error"] == "emptyinput") {

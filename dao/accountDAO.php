@@ -34,7 +34,7 @@ class accountDAO extends DAO
         }
 
         // use PHP built in method to check if the given password matches the hashed password stored in the DB (returns bool)
-        $checkPwd = password_verify($password, $result[0]["account_password"]);
+        $checkPwd = password_verify($password, $result[0]["password"]);
 
         // If the password match
         if ($checkPwd == false) {
@@ -44,10 +44,10 @@ class accountDAO extends DAO
             exit();
         } elseif ($checkPwd == true) {
             // Prepared satement that selects all rows in the accounts table where user credentials match the given credentials
-            $stmt = $this->prepare('SELECT * FROM accounts WHERE email = ? AND account_password = ?;');
+            $stmt = $this->prepare('SELECT * FROM accounts WHERE email = ? AND password = ?;');
 
             // If they do not match, set statement to null and redirect user to index with error message
-            if (!$stmt->execute(array($email, $result[0]["account_password"]))) {
+            if (!$stmt->execute(array($email, $result[0]["password"]))) {
                 $stmt = null;
                 // echo "Onjuist wachtwoord.";
                 header("location: ../view/login.php?error=wrongpassword");
@@ -115,7 +115,7 @@ class accountDAO extends DAO
     public function insert(Account $account): void
     {
         $sql = 'INSERT INTO `accounts` '
-            . ' (username, email, account_password)'
+            . ' (username, email, password)'
             . ' VALUES (?, ?, ?)';
         $args = [
             $account->getName(),
