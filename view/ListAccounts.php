@@ -32,11 +32,19 @@ class ListAccounts extends View
                     ?>
                         <tr onclick="">
                             <!-- PHP shorthand to echo the data in the table -->
-                            <td><?= $account->getAccountID() ?></td>
+                            <td><?= '# ' . $account->getAccountID() ?></td>
                             <td><?= $account->getName() ?></td>
                             <td><?= $account->getEmail() ?></td>
-                            <td><?= $account->getEnabled() ?></td>
-                            <td><?= $account->getBetaUser() ?></td>
+                            <td><?php if ($account->getEnabled()) {
+                                    echo 'Yes';
+                                } else {
+                                    echo 'No';
+                                } ?></td>
+                            <td><?php if ($account->getBetaUser()) {
+                                    echo 'Yes';
+                                } else {
+                                    echo 'No';
+                                } ?>
                         </tr>
                     <?php
                     }

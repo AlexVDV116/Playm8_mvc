@@ -21,12 +21,6 @@ class Account extends Model
         parent::__construct($data);
     }
 
-    public function createUserProfile($firstName, $lastName, $location, $phoneNumber, $dateOfBirth, $age)
-    {
-        $userProfileID = "UP" . substr($this->accountID, 3);
-        $this->userProfile = new userProfile($userProfileID, $firstName, $lastName, $location, $phoneNumber, $dateOfBirth, $age);
-    }
-
     public function getAccountID(): string
     {
         return $this->accountID;
@@ -80,6 +74,12 @@ class Account extends Model
             }
         }
         return false;
+    }
+
+    public function createUserProfile($firstName, $lastName, $location, $phoneNumber, $dateOfBirth, $age)
+    {
+        $userProfileID = "UP" . substr($this->accountID, 3);
+        $this->userProfile = new userProfile($userProfileID, $firstName, $lastName, $location, $phoneNumber, $dateOfBirth, $age);
     }
 
     public function getUserProfile(): userProfile
