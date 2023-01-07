@@ -21,7 +21,7 @@ class accountDAO extends DAO
     // If true log user in 
     public function logInUser($email, $password): void
     {
-        $stmt = $this->prepare("SELECT * FROM accounts WHERE account_email = ?");
+        $stmt = $this->prepare("SELECT * FROM accounts WHERE email = ?");
         $stmt->execute([$email]);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -44,7 +44,7 @@ class accountDAO extends DAO
             exit();
         } elseif ($checkPwd == true) {
             // Prepared satement that selects all rows in the accounts table where user credentials match the given credentials
-            $stmt = $this->prepare('SELECT * FROM accounts WHERE account_email = ? AND account_password = ?;');
+            $stmt = $this->prepare('SELECT * FROM accounts WHERE email = ? AND account_password = ?;');
 
             // If they do not match, set statement to null and redirect user to index with error message
             if (!$stmt->execute(array($email, $result[0]["account_password"]))) {
@@ -67,46 +67,46 @@ class accountDAO extends DAO
             $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
-            // Create a new session with a session super global of accountid and account_username
+            // Create a new session with a session super global of accountid and username
             session_start();
             // Regenerate session id to prevent session fixation-by malicious user
             session_regenerate_id();
-            $_SESSION["account_id"] = $user[0]["account_id"];
-            $_SESSION["account_username"] = $user[0]["account_username"];
+            $_SESSION["accountID"] = $user[0]["accountID"];
+            $_SESSION["username"] = $user[0]["username"];
         }
 
         $stmt = null;
     }
 
-    // Select all records from accounts table and order them by account_id
+    // Select all records from accounts table and order them by accountID
     public function startList(): void
     {
         $sql = self::$select;
-        $sql .= ' ORDER BY `accounts`.`account_id`';
+        $sql .= ' ORDER BY `accounts`.`accountID`';
         $this->startListSql($sql);
     }
 
     // Returns a new Account object if no email provided
     // Else select all records from accounts table where the email mathes the given email
     // Returns an instance of the Account model with the property names set to the data from the selected record
-    public function get(?string $account_email)
+    public function get(?string $email)
     {
-        if (empty($account_email)) {
+        if (empty($email)) {
             return new Account;
         } else {
             $sql = self::$select;
-            $sql .= ' WHERE `accounts`.`account_email` = ?';
-            return $this->getObjectSql($sql, [$account_email]);
+            $sql .= ' WHERE `accounts`.`email` = ?';
+            return $this->getObjectSql($sql, [$email]);
         }
     }
 
-    // Deletes a the record from the accounts table where the account_id matches
-    public function delete(int $account_id): void
+    // Deletes a the record from the accounts table where the accountID matches
+    public function delete(int $accountID): void
     {
         $sql = 'DELETE FROM `accounts` '
             . ' WHERE `accounts_id` = ?';
         $args = [
-            $account_id
+            $accountID
         ];
         $this->execute($sql, $args);
     }
@@ -115,7 +115,7 @@ class accountDAO extends DAO
     public function insert(Account $account): void
     {
         $sql = 'INSERT INTO `accounts` '
-            . ' (account_username, account_email, account_password)'
+            . ' (username, email, account_password)'
             . ' VALUES (?, ?, ?)';
         $args = [
             $account->getName(),
@@ -129,8 +129,8 @@ class accountDAO extends DAO
     public function update(Account $account): void
     {
         $sql = 'UPDATE `accounts` '
-            . ' SET account_username = ?, account_email = ?, account_enabled = ?, account_beta_user = ?'
-            . ' WHERE account_id = ?';
+            . ' SET username = ?, email = ?, isEnabled = ?, isBetaUser = ?'
+            . ' WHERE accountID = ?';
         $args = [
             $account->getName(),
             $account->getEmail(),
@@ -152,10 +152,10 @@ class accountDAO extends DAO
     }
 
     // Select all records with a matchin e-mailadress: return true if a row is returned
-    public function knownEmail(string $account_email): bool
+    public function knownEmail(string $email): bool
     {
-        $stmt = $this->prepare("SELECT * FROM accounts WHERE account_email = ?");
-        $stmt->execute([$account_email]);
+        $stmt = $this->prepare("SELECT * FROM accounts WHERE email = ?");
+        $stmt->execute([$email]);
         $result = $stmt->fetch();
 
         $resultCheck = null;
@@ -167,11 +167,11 @@ class accountDAO extends DAO
         return $resultCheck;
     }
 
-    // Select all records with a matchin e-mailadress AND account_beta_user set to 1: return true if a row is returned
-    public function isBeta(string $account_email): bool
+    // Select all records with a matchin e-mailadress AND isBetaUser set to 1: return true if a row is returned
+    public function isBeta(string $email): bool
     {
-        $stmt = $this->prepare("SELECT * FROM accounts WHERE account_email = ? AND account_beta_user = 1");
-        $stmt->execute([$account_email]);
+        $stmt = $this->prepare("SELECT * FROM accounts WHERE email = ? AND isBetaUser = 1");
+        $stmt->execute([$email]);
         $result = $stmt->fetch();
 
         $resultCheck = null;
@@ -183,11 +183,11 @@ class accountDAO extends DAO
         return $resultCheck;
     }
 
-    // Select all records with a matchin e-mailadress AND account_enabled set to 1: return true if a row is returned
-    public function isEnabled(string $account_email): bool
+    // Select all records with a matchin e-mailadress AND isEnabled set to 1: return true if a row is returned
+    public function isEnabled(string $email): bool
     {
-        $stmt = $this->prepare("SELECT * FROM accounts WHERE account_email = ? AND account_enabled = 1");
-        $stmt->execute([$account_email]);
+        $stmt = $this->prepare("SELECT * FROM accounts WHERE email = ? AND isEnabled = 1");
+        $stmt->execute([$email]);
         $result = $stmt->fetch();
 
         $resultCheck = null;

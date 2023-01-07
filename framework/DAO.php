@@ -9,9 +9,9 @@ require_once '../framework/databaseHandler.php';
 abstract class DAO extends databaseHandler
 {
 
-    private string $class;
-    private Object $object;
-    private Object $stmt;
+    private $class;
+    private $object;
+    private $stmt;
 
     function __construct($class)
     {
