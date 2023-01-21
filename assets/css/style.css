@@ -129,20 +129,6 @@ header.fixed-top {
     color: #d6004a;
 }
 
-@media (min-width: 992px) {
-    #main-navbar .btn-register {
-        background-color: #ffffff;
-        border: 2px solid #ffffff;
-        color: #d6004a;
-    }
-
-    #main-navbar .btn-login {
-        background-color: #d6004a;
-        color: #ffffff;
-        border: 2px solid #ffffff;
-    }
-}
-
 #sideBarNav .nav-link {
     color: #d6004a;
 }
@@ -628,7 +614,7 @@ button.btn.btn-credits,
 *
 *  ================================================================= */
 
-@media (min-width: 1200px) {
+@media (min-width: 1400px) {
     #main-navbar .nav-link:not(.nav-btn)::after {
         content: " ";
         width: 140%;
@@ -641,6 +627,8 @@ button.btn.btn-credits,
 
     #main-navbar .nav-link.active:not(.nav-btn)::after {
         border: 4px solid #f6bfd5;
+        transform: translateX(0);
+        filter: blur(0);
     }
 
     #main-navbar .nav-btn {
@@ -655,7 +643,7 @@ button.btn.btn-credits,
     }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1400px) {
     h1 {
         font-size: 40px;
     }
@@ -688,15 +676,6 @@ button.btn.btn-credits,
         display: block;
     }
 
-    .nav-link.active::before {
-        display: inline-block;
-        text-rendering: auto;
-        -webkit-font-smoothing: antialiased;
-        /* using style CSS custom property */
-        font: var(--fa-font-solid);
-        content: "\f061";
-    }
-
     .container:not(.container.register-form) {
         width: 100% !important;
         max-width: 100%;
@@ -709,14 +688,7 @@ button.btn.btn-credits,
     }
 
     .nav-link.active {
-        border-bottom: 1px solid rgba(255, 255, 255, 0.25) !important;
-    }
-}
-
-@media (max-width: 940px) {
-    .register-form.container {
-        width: 100%;
-        margin-top: 1.5rem;
+        border-bottom: 5px solid rgba(255, 255, 255, 0.25) !important;
     }
 }
 
@@ -766,7 +738,19 @@ button.btn.btn-credits,
     }
 }
 
-@media (min-width: 992px) {
+@media (min-width: 1400px) {
+    #main-navbar .btn-register {
+        background-color: #ffffff;
+        border: 2px solid #ffffff;
+        color: #d6004a;
+    }
+
+    #main-navbar .btn-login {
+        background-color: #d6004a;
+        color: #ffffff;
+        border: 2px solid #ffffff;
+    }
+
     .container {
         text-align: left;
     }
