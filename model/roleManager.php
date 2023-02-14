@@ -18,7 +18,7 @@ class roleManager
 
     public function getRoles(Account $account): array
     {
-        return $account->getRole();
+        return $account->getRoles();
     }
 
     public function givePermission(Role $role, Permission $permission): void

@@ -56,7 +56,7 @@ class Account extends Model
         return $this->roles;
     }
 
-    public function addRoles(Role $role): void
+    public function addRole(Role $role): void
     {
         array_push($this->roles, $role);
     }
