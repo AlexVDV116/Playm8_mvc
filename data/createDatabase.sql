@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Gegenereerd op: 20 feb 2023 om 15:48
+-- Gegenereerd op: 20 feb 2023 om 16:54
 -- Serverversie: 10.4.27-MariaDB
 -- PHP-versie: 8.1.12
 
@@ -34,8 +34,8 @@ CREATE TABLE `accounts` (
   `password` tinytext NOT NULL,
   `isEnabled` tinyint(1) NOT NULL DEFAULT 1,
   `isBetaUser` tinyint(1) NOT NULL DEFAULT 0,
-  `roleID` int(16) NOT NULL,
-  `userProfileID` int(16) NOT NULL
+  `roleID` int(16) DEFAULT NULL,
+  `userProfileID` int(16) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -45,7 +45,9 @@ CREATE TABLE `accounts` (
 INSERT INTO `accounts` (`accountID`, `username`, `email`, `password`, `isEnabled`, `isBetaUser`, `roleID`, `userProfileID`) VALUES
 (1, 'Admin', 'admin@email.com', '$2y$10$P6zQFs2FIgopK1QImllqWeINrzHfxzulGeFR.DaTJzlFQi.JNbXki', 1, 1, 0, 0),
 (2, 'AlexVDV116', 'alexemail@hotmail.com', '$2y$10$/ishZ2nbQxODPAE.r8s5Y.sGErC2wn.02QRPExN2Gila4nN3ypCEu', 1, 1, 0, 0),
-(49, 'Piet', 'piet@email.com', '$2y$10$dsXB90MqB3rCYVPmGm8i9eklqvR2t.X.qOeGOuqj7CVgwFawHkcJq', 1, 0, 0, 0);
+(49, 'Piet', 'piet@email.com', '$2y$10$dsXB90MqB3rCYVPmGm8i9eklqvR2t.X.qOeGOuqj7CVgwFawHkcJq', 1, 0, 0, 0),
+(50, 'Christina', 'christina@email.com', '$2y$10$G4YDSl0e43ziR5NkKXlWVeOiOLJoaNXF.MEmoukDm1bbfMz0oqh/G', 1, 0, 0, 0),
+(51, 'Frank', 'frankie@email.com', '$2y$10$shhj8UumMUsw6jdd5.G19.6KE5kmKVOT/WUvzKM4qOqqP84UNS8xi', 1, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -140,7 +142,7 @@ ALTER TABLE `userProfiles`
 -- AUTO_INCREMENT voor een tabel `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `accountID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `accountID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
