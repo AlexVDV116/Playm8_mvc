@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Gegenereerd op: 20 feb 2023 om 16:54
+-- Gegenereerd op: 20 feb 2023 om 17:41
 -- Serverversie: 10.4.27-MariaDB
 -- PHP-versie: 8.1.12
 
@@ -34,7 +34,6 @@ CREATE TABLE `accounts` (
   `password` tinytext NOT NULL,
   `isEnabled` tinyint(1) NOT NULL DEFAULT 1,
   `isBetaUser` tinyint(1) NOT NULL DEFAULT 0,
-  `roleID` int(16) DEFAULT NULL,
   `userProfileID` int(16) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -42,12 +41,12 @@ CREATE TABLE `accounts` (
 -- Gegevens worden geëxporteerd voor tabel `accounts`
 --
 
-INSERT INTO `accounts` (`accountID`, `username`, `email`, `password`, `isEnabled`, `isBetaUser`, `roleID`, `userProfileID`) VALUES
-(1, 'Admin', 'admin@email.com', '$2y$10$P6zQFs2FIgopK1QImllqWeINrzHfxzulGeFR.DaTJzlFQi.JNbXki', 1, 1, 0, 0),
-(2, 'AlexVDV116', 'alexemail@hotmail.com', '$2y$10$/ishZ2nbQxODPAE.r8s5Y.sGErC2wn.02QRPExN2Gila4nN3ypCEu', 1, 1, 0, 0),
-(49, 'Piet', 'piet@email.com', '$2y$10$dsXB90MqB3rCYVPmGm8i9eklqvR2t.X.qOeGOuqj7CVgwFawHkcJq', 1, 0, 0, 0),
-(50, 'Christina', 'christina@email.com', '$2y$10$G4YDSl0e43ziR5NkKXlWVeOiOLJoaNXF.MEmoukDm1bbfMz0oqh/G', 1, 0, 0, 0),
-(51, 'Frank', 'frankie@email.com', '$2y$10$shhj8UumMUsw6jdd5.G19.6KE5kmKVOT/WUvzKM4qOqqP84UNS8xi', 1, 0, 0, 0);
+INSERT INTO `accounts` (`accountID`, `username`, `email`, `password`, `isEnabled`, `isBetaUser`, `userProfileID`) VALUES
+(1, 'Admin', 'admin@email.com', '$2y$10$P6zQFs2FIgopK1QImllqWeINrzHfxzulGeFR.DaTJzlFQi.JNbXki', 1, 1, 0),
+(2, 'AlexVDV116', 'alexemail@hotmail.com', '$2y$10$/ishZ2nbQxODPAE.r8s5Y.sGErC2wn.02QRPExN2Gila4nN3ypCEu', 1, 1, 0),
+(49, 'Piet', 'piet@email.com', '$2y$10$dsXB90MqB3rCYVPmGm8i9eklqvR2t.X.qOeGOuqj7CVgwFawHkcJq', 1, 0, 0),
+(50, 'Christina', 'christina@email.com', '$2y$10$G4YDSl0e43ziR5NkKXlWVeOiOLJoaNXF.MEmoukDm1bbfMz0oqh/G', 1, 0, NULL),
+(51, 'Frank', 'frankie@email.com', '$2y$10$shhj8UumMUsw6jdd5.G19.6KE5kmKVOT/WUvzKM4qOqqP84UNS8xi', 1, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -108,13 +107,15 @@ CREATE TABLE `userProfiles` (
 -- Indexen voor tabel `accounts`
 --
 ALTER TABLE `accounts`
-  ADD PRIMARY KEY (`accountID`);
+  ADD PRIMARY KEY (`accountID`),
+  ADD KEY `userProfileID` (`userProfileID`);
 
 --
 -- Indexen voor tabel `accountsRoles`
 --
 ALTER TABLE `accountsRoles`
-  ADD PRIMARY KEY (`accountID`,`roleID`);
+  ADD PRIMARY KEY (`accountID`,`roleID`),
+  ADD KEY `roleID` (`roleID`);
 
 --
 -- Indexen voor tabel `permissions`
@@ -126,7 +127,8 @@ ALTER TABLE `permissions`
 -- Indexen voor tabel `roles`
 --
 ALTER TABLE `roles`
-  ADD PRIMARY KEY (`roleID`);
+  ADD PRIMARY KEY (`roleID`),
+  ADD KEY `permissionID` (`permissionID`);
 
 --
 -- Indexen voor tabel `userProfiles`
@@ -143,6 +145,29 @@ ALTER TABLE `userProfiles`
 --
 ALTER TABLE `accounts`
   MODIFY `accountID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+
+--
+-- Beperkingen voor geëxporteerde tabellen
+--
+
+--
+-- Beperkingen voor tabel `accountsRoles`
+--
+ALTER TABLE `accountsRoles`
+  ADD CONSTRAINT `accountsroles_ibfk_1` FOREIGN KEY (`accountID`) REFERENCES `accounts` (`accountID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `accountsroles_ibfk_2` FOREIGN KEY (`roleID`) REFERENCES `roles` (`roleID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Beperkingen voor tabel `roles`
+--
+ALTER TABLE `roles`
+  ADD CONSTRAINT `roles_ibfk_1` FOREIGN KEY (`permissionID`) REFERENCES `permissions` (`permissionID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Beperkingen voor tabel `userProfiles`
+--
+ALTER TABLE `userProfiles`
+  ADD CONSTRAINT `userprofiles_ibfk_1` FOREIGN KEY (`userProfileID`) REFERENCES `accounts` (`userProfileID`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
