@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Gegenereerd op: 03 jan 2023 om 16:53
+-- Gegenereerd op: 20 feb 2023 om 15:48
 -- Serverversie: 10.4.27-MariaDB
 -- PHP-versie: 8.1.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ooplogin`
+-- Database: `playm8`
 --
 
 -- --------------------------------------------------------
@@ -28,22 +28,75 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `accounts` (
-  `account_id` int(16) NOT NULL,
-  `account_username` tinytext NOT NULL,
-  `account_email` tinytext NOT NULL,
-  `account_password` longtext NOT NULL,
-  `account_enabled` tinyint(1) NOT NULL DEFAULT 1,
-  `account_beta_user` tinyint(1) NOT NULL DEFAULT 0
+  `accountID` int(16) NOT NULL,
+  `username` tinytext NOT NULL,
+  `email` tinytext NOT NULL,
+  `password` tinytext NOT NULL,
+  `isEnabled` tinyint(1) NOT NULL DEFAULT 1,
+  `isBetaUser` tinyint(1) NOT NULL DEFAULT 0,
+  `roleID` int(16) NOT NULL,
+  `userProfileID` int(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `accounts`
 --
 
-INSERT INTO `accounts` (`account_id`, `account_username`, `account_email`, `account_password`, `account_enabled`, `account_beta_user`) VALUES
-(1, 'Admin', 'admin@email.com', '$2y$10$P6zQFs2FIgopK1QImllqWeINrzHfxzulGeFR.DaTJzlFQi.JNbXki', 1, 1),
-(2, 'AlexVDV116', 'alexemail@hotmail.com', '$2y$10$/ishZ2nbQxODPAE.r8s5Y.sGErC2wn.02QRPExN2Gila4nN3ypCEu', 1, 1),
-(3, 'Testaccount', 'testaccount@email.com', '$2y$10$PjCy2gps5XRyyDChlphyv.zcd1iIem0co/JDNPOEHSJjsMuEDjHzi', 0, 0);
+INSERT INTO `accounts` (`accountID`, `username`, `email`, `password`, `isEnabled`, `isBetaUser`, `roleID`, `userProfileID`) VALUES
+(1, 'Admin', 'admin@email.com', '$2y$10$P6zQFs2FIgopK1QImllqWeINrzHfxzulGeFR.DaTJzlFQi.JNbXki', 1, 1, 0, 0),
+(2, 'AlexVDV116', 'alexemail@hotmail.com', '$2y$10$/ishZ2nbQxODPAE.r8s5Y.sGErC2wn.02QRPExN2Gila4nN3ypCEu', 1, 1, 0, 0),
+(49, 'Piet', 'piet@email.com', '$2y$10$dsXB90MqB3rCYVPmGm8i9eklqvR2t.X.qOeGOuqj7CVgwFawHkcJq', 1, 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `accountsRoles`
+--
+
+CREATE TABLE `accountsRoles` (
+  `accountID` int(11) NOT NULL,
+  `roleID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `permissions`
+--
+
+CREATE TABLE `permissions` (
+  `permissionID` int(16) NOT NULL,
+  `permissionName` tinytext NOT NULL,
+  `permissionDescription` tinytext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `roles`
+--
+
+CREATE TABLE `roles` (
+  `roleID` int(16) NOT NULL,
+  `roleName` tinytext NOT NULL,
+  `roleDescription` tinytext NOT NULL,
+  `permissionID` int(16) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `userProfiles`
+--
+
+CREATE TABLE `userProfiles` (
+  `userProfileID` int(16) NOT NULL,
+  `firstName` tinytext NOT NULL,
+  `lastName` tinytext NOT NULL,
+  `phoneNumber` tinytext NOT NULL,
+  `dateOfBirth` date NOT NULL,
+  `age` smallint(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -53,7 +106,31 @@ INSERT INTO `accounts` (`account_id`, `account_username`, `account_email`, `acco
 -- Indexen voor tabel `accounts`
 --
 ALTER TABLE `accounts`
-  ADD PRIMARY KEY (`account_id`);
+  ADD PRIMARY KEY (`accountID`);
+
+--
+-- Indexen voor tabel `accountsRoles`
+--
+ALTER TABLE `accountsRoles`
+  ADD PRIMARY KEY (`accountID`,`roleID`);
+
+--
+-- Indexen voor tabel `permissions`
+--
+ALTER TABLE `permissions`
+  ADD PRIMARY KEY (`permissionID`);
+
+--
+-- Indexen voor tabel `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`roleID`);
+
+--
+-- Indexen voor tabel `userProfiles`
+--
+ALTER TABLE `userProfiles`
+  ADD PRIMARY KEY (`userProfileID`);
 
 --
 -- AUTO_INCREMENT voor geëxporteerde tabellen
@@ -63,7 +140,7 @@ ALTER TABLE `accounts`
 -- AUTO_INCREMENT voor een tabel `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `account_id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `accountID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
