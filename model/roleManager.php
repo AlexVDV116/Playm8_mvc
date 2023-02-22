@@ -36,7 +36,7 @@ class roleManager
         return $role->getPermission();
     }
 
-    public function hasPermissions(Account $account, Permission $permission)
+    public function hasPermissions(Account $account, Permission $permission): bool
     {
         return $account->hasPermission($permission);
     }
