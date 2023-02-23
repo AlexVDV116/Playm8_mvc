@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Gegenereerd op: 20 feb 2023 om 17:41
+-- Gegenereerd op: 23 feb 2023 om 16:11
 -- Serverversie: 10.4.27-MariaDB
 -- PHP-versie: 8.1.12
 
@@ -57,6 +57,17 @@ INSERT INTO `accounts` (`accountID`, `username`, `email`, `password`, `isEnabled
 CREATE TABLE `accountsRoles` (
   `accountID` int(11) NOT NULL,
   `roleID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `likes`
+--
+
+CREATE TABLE `likes` (
+  `userProfileID` int(16) NOT NULL,
+  `userProfileIDOfLikedUser` int(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -118,6 +129,12 @@ ALTER TABLE `accountsRoles`
   ADD KEY `roleID` (`roleID`);
 
 --
+-- Indexen voor tabel `likes`
+--
+ALTER TABLE `likes`
+  ADD KEY `userProfileID` (`userProfileID`);
+
+--
 -- Indexen voor tabel `permissions`
 --
 ALTER TABLE `permissions`
@@ -156,6 +173,12 @@ ALTER TABLE `accounts`
 ALTER TABLE `accountsRoles`
   ADD CONSTRAINT `accountsroles_ibfk_1` FOREIGN KEY (`accountID`) REFERENCES `accounts` (`accountID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `accountsroles_ibfk_2` FOREIGN KEY (`roleID`) REFERENCES `roles` (`roleID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Beperkingen voor tabel `likes`
+--
+ALTER TABLE `likes`
+  ADD CONSTRAINT `likes_ibfk_1` FOREIGN KEY (`userProfileID`) REFERENCES `userProfiles` (`userProfileID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Beperkingen voor tabel `roles`
