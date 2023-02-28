@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Gegenereerd op: 23 feb 2023 om 16:11
+-- Gegenereerd op: 28 feb 2023 om 19:05
 -- Serverversie: 10.4.27-MariaDB
 -- PHP-versie: 8.1.12
 
@@ -91,8 +91,18 @@ CREATE TABLE `permissions` (
 CREATE TABLE `roles` (
   `roleID` int(16) NOT NULL,
   `roleName` tinytext NOT NULL,
-  `roleDescription` tinytext NOT NULL,
-  `permissionID` int(16) NOT NULL
+  `roleDescription` tinytext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `rolesPermissions`
+--
+
+CREATE TABLE `rolesPermissions` (
+  `roleID` int(11) NOT NULL,
+  `permissionID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -144,8 +154,14 @@ ALTER TABLE `permissions`
 -- Indexen voor tabel `roles`
 --
 ALTER TABLE `roles`
-  ADD PRIMARY KEY (`roleID`),
-  ADD KEY `permissionID` (`permissionID`);
+  ADD PRIMARY KEY (`roleID`);
+
+--
+-- Indexen voor tabel `rolesPermissions`
+--
+ALTER TABLE `rolesPermissions`
+  ADD PRIMARY KEY (`roleID`,`permissionID`),
+  ADD KEY `rolespermissions_ibfk_2` (`permissionID`);
 
 --
 -- Indexen voor tabel `userProfiles`
@@ -181,10 +197,11 @@ ALTER TABLE `likes`
   ADD CONSTRAINT `likes_ibfk_1` FOREIGN KEY (`userProfileID`) REFERENCES `userProfiles` (`userProfileID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Beperkingen voor tabel `roles`
+-- Beperkingen voor tabel `rolesPermissions`
 --
-ALTER TABLE `roles`
-  ADD CONSTRAINT `roles_ibfk_1` FOREIGN KEY (`permissionID`) REFERENCES `permissions` (`permissionID`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `rolesPermissions`
+  ADD CONSTRAINT `rolespermissions_ibfk_1` FOREIGN KEY (`roleID`) REFERENCES `roles` (`roleID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `rolespermissions_ibfk_2` FOREIGN KEY (`permissionID`) REFERENCES `permissions` (`permissionID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Beperkingen voor tabel `userProfiles`
