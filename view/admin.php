@@ -35,7 +35,7 @@ $menu = [
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Playm8 is a fictional company of students of the Avans Academy. Playm8 Admin Area is the administrative website for Playm8.">
+    <meta name="description" content="Playm8 is a fictional company of students of the Avans Academy. The Playm8 Admin Dashboard is the administrative website for Playm8.">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
@@ -118,7 +118,7 @@ $menu = [
                     <ul class="nav flex-column mb-auto">
                         <li class="nav-item">
                             <a href="?view=Home" class="nav-link">
-                                <h4>Admin area</h4>
+                                <h4>Admin Dashboard</h4>
                             </a>
                         </li>
                         <li class="nav-item">
