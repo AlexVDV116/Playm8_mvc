@@ -127,8 +127,8 @@ $menu = [
                             </a>
                         </li>
                         <li>
-                            <a href="?view=Home" class="nav-link">
-                                Betatesters
+                            <a href="?view=SearchAccounts" class="nav-link">
+                                Zoek account
                             </a>
                         </li>
                         <li class="nav-item">
