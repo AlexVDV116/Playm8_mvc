@@ -55,8 +55,8 @@ class betaFormController extends Controller
         // Get the account information from database (accountDAO extends DAO and DAO will construct a new Account object)
         $account = $accountDAO->get($this->email);
 
-        // Set account_beta_user collum to true
-        $account->account_beta_user = true;
+        // Set isBetaUser collum to true
+        $account->isBetaUser = true;
 
         // Update the account info and store in database
         $accountDAO->update($account);
