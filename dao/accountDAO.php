@@ -21,7 +21,7 @@ class accountDAO extends DAO
     // If true log user in 
     public function logInUser($email, $password): void
     {
-        $stmt = $this->prepare("SELECT * FROM accounts WHERE email = ?");
+        $stmt = $this->prepare('CALL getAccountWithEmail(?);');
         $stmt->execute([$email]);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -44,7 +44,7 @@ class accountDAO extends DAO
             exit();
         } elseif ($checkPwd == true) {
             // Prepared satement that selects all rows in the accounts table where user credentials match the given credentials
-            $stmt = $this->prepare('SELECT * FROM accounts WHERE email = ? AND password = ?;');
+            $stmt = $this->prepare('CALL logInAccount(?, ?)');
 
             // If they do not match, set statement to null and redirect user to index with error message
             if (!$stmt->execute(array($email, $result[0]["password"]))) {
@@ -81,8 +81,7 @@ class accountDAO extends DAO
     // Select all records from accounts table and order them by accountID
     public function startList(): void
     {
-        $sql = self::$select;
-        $sql .= ' ORDER BY `accounts`.`accountID`';
+        $sql = 'CALL getAllAccountsOrderByAccountID();';
         $this->startListSql($sql);
     }
 
@@ -101,10 +100,10 @@ class accountDAO extends DAO
     }
 
     // Deletes a the record from the accounts table where the accountID matches
+    // Prepared statement that uses a stored procedure
     public function delete(int $accountID): void
     {
-        $sql = 'DELETE FROM `accounts` '
-            . ' WHERE `accounts_id` = ?';
+        $sql = 'CALL deleteAccount(?);';
         $args = [
             $accountID
         ];
@@ -112,11 +111,10 @@ class accountDAO extends DAO
     }
 
     // Inserts a new record into the accounts table with the data from Account object
+    // Prepared statement that uses a stored procedure
     public function insert(Account $account): void
     {
-        $sql = 'INSERT INTO `accounts` '
-            . ' (username, email, password)'
-            . ' VALUES (?, ?, ?)';
+        $sql = 'CALL insertNewAccount(?, ?, ?);';
         $args = [
             $account->getName(),
             $account->getEmail(),
@@ -126,11 +124,10 @@ class accountDAO extends DAO
     }
 
     // Updates the record in the accounts table with the data from the Account object
+    // Prepared statement that uses a stored procedure
     public function update(Account $account): void
     {
-        $sql = 'UPDATE `accounts` '
-            . ' SET username = ?, email = ?, isEnabled = ?, isBetaUser = ?'
-            . ' WHERE accountID = ?';
+        $sql = 'CALL updateAccount(?, ?, ?, ?, ?);';
         $args = [
             $account->getName(),
             $account->getEmail(),
