@@ -14,7 +14,7 @@ class Account extends Model
     public bool $isEnabled = true;
     public bool $isBetaUser = false;
     public array $roles = [];
-    public ?userProfile $UserProfile = null;
+    public ?userProfile $userProfile = null;
 
     public function __construct(?array $data = null)
     {
