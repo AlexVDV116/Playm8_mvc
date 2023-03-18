@@ -132,3 +132,54 @@ CREATE USER
   'user_write'@'%' IDENTIFIED BY 'p-RCj/_G!7uGjfHN',
   'admin_ddl'@'%' IDENTIFIED BY '6br0IMwuoar_999W',
   'admin_dcl'@'%' IDENTIFIED BY 'eWROy_8C9KavY*rE';
+
+--
+-- Creating stored procedures
+--
+
+DELIMITER $$
+CREATE PROCEDURE `getAllAccountsOrderByAccountID`()
+SELECT * FROM accounts ORDER BY accounts.accountID$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `insertNewAccount`(
+    IN `username` TINYTEXT, 
+    IN `email` TINYTEXT, 
+    IN `password` TINYTEXT)
+INSERT INTO `accounts` (
+    username, email, password)
+     VALUES (username, email, password)$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `updateAccount`(
+    IN `username` TINYTEXT, 
+    IN `email` TINYTEXT, 
+    IN `isEnabled` TINYINT, 
+    IN `isBetaUser` TINYINT, 
+    IN `accountID` int(16))
+UPDATE `accounts` 
+SET username = username, email = email, isEnabled = isEnabled, isBetaUser = isBetaUser 
+WHERE accountID = accountID$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `deleteAccount`(
+    IN `account_id` INT(16))
+DELETE FROM `accounts` 
+WHERE `accounts_id` = account_id$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `getAccountMatchingEmail`(
+    IN `email` TINYTEXT)
+SELECT * FROM accounts WHERE accounts.email = email$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `logInAccount`(
+    IN `email` TINYTEXT, 
+    IN `password` TINYTEXT)
+SELECT * FROM accounts WHERE accounts.email = email AND accounts.password = password$$
+DELIMITER ;
