@@ -14,12 +14,17 @@ GRANT REFERENCES, LOCK TABLES ON `playm8`.* TO `admin_dcl`@`%` WITH GRANT OPTION
 -- Giving users access to stored procedures
 --
 
+GRANT EXECUTE ON PROCEDURE `getAllAccounts` TO 'user_read'@'%';
+GRANT EXECUTE ON PROCEDURE `getAllAccounts` TO 'user_write'@'%';
+
 GRANT EXECUTE ON PROCEDURE `insertNewAccount` TO 'user_write'@'%';
 
 GRANT EXECUTE ON PROCEDURE `updateAccount` TO 'user_write'@'%';
 
-GRANT EXECUTE ON PROCEDURE `deleteAccount` TO 'user_write'@'%';
+GRANT EXECUTE ON PROCEDURE `deleteAccount` TO 'admin_ddl'@'%';
 
+GRANT EXECUTE ON PROCEDURE `getAccountMatchingEmail` TO 'user_read'@'%';
 GRANT EXECUTE ON PROCEDURE `getAccountMatchingEmail` TO 'user_write'@'%';
 
+GRANT EXECUTE ON PROCEDURE `logInAccount` TO 'user_read'@'%';
 GRANT EXECUTE ON PROCEDURE `logInAccount` TO 'user_write'@'%';
