@@ -183,3 +183,19 @@ CREATE PROCEDURE `logInAccount`(
     IN `password` TINYTEXT)
 SELECT * FROM accounts WHERE accounts.email = email AND accounts.password = password$$
 DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `disableAccount`(
+    IN `accountID` INT(16))
+UPDATE `accounts` 
+SET isEnabled = 0
+WHERE accounts.accountID = accountID$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `enableAccount`(
+    IN `accountID` INT(16))
+UPDATE `accounts` 
+SET isEnabled = 0
+WHERE accounts.accountID = accountID$$
+DELIMITER ;
