@@ -88,7 +88,7 @@ class accountDAO extends DAO
     // Select all records from accounts table and order them by accountID
     public function startSearch($search): void
     {
-        $sql = "SELECT * FROM accounts WHERE username like '%$search%'";
+        $sql = "SELECT * FROM accounts WHERE (`username` LIKE '%" . $search . "%') OR (`email` LIKE '%" . $search . "%')";
         $this->startListSql($sql);
     }
 

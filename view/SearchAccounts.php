@@ -12,30 +12,36 @@ class SearchAccounts extends View
     public function show()
     {
         $accountDAO = new accountDAO;
-        $result = $accountDAO->getCount("accounts");
         if (isset($_POST['search'])) { // Check if form was submitted
 
             $search = $_POST['search']; // Get input text
             $accountDAO->startSearch($search);
         }
 ?>
-        <form action="#" method="post">
-            Search <input type="text" name="search">
-            <input type="submit">
-        </form>
+        <div class="form-group d-flex justify-content-end">
+            <form action="#" method="post">
+                <input class="rounded form-control-sm" type="text" name="search" placeholder="Search Accounts">
+                <button type="submit" class="btn btn-credits shadow-sm my-2">Search</button>
+            </form>
+        </div>
 
-        <div class="class-responsive">
-            <table class="table table-striped table-sm">
-                <thead>
-                    <tr>
-                        <th>Account ID</th>
-                        <th>Naam</th>
-                        <th>Email</th>
-                        <th>Enabled</th>
-                        <th>Beta</th>
-                    </tr>
-                </thead>
-                <tbody>
+        <?php
+        if ($accountDAO->hasNext()) { ?>
+            <div class="class-responsive">
+                <table class="table table-striped table-sm">
+                    <thead>
+                        <tr>
+                            <th>Account ID</th>
+                            <th>Naam</th>
+                            <th>Email</th>
+                            <th>Enabled</th>
+                            <th>Beta</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                }
+                    ?>
                     <?php
                     while ($accountDAO->hasNext()) {
                         $account = $accountDAO->getNext();
@@ -59,10 +65,10 @@ class SearchAccounts extends View
                     <?php
                     }
                     ?>
-                </tbody>
-            </table>
-        </div>
-<?php
+                    </tbody>
+                </table>
+            </div>
+    <?php
     }
 }
 new SearchAccounts;
