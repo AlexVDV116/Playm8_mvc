@@ -24,6 +24,8 @@ GRANT EXECUTE ON PROCEDURE `insertNewAccount` TO 'user_write'@'%';
 GRANT EXECUTE ON PROCEDURE `updateAccount` TO 'user_write'@'%';
 
 GRANT EXECUTE ON PROCEDURE `deleteAccount` TO 'admin_ddl'@'%';
+GRANT EXECUTE ON PROCEDURE `enableAccount` TO 'admin_ddl'@'%';
+GRANT EXECUTE ON PROCEDURE `disableAccount` TO 'admin_ddl'@'%';
 
 GRANT EXECUTE ON PROCEDURE `getAccountMatchingEmail` TO 'user_read'@'%';
 GRANT EXECUTE ON PROCEDURE `getAccountMatchingEmail` TO 'user_write'@'%';
