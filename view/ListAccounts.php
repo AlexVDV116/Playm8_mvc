@@ -11,8 +11,12 @@ class ListAccounts extends View
     public function show()
     {
         $accountDAO = new accountDAO;
+        $result = $accountDAO->getCount("accounts");
         $accountDAO->startList();
 ?>
+        <div>
+            <p>Total number of accounts: <?= $result ?></p>
+        </div>
 
         <div class="class-responsive">
             <table class="table table-striped table-sm">
