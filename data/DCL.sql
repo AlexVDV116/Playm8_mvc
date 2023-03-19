@@ -2,6 +2,8 @@
 -- Data Control Lanuage voor database `Playm8`
 --
 
+USE `playm8`;
+
 GRANT SELECT ON `playm8`.* TO `user_read`@`%`;
 
 GRANT SELECT, INSERT, UPDATE ON `playm8`.* TO `user_write`@`%`;
@@ -14,8 +16,8 @@ GRANT REFERENCES, LOCK TABLES ON `playm8`.* TO `admin_dcl`@`%` WITH GRANT OPTION
 -- Giving users access to stored procedures
 --
 
-GRANT EXECUTE ON PROCEDURE `getAllAccounts` TO 'user_read'@'%';
-GRANT EXECUTE ON PROCEDURE `getAllAccounts` TO 'user_write'@'%';
+GRANT EXECUTE ON PROCEDURE `getAllAccountsOrderByAccountID` TO 'user_read'@'%';
+GRANT EXECUTE ON PROCEDURE `getAllAccountsOrderByAccountID` TO 'user_write'@'%';
 
 GRANT EXECUTE ON PROCEDURE `insertNewAccount` TO 'user_write'@'%';
 

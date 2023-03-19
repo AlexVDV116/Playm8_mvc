@@ -5,6 +5,8 @@
 DROP DATABASE IF EXISTS `playm8`;
 CREATE DATABASE IF NOT EXISTS `playm8`; 
 
+USE `playm8`;
+
 CREATE TABLE IF NOT EXISTS `accounts` (
   `accountID` int(16) NOT NULL,
   `username` tinytext NOT NULL,
@@ -196,6 +198,6 @@ DELIMITER $$
 CREATE PROCEDURE `enableAccount`(
     IN `accountID` INT(16))
 UPDATE `accounts` 
-SET isEnabled = 0
+SET isEnabled = 1
 WHERE accounts.accountID = accountID$$
 DELIMITER ;
