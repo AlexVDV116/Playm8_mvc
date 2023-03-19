@@ -180,7 +180,7 @@ class accountDAO extends DAO
         return $resultCheck;
     }
 
-    // Select all records with a matchin e-mailadress AND isEnabled set to 1: return true if a row is returned
+    // Select all records with a matching e-mailadress AND isEnabled set to 1: return true if a row is returned
     public function isEnabled(string $email): bool
     {
         $stmt = $this->prepare("SELECT * FROM accounts WHERE email = ? AND isEnabled = 1");
@@ -194,5 +194,15 @@ class accountDAO extends DAO
             $resultCheck = false;
         }
         return $resultCheck;
+    }
+
+    // Select all records with a matching table name from the database and returns the number of rows as an int
+    public function getCount(string $dbName): int
+    {
+        $stmt = $this->prepare("SELECT count(*) from $dbName");
+        $stmt->execute();
+        $result = $stmt->fetch();
+
+        return $result[0];
     }
 }
