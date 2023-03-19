@@ -10,7 +10,7 @@ header("Expires: 0"); // HTTP 1.0 Proxies
 set_include_path('./' . PATH_SEPARATOR . '../');
 
 
-$title = 'Eboost Manager Area';
+$title = 'Playm8 Manager Area';
 
 $controller = filter_input(INPUT_GET, 'controller');
 if (!empty($controller)) {
@@ -25,6 +25,7 @@ if (empty($view)) {
 $menu = [
     'Home' => '?view=Home',
     'UserProfiles' => '?view=UserProfileList',
+    'Search' => '?view=Search',
 ];
 ?>
 

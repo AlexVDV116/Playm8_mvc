@@ -85,6 +85,13 @@ class accountDAO extends DAO
         $this->startListSql($sql);
     }
 
+    // Select all records from accounts table and order them by accountID
+    public function startSearch($search): void
+    {
+        $sql = "SELECT * FROM accounts WHERE username like '%$search%'";
+        $this->startListSql($sql);
+    }
+
     // Returns a new Account object if no email provided
     // Else select all records from accounts table where the email mathes the given email
     // Returns an instance of the Account model with the property names set to the data from the selected record

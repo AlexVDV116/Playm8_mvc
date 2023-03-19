@@ -5,17 +5,22 @@ require_once 'dao/accountDAO.php';
 
 ini_set('display_errors', 1);
 
+
 class SearchAccounts extends View
 {
 
     public function show()
     {
         $accountDAO = new accountDAO;
-        $accountDAO->startList();
-?>
+        $result = $accountDAO->getCount("accounts");
+        if (isset($_POST['search'])) { // Check if form was submitted
 
-        <form action="phpSearch.php" method="post">
-            Search <input type="text" name="search"><br>
+            $search = $_POST['search']; // Get input text
+            $accountDAO->startSearch($search);
+        }
+?>
+        <form action="#" method="post">
+            Search <input type="text" name="search">
             <input type="submit">
         </form>
 
