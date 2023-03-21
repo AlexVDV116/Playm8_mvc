@@ -29,6 +29,11 @@ CREATE TABLE IF NOT EXISTS `likes` (
   `liked` int(16) NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS `matches` (
+  `userProfileID_A` int(16) NOT NULL,
+  `userProfileID_B` int(16) NOT NULL
+);
+
 
 CREATE TABLE IF NOT EXISTS `permissions` (
   `permissionID` int(16) NOT NULL,
@@ -76,6 +81,9 @@ ALTER TABLE `likes`
   ADD KEY `liker` (`liker`),
   ADD KEY `liked` (`liked`);
 
+ALTER TABLE `matches` 
+  ADD KEY `userProfileID_A` (`userProfileID_A`),
+  ADD KEY `userProfileID_B` (`userProfileID_B`);
 
 ALTER TABLE `permissions`
   ADD PRIMARY KEY (`permissionID`);
@@ -108,6 +116,10 @@ ALTER TABLE `accountsRoles`
 ALTER TABLE `likes`
   ADD CONSTRAINT `likes_ibfk_1` FOREIGN KEY (`liked`) REFERENCES `userProfiles` (`userProfileID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `likes_ibfk_2` FOREIGN KEY (`liker`) REFERENCES `userProfiles` (`userProfileID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `matches`
+  ADD CONSTRAINT `matches_ibfk_1` FOREIGN KEY (`userProfileID_A`) REFERENCES `userProfiles` (`userProfileID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `matches_ibfk_2` FOREIGN KEY (`userProfileID_B`) REFERENCES `userProfiles` (`userProfileID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 
 ALTER TABLE `rolesPermissions`
@@ -200,4 +212,13 @@ CREATE PROCEDURE `enableAccount`(
 UPDATE `accounts` 
 SET isEnabled = 1
 WHERE accounts.accountID = accountID$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER `foundMatch` BEFORE INSERT ON `likes`
+ FOR EACH ROW BEGIN
+    IF EXISTS( SELECT * FROM likes WHERE NEW.liker = likes.liked AND NEW.liked = likes.liker ) THEN
+      INSERT INTO matches (userProfileID_A, userProfileID_B) VALUES (NEW.liker, NEW.liked)$$
+    END IF$$
+  END
 DELIMITER ;
