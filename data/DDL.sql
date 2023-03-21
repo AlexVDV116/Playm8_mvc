@@ -108,6 +108,9 @@ ALTER TABLE `accounts`
 --
 -- Setting Foreign Keys
 --
+ALTER TABLE `accounts` 
+  ADD CONSTRAINT `accounts_ibfk_1` FOREIGN KEY (`userProfileID`) REFERENCES `userProfiles`(`userProfileID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 ALTER TABLE `accountsRoles`
   ADD CONSTRAINT `accountsroles_ibfk_1` FOREIGN KEY (`accountID`) REFERENCES `accounts` (`accountID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `accountsroles_ibfk_2` FOREIGN KEY (`roleID`) REFERENCES `roles` (`roleID`) ON DELETE CASCADE ON UPDATE CASCADE;
@@ -216,9 +219,10 @@ DELIMITER ;
 
 DELIMITER $$
 CREATE TRIGGER `foundMatch` BEFORE INSERT ON `likes`
- FOR EACH ROW BEGIN
-    IF EXISTS( SELECT * FROM likes WHERE NEW.liker = likes.liked AND NEW.liked = likes.liker ) THEN
-      INSERT INTO matches (userProfileID_A, userProfileID_B) VALUES (NEW.liker, NEW.liked)$$
-    END IF$$
+  FOR EACH ROW 
+  BEGIN
+    IF EXISTS( SELECT * FROM likes WHERE NEW.liker = likes.liked AND NEW.liked = likes.liker ) THEN 
+        INSERT INTO matches (userProfileID_A, userProfileID_B) VALUES (NEW.liker, NEW.liked);
+    END IF;
   END
 DELIMITER ;
