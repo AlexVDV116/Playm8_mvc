@@ -4,6 +4,12 @@
 
 USE `playm8`;
 
+-- Had to disable foreign key checks globally to prevent ERROR 1452: Foreign key constraint fail
+-- Setting this option for the session does not work
+-- SET FOREIGN_KEY_CHECKS=0;
+SET GLOBAL FOREIGN_KEY_CHECKS=0;
+
+
 -- Insert data into the 'accounts' table
 
 INSERT INTO `accounts` (`accountID`, `username`, `email`, `password`, `isEnabled`, `isBetaUser`, `userProfileID`) VALUES
@@ -174,3 +180,6 @@ INSERT INTO `roles`(`roleID`, `roleName`, `roleDescription`) VALUES
    ('69','01'),
    ('70','02'),
    ('71','03');
+
+-- Enable Foreign Key Checks Globally
+SET GLOBAL FOREIGN_KEY_CHECKS=1;
