@@ -20,7 +20,7 @@ class SearchAccounts extends View
 ?>
         <div class="form-group d-flex justify-content-end">
             <form action="#" method="post">
-                <input class="rounded form-control-sm" type="text" name="search" placeholder="Search Accounts">
+                <input class="rounded form-control-sm" type="text" name="search" placeholder="Zoek Accounts">
                 <button type="submit" class="btn btn-credits shadow-sm my-2">Search</button>
             </form>
         </div>

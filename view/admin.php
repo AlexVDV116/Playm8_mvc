@@ -129,7 +129,7 @@ $menu = [
                         </li>
                         <li>
                             <a href="?view=SearchAccounts" class="nav-link">
-                                Zoek account
+                                Zoek accounts
                             </a>
                         </li>
                         <li class="nav-item">
