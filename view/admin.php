@@ -9,6 +9,11 @@ header("Expires: 0"); // HTTP 1.0 Proxies
 // set include path to work from any directory level
 set_include_path('./' . PATH_SEPARATOR . '../');
 
+// Check if user is admin
+if ($_SESSION["auth_role"] != '3') {
+    // Redirect user back to the index page if not admin
+    header("location: ../index.php");
+};
 
 $title = 'Playm8 Manager Area';
 
@@ -27,6 +32,7 @@ $menu = [
     'UserProfiles' => '?view=UserProfileList',
     'Search' => '?view=Search',
 ];
+
 ?>
 
 <!DOCTYPE html>
@@ -78,11 +84,11 @@ $menu = [
                         <!-- If user is logged in show account name and logout button -->
                         <!-- Else show regular register and login button -->
                         <?php
-                        if (isset($_SESSION["account_username"])) {
+                        if (isset($_SESSION["auth_user"])) {
                         ?>
                             <li class="nav-item pl-3 pr-1">
                                 <a class="nav-link btn btn-register nav-btn" href="#" role="button">
-                                    <?php echo $_SESSION["account_username"]; ?>
+                                    <?php echo $_SESSION["auth_user"]["username"]; ?>
                                 </a>
                             </li>
                             <li class="nav-item px-2">
