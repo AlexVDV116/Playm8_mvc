@@ -1,6 +1,5 @@
 <?php
 $ROOT = '../'; // Setting the ROOT directory for this file so the relative paths used in included pages will still work
-session_start();
 
 ini_set('display_errors', 1);
 header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1

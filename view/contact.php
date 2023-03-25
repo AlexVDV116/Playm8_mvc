@@ -1,6 +1,5 @@
 <?php
 $ROOT = '../'; // Setting the ROOT directory for this file so the relative paths used in included pages will still work
-session_start();
 
 ini_set('display_errors', 1);
 header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1
@@ -9,7 +8,6 @@ header("Expires: 0"); // HTTP 1.0 Proxies
 
 // If a session variable array exists store the contents in the form_data variable
 // So we can retain the form values for better user experience
-session_start();
 if (isset($_SESSION['contact_form']) && !empty($_SESSION['contact_form'])) {
 	$form_data = $_SESSION['contact_form'];
 	unset($_SESSION['contact_form']);
