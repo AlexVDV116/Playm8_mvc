@@ -73,6 +73,7 @@ class accountDAO extends DAO
 
             // Set session super global variables containing user information
             $_SESSION["auth"] = true;
+            $_SESSION["auth_role"] = $this->getRoleID($user[0]["accountID"]);
             $_SESSION["auth_user"] = [
                 'accountID' => $user[0]["accountID"],
                 'username' => $user[0]["username"],
@@ -226,5 +227,15 @@ class accountDAO extends DAO
         $result = $stmt->fetch();
 
         return $result[0];
+    }
+
+    // Get all roleID's assigned to account 
+    public function getRoleID(int $accountID): int
+    {
+        $stmt = $this->prepare("SELECT * FROM `accountsRoles` WHERE `accountID` = ?");
+        $stmt->execute();
+        $result = $stmt->fetch();
+
+        return $result;
     }
 }
