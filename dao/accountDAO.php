@@ -66,6 +66,9 @@ class accountDAO extends DAO
             // This user variable now contains all data from the database belonging to the account
             $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+            // Free up the connection to the server so that other SQL statements may be issued
+            $stmt->closeCursor();
+
             // Create a new session 
             session_start();
             // Regenerate session id to prevent session fixation-by malicious user
@@ -229,13 +232,13 @@ class accountDAO extends DAO
         return $result[0];
     }
 
-    // Get all roleID's assigned to account 
+    // Get the roleID assigned to an account 
     public function getRoleID(int $accountID): int
     {
-        $stmt = $this->prepare("SELECT * FROM `accountsRoles` WHERE `accountID` = ?");
-        $stmt->execute();
+        $stmt = $this->prepare("SELECT `roleID` FROM `accountsRoles` WHERE `accountID` = ?");
+        $stmt->execute([$accountID]);
         $result = $stmt->fetch();
 
-        return $result;
+        return $result[0];
     }
 }
