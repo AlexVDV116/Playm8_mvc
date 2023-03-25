@@ -10,8 +10,8 @@ header("Expires: 0"); // HTTP 1.0 Proxies
 echo '<pre>';
 var_dump($_SESSION);
 echo '</pre>';
-?>
 */
+?>
 
 <!DOCTYPE html>
 <html lang="nl">
