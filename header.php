@@ -6,8 +6,12 @@ header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1
 header("Pragma: no-cache"); // HTTP 1.0 clients (IE6 / pre 1997)
 header("Expires: 0"); // HTTP 1.0 Proxies
 
-//var_dump($_SESSION);
+/* Echo session variables 
+echo '<pre>';
+var_dump($_SESSION);
+echo '</pre>';
 ?>
+*/
 
 <!DOCTYPE html>
 <html lang="nl">
