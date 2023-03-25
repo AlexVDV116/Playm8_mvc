@@ -21,7 +21,7 @@ class accountDAO extends DAO
     // If true log user in 
     public function logInUser($email, $password): void
     {
-        $stmt = $this->prepare('CALL getAccountWithEmail(?);');
+        $stmt = $this->prepare('CALL getAccountMatchingEmail(?);');
         $stmt->execute([$email]);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -66,13 +66,21 @@ class accountDAO extends DAO
             // This user variable now contains all data from the database belonging to the account
             $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-
-            // Create a new session with a session super global of accountid and username
+            // Create a new session 
             session_start();
             // Regenerate session id to prevent session fixation-by malicious user
             session_regenerate_id();
-            $_SESSION["accountID"] = $user[0]["accountID"];
-            $_SESSION["username"] = $user[0]["username"];
+
+            // Set session super global variables containing user information
+            $_SESSION["auth"] = true;
+            $_SESSION["auth_user"] = [
+                'accountID' => $user[0]["accountID"],
+                'username' => $user[0]["username"],
+                'email' => $user[0]["email"],
+                'isEnabled' => $user[0]["isEnabled"],
+                'isBetaUser' => $user[0]["isBetaUser"],
+                'userProfileID' => $user[0]["userProfileID"],
+            ];
         }
 
         $stmt = null;
