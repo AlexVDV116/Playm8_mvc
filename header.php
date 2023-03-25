@@ -89,11 +89,11 @@ header("Expires: 0"); // HTTP 1.0 Proxies
                         <!-- If user is logged in show account name and logout button -->
                         <!-- Else show regular register and login button -->
                         <?php
-                        if (isset($_SESSION["username"])) {
+                        if (isset($_SESSION["auth_user"])) {
                         ?>
                             <li class="nav-item pl-3 pr-1">
                                 <a class="nav-link btn btn-register nav-btn" href="#" role="button">
-                                    <?php echo $_SESSION["username"]; ?>
+                                    <?php echo $_SESSION["auth_user"]["username"]; ?>
                                 </a>
                             </li>
                             <li class="nav-item px-2">
