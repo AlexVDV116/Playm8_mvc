@@ -91,6 +91,7 @@ echo '</pre>';
                                 Betatester</a>
                         </li>
                         <!-- If user is logged in show account name and logout button -->
+                        <!-- If user is logged in as admin href leads to admin panel, user leads to profile page -->
                         <!-- Else show regular register and login button -->
                         <?php
                         if (isset($_SESSION["auth_user"]) && $_SESSION["auth_role"] == '3') {
