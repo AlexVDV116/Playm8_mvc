@@ -96,11 +96,18 @@ echo '</pre>';
                         <?php
                         if (isset($_SESSION["auth_user"]) && $_SESSION["auth_role"] == '3') {
                         ?>
-                            <li class="nav-item pl-3 pr-1">
-                                <a class="nav-link btn btn-register nav-btn" href="<?php echo $ROOT; ?>view/admin.php" role="button">
-                                    <?php echo $_SESSION["auth_user"]["username"]; ?>
-                                </a>
-                            </li>
+                            <div class="dropdown">
+                                <li class="nav-item pl-3 pr-1">
+                                    <a class="nav-link btn btn-register nav-btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <?php echo $_SESSION["auth_user"]["username"]; ?>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="<?php echo $ROOT; ?>view/admin.php">Admin Dashboard</a></li>
+                                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                    </ul>
+                                </li>
+                            </div>
                             <li class="nav-item px-2">
                                 <a class="nav-link btn btn-login nav-btn" href="<?php echo $ROOT; ?>includes/logout.inc.php" role="button">
                                     Uitloggen
@@ -109,11 +116,18 @@ echo '</pre>';
                         <?php
                         } elseif (isset($_SESSION["auth_user"])) {
                         ?>
-                            <li class="nav-item pl-3 pr-1">
-                                <a class="nav-link btn btn-register nav-btn" href="<?php echo $ROOT; ?>view/userprofile.php" role="button">
-                                    <?php echo $_SESSION["auth_user"]["username"]; ?>
-                                </a>
-                            </li>
+                            <div class="dropdown">
+                                <li class="nav-item pl-3 pr-1">
+                                    <a class="nav-link btn btn-register nav-btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <?php echo $_SESSION["auth_user"]["username"]; ?>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="<?php echo $ROOT; ?>view/userprofile.php">Userprofile</a></li>
+                                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                    </ul>
+                                </li>
+                            </div>
                             <li class="nav-item px-2">
                                 <a class="nav-link btn btn-login nav-btn" href="<?php echo $ROOT; ?>includes/logout.inc.php" role="button">
                                     Uitloggen
