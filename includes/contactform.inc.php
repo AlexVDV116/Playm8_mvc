@@ -38,6 +38,4 @@ if (isset($_POST["submit"])) {
 
     // Redirect user back to the contact page when successfull with a success message
     header("Location: ../view/contact.php?error=none");
-    session_unset();
-    session_destroy();
 }
