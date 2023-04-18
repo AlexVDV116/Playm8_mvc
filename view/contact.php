@@ -93,7 +93,7 @@ include_once '../header.php';
 											<label for="form_message">Bericht:</label>
 											<textarea id="form_message" name="message" class="form-control border-0" placeholder="Schrijf hier uw bericht. (20 -500 karakters)" rows="4" required><?php if (isset($form_data)) {
 																																																		echo $form_data['message'];
-																																																	} ?>"</textarea>
+																																																	} ?></textarea>
 											<div class="invalid-feedback">
 												Dit veld is verplicht. (20 - 500 karakters)
 											</div>
