@@ -56,7 +56,7 @@ class contactFormController extends Controller
 
         $headers = "From: Playm8 <contact@playm8.com>\r\n";
         $headers .= "Reply-To: contact@playm8.com";
-        $headers .= "Content-type: text/html\r\n";
+        $headers .= "Content-type: text/html, charset='utf-8'\r\n";
 
         mail($to, $subject, $message, $headers);
     }
