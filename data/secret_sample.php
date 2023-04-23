@@ -1,8 +1,10 @@
 <?php
 
+// Rename this file, or create a new file named secret.php
 // Copy this template to to 'secret.php' and fill in your own database credentials and mail configuration
 // Make sure the name 'secret.php' is in .gitignore
 
+// Class containing database credentials
 class Secret
 {
     const DB_HOST = 'localhost';
@@ -12,6 +14,7 @@ class Secret
     const DB_ADMIN = 'https://localhost/phpmyadmin';
 }
 
+// Class containing PHPMailer email credentials and configuration
 class mailConfig
 {
     const CONFIG = [
