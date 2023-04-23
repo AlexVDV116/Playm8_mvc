@@ -71,8 +71,6 @@ include_once '../header.php';
                                     if (isset($_GET["activation"])) {
                                         if ($_GET["activation"] == "success") {
                                             echo '<p class="form-success"><i class="fa-solid fa-circle-exclamation"></i> Uw account is successvol geactiveerd.<br> U kunt nu inloggen. </p>';
-                                        } elseif ($_GET["activation"] == "fail") {
-                                            echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Account activatie mislukt, registreer opnieuw.</p>';
                                         }
                                     } ?>
                                 </form>
