@@ -285,9 +285,6 @@ include_once 'header.php';
                         </div>
                         <?php
                         if (isset($_GET["error"])) {
-                            if ($_GET["beta"] == "success") {
-                                echo '<p class="form-success"><i class="fa-regular fa-circle-check"></i> Bedankt voor je inschrijving als betatester.<br> Wij behandelen je verzoek zo snel mogelijk.</p>';
-                            }
                             if ($_GET["error"] == "emptyinput") {
                                 echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Alle velden zijn verplicht.</p>';
                             }
@@ -302,6 +299,11 @@ include_once 'header.php';
                             }
                             if ($_GET["error"] == "accountdisabled") {
                                 echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Dit account is inactief.</p>';
+                            }
+                        }
+                        if (isset($_GET["beta"])) {
+                            if ($_GET["beta"] == "success") {
+                                echo '<p class="form-success"><i class="fa-regular fa-circle-check"></i> Bedankt voor je inschrijving als betatester.<br> Wij behandelen je verzoek zo snel mogelijk.</p>';
                             }
                         }
                         ?>
