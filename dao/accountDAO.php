@@ -30,8 +30,7 @@ class accountDAO extends DAO
             // echo "Onbekend e-mailadres..";
             header("location: ../view/login.php?error=accountnotfound");
             exit();
-        } else {
-        }
+        };
 
         // use PHP built in method to check if the given password matches the hashed password stored in the DB (returns bool)
         $checkPwd = password_verify($password, $result[0]["password"]);
@@ -52,14 +51,21 @@ class accountDAO extends DAO
                 // echo "Onjuist wachtwoord.";
                 header("location: ../view/login.php?error=wrongpassword");
                 exit;
-            }
+            };
+
+            // Check if the user has verified its email-adress and that his account isActive = 1
+            if ($this->isActive($email) == 0) {
+                // echo "Account niet geactiveerd";
+                header("location: ../view/login.php?error=accountnotactivated");
+                exit();
+            };
 
             // Before logging in the user check if the database query retrieves any results
             if ($stmt->rowCount() == 0) {
                 $stmt = null;
                 header("location: ../view/login.php?error=accountnotfound");
                 exit();
-            }
+            };
 
             // Log user in
             // Create a user variable with the results from the statement and return these results in an associative array
@@ -140,11 +146,13 @@ class accountDAO extends DAO
     // Prepared statement that uses a stored procedure
     public function insert(Account $account): void
     {
-        $sql = 'CALL insertNewAccount(?, ?, ?);';
+        $sql = 'CALL insertNewAccount(?, ?, ?, ?, ?);';
         $args = [
             $account->getName(),
             $account->getEmail(),
-            $account->getPassword()
+            $account->getPassword(),
+            $account->getActivationCode(),
+            $account->getExpiryDate()
         ];
         $this->execute($sql, $args);
     }
@@ -206,10 +214,11 @@ class accountDAO extends DAO
         return $resultCheck;
     }
 
-    // Select all records with a matching e-mailadress AND isEnabled set to 1: return true if a row is returned
-    public function isEnabled(string $email): bool
+    // Select all records with a matching e-mailadress AND isActive set to 1: return true if a row is returned
+    public function isActive(string $email): bool
     {
-        $stmt = $this->prepare("SELECT * FROM accounts WHERE email = ? AND isEnabled = 1");
+        $stmt = $this->prepare("SELECT * FROM accounts WHERE email = ? AND isActive = 1");
+        $stmt->closeCursor();
         $stmt->execute([$email]);
         $result = $stmt->fetch();
 
@@ -233,12 +242,94 @@ class accountDAO extends DAO
     }
 
     // Get the roleID assigned to an account 
-    public function getRoleID(int $accountID): int
+    public function getRoleID(int $accountID)
     {
         $stmt = $this->prepare("SELECT `roleID` FROM `accountsRoles` WHERE `accountID` = ?");
         $stmt->execute([$accountID]);
         $result = $stmt->fetch();
 
-        return $result[0];
+        if ($result[0]) {
+            return $result[0];
+        } else {
+            return null;
+        }
+    }
+
+    // Generate a uniquely random activation code
+    public function generateActivationCode(): string
+    {
+        return bin2hex(random_bytes(16));
+    }
+
+    // Send the activation code to the email registered
+    public function mailActivationCode($email, $activation_code): void
+    {
+        $activation_link = "http://localhost/Coding_projects/GitHub%20Repositories/Playm8_mvc/includes/activate.inc.php?email=$email&activation_code=$activation_code";
+
+        $senderName = "Playm8 Account Activation";
+        $senderEmail = mailConfig::CONFIG['email']['username'];
+        $senderEmailPassword = mailConfig::CONFIG['email']['password'];
+
+        $recieverEmail = $email;
+        $subject = "Verify your email-adress!";
+        $body = "<p><strong>Thank you for registering at Playm8!</strong></p>";
+        $body .= "<p>Please follow this link to activate your account:<br>";
+        $body .= "{$activation_link}</p>";
+
+        $playm8Mail = new Mail($senderName, $senderEmail, $senderEmailPassword);
+        $playm8Mail->sendMail($recieverEmail, $subject, $body);
+    }
+
+    // Delete account with matching accountID and isActive set to 0
+    public function deleteInactiveUserByID(int $accountID, int $isActive = 0): void
+    {
+        $sql = 'DELETE FROM accounts
+            WHERE accountID = ? AND isActive = ?';
+        $args = [
+            $accountID,
+            $isActive
+        ];
+        $this->execute($sql, $args);
+    }
+
+    // Select the ID, activation code from the account that matched the email
+    // and set expired to true if the activation_expiry is greater then now 
+    // If the account has an expired activation_expiry date remove the account from the DB
+    // else return the unverified account
+    public function getUnverifiedAccount(string $email, string $activationCode)
+    {
+        $stmt = $this->prepare("SELECT accountID, username, activation_code, activation_expiry < now() as expired
+            FROM accounts WHERE isActive = 0 AND email = ?");
+        $stmt->closeCursor();
+        $stmt->execute([$email]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user) {
+            // already expired, delete the in active user with expired activation code
+            if ((int)$user['expired'] === 1) {
+                $this->deleteInactiveUserByID($user['accountID']);
+                return null;
+            }
+            // verify the password
+            if (($user['activation_code'] == $activationCode)) {
+                return $user;
+            }
+        }
+
+        return null;
+    }
+
+    function activateAccount(int $accountID): bool
+    {
+        $now = date("Y-m-d H:i:s");
+        $sql = 'UPDATE accounts
+            SET isActive = 1,
+                activated_at = ? 
+            WHERE accountID = ?';
+        $args = [
+            $now,
+            $accountID
+        ];
+        return $this->execute($sql, $args);
     }
 }
