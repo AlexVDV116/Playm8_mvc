@@ -7,14 +7,17 @@ require_once '../framework/Model.php';
 class Account extends Model
 {
 
-    public string $accountID = '';
-    public string $username = '';
-    public string $email = '';
-    public string $password = '';
-    public bool $isEnabled = true;
-    public bool $isBetaUser = false;
-    public array $roles = [];
-    public ?userProfile $userProfile = null;
+    public string $accountID;
+    public string $username;
+    public string $email;
+    public string $password;
+    public bool $isBetaUser;
+    public bool $isActive;
+    public string $activation_code;
+    public string $activation_expiry;
+    public ?string $activated_at;
+    public array $roles;
+    public ?userProfile $userProfile;
 
     public function __construct(?array $data = null)
     {
@@ -43,7 +46,7 @@ class Account extends Model
 
     public function getEnabled(): bool
     {
-        return $this->isEnabled;
+        return $this->isActive;
     }
 
     public function getBetaUser(): bool
@@ -85,5 +88,15 @@ class Account extends Model
     public function getUserProfile(): userProfile
     {
         return $this->userProfile;
+    }
+
+    public function getActivationCode(): string
+    {
+        return $this->activation_code;
+    }
+
+    public function getExpiryDate(): string
+    {
+        return $this->activation_expiry;
     }
 }
