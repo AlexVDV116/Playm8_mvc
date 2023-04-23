@@ -85,9 +85,10 @@ class accountController extends Controller
 
         // Insert the account object data into the database
         $accountDAO->insert($account);
+
+        // Send email to user with activation code and link to activate the account
         $accountDAO->mailActivationCode($this->email, $activationCode);
     }
-
 
     // Method that checks if for any empty inputs: returns true if empty inputs found
     private function hasEmptyInput(): bool
