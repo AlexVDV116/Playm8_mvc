@@ -2,13 +2,16 @@
 
 // Server side user input validation when submitting the contact form
 // Gets the data from the contactform.inc.php
-// If no errors found, send mail to Playm8 e-mailadress (WIP needs to be tested)
+// If no errors found, sends an e-mail to the Playm8 e-mailadress with the data
+// Sends an additional email to the client confirming that his contact support is being processed
 
 require_once '../framework/Controller.php';
+require_once '../model/Mail.php';
+require_once '../data/secret.php';
 
-error_reporting(-1);
-ini_set('display_errors', 'On');
-set_error_handler("var_dump");
+//error_reporting(-1);
+//ini_set('display_errors', 1);
+//set_error_handler("var_dump");
 
 class contactFormController extends Controller
 {
@@ -46,19 +49,34 @@ class contactFormController extends Controller
             exit();
         }
 
-        // Send data to our contact e-mailadress (WIP needs to be tested)
+        // Send the data from the contact form to our email-adress so we can process the support request
         $mailname = $this->name . " " . $this->lastname;
 
-        $to = $this->email;
+        $senderName = "Playm8 Contact Form";
+        $senderEmail = mailConfig::CONFIG['email']['username'];
+        $senderEmailPassword = mailConfig::CONFIG['email']['password'];
+
+        $recieverEmail = mailConfig::CONFIG['email']['username'];
         $subject = "Contact request from: {$mailname}";
-        $message = "<p>Subject: {$this->need}</p>";
-        $message .= "<p>{$this->message}</p>";
+        $body = "<p>Sent by: {$this->email}<br>";
+        $body .= "Subject: {$this->need}</p>";
+        $body .= "<p><strong>{$mailname} has requested to contact us trough our contact form.</strong></p>";
+        $body .= "<p>{$this->message}</p>";
 
-        $headers = "From: Playm8 <contact@playm8.com>\r\n";
-        $headers .= "Reply-To: contact@playm8.com";
-        $headers .= "Content-type: text/html, charset='utf-8'\r\n";
+        $playm8Mail = new Mail($senderName, $senderEmail, $senderEmailPassword);
+        $playm8Mail->sendMail($recieverEmail, $subject, $body);
 
-        mail($to, $subject, $message, $headers);
+        // Send a copy of the contact support to the client as a confirmation mail that his request is being processed
+
+        $recieverEmail = $this->email;
+        $subject = "Your contact request from is being processed";
+        $body = "<p><strong>Thank you for contacting us, {$mailname}.</strong><br>";
+        $body .= "Your contact request: {$this->need} is being processed, we will do our best to reach out to you as soon as possible.<br><br>";
+        $body .= "A copy of your message is attached below:</p>";
+        $body .= "<p>{$this->message}</p>";
+
+        $clientMail = new Mail($senderName, $senderEmail, $senderEmailPassword);
+        $clientMail->sendMail($recieverEmail, $subject, $body);
     }
 
     // Method that checks if for any empty inputs: returns true if empty inputs found

@@ -1,13 +1,26 @@
 <?php
 
-// Copy this template to to 'secret.php' and fill in your own database credentials
+// Copy this template to to 'secret.php' and fill in your own database credentials and mail configuration
 // Make sure the name 'secret.php' is in .gitignore
 
 class Secret
 {
-    const DB_HOST = '';
-    const DB_NAME = '';
-    const DB_USERNAME = '';
+    const DB_HOST = 'localhost';
+    const DB_NAME = 'playm8';
+    const DB_USERNAME = 'root';
     const DB_PASSWORD = '';
-    const DB_ADMIN = '';
+    const DB_ADMIN = 'https://localhost/phpmyadmin';
+}
+
+class mailConfig
+{
+    const CONFIG = [
+        'email' => [
+            'host' => 'smtp.office365.com',
+            'port' => 587,
+            'username' => 'donotreply-playm8@outlook.com',
+            'password' => '',
+            'SMTPSecure' => 'tls'
+        ]
+    ];
 }
