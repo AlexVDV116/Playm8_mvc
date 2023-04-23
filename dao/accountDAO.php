@@ -5,6 +5,7 @@
 
 require_once '../framework/DAO.php';
 require_once '../model/Account.php';
+require_once '../data/secret.php';
 
 class accountDAO extends DAO
 {
@@ -264,7 +265,8 @@ class accountDAO extends DAO
     // Send the activation code to the email registered
     public function mailActivationCode($email, $activation_code): void
     {
-        $activation_link = "http://localhost/Coding_projects/GitHub%20Repositories/Playm8_mvc/includes/activate.inc.php?email=$email&activation_code=$activation_code";
+        $activation_link = mailConfig::APP_URL;
+        $activation_link .= "Playm8_mvc/includes/activate.inc.php?email=$email&activation_code=$activation_code";
 
         $senderName = "Playm8 Account Activation";
         $senderEmail = mailConfig::CONFIG['email']['username'];
