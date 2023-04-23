@@ -18,7 +18,6 @@ class Mail extends Model
     public $senderName;
     public $senderEmail;
     public $password;
-    public $SMTPhost;
 
     public function __construct($senderName, $senderEmail, $password)
     {
