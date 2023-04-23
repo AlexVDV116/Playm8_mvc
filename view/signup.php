@@ -109,6 +109,12 @@ include_once '../header.php';
                                         if ($_GET["error"] == "passwordstrength") {
                                             echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Uw wachtwoord moet uit ten minste 8 tekens (maximaal 32) en ten minste één cijfer, één letter en één speciaal karakter bestaan.</p>';
                                         }
+                                    }
+
+                                    if (isset($_GET["activation"])) {
+                                        if ($_GET["activation"] == "fail") {
+                                            echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Account activatie mislukt, registreer opnieuw.</p>';
+                                        }
                                     } ?>
                                 </form>
                             </div>
