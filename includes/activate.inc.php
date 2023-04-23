@@ -28,6 +28,6 @@ if ((isset($_GET['email'])) && (isset($_GET['activation_code']))) {
     if ($user && $accountDAO->activateAccount($user['accountID'])) {
         header("location: ../view/login.php?activation=success");
     } else {
-        header("location: ../view/login.php?activation=fail");
+        header("location: ../view/signup.php?activation=fail");
     }
 }
