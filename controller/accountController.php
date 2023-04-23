@@ -9,6 +9,7 @@ session_start();
 
 require_once '../framework/Controller.php';
 require_once '../dao/accountDAO.php';
+require_once '../model/Mail.php';
 
 class accountController extends Controller
 {
@@ -58,17 +59,33 @@ class accountController extends Controller
         // Use PHP built in method to generate a password hash
         $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
 
+        // Instantiate an accountDAO object
+        // Generate an activation code for email activation
+        // Generate an expiry date that is now + 24 hours for the activation code expiry date
+        $accountDAO = new accountDAO();
+        $activationCode = $accountDAO->generateActivationCode();
+        $expiryDate = date("Y-m-d H:i:s", strtotime('+24 hours')); // ExpiryDate = now + 24 hours
+
         // Assocaitive array containing the user data
-        $data = array("username" => $this->username, "email" => $this->email, "password" => $hashedPassword, "isEnabled" => true, "isBetaUser" => 0);
+        $data = array(
+            "username" => $this->username,
+            "email" => $this->email,
+            "password" => $hashedPassword,
+            "isBetaUser" => false,
+            "isActive" => false,
+            "activation_code" => $activationCode,
+            "activation_expiry" => $expiryDate,
+            "activated_at" => '',
+            "roles" => [],
+            "userProfile" => null
+        );
 
         // Create a new empty Account object with the user data
         $account = new Account($data);
 
-        // Instantiate an accountDAO object
-        $accountDAO = new accountDAO();
-
         // Insert the account object data into the database
         $accountDAO->insert($account);
+        $accountDAO->mailActivationCode($this->email, $activationCode);
     }
 
 
