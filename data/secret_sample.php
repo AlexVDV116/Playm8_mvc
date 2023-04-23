@@ -26,4 +26,7 @@ class mailConfig
             'SMTPSecure' => 'tls'
         ]
     ];
+
+    // Fill in your localhost APP URL in order to get right activation link in the accountDAO mailActivationCode method
+    const APP_URL = 'http://localhost/Coding_projects/GitHub%20Repositories/';
 }
