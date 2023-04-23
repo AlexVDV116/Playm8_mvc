@@ -12,23 +12,23 @@ SET GLOBAL FOREIGN_KEY_CHECKS = 0;
 
 -- Insert data into the 'accounts' table
 
-INSERT INTO `accounts` (`accountID`, `username`, `email`, `password`, `isEnabled`, `isBetaUser`, `userProfileID`) VALUES
-  (56, 'JohanDeBoer', 'johan21@hotmail.com', '$2y$10$PGp.e8doGD/i3AU1g8GnqeL6TcXwUbEtJ3Bq9QOABItMkj6KtKQEi', 1, 0, 560),
-  (57, 'Jan21', 'jan21@hotmail.com', '$2y$10$8GSfjqTJN6kMDlT8ZVbJsex7rWUu0eFP2SGYVhwbBH258w5Y4gTaW', 1, 1, 570),
-  (58, 'Freek', 'Freekie@gmail.com', '$2y$10$uE0GZT5Wd.QrAbSRd5hvXeOqzTKNXtW3HZ/vdIxGpgFHG7/KkqGeu', 1, 0, 580),
-  (59, 'Suzanne1995', 'suussje@hotmail.com', '$2y$10$wSRdfnFuxqszyn8aGrB4AunVblTQ/LdWU6yj0YbFkYTb2fQlJil/.', 1, 0, 590),
-  (60, 'pieter', 'pieterjeeeee@gmail.com', '$2y$10$.EGzPDlybCZUAtOAe3/CouXfA5V3NphZBkHPu5H7R.NxAo314AUtW', 1, 1, 600),
-  (61, 'Petertjeeeee', 'petertjeeee@hotmail.com', '$2y$10$Sghx.UpH1fpeMNBbYd9Nbue9ioKZ6QuVzkcpLfX2pedS09UmavN0W', 1, 0, 610),
-  (62, 'Marit_123', 'maritdeboer@hotmail.com', '$2y$10$tUXFyfsk/1wp2dmx00og3uoFWjsG8sY7FOu2wSGUrDNE1FATIqW6.', 1, 0, 620),
-  (63, 'donut12', 'poloooo@gmail.com', '$2y$10$Wkg3OKaATFkhIZeRXyLg7eq599HSVcaIUA7WskHoeXcxkjcNRRMN6', 1, 0, 630),
-  (64, 'richard21', 'richard@gmail.com', '$2y$10$vN9nq8iah1/jt0oFrtqBo.SoIoP8mooeVqqIOGBvdfziO6eMRJYLS', 1, 0, 640),
-  (65, 'i<3dogs', 'chihuahua213@gmail.com', '$2y$10$4mij1qqSuR1bLm.OhKYDrO/iFRG882ijwxXAs9PSIhrVvbi7JSTbm', 1, 1, 650),
-  (66, 'banaan22', 'banaantjee@gmail.com', '$2y$10$Dtjewcor/Smp7inPNYcewOTMP4x8e/E8LUzg/JakmDT5EEHOb3KlC', 1, 1, 660),
-  (67, 'kareldeboer', 'kareltje@email.com', '$2y$10$SD2sAr7W12dvE1saupbKDu5fNZ/I7eg6R6yqvh9KnOtbhITTs9wUW', 1, 0, 670),
-  (68, 'chrisjjee', 'chrisjee_3213@hotmail.com', '$2y$10$dV48fzD0CYxO80ERMMbAm.RoeYXW0c8TxE5JC6rzWjbC/M/mEBC42', 1, 0, 680),
-  (69, 'banaanaa', 'chiquitabanana@hotmail.com', '$2y$10$niMTxstvGyYBjZZQ/6hK8ei4P4FltVlt8zAT2Ts8XaZGyXoaA45mC', 1, 0, 690),
-  (70, 'connor', 'connorh@gmail.com', '$2y$10$YCHr7ZA8iHic1zdwLdd5zu1JSxG/Msa139I5QNvTwQb3Qcm09T0qG', 1, 0, 700),
-  (71, 'falcooo1991', 'falcoo_1991@email.com', '$2y$10$I/ZQpbJ3eCgehf6D1lRNj.uus3t.rXK16QTcSoQdOXOigLTDfEZMK', 1, 0, 710);
+INSERT INTO `accounts` (`accountID`, `username`, `email`, `password`, `isBetaUser`, `userProfileID`, `isActive`, `activation_code`, `activation_expiry`, `activated_at`) VALUES
+  (56, 'JohanDeBoer', 'johan21@hotmail.com', '$2y$10$PGp.e8doGD/i3AU1g8GnqeL6TcXwUbEtJ3Bq9QOABItMkj6KtKQEi', 0, 560, 1, "1ddcd20a391af2e8c2a4e4bf69f55fc7", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
+  (57, 'Jan21', 'jan21@hotmail.com', '$2y$10$8GSfjqTJN6kMDlT8ZVbJsex7rWUu0eFP2SGYVhwbBH258w5Y4gTaW', 1, 570, 1, "1137a2c535246a1383926a5d73f20011", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
+  (58, 'Freek', 'Freekie@gmail.com', '$2y$10$uE0GZT5Wd.QrAbSRd5hvXeOqzTKNXtW3HZ/vdIxGpgFHG7/KkqGeu', 0, 580 , 1, "27471a0171af38910d5c8ffa7ed16c0d", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
+  (59, 'Suzanne1995', 'suussje@hotmail.com', '$2y$10$wSRdfnFuxqszyn8aGrB4AunVblTQ/LdWU6yj0YbFkYTb2fQlJil/.', 0, 590, 1, "9fb87917c701231a6ad3cd502c60a56c", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
+  (60, 'pieter', 'pieterjeeeee@gmail.com', '$2y$10$.EGzPDlybCZUAtOAe3/CouXfA5V3NphZBkHPu5H7R.NxAo314AUtW', 1, 600, 1, "914bfd2aa3fb6f355258546bb7dcfcbc", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
+  (61, 'Petertjeeeee', 'petertjeeee@hotmail.com', '$2y$10$Sghx.UpH1fpeMNBbYd9Nbue9ioKZ6QuVzkcpLfX2pedS09UmavN0W', 0, 610, 1, "f297e4b1eacd1ba9c62538a61a8dd557", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
+  (62, 'Marit_123', 'maritdeboer@hotmail.com', '$2y$10$tUXFyfsk/1wp2dmx00og3uoFWjsG8sY7FOu2wSGUrDNE1FATIqW6.', 0, 620, 1, "154542a1e98040b1e68a1750cbf3dec2", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
+  (63, 'donut12', 'poloooo@gmail.com', '$2y$10$Wkg3OKaATFkhIZeRXyLg7eq599HSVcaIUA7WskHoeXcxkjcNRRMN6', 0, 630, 1, "20330503e226d3b4d5f8a3c47b8cabf6", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
+  (64, 'richard21', 'richard@gmail.com', '$2y$10$vN9nq8iah1/jt0oFrtqBo.SoIoP8mooeVqqIOGBvdfziO6eMRJYLS', 0, 640, 1, "a5917f8a32005d757823d547a4b7931e", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
+  (65, 'i<3dogs', 'chihuahua213@gmail.com', '$2y$10$4mij1qqSuR1bLm.OhKYDrO/iFRG882ijwxXAs9PSIhrVvbi7JSTbm', 1, 650, 1, "c92a2bf8590ed7c7839000aa650d6e5f", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
+  (66, 'banaan22', 'banaantjee@gmail.com', '$2y$10$Dtjewcor/Smp7inPNYcewOTMP4x8e/E8LUzg/JakmDT5EEHOb3KlC', 1, 660, 1, "cbaf2cb9e92abef6e732b026b2fc5249", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
+  (67, 'kareldeboer', 'kareltje@email.com', '$2y$10$SD2sAr7W12dvE1saupbKDu5fNZ/I7eg6R6yqvh9KnOtbhITTs9wUW', 0, 670, 1, "537cfeee5d30427b1eaaa9fa10c13242", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
+  (68, 'chrisjjee', 'chrisjee_3213@hotmail.com', '$2y$10$dV48fzD0CYxO80ERMMbAm.RoeYXW0c8TxE5JC6rzWjbC/M/mEBC42', 0, 680, 1, "e39b3258dd906d2ba3ce3e7a44ccfdc8", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
+  (69, 'banaanaa', 'chiquitabanana@hotmail.com', '$2y$10$niMTxstvGyYBjZZQ/6hK8ei4P4FltVlt8zAT2Ts8XaZGyXoaA45mC', 0, 690, 1, "49274824b95409a8ab8bb15338a19fbf", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
+  (70, 'connor', 'connorh@gmail.com', '$2y$10$YCHr7ZA8iHic1zdwLdd5zu1JSxG/Msa139I5QNvTwQb3Qcm09T0qG', 0, 700, 1, "4ddcbec25b77c4d537c35707b66e3bc0", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
+  (71, 'falcooo1991', 'falcoo_1991@email.com', '$2y$10$I/ZQpbJ3eCgehf6D1lRNj.uus3t.rXK16QTcSoQdOXOigLTDfEZMK', 0, 710, 1, "a5e8544e3b197e63b9ec74c9481fb058", "2023-04-24 15:41:16", "2023-04-23 11:16:21");
 
 -- Insert data into the 'userProfiles' table
 
