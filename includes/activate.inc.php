@@ -1,10 +1,11 @@
 <?php
 
 // An include file that runs a PHP script
-// Gets the data from the betaform trough the $_POST method
-// Uses this data to instantiate a betaFormController object
-// The betaFormController will run several server side validations
-// If no errors return user to the index.php with a success message
+// Gets the data from the email activation link trough the $GET method
+// Uses this data to instantiate a accountDAO object
+// Run the getUnverifiedAccount method to check if account exists in activation time bracket
+// If activation has expired account will be removed, redirect user to signup page 
+// Else activate account and return user to login page
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
