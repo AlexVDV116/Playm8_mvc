@@ -53,19 +53,26 @@ include_once '../header.php';
                                     <?php
                                     if (isset($_GET["error"])) {
                                         if ($_GET["error"] == "none") {
-                                            echo '<p class="form-success"><i class="fa-regular fa-circle-check"></i> Bedankt voor uw registratie. U kunt nu inloggen.</p>';
-                                        }
-                                        if ($_GET["error"] == "emptyinput") {
+                                            echo '<p class="form-success"><i class="fa-regular fa-circle-check"></i> Bedankt voor uw registratie.<br> 
+                                                    U dient uw email-adres te verifiëren voordat u kunt inloggen.</p>';
+                                        } elseif ($_GET["error"] == "emptyinput") {
                                             echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Alle velden zijn verplicht.</p>';
-                                        }
-                                        if ($_GET["error"] == "invalidemail") {
+                                        } elseif ($_GET["error"] == "invalidemail") {
                                             echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Onjuist email format.</p>';
-                                        }
-                                        if ($_GET["error"] == "accountnotfound") {
+                                        } elseif ($_GET["error"] == "accountnotfound") {
                                             echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Onbekend e-mailadres.</p>';
-                                        }
-                                        if ($_GET["error"] == "wrongpassword") {
+                                        } elseif ($_GET["error"] == "wrongpassword") {
                                             echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Onjuist wachtwoord.</p>';
+                                        } elseif ($_GET["error"] == "accountnotactivated") {
+                                            echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Inactief Account. Verifieer uw email-adres.</p>';
+                                        }
+                                    }
+
+                                    if (isset($_GET["activation"])) {
+                                        if ($_GET["activation"] == "success") {
+                                            echo '<p class="form-success"><i class="fa-solid fa-circle-exclamation"></i> Uw account is successvol geactiveerd.<br> U kunt nu inloggen. </p>';
+                                        } elseif ($_GET["activation"] == "fail") {
+                                            echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Account activatie mislukt, registreer opnieuw.</p>';
                                         }
                                     } ?>
                                 </form>
