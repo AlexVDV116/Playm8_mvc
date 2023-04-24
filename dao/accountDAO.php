@@ -313,7 +313,7 @@ class accountDAO extends DAO
                 return null;
             }
             // verify the password
-            if (($user['activation_code'] == $activationCode)) {
+            if (($user['activation_code'] === $activationCode)) {
                 return $user;
             }
         }
