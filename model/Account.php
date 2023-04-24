@@ -13,9 +13,9 @@ class Account extends Model
     public string $password;
     public bool $isBetaUser;
     public bool $isActive;
-    public string $activation_code;
-    public string $activation_expiry;
-    public ?string $activated_at;
+    public string $activationCode;
+    public string $activationExpiry;
+    public ?string $activatedAtt;
     public array $roles;
     public ?userProfile $userProfile;
 
@@ -92,11 +92,11 @@ class Account extends Model
 
     public function getActivationCode(): string
     {
-        return $this->activation_code;
+        return $this->activationCode;
     }
 
     public function getExpiryDate(): string
     {
-        return $this->activation_expiry;
+        return $this->activationExpiry;
     }
 }
