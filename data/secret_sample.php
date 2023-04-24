@@ -28,5 +28,6 @@ class mailConfig
     ];
 
     // Fill in your localhost APP URL in order to get right activation link in the accountDAO mailActivationCode method
+    // This should point to the playm8_mvc/ folder
     const APP_URL = 'http://localhost/Coding_projects/GitHub%20Repositories/';
 }
