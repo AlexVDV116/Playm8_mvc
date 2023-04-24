@@ -11,11 +11,11 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-if ((isset($_GET['email'])) && (isset($_GET['activation_code']))) {
+if ((isset($_GET['email'])) && (isset($_GET['activationCode']))) {
 
     // Grabbing the data
     $email = $_GET['email'];
-    $activationCode = $_GET['activation_code'];
+    $activationCode = $_GET['activationCode'];
 
     // Instantiate the betaFormController class
     include "../dao/accountDAO.php";
