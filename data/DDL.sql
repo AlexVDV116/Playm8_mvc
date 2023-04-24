@@ -15,9 +15,9 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `isBetaUser` tinyint(1) NOT NULL DEFAULT 0,
   `userProfileID` int(16) DEFAULT NULL,
   `isActive` tinyint(1) DEFAULT 0,
-  `activation_code` varchar(255) NOT NULL,
-  `activation_expiry` datetime NOT NULL,
-  `activated_at` datetime DEFAULT NULL
+  `activationCode` varchar(255) NOT NULL,
+  `activationExpiry` datetime NOT NULL,
+  `activatedAt` datetime DEFAULT NULL
 );
 
 
@@ -167,11 +167,11 @@ CREATE PROCEDURE `insertNewAccount`(
     IN `username` TINYTEXT, 
     IN `email` TINYTEXT, 
     IN `password` TINYTEXT,
-    IN `activation_code` TINYTEXT,
-    IN `activation_expiry` TINYTEXT)
+    IN `activationCode` TINYTEXT,
+    IN `activationExpiry` TINYTEXT)
 INSERT INTO `accounts` (
-    username, email, password, activation_code, activation_expiry)
-     VALUES (username, email, password, activation_code, activation_expiry)$$
+    username, email, password, activationCode, activationExpiry)
+     VALUES (username, email, password, activationCode, activationExpiry)$$
 DELIMITER ;
 
 DELIMITER $$
