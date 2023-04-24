@@ -12,7 +12,7 @@ SET GLOBAL FOREIGN_KEY_CHECKS = 0;
 
 -- Insert data into the 'accounts' table
 
-INSERT INTO `accounts` (`accountID`, `username`, `email`, `password`, `isBetaUser`, `userProfileID`, `isActive`, `activation_code`, `activation_expiry`, `activated_at`) VALUES
+INSERT INTO `accounts` (`accountID`, `username`, `email`, `password`, `isBetaUser`, `userProfileID`, `isActive`, `activationCode`, `activationExpiry`, `activatedAt`) VALUES
   (56, 'JohanDeBoer', 'johan21@hotmail.com', '$2y$10$PGp.e8doGD/i3AU1g8GnqeL6TcXwUbEtJ3Bq9QOABItMkj6KtKQEi', 0, 560, 1, "1ddcd20a391af2e8c2a4e4bf69f55fc7", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
   (57, 'Jan21', 'jan21@hotmail.com', '$2y$10$8GSfjqTJN6kMDlT8ZVbJsex7rWUu0eFP2SGYVhwbBH258w5Y4gTaW', 1, 570, 1, "1137a2c535246a1383926a5d73f20011", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
   (58, 'Freek', 'Freekie@gmail.com', '$2y$10$uE0GZT5Wd.QrAbSRd5hvXeOqzTKNXtW3HZ/vdIxGpgFHG7/KkqGeu', 0, 580 , 1, "27471a0171af38910d5c8ffa7ed16c0d", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
