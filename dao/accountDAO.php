@@ -263,10 +263,10 @@ class accountDAO extends DAO
     }
 
     // Send the activation code to the email registered
-    public function mailActivationCode($email, $activation_code): void
+    public function mailActivationCode($email, $activationCode): void
     {
-        $activation_link = mailConfig::APP_URL;
-        $activation_link .= "Playm8_mvc/includes/activate.inc.php?email=$email&activation_code=$activation_code";
+        $activationLink = mailConfig::APP_URL;
+        $activationLink .= "Playm8_mvc/includes/activate.inc.php?email=$email&activationCode=$activationCode";
 
         $senderName = "Playm8 Account Activation";
         $senderEmail = mailConfig::CONFIG['email']['username'];
@@ -276,7 +276,7 @@ class accountDAO extends DAO
         $subject = "Verify your email-adress!";
         $body = "<p><strong>Thank you for registering at Playm8!</strong></p>";
         $body .= "<p>Please follow this link to activate your account:<br>";
-        $body .= "{$activation_link}</p>";
+        $body .= "{$activationLink}</p>";
 
         $playm8Mail = new Mail($senderName, $senderEmail, $senderEmailPassword);
         $playm8Mail->sendMail($recieverEmail, $subject, $body);
@@ -295,12 +295,12 @@ class accountDAO extends DAO
     }
 
     // Select the ID, activation code from the account that matched the email
-    // and set expired to true if the activation_expiry is greater then now 
-    // If the account has an expired activation_expiry date remove the account from the DB
+    // and set expired to true if the activationExpiry is greater then now 
+    // If the account has an expired activationExpiry date remove the account from the DB
     // else return the unverified account
     public function getUnverifiedAccount(string $email, string $activationCode)
     {
-        $stmt = $this->prepare("SELECT accountID, username, activation_code, activation_expiry < now() as expired
+        $stmt = $this->prepare("SELECT accountID, username, activationCode, activationExpiry < now() as expired
             FROM accounts WHERE isActive = 0 AND email = ?");
         $stmt->closeCursor();
         $stmt->execute([$email]);
@@ -313,7 +313,7 @@ class accountDAO extends DAO
                 return null;
             }
             // verify the password
-            if (($user['activation_code'] === $activationCode)) {
+            if (($user['activationCode'] === $activationCode)) {
                 return $user;
             }
         }
@@ -326,7 +326,7 @@ class accountDAO extends DAO
         $now = date("Y-m-d H:i:s");
         $sql = 'UPDATE accounts
             SET isActive = 1,
-                activated_at = ? 
+                activatedAt = ? 
             WHERE accountID = ?';
         $args = [
             $now,
