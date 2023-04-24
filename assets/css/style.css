@@ -514,6 +514,29 @@ label > a:visited {
 
 /** =================================================================
 *
+*    Font awesome icons
+*
+*  ================================================================= */
+
+/** Signup page and Login page */
+form i.fa-user {
+    margin-bottom: 2rem;
+}
+
+form i.fa-envelope {
+    margin-bottom: 2rem;
+}
+
+form i.fa-lock {
+    margin-bottom: 2rem;
+}
+
+form i.fa-key {
+    margin-bottom: 2rem;
+}
+
+/** =================================================================
+*
 *    Alerts
 *
 *  ================================================================= */
