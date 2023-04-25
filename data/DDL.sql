@@ -20,12 +20,10 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `activatedAt` datetime DEFAULT NULL
 );
 
-
 CREATE TABLE IF NOT EXISTS `accountsRoles` (
   `accountID` int(11) NOT NULL,
   `roleID` int(11) NOT NULL
 );
-
 
 CREATE TABLE IF NOT EXISTS `likes` (
   `liker` int(16) NOT NULL,
@@ -37,13 +35,11 @@ CREATE TABLE IF NOT EXISTS `matches` (
   `userProfileID_B` int(16) NOT NULL
 );
 
-
 CREATE TABLE IF NOT EXISTS `permissions` (
   `permissionID` int(16) NOT NULL,
   `permissionName` tinytext NOT NULL,
   `permissionDescription` tinytext NOT NULL
 );
-
 
 CREATE TABLE IF NOT EXISTS `roles` (
   `roleID` int(16) NOT NULL,
@@ -51,12 +47,10 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `roleDescription` tinytext NOT NULL
 );
 
-
 CREATE TABLE IF NOT EXISTS `rolesPermissions` (
   `roleID` int(11) NOT NULL,
   `permissionID` int(11) NOT NULL
 );
-
 
 CREATE TABLE IF NOT EXISTS `userProfiles` (
   `userProfileID` int(16) NOT NULL,
@@ -67,6 +61,14 @@ CREATE TABLE IF NOT EXISTS `userProfiles` (
   `age` smallint(6) NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS `passwordReset` (
+  `passwordResetID` int(11) NOT NULL,
+  `passwordResetEmail` tinytext NOT NULL,
+  `passwordResetSelector` tinytext NOT NULL,
+  `passwordResetToken` longtext NOT NULL,
+  `passwordResetExpires` tinytext NOT NULL
+);
+
 --
 -- Setting Primary Keys
 --
@@ -74,11 +76,9 @@ ALTER TABLE `accounts`
   ADD PRIMARY KEY (`accountID`),
   ADD KEY `userProfileID` (`userProfileID`);
 
-
 ALTER TABLE `accountsRoles`
   ADD PRIMARY KEY (`accountID`,`roleID`),
   ADD KEY `roleID` (`roleID`);
-
 
 ALTER TABLE `likes`
   ADD KEY `liker` (`liker`),
@@ -91,22 +91,24 @@ ALTER TABLE `matches`
 ALTER TABLE `permissions`
   ADD PRIMARY KEY (`permissionID`);
 
-
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`roleID`);
-
 
 ALTER TABLE `rolesPermissions`
   ADD PRIMARY KEY (`roleID`,`permissionID`),
   ADD KEY `rolespermissions_ibfk_2` (`permissionID`);
 
-
 ALTER TABLE `userProfiles`
   ADD PRIMARY KEY (`userProfileID`);
 
-
 ALTER TABLE `accounts`
-  MODIFY `accountID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `accountID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+
+ALTER TABLE `passwordReset`
+ADD PRIMARY KEY (`passwordResetID`);
+
+ALTER TABLE `passwordReset`
+  MODIFY `passwordResetID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
 -- Setting Foreign Keys
@@ -127,14 +129,13 @@ ALTER TABLE `matches`
   ADD CONSTRAINT `matches_ibfk_1` FOREIGN KEY (`userProfileID_A`) REFERENCES `userProfiles` (`userProfileID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `matches_ibfk_2` FOREIGN KEY (`userProfileID_B`) REFERENCES `userProfiles` (`userProfileID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-
 ALTER TABLE `rolesPermissions`
   ADD CONSTRAINT `rolespermissions_ibfk_1` FOREIGN KEY (`roleID`) REFERENCES `roles` (`roleID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `rolespermissions_ibfk_2` FOREIGN KEY (`permissionID`) REFERENCES `permissions` (`permissionID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-
 ALTER TABLE `userProfiles`
   ADD CONSTRAINT `userprofiles_ibfk_1` FOREIGN KEY (`userProfileID`) REFERENCES `accounts` (`userProfileID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 COMMIT;
 
 --
