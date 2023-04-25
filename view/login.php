@@ -50,6 +50,10 @@ include_once '../header.php';
                                     <div class="form-button-row d-flex justify-content-center flex-row mt-3">
                                         <button class="btn btn-credits shadow-sm my-2" type="submit" name="submit">Inloggen</button>
                                     </div>
+
+                                    <div class="forgotpassword mt-5 d-flex justify-content-center">
+                                        <a href="../view/forgotPassword.php">Wachtwoord vergeten?</a>
+                                    </div>
                                     <?php
                                     if (isset($_GET["error"])) {
                                         if ($_GET["error"] == "none") {
@@ -72,11 +76,17 @@ include_once '../header.php';
                                         if ($_GET["activation"] == "success") {
                                             echo '<p class="form-success"><i class="fa-solid fa-circle-exclamation"></i> Uw account is successvol geactiveerd.<br> U kunt nu inloggen. </p>';
                                         }
+                                    }
+
+                                    if (isset($_GET["reset"])) {
+                                        if ($_GET["reset"] == "success") {
+                                            echo '<p class="form-success"><i class="fa-solid fa-circle-exclamation"></i> Uw wachtwoord is successvol gereset.<br> U kunt nu inloggen. </p>';
+                                        }
                                     } ?>
                                 </form>
                             </div>
                             <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-                                <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1674&q=80" class="form-img img-fluid rounded-4 shadow-sm" alt="Dog image">
+                                <img src="../assets/images/login.png" class="form-img img-fluid rounded-4 shadow-sm" alt="Dog image">
                             </div>
                         </div>
                     </div>
