@@ -126,7 +126,7 @@ class accountController extends Controller
         return $result;
     }
 
-    // Method to check if both password fields input match: return true if they match
+    // Method to check if password is strong enough
     private function isPasswordStrong(): bool
     {
         // Validate password strenght

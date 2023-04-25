@@ -75,13 +75,13 @@ class resetPasswordController extends Controller
         return $result;
     }
 
-    // Method to check if both password fields input match: return true if they match
+    // Method to check if password is strong enough
     private function isPasswordStrong(): bool
     {
-        // Validate password strenght
+        // Validate password strength
         $uppercase = preg_match('@[A-Z]@', $this->password);
         $lowercase = preg_match('@[a-z]@', $this->password);
-        $number    = preg_match('@[0-9]@', $this->password);
+        $number = preg_match('@[0-9]@', $this->password);
         $specialChars = preg_match('@[^\w]@', $this->password);
 
 
