@@ -1,6 +1,12 @@
 <?php
-$ROOT = './'; // Setting the ROOT directory for this file so the relative paths used in included pages will still work
+
+// Set include path to work from any directory level
+set_include_path('./' . PATH_SEPARATOR . '../');
+
+// Setting the ROOT directory for this file so the relative paths used in included pages will still work
+$ROOT = './';
 include_once 'header.php';
+
 ?>
 
 <section id="hero-section">
