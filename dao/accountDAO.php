@@ -1,11 +1,17 @@
 <?php
 
+ini_set('display_errors', 1);
+header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1
+header("Pragma: no-cache"); // HTTP 1.0 clients (IE6 / pre 1997)
+header("Expires: 0"); // HTTP 1.0 Proxies
+
 // Data Abstraction Object for an Account object
 // Can access the database create, read, update, or delete data (CRUD)
 
 require_once '../framework/DAO.php';
 require_once '../model/Account.php';
 require_once '../data/secret.php';
+require_once '../model/Mail.php';
 
 class accountDAO extends DAO
 {
@@ -256,7 +262,8 @@ class accountDAO extends DAO
         }
     }
 
-    // Generate a uniquely random activation code
+    // Generate a uniquely random activation code, random bytes converted to a hexadecimal format
+    // This code will be emailed to the user, a hash of this code will be stored in the db
     public function generateActivationCode(): string
     {
         return bin2hex(random_bytes(16));
@@ -266,20 +273,20 @@ class accountDAO extends DAO
     public function mailActivationCode($email, $activationCode): void
     {
         $activationLink = mailConfig::APP_URL;
-        $activationLink .= "Playm8_mvc/includes/activate.inc.php?email=$email&activationCode=$activationCode";
+        $activationLink .= "Playm8_mvc/includes/activate.inc.php?email={$email}&activationCode={$activationCode}";
 
         $senderName = "Playm8 Account Activation";
         $senderEmail = mailConfig::CONFIG['email']['username'];
         $senderEmailPassword = mailConfig::CONFIG['email']['password'];
 
         $recieverEmail = $email;
-        $subject = "Verify your email-adress!";
+        $subject = "Verify your email-adress.";
         $body = "<p><strong>Thank you for registering at Playm8!</strong></p>";
         $body .= "<p>Please follow this link to activate your account:<br>";
         $body .= "{$activationLink}</p>";
 
-        $playm8Mail = new Mail($senderName, $senderEmail, $senderEmailPassword);
-        $playm8Mail->sendMail($recieverEmail, $subject, $body);
+        $activationMail = new Mail($senderName, $senderEmail, $senderEmailPassword);
+        $activationMail->sendMail($recieverEmail, $subject, $body);
     }
 
     // Delete account with matching accountID and isActive set to 0
@@ -294,10 +301,9 @@ class accountDAO extends DAO
         $this->execute($sql, $args);
     }
 
-    // Select the ID, activation code from the account that matched the email
-    // and set expired to true if the activationExpiry is greater then now 
-    // If the account has an expired activationExpiry date remove the account from the DB
-    // else return the unverified account
+    // Select accountID, username, activationCode and set expired to 1 if activationExpiry date is greater then now
+    // If expiry = 1 remove the account from the DB
+    // else verify if the activationCode matches the hashed activationCode in the db, if true return the $user
     public function getUnverifiedAccount(string $email, string $activationCode)
     {
         $stmt = $this->prepare("SELECT accountID, username, activationCode, activationExpiry < now() as expired
@@ -313,11 +319,10 @@ class accountDAO extends DAO
                 return null;
             }
             // verify the password
-            if (($user['activationCode'] === $activationCode)) {
+            if (password_verify($activationCode, $user["activationCode"])) {
                 return $user;
             }
         }
-
         return null;
     }
 
@@ -325,13 +330,133 @@ class accountDAO extends DAO
     {
         $now = date("Y-m-d H:i:s");
         $sql = 'UPDATE accounts
-            SET isActive = 1,
-                activatedAt = ? 
-            WHERE accountID = ?';
+                    SET isActive = 1,
+                        activatedAt = ? 
+                    WHERE accountID = ?';
         $args = [
             $now,
             $accountID
         ];
         return $this->execute($sql, $args);
+    }
+
+    // Function that generates a selector  and a validator
+    // Selector is used to select the correct user in the database
+    // Token is used to validate the user
+    // The user has the unhashed hexadecimal format of the token sent to him in the email aka validator
+    // The hashed token is saved in the database as the passwordResetToken
+    // In the updatePassword method we will check that the user's validator matches our hashed token to confirm the correct user has access to the page
+    function resetPassword(string $email): void
+    {
+        // Check if email exists in database
+        $stmt = $this->prepare('CALL getAccountMatchingEmail(?);');
+        $stmt->execute([$email]);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+
+        // If query gets no result exit script and redirect user to index with error message
+        if (!$result) {
+            // echo "Onbekend e-mailadres..";
+            header("location: ../view/forgotPassword.php?error=accountnotfound");
+            exit();
+        };
+
+        // We generate a selector and a token, we use both to prevent timing attacks
+        $selector = bin2hex(random_bytes(16));
+        $token = random_bytes(32);
+
+        // Next we generate a resetlink that contains the selector and unhashed token
+        $resetLink = mailConfig::APP_URL;
+        $resetLink .= "Playm8_mvc/view/resetPassword.php?selector={$selector}&validator=" . bin2hex($token);
+
+        // We generate a token expiry date that is now + 1 hour
+        $tokenExpiryDate = date("Y-m-d H:i:s", strtotime('+1 hours')); // ExpiryDate = now + 1 hours 
+
+        // Before adding a record into the db we 
+        // remove any existing db record from previous password resets from this email
+        $stmt = $this->prepare('DELETE FROM passwordReset WHERE passwordResetEmail = ?');
+        $stmt->execute([$email]);
+        $stmt->closeCursor();
+
+        // Hash the token
+        $hashedToken = password_hash($token, PASSWORD_DEFAULT);
+
+        // Insert the email, selector, hashedToken and expiry date into the db
+        $stmt = $this->prepare('INSERT INTO passwordReset (passwordResetEmail, passwordResetSelector, passwordResetToken, passwordResetExpires) VALUES (?, ? , ?, ?)');
+        $stmt->execute([$email, $selector, $hashedToken, $tokenExpiryDate]);
+
+        // Free up the connection to the server so that other SQL statements can be issued
+        $stmt->closeCursor();
+
+        // Send e-mail to the user containing the link to reset his password
+        $senderName = "Playm8 Password Reset";
+        $senderEmail = mailConfig::CONFIG['email']['username'];
+        $senderEmailPassword = mailConfig::CONFIG['email']['password'];
+
+        $recieverEmail = $email;
+        $subject = "Reset your password.";
+        $body = "<p><strong>Playm8 has received a reset password request for your account.</strong></p>";
+        $body .= "<p>If you did not make this request you can ignore this message.<br>";
+        $body .= "Please follow this link to reset your password:<br>";
+        $body .= '<a href="' . $resetLink . '">' . $resetLink . '</a></p>';
+
+        $activationMail = new Mail($senderName, $senderEmail, $senderEmailPassword);
+        $activationMail->sendMail($recieverEmail, $subject, $body);
+
+        header("location: ../view/resetPassword.php?reset=success");
+    }
+
+    // Validate the user by comparing the validator from to our hashed token in the database
+    // If successfull update the user account in the db with the new hashed password
+    function updatePassword($selector, $validator, $hashedPassword)
+    {
+        $now = date("Y-m-d H:i:s");
+
+        // Use the selector token to select the correct record from the db where the passwordResetExpires date is greater then now
+        $stmt = $this->prepare('SELECT * FROM passwordReset 
+                                    WHERE passwordResetSelector = ? AND passwordResetExpires >= ?');
+        $stmt->execute([$selector, $now]);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+
+        // If query gets no result exit script and redirect user to index with error message
+        // Else verify if the validator from the form matches the hashed token in the database
+        // If true grab the email belonging to that token
+        if (!$result) {
+            header("location: ../view/resetPassword.php?selector=" . $selector . "&validator=" . $validator . "&reset=fail");
+            exit();
+        } else {
+            $tokenBin = hex2bin($validator);
+            $tokenCheck = password_verify($tokenBin, $result[0]["passwordResetToken"]);
+
+            if ($tokenCheck === false) {
+                header("location: ../view/resetPassword.php?selector=" . $selector . "&validator=" . $validator . "&reset=fail");
+                exit();
+            } elseif ($tokenCheck === true) {
+
+                // Use the get method to grab the account that matches the email
+                $tokenEmail = $result[0]["passwordResetEmail"];
+                $account = $this->get($tokenEmail);
+
+                // If no match redirect user with error message
+                if (!$account) {
+                    header("location: ../view/resetPassword.php?selector=" . $selector . "&validator=" . $validator . "&reset=fail");
+                    exit();
+                } else {
+
+                    // Else update the password in the database with the new hashed password
+                    $stmt = $this->prepare('UPDATE accounts SET password = ? WHERE email = ?');
+                    $stmt->execute([$hashedPassword, $tokenEmail]);
+                    $stmt->closeCursor();
+
+                    // Delete token after successfull password reset
+                    $stmt = $this->prepare('DELETE FROM passwordReset WHERE passwordResetEmail = ?');
+                    $stmt->execute([$tokenEmail]);
+                    $stmt->closeCursor();
+                }
+                // Redirect user back to the front page when sucsessfull
+                header("location: ../view/login.php?reset=success");
+            }
+        }
     }
 }
