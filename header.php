@@ -1,10 +1,14 @@
 <?php
+// set include path to work from any directory level
+set_include_path('./' . PATH_SEPARATOR . '../');
+
 session_start();
 
 ini_set('display_errors', 1);
 header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1
 header("Pragma: no-cache"); // HTTP 1.0 clients (IE6 / pre 1997)
 header("Expires: 0"); // HTTP 1.0 Proxies
+
 
 /* Echo session variables 
 echo '<pre>';
