@@ -25,7 +25,8 @@ if ((isset($_GET['email'])) && (isset($_GET['activationCode']))) {
     $accountDAO = new accountDAO();
     $user = $accountDAO->getUnverifiedAccount($email, $activationCode);
 
-    // if user exists activate the user and redirect user to login page with a success message
+    // If a $user is returned by the getUnverifiedAccount method
+    // activate the account using the activateAccount method and redirect user with success message
     if ($user && $accountDAO->activateAccount($user['accountID'])) {
         header("location: ../view/login.php?activation=success");
     } else {
