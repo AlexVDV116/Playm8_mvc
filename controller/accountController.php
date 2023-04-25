@@ -73,7 +73,7 @@ class accountController extends Controller
             "password" => $hashedPassword,
             "isBetaUser" => false,
             "isActive" => false,
-            "activationCode" => $activationCode,
+            "activationCode" => password_hash($activationCode, PASSWORD_DEFAULT),
             "activationExpiry" => $expiryDate,
             "activatedAt" => '',
             "roles" => [],
