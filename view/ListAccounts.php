@@ -1,9 +1,8 @@
 <?php
+
 require_once 'framework/View.php';
 require_once 'model/Account.php';
 require_once 'dao/accountDAO.php';
-
-ini_set('display_errors', 1);
 
 class ListAccounts extends View
 {
