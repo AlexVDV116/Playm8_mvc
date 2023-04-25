@@ -1,9 +1,6 @@
 <?php
 
 ini_set('display_errors', 1);
-header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1
-header("Pragma: no-cache"); // HTTP 1.0 clients (IE6 / pre 1997)
-header("Expires: 0"); // HTTP 1.0 Proxies
 
 // Data Abstraction Object for an Account object
 // Can access the database create, read, update, or delete data (CRUD)
