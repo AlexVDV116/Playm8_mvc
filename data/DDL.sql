@@ -10,7 +10,7 @@ USE `playm8`;
 CREATE TABLE IF NOT EXISTS `accounts` (
   `accountID` int(16) NOT NULL,
   `username` tinytext NOT NULL,
-  `email` tinytext NOT NULL,
+  `email` varchar(255) NOT NULL,
   `password` tinytext NOT NULL,
   `isBetaUser` tinyint(1) NOT NULL DEFAULT 0,
   `userProfileID` int(16) DEFAULT NULL,
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `userProfiles` (
 
 CREATE TABLE IF NOT EXISTS `passwordReset` (
   `passwordResetID` int(11) NOT NULL,
-  `passwordResetEmail` tinytext NOT NULL,
+  `passwordResetEmail` varchar(255) NOT NULL,
   `passwordResetSelector` tinytext NOT NULL,
   `passwordResetToken` longtext NOT NULL,
   `passwordResetExpires` tinytext NOT NULL
@@ -74,7 +74,8 @@ CREATE TABLE IF NOT EXISTS `passwordReset` (
 --
 ALTER TABLE `accounts`
   ADD PRIMARY KEY (`accountID`),
-  ADD KEY `userProfileID` (`userProfileID`);
+  ADD KEY `userProfileID` (`userProfileID`),
+  ADD KEY `email` (`email`);
 
 ALTER TABLE `accountsRoles`
   ADD PRIMARY KEY (`accountID`,`roleID`),
@@ -102,13 +103,14 @@ ALTER TABLE `userProfiles`
   ADD PRIMARY KEY (`userProfileID`);
 
 ALTER TABLE `accounts`
-  MODIFY `accountID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `accountID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 ALTER TABLE `passwordReset`
-ADD PRIMARY KEY (`passwordResetID`);
+ADD PRIMARY KEY (`passwordResetEmail`);
 
 ALTER TABLE `passwordReset`
-  MODIFY `passwordResetID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  ADD KEY `passwordResetID` (`passwordResetID`),
+  MODIFY `passwordResetID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- Setting Foreign Keys
@@ -135,6 +137,9 @@ ALTER TABLE `rolesPermissions`
 
 ALTER TABLE `userProfiles`
   ADD CONSTRAINT `userprofiles_ibfk_1` FOREIGN KEY (`userProfileID`) REFERENCES `accounts` (`userProfileID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `passwordReset`
+  ADD CONSTRAINT `passwordreset_ibfk_1` FOREIGN KEY (`passwordResetEmail`) REFERENCES `accounts` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 COMMIT;
 
