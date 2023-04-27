@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `passwordReset` (
   `passwordResetEmail` varchar(255) NOT NULL,
   `passwordResetSelector` tinytext NOT NULL,
   `passwordResetToken` longtext NOT NULL,
-  `passwordResetExpires` tinytext NOT NULL
+  `passwordResetExpires` datetime NOT NULL
 );
 
 --
