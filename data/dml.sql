@@ -164,22 +164,22 @@ INSERT INTO `roles`(`roleID`, `roleName`, `roleDescription`) VALUES
   -- Insert data into the 'accountsRoles' table
 
 INSERT INTO `accountsRoles`(`accountID`, `roleID`) VALUES
-  ('56','01'),
-  ('57','01'),
-  ('58','01'),
-  ('59','01'),
-  ('60','01'),
-  ('61','01'),
-  ('62','01'),
-  ('63','01'),
-  ('64','01'),
-  ('65','01'), 
-  ('66','01'),
-  ('67','01'),
-  ('68','01'),
-  ('69','01'),
-  ('70','02'),
-  ('71','03');
+  ('AID644e5491179c5','01'),
+  ('AID644e5491179c8','01'),
+  ('AID644e5491179c9','01'),
+  ('AID644e5491179ca','01'),
+  ('AID644e579c94b95','01'),
+  ('AID644e579c94b96','01'),
+  ('AID644e579c94b97','01'),
+  ('AID644e579c94b98','01'),
+  ('AID644e579c94b99','01'),
+  ('AID644e579c94b9a','01'), 
+  ('UID644e579c94b9b','01'),
+  ('AID644e579c94b9c','01'),
+  ('UID644e579c94ba0','01'),
+  ('AID644e579c94ba1','01'),
+  ('AID644e579c94ba2','02'),
+  ('UID644e579c94ba3','03');
 
 -- Enable Foreign Key Checks Globally
 SET GLOBAL FOREIGN_KEY_CHECKS=1;
