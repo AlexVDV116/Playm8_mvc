@@ -259,12 +259,12 @@ class accountDAO extends DAO
     }
 
     // Get the roleID assigned to an account 
-    // Flatten the associative array to a simple array containing the different role ID's
+    // Flatten the associative array to a simple array containing the differen roleID's
     public function getRoleID(string $accountID): array
     {
         $stmt = $this->prepare("SELECT `roleID` FROM `accountsRoles` WHERE `accountID` = ?");
         $stmt->execute([$accountID]);
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll();
 
         $roles = array_column($result, '0');
         return $roles;
