@@ -94,7 +94,7 @@ class Account extends Model
     public function getUserProfile(): userProfile
     {
         $userProfileDAO = new userProfileDAO;
-        return $userProfileDAO->get($this->userProfileID)
+        return $userProfileDAO->get($this->userProfileID);
     }
 
     public function getActivationCode(): string
