@@ -8,7 +8,7 @@ CREATE DATABASE IF NOT EXISTS `playm8`;
 USE `playm8`;
 
 CREATE TABLE IF NOT EXISTS `accounts` (
-  `accountID` int(16) NOT NULL,
+  `accountID` tinytext NOT NULL,
   `username` tinytext NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` tinytext NOT NULL,
@@ -170,14 +170,15 @@ DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE `insertNewAccount`(
+    IN `accountID` TINYTEXT,
     IN `username` TINYTEXT, 
     IN `email` TINYTEXT, 
     IN `password` TINYTEXT,
     IN `activationCode` TINYTEXT,
     IN `activationExpiry` TINYTEXT)
 INSERT INTO `accounts` (
-    username, email, password, activationCode, activationExpiry)
-     VALUES (username, email, password, activationCode, activationExpiry)$$
+    accountID, username, email, password, activationCode, activationExpiry)
+     VALUES (accountID, username, email, password, activationCode, activationExpiry)$$
 DELIMITER ;
 
 DELIMITER $$
