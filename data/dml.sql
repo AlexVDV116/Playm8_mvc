@@ -23,7 +23,7 @@ INSERT INTO `accounts` (`accountID`, `username`, `email`, `password`, `isBetaUse
   ('AID644e579c94b98', 'donut12', 'poloooo@gmail.com', '$2y$10$Wkg3OKaATFkhIZeRXyLg7eq599HSVcaIUA7WskHoeXcxkjcNRRMN6', 0, 'UID644e579c94b98', 1, "20330503e226d3b4d5f8a3c47b8cabf6", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
   ('AID644e579c94b99', 'richard21', 'richard@gmail.com', '$2y$10$vN9nq8iah1/jt0oFrtqBo.SoIoP8mooeVqqIOGBvdfziO6eMRJYLS', 0, 'UID644e579c94b99', 1, "a5917f8a32005d757823d547a4b7931e", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
   ('AID644e579c94b9a', 'i<3dogs', 'chihuahua213@gmail.com', '$2y$10$4mij1qqSuR1bLm.OhKYDrO/iFRG882ijwxXAs9PSIhrVvbi7JSTbm', 1, 'UID644e579c94b9a', 1, "c92a2bf8590ed7c7839000aa650d6e5f", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
-  ('UID644e579c94b9b', 'banaan22', 'banaantjee@gmail.com', '$2y$10$Dtjewcor/Smp7inPNYcewOTMP4x8e/E8LUzg/JakmDT5EEHOb3KlC', 1, 'UID644e579c94b9b', 1, "cbaf2cb9e92abef6e732b026b2fc5249", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
+  ('AID644e579c94b9b', 'banaan22', 'banaantjee@gmail.com', '$2y$10$Dtjewcor/Smp7inPNYcewOTMP4x8e/E8LUzg/JakmDT5EEHOb3KlC', 1, 'UID644e579c94b9b', 1, "cbaf2cb9e92abef6e732b026b2fc5249", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
   ('AID644e579c94b9c', 'kareldeboer', 'kareltje@email.com', '$2y$10$SD2sAr7W12dvE1saupbKDu5fNZ/I7eg6R6yqvh9KnOtbhITTs9wUW', 0, 'UID644e579c94b9c', 1, "537cfeee5d30427b1eaaa9fa10c13242", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
   ('AID644e579c94ba0', 'chrisjjee', 'chrisjee_3213@hotmail.com', '$2y$10$dV48fzD0CYxO80ERMMbAm.RoeYXW0c8TxE5JC6rzWjbC/M/mEBC42', 0, 'UID644e579c94ba0', 1, "e39b3258dd906d2ba3ce3e7a44ccfdc8", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
   ('AID644e579c94ba1', 'banaanaa', 'chiquitabanana@hotmail.com', '$2y$10$niMTxstvGyYBjZZQ/6hK8ei4P4FltVlt8zAT2Ts8XaZGyXoaA45mC', 0, 'UID644e579c94ba1', 1, "49274824b95409a8ab8bb15338a19fbf", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
@@ -173,13 +173,15 @@ INSERT INTO `accountsRoles`(`accountID`, `roleID`) VALUES
   ('AID644e579c94b97','01'),
   ('AID644e579c94b98','01'),
   ('AID644e579c94b99','01'),
-  ('AID644e579c94b9a','01'), 
-  ('UID644e579c94b9b','01'),
+  ('AID644e579c94b9a','01'),
+  ('AID644e579c94b9b','01'),
   ('AID644e579c94b9c','01'),
-  ('UID644e579c94ba0','01'),
+  ('AID644e579c94ba0','01'),
   ('AID644e579c94ba1','01'),
   ('AID644e579c94ba2','02'),
-  ('UID644e579c94ba3','03');
+  ('AID644e579c94ba3','02'),
+  ('AID644e579c94ba3','03');
+  
 
 -- Enable Foreign Key Checks Globally
 SET GLOBAL FOREIGN_KEY_CHECKS=1;
