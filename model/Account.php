@@ -16,9 +16,7 @@ class Account extends Model
     public string $activationCode;
     public string $activationExpiry;
     public ?string $activatedAtt;
-    public array $roles;
     public ?string $userProfileID;
-    public ?userProfile $userProfile;
 
     public function __construct(?array $data = null)
     {
@@ -55,46 +53,9 @@ class Account extends Model
         return $this->isBetaUser;
     }
 
-    public function getRoles(): array
-    {
-        return $this->roles;
-    }
-
-    public function addRole(Role $role): void
-    {
-        array_push($this->roles, $role);
-    }
-
-    public function deleteRole(Role $role): void
-    {
-        unset($this->roles[array_search($role, $this->roles)]);
-    }
-
-    public function hasPermission(Permission $permission): bool
-    {
-        foreach ($this->roles as $role) {
-            if ($role->hasPermission($permission)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public function createUserProfile($data)
-    {
-        $userProfileID = "UP" . substr($this->accountID, 3);
-        $this->userProfile = new userProfile($data);
-    }
-
     public function getUserProfileID(): string
     {
         return $this->userProfileID;
-    }
-
-    public function getUserProfile(): userProfile
-    {
-        $userProfileDAO = new userProfileDAO;
-        return $userProfileDAO->get($this->userProfileID);
     }
 
     public function getActivationCode(): string
