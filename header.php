@@ -98,7 +98,7 @@ echo '</pre>';
                         <!-- If user is logged in as admin href leads to admin panel, user leads to profile page -->
                         <!-- Else show regular register and login button -->
                         <?php
-                        if (isset($_SESSION["auth_user"]) && $_SESSION["auth_role"] == '3') {
+                        if (isset($_SESSION["auth_user"]) && in_array(3, $_SESSION["auth_role"])) {
                         ?>
                             <div class="dropdown">
                                 <li class="nav-item pl-3 pr-1">
