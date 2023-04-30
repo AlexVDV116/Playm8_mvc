@@ -17,6 +17,7 @@ class Account extends Model
     public string $activationExpiry;
     public ?string $activatedAtt;
     public array $roles;
+    public ?string $userProfileID;
     public ?userProfile $userProfile;
 
     public function __construct(?array $data = null)
@@ -79,15 +80,21 @@ class Account extends Model
         return false;
     }
 
-    public function createUserProfile($firstName, $lastName, $location, $phoneNumber, $dateOfBirth, $age)
+    public function createUserProfile($data)
     {
         $userProfileID = "UP" . substr($this->accountID, 3);
-        $this->userProfile = new userProfile($userProfileID, $firstName, $lastName, $location, $phoneNumber, $dateOfBirth, $age);
+        $this->userProfile = new userProfile($data);
+    }
+
+    public function getUserProfileID(): string
+    {
+        return $this->userProfileID;
     }
 
     public function getUserProfile(): userProfile
     {
-        return $this->userProfile;
+        $userProfileDAO = new userProfileDAO;
+        return $userProfileDAO->get($this->userProfileID)
     }
 
     public function getActivationCode(): string
