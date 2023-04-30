@@ -137,7 +137,7 @@ class accountDAO extends DAO
 
     // Deletes a the record from the accounts table where the accountID matches
     // Prepared statement that uses a stored procedure
-    public function delete(int $accountID): void
+    public function delete(string $accountID): void
     {
         $sql = 'CALL deleteAccount(?);';
         $args = [
@@ -150,13 +150,14 @@ class accountDAO extends DAO
     // Prepared statement that uses a stored procedure
     public function insert(Account $account): void
     {
-        $sql = 'CALL insertNewAccount(?, ?, ?, ?, ?);';
+        $sql = 'CALL insertNewAccount(?, ?, ?, ?, ?, ?);';
         $args = [
+            $account->getAccountID(),
             $account->getName(),
             $account->getEmail(),
             $account->getPassword(),
             $account->getActivationCode(),
-            $account->getExpiryDate()
+            $account->getExpiryDate(),
         ];
         $this->execute($sql, $args);
     }
@@ -245,8 +246,20 @@ class accountDAO extends DAO
         return $result[0];
     }
 
+    // Set the roleID's for an account
+    // Interate over the arrayRoleID, for each value exectute statement with the given value
+    public function setRoleID(string $accountID, array $roleID): void
+    {
+        $stmt = $this->prepare("INSERT INTO `accountsRoles` (accountID, roleID) VALUES (?, ?)");
+
+        foreach ($roleID as $role) {
+            $stmt->execute([$accountID, $role]);
+        }
+        $stmt->closeCursor();
+    }
+
     // Get the roleID assigned to an account 
-    public function getRoleID(int $accountID)
+    public function getRoleID(string $accountID)
     {
         $stmt = $this->prepare("SELECT `roleID` FROM `accountsRoles` WHERE `accountID` = ?");
         $stmt->execute([$accountID]);
@@ -287,7 +300,7 @@ class accountDAO extends DAO
     }
 
     // Delete account with matching accountID and isActive set to 0
-    public function deleteInactiveUserByID(int $accountID, int $isActive = 0): void
+    public function deleteInactiveUserByID(string $accountID, int $isActive = 0): void
     {
         $sql = 'DELETE FROM accounts
             WHERE accountID = ? AND isActive = ?';
@@ -323,7 +336,7 @@ class accountDAO extends DAO
         return null;
     }
 
-    function activateAccount(int $accountID): bool
+    function activateAccount(string $accountID): bool
     {
         $now = date("Y-m-d H:i:s");
         $sql = 'UPDATE accounts
