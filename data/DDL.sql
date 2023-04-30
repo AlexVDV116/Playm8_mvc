@@ -8,12 +8,12 @@ CREATE DATABASE IF NOT EXISTS `playm8`;
 USE `playm8`;
 
 CREATE TABLE IF NOT EXISTS `accounts` (
-  `accountID` tinytext NOT NULL,
+  `accountID` varchar(255) NOT NULL,
   `username` tinytext NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` tinytext NOT NULL,
   `isBetaUser` tinyint(1) NOT NULL DEFAULT 0,
-  `userProfileID` int(16) DEFAULT NULL,
+  `userProfileID` varchar(255) DEFAULT NULL,
   `isActive` tinyint(1) DEFAULT 0,
   `activationCode` varchar(255) NOT NULL,
   `activationExpiry` datetime NOT NULL,
@@ -21,18 +21,18 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 );
 
 CREATE TABLE IF NOT EXISTS `accountsRoles` (
-  `accountID` int(11) NOT NULL,
+  `accountID` varchar(255) NOT NULL,
   `roleID` int(11) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `likes` (
-  `liker` int(16) NOT NULL,
-  `liked` int(16) NOT NULL
+  `liker` varchar(255) NOT NULL,
+  `liked` varchar(255) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `matches` (
-  `userProfileID_A` int(16) NOT NULL,
-  `userProfileID_B` int(16) NOT NULL
+  `userProfileID_A` varchar(255) NOT NULL,
+  `userProfileID_B` varchar(255) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `permissions` (
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `rolesPermissions` (
 );
 
 CREATE TABLE IF NOT EXISTS `userProfiles` (
-  `userProfileID` int(16) NOT NULL,
+  `userProfileID` varchar(255) NOT NULL,
   `firstName` tinytext NOT NULL,
   `lastName` tinytext NOT NULL,
   `phoneNumber` tinytext NOT NULL,
@@ -101,9 +101,6 @@ ALTER TABLE `rolesPermissions`
 
 ALTER TABLE `userProfiles`
   ADD PRIMARY KEY (`userProfileID`);
-
-ALTER TABLE `accounts`
-  MODIFY `accountID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 ALTER TABLE `passwordReset`
 ADD PRIMARY KEY (`passwordResetEmail`);
@@ -170,7 +167,7 @@ DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE `insertNewAccount`(
-    IN `accountID` TINYTEXT,
+    IN `accountID` varchar(255),
     IN `username` TINYTEXT, 
     IN `email` TINYTEXT, 
     IN `password` TINYTEXT,
@@ -187,7 +184,7 @@ CREATE PROCEDURE `updateAccount`(
     IN `email` TINYTEXT, 
     IN `isEnabled` TINYINT, 
     IN `isBetaUser` TINYINT, 
-    IN `accountID` int(16))
+    IN `accountID` varchar(255))
 UPDATE `accounts` 
 SET username = username, email = email, isEnabled = isEnabled, isBetaUser = isBetaUser 
 WHERE accountID = accountID$$
@@ -215,7 +212,7 @@ DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE `disableAccount`(
-    IN `accountID` INT(16))
+    IN `accountID` varchar(255))
 UPDATE `accounts` 
 SET isEnabled = 0
 WHERE accounts.accountID = accountID$$
@@ -223,7 +220,7 @@ DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE `enableAccount`(
-    IN `accountID` INT(16))
+    IN `accountID` varchar(255))
 UPDATE `accounts` 
 SET isEnabled = 1
 WHERE accounts.accountID = accountID$$
