@@ -13,7 +13,7 @@ class admin extends View
     public function show()
     {
         // Check if user is admin
-        if ($_SESSION["auth_role"] != '3') {
+        if (!in_array(3, $_SESSION["auth_role"])) {
             // Redirect user back to the index page if not admin
             header("location: ../index.php");
         };
