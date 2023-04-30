@@ -122,7 +122,7 @@ class accountDAO extends DAO
     }
 
     // Returns a new Account object if no email provided
-    // Else select all records from accounts table where the email mathes the given email
+    // Else select all records from accounts table where the email matches the given email
     // Returns an instance of the Account model with the property names set to the data from the selected record
     public function get(?string $email)
     {
