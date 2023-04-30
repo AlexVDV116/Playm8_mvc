@@ -264,9 +264,9 @@ class accountDAO extends DAO
     {
         $stmt = $this->prepare("SELECT `roleID` FROM `accountsRoles` WHERE `accountID` = ?");
         $stmt->execute([$accountID]);
+        $result = $stmt->fetchAll();
         $stmt->closeCursor();
 
-        $result = $stmt->fetchAll();
         $roles = array_column($result, '0');
 
         return $roles;
