@@ -3,6 +3,7 @@
 require_once 'framework/View.php';
 require_once 'model/Account.php';
 require_once 'dao/accountDAO.php';
+require_once 'dao/userProfileDAO.php';
 
 class ListAccounts extends View
 {
@@ -10,6 +11,7 @@ class ListAccounts extends View
     public function show()
     {
         $accountDAO = new accountDAO;
+        $userProfileDAO = new userProfileDAO;
         $result = $accountDAO->getCount("accounts");
         $accountDAO->startList();
 ?>
@@ -22,6 +24,7 @@ class ListAccounts extends View
                 <thead>
                     <tr>
                         <th>Account ID</th>
+                        <th>Userprofile ID</th>
                         <th>Naam</th>
                         <th>Email</th>
                         <th>Actief</th>
@@ -36,6 +39,7 @@ class ListAccounts extends View
                         <tr onclick="">
                             <!-- PHP shorthand to echo the data in the table -->
                             <td><?= '# ' . $account->getAccountID() ?></td>
+                            <td><?= '# ' . $account->getUserProfileID() ?></td>
                             <td><?= $account->getName() ?></td>
                             <td><?= $account->getEmail() ?></td>
                             <td><?php if ($account->getEnabled()) {
