@@ -34,8 +34,8 @@ class SearchAccounts extends View
                             <th>Account ID</th>
                             <th>Naam</th>
                             <th>Email</th>
-                            <th>Enabled</th>
-                            <th>Beta</th>
+                            <th>Actief</th>
+                            <th>Beta-user</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,14 +52,14 @@ class SearchAccounts extends View
                             <td><?= $account->getName() ?></td>
                             <td><?= $account->getEmail() ?></td>
                             <td><?php if ($account->getEnabled()) {
-                                    echo 'Yes';
+                                    echo 'Ja';
                                 } else {
-                                    echo 'No';
+                                    echo 'Nee';
                                 } ?></td>
                             <td><?php if ($account->getBetaUser()) {
-                                    echo 'Yes';
+                                    echo 'Ja';
                                 } else {
-                                    echo 'No';
+                                    echo 'Nee';
                                 } ?>
                         </tr>
                     <?php
