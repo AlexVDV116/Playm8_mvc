@@ -91,7 +91,7 @@ class accountDAO extends DAO
                 'accountID' => $user[0]["accountID"],
                 'username' => $user[0]["username"],
                 'email' => $user[0]["email"],
-                'isEnabled' => $user[0]["isEnabled"],
+                'isActive' => $user[0]["isActive"],
                 'isBetaUser' => $user[0]["isBetaUser"],
                 'userProfileID' => $user[0]["userProfileID"],
             ];
@@ -259,17 +259,15 @@ class accountDAO extends DAO
     }
 
     // Get the roleID assigned to an account 
-    public function getRoleID(string $accountID)
+    // Flatten the associative array to a simple array containing the different role ID's
+    public function getRoleID(string $accountID): array
     {
         $stmt = $this->prepare("SELECT `roleID` FROM `accountsRoles` WHERE `accountID` = ?");
         $stmt->execute([$accountID]);
-        $result = $stmt->fetch();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($result[0]) {
-            return $result[0];
-        } else {
-            return null;
-        }
+        $roles = array_column($result, '0');
+        return $roles;
     }
 
     // Generate a uniquely random activation code, random bytes converted to a hexadecimal format
