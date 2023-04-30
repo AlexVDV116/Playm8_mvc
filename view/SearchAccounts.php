@@ -32,6 +32,7 @@ class SearchAccounts extends View
                     <thead>
                         <tr>
                             <th>Account ID</th>
+                            <th>Userprofile ID</th>
                             <th>Naam</th>
                             <th>Email</th>
                             <th>Actief</th>
@@ -49,6 +50,7 @@ class SearchAccounts extends View
                         <tr onclick="">
                             <!-- PHP shorthand to echo the data in the table -->
                             <td><?= '# ' . $account->getAccountID() ?></td>
+                            <td><?= '# ' . $account->getUserProfileID() ?></td>
                             <td><?= $account->getName() ?></td>
                             <td><?= $account->getEmail() ?></td>
                             <td><?php if ($account->getEnabled()) {
