@@ -66,8 +66,12 @@ class accountController extends Controller
         $activationCode = $accountDAO->generateActivationCode();
         $expiryDate = date("Y-m-d H:i:s", strtotime('+24 hours')); // ExpiryDate = now + 24 hours
 
+        // Generate an unique ID with the prefix AID for AccountID
+        $accountID = uniqid("AID");
+
         // Assocaitive array containing the user data
         $data = array(
+            "accountID" => $accountID,
             "username" => $this->username,
             "email" => $this->email,
             "password" => $hashedPassword,
@@ -76,15 +80,18 @@ class accountController extends Controller
             "activationCode" => password_hash($activationCode, PASSWORD_DEFAULT),
             "activationExpiry" => $expiryDate,
             "activatedAt" => '',
-            "roles" => [],
-            "userProfile" => null
+            "roles" => [1], // Array with user roles, default role = user
+            "userProfileID" => "UP" . substr($accountID, 3)
         );
 
         // Create a new empty Account object with the user data
         $account = new Account($data);
 
-        // Insert the account object data into the database
+        // Insert the account object data into the database accounts table
         $accountDAO->insert($account);
+
+        // Insert the roles array into the accountRoles table
+        $accountDAO->setRoleID($account->accountID, $account->roles);
 
         // Send email to user with activation code and link to activate the account
         $accountDAO->mailActivationCode($this->email, $activationCode);
