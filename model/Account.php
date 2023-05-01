@@ -43,7 +43,7 @@ class Account extends Model
         return $this->password;
     }
 
-    public function getEnabled(): bool
+    public function getActive(): bool
     {
         return $this->isActive;
     }
