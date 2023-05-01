@@ -3,7 +3,6 @@
 require_once 'framework/View.php';
 require_once 'model/Account.php';
 require_once 'dao/accountDAO.php';
-require_once 'dao/userProfileDAO.php';
 
 class ListAccounts extends View
 {
