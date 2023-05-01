@@ -1,5 +1,8 @@
 <?php
 
+// Controller class that handles user input when using the forgot password form
+// Connects to the database trough an instance of the accountDAO class
+
 require_once '../framework/Controller.php';
 require_once '../dao/accountDAO.php';
 

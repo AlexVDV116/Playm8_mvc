@@ -1,8 +1,8 @@
 <?php
 
-// Server side user input validation when submitting the contact form
+// Controller class that handles user input when using the contact form
 // Gets the data from the contactform.inc.php
-// If no errors found, sends an e-mail to the Playm8 e-mailadress with the data
+// If no errors found, sends an e-mail to the Playm8 e-mailadress with the data using PHPMailer plugin
 // Sends an additional email to the client confirming that his contact support is being processed
 
 require_once '../framework/Controller.php';

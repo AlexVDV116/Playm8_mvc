@@ -1,10 +1,7 @@
 <?php
 
-// Server side user input validation when signing up as a beta user
-// Instantiates an accountDAO object
-// Retrieves the user information from the database
-// Set the account_beta_user table to true
-// Use the accountDAO update method to update the data in the database
+// Controller class that handles user input when registering as a beta user
+// Connects to the database trough an instance of the accountDAO class
 
 require_once '../framework/Controller.php';
 

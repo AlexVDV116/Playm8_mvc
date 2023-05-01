@@ -1,9 +1,7 @@
 <?php
 
-// Server side user input validation when signing up.
-// Creates an empty Account object
-// Instantiates an accountDAO object
-// Uses the insert method to insert the user data into the database
+// Controller class that handles user input when registering an account
+// Connects to the database trough an instance of the accountDAO class
 
 require_once '../framework/Controller.php';
 require_once '../dao/accountDAO.php';

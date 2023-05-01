@@ -1,8 +1,11 @@
 <?php
 
+// Controller class that handles user input when logging in as a user
+// Connects to the database trough an instance of the accountDAO class
+
 // Server side user input validation when submitting the inlog form data
 // Gets the data from the login.inc.php
-// If no errors found, instantiates an accountDAO object and runs it getUser method to log the user in
+// If no errors found, instantiates an accountDAO object and runs the getUser method to log the user in
 
 require_once '../framework/Controller.php';
 require_once '../dao/accountDAO.php';

@@ -1,9 +1,7 @@
 <?php
 
-// Server side user input validation when resetting password
-// Creates an empty Account object
-// Instantiates an accountDAO object
-// Uses the insert method to insert the user data into the database
+// Controller class for the resetPassword that handles user input
+// Connects to the database trough an instance of the accountDAO class
 
 require_once '../framework/Controller.php';
 require_once '../dao/accountDAO.php';
