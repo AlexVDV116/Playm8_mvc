@@ -5,8 +5,6 @@
 // Instantiates an accountDAO object
 // Uses the insert method to insert the user data into the database
 
-session_start();
-
 require_once '../framework/Controller.php';
 require_once '../dao/accountDAO.php';
 
