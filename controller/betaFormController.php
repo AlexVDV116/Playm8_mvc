@@ -112,13 +112,13 @@ class betaFormController extends Controller
     }
 
 
-    // Method that uses the accountDAO isEnabled method because it has to access the database
-    // Checks if a record with this email AND account_enabled set to false is known in our database: returns true if record found
-    private function isAccountEnabled(): bool
+    // Method that uses the accountDAO isActive method
+    // Checks if a record with this email AND isActive set to false is known in our database: returns true if record found
+    private function isAccountActive(): bool
     {
         $result = null;
         $accountDAO = new accountDAO;
-        if ($accountDAO->isEnabled($this->email)) {
+        if ($accountDAO->isActive($this->email)) {
             $result = true;
         } else {
             $result = false;
