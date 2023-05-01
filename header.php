@@ -126,9 +126,9 @@ echo '</pre>';
                                         <?php echo $_SESSION["auth_user"]["username"]; ?>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="<?php echo $ROOT; ?>view/userprofile.php">Userprofile</a></li>
-                                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                        <li><a class="dropdown-item" href="<?php echo $ROOT; ?>view/userProfilePage.php">Gebruikersprofiel</a></li>
+                                        <li><a class="dropdown-item" href="#">Wijzig profiel</a></li>
+                                        <li><a class="dropdown-item" href="#">Vind matches!</a></li>
                                     </ul>
                                 </li>
                             </div>
