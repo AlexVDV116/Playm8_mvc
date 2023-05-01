@@ -39,24 +39,15 @@ class betaFormController extends Controller
             header("location: ../index.php?error=alreadybeta#tester-section");
             exit();
         }
-        if ($this->isAccountEnabled() == false) {
+        if ($this->isAccountActive() == false) {
             // echo "Dit account is inactief.";
             header("location: ../index.php?error=accountdisabled#tester-section");
             exit();
         }
 
-        // Instantiate an account DAO
+        // Instantiate an account DAO and set the account isBetaUser to true
         $accountDAO = new accountDAO();
-        $accountDAO->startList();
-
-        // Get the account information from database (accountDAO extends DAO and DAO will construct a new Account object)
-        $account = $accountDAO->get($this->email);
-
-        // Set isBetaUser collum to true
-        $account->isBetaUser = true;
-
-        // Update the account info and store in database
-        $accountDAO->update($account);
+        $accountDAO->setBeta($this->email);
     }
 
     // Method that checks if for any empty inputs: returns true if empty inputs found
