@@ -34,7 +34,7 @@ INSERT INTO `accounts` (`accountID`, `username`, `email`, `password`, `isBetaUse
 
 INSERT INTO `userProfiles`(`userProfileID`, `firstName`, `lastName`, `phoneNumber`, `dateOfBirth`, `age`) VALUES
  ('UID644e5491179c5','Johan','Vink','+31654738829','1991-02-19','31'),
- ('AID644e5491179c8','Jan','Dijkstra','+31688372293','1992-03-11','30'),
+ ('UID644e5491179c8','Jan','Dijkstra','+31688372293','1992-03-11','30'),
  ('UID644e5491179c9','Freek','De Jong','+31687653367','1988-07-21','35'),
  ('UID644e5491179ca','Suzanne','Hoogland','+31678937784','1981-02-10','42'),
  ('UID644e579c94b95','Pieter','Janssen','+31688926535','1994-03-28','29'),
