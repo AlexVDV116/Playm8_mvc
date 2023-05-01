@@ -170,7 +170,7 @@ class accountDAO extends DAO
         $args = [
             $account->getName(),
             $account->getEmail(),
-            $account->getEnabled(),
+            $account->getActive(),
             $account->getBetaUser(),
             $account->getAccountID()
         ];
@@ -468,5 +468,15 @@ class accountDAO extends DAO
                 header("location: ../view/login.php?reset=success");
             }
         }
+    }
+
+    // Set the isBetaUser collum to true
+    public function setBeta($email): void
+    {
+        $stmt = $this->prepare("UPDATE `accounts` 
+        SET isBetaUser = 1 
+        WHERE email = ?");
+        $stmt->execute([$email]);
+        $stmt->closeCursor();
     }
 }
