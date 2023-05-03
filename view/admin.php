@@ -7,17 +7,21 @@ session_start();
 
 require_once 'framework/View.php';
 
+// Check if user is logged in if false redirect to index page else check if user has the correct admin role
+if ($_SESSION["auth"] == false) {
+    header("location: ../index.php");
+    exit();
+} elseif (!in_array(3, $_SESSION["auth_role"])) {
+    // Redirect user back to the index page if not admin
+    header("location: ../index.php");
+    exit();
+}
+
 class admin extends View
 {
 
     public function show()
     {
-        // Check if user is admin
-        if (!in_array(3, $_SESSION["auth_role"])) {
-            // Redirect user back to the index page if not admin
-            header("location: ../index.php");
-        };
-
         $view = filter_input(INPUT_GET, 'view');
         if (empty($view)) {
             $view = 'Home';
