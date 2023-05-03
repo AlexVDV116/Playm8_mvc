@@ -56,9 +56,13 @@ CREATE TABLE IF NOT EXISTS `userProfiles` (
   `userProfileID` varchar(255) NOT NULL,
   `firstName` tinytext NOT NULL,
   `lastName` tinytext NOT NULL,
+  `city` tinytext NOT NULL,
+  `country` tinytext NOT NULL,
   `phoneNumber` tinytext NOT NULL,
   `dateOfBirth` date NOT NULL,
-  `age` smallint(6) NOT NULL
+  `age` smallint(6) NOT NULL,
+  `aboutMeTitle` tinytext NOT NULL,
+  `aboutMeText` text NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `passwordReset` (
@@ -119,7 +123,6 @@ ALTER TABLE `accountsRoles`
   ADD CONSTRAINT `accountsroles_ibfk_1` FOREIGN KEY (`accountID`) REFERENCES `accounts` (`accountID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `accountsroles_ibfk_2` FOREIGN KEY (`roleID`) REFERENCES `roles` (`roleID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-
 ALTER TABLE `likes`
   ADD CONSTRAINT `likes_ibfk_1` FOREIGN KEY (`liked`) REFERENCES `userProfiles` (`userProfileID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `likes_ibfk_2` FOREIGN KEY (`liker`) REFERENCES `userProfiles` (`userProfileID`) ON DELETE CASCADE ON UPDATE CASCADE;
@@ -131,9 +134,6 @@ ALTER TABLE `matches`
 ALTER TABLE `rolesPermissions`
   ADD CONSTRAINT `rolespermissions_ibfk_1` FOREIGN KEY (`roleID`) REFERENCES `roles` (`roleID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `rolespermissions_ibfk_2` FOREIGN KEY (`permissionID`) REFERENCES `permissions` (`permissionID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-ALTER TABLE `userProfiles`
-  ADD CONSTRAINT `userprofiles_ibfk_1` FOREIGN KEY (`userProfileID`) REFERENCES `accounts` (`userProfileID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE `passwordReset`
   ADD CONSTRAINT `passwordreset_ibfk_1` FOREIGN KEY (`passwordResetEmail`) REFERENCES `accounts` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
@@ -182,12 +182,12 @@ DELIMITER $$
 CREATE PROCEDURE `updateAccount`(
     IN `username` TINYTEXT, 
     IN `email` TINYTEXT, 
-    IN `isEnabled` TINYINT, 
+    IN `isActive` TINYINT, 
     IN `isBetaUser` TINYINT, 
     IN `accountID` varchar(255))
 UPDATE `accounts` 
-SET username = username, email = email, isEnabled = isEnabled, isBetaUser = isBetaUser 
-WHERE accountID = accountID$$
+SET username = username, email = email, isActive = isActive, isBetaUser = isBetaUser 
+WHERE accounts.accountID = accountID$$
 DELIMITER ;
 
 DELIMITER $$
@@ -234,4 +234,41 @@ CREATE TRIGGER `foundMatch` BEFORE INSERT ON `likes`
         INSERT INTO matches (userProfileID_A, userProfileID_B) VALUES (NEW.liker, NEW.liked);
     END IF;
   END
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `insertNewUserProfile`(
+  IN `accountID` TINYTEXT, 
+  IN `userProfileID` TINYTEXT, 
+  IN `firstName` TINYTEXT, 
+  IN `lastName` TINYTEXT, 
+  IN `city` TINYTEXT, 
+  IN `country` TINYTEXT, 
+  IN `phoneNumber` TINYTEXT, 
+  IN `dateOfBirth` DATE, 
+  IN `age` INT, 
+  IN `aboutMeTitle` TINYTEXT, 
+  IN `aboutMeText` TINYTEXT)
+BEGIN
+  INSERT INTO `userProfiles` (`userProfileID`, `firstName`, `lastName`, `city`, `country`, `phoneNumber`, `dateOfBirth`, `age`, `aboutMeTitle`, `aboutMeText`) 
+    VALUES (userProfileID, firstName, lastName, city, country, phoneNumber, dateOfBirth, age, aboutMeTitle, aboutMeText);
+      UPDATE `accounts` SET accounts.userProfileID = userProfileID WHERE accounts.accountID = accountID;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `updateUserProfile`(
+  IN `userProfileID` TINYTEXT, 
+  IN `firstName` TINYTEXT, 
+  IN `lastName` TINYTEXT, 
+  IN `city` TINYTEXT, 
+  IN `country` TINYTEXT, 
+  IN `phoneNumber` TINYTEXT, 
+  IN `dateOfBirth` DATE, 
+  IN `age` INT, 
+  IN `aboutMeTitle` TINYTEXT, 
+  IN `aboutMeText` TINYTEXT)
+UPDATE `userProfiles` 
+SET userProfiles.firstName = firstName, userProfiles.lastName = lastName, userProfiles.city = city, userProfiles.country = country, userProfiles.phoneNumber = phoneNumber, userProfiles.dateOfBirth = dateOfBirth, userProfiles.age = age, userProfiles.aboutMeTitle = aboutMeTitle, userProfiles.aboutMeText = aboutMeText
+WHERE userProfiles.userProfileID = userProfileID$$
 DELIMITER ;
