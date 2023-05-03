@@ -40,7 +40,7 @@ class ListAccounts extends View
                             <td><?= '# ' . $account->getUserProfileID() ?></td>
                             <td><?= $account->getName() ?></td>
                             <td><?= $account->getEmail() ?></td>
-                            <td><?php if ($account->getEnabled()) {
+                            <td><?php if ($account->getActive()) {
                                     echo 'Ja';
                                 } else {
                                     echo 'Nee';
