@@ -53,7 +53,7 @@ class Account extends Model
         return $this->isBetaUser;
     }
 
-    public function getUserProfileID(): string
+    public function getUserProfileID()
     {
         return $this->userProfileID;
     }
