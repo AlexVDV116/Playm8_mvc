@@ -631,6 +631,21 @@ button.btn.btn-credits,
 
 /** =================================================================
 *
+*    Userprofile page
+*
+*  ================================================================= */
+
+.banner-top {
+    background-color: #d6004a;
+    height: 200px;
+}
+
+.about-me-section {
+    margin: 6rem 0rem;
+}
+
+/** =================================================================
+*
 *    Media queries => Responsive elements
 *    min-width stands for greater than or equal to (>=)
 *    max-width stands for less than or equal to (<=)
