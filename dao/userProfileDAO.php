@@ -19,9 +19,9 @@ class userProfileDAO extends DAO
     }
 
     // Returns a new userProfile object if no email provided
-    // Else select all records from accounts table where the email matches the given email
-    // Returns an instance of the Account model with the property names set to the data from the selected record
-    public function get(?string $userProfileID)
+    // Else select all records from userProfile table where the userProfileID matches the given userProfileID
+    // Returns an instance of the userProfile model with the property names set to the data from the selected record
+    public function get(?string $userProfileID): userProfile
     {
         if (empty($userProfileID)) {
             return new userProfile;
@@ -30,5 +30,59 @@ class userProfileDAO extends DAO
             $sql .= ' WHERE `userProfiles`.`userProfileID` = ?';
             return $this->getObjectSql($sql, [$userProfileID]);
         }
+    }
+
+    public function updateUserProfileInfo(userProfile $userProfile): void
+    {
+        $stmt = $this->prepare('CALL updateUserProfile(?, ?, ?, ?, ?, ?, ?, ? ,?, ?);');
+        $stmt->execute([
+            $userProfile->getUserProfileID(),
+            $userProfile->getFirstName(),
+            $userProfile->getLastName(),
+            $userProfile->getCity(),
+            $userProfile->getCountry(),
+            $userProfile->getPhoneNumber(),
+            $userProfile->getDateOfBirth(),
+            $userProfile->getAge(),
+            $userProfile->getAboutMeTitle(),
+            $userProfile->getAboutMeText()
+        ]);
+        $stmt->closeCursor();
+    }
+
+    public function setUserProfileInfo(userProfile $userProfile): void
+    {
+        $stmt = $this->prepare('CALL insertNewUserProfile(?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?);');
+
+        $stmt->execute([
+            $userProfile->getAccountID(),
+            $userProfile->getUserProfileID(),
+            $userProfile->getFirstName(),
+            $userProfile->getLastName(),
+            $userProfile->getCity(),
+            $userProfile->getCountry(),
+            $userProfile->getPhoneNumber(),
+            $userProfile->getDateOfBirth(),
+            $userProfile->getAge(),
+            $userProfile->getAboutMeTitle(),
+            $userProfile->getAboutMeText()
+        ]);
+        $stmt->closeCursor();
+    }
+
+    public function checkRecordExists($userProfileID): bool
+    {
+        $stmt = $this->prepare('SELECT * FROM `UserProfiles` WHERE `userProfileID` = ?');
+        $stmt->execute([$userProfileID]);
+        $result = $stmt->fetch();
+        $stmt->closeCursor();
+
+        $resultCheck = null;
+        if ($result) {
+            $resultCheck = true;
+        } else {
+            $resultCheck = false;
+        }
+        return $resultCheck;
     }
 }
