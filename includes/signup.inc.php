@@ -14,11 +14,11 @@ error_reporting(E_ALL);
 
 if (isset($_POST["submit"])) {
 
-    // Grabbing the data
-    $username = $_POST["username"];
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-    $passwordrepeat = $_POST["passwordrepeat"];
+    // Grabbing the data, use htmlspecialchars to convert user input to html entities including single and double quotes
+    $username = htmlspecialchars($_POST["username"], ENT_QUOTES, "UTF-8");
+    $email = htmlspecialchars($_POST["email"], ENT_QUOTES, "UTF-8");
+    $password = htmlspecialchars($_POST["password"], ENT_QUOTES, "UTF-8");
+    $passwordrepeat = htmlspecialchars($_POST["passwordrepeat"], ENT_QUOTES, "UTF-8");
     $enabled = true;
 
     // Assign session variables to retain form values for username and password after error handling

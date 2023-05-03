@@ -13,17 +13,17 @@ error_reporting(E_ALL);
 // If the user access this script trough the editUserProfile.php
 if (isset($_SESSION["auth_user"]) && isset($_POST["submit"])) {
 
-    // Grabbing the data 
+    // Grabbing the data, use htmlspecialchars to convert user input to html entities including single and double quotes
     $accountID = $_SESSION["auth_user"]["accountID"];
     $userProfileID = substr_replace($accountID, 'UID', 0, 3);
-    $firstName = $_POST["firstName"];
-    $lastName = $_POST["lastName"];
-    $city = $_POST["city"];
-    $country = $_POST["country"];
-    $phoneNumber = $_POST["phoneNumber"];
-    $dateOfBirth = $_POST["dateOfBirth"];
-    $aboutMeTitle = $_POST["aboutMeTitle"];
-    $aboutMeText = $_POST["aboutMeText"];
+    $firstName = htmlspecialchars($_POST["firstName"], ENT_QUOTES, "UTF-8");
+    $lastName = htmlspecialchars($_POST["lastName"], ENT_QUOTES, "UTF-8");
+    $city = htmlspecialchars($_POST["city"], ENT_QUOTES, "UTF-8");
+    $country = htmlspecialchars($_POST["country"], ENT_QUOTES, "UTF-8");
+    $phoneNumber = htmlspecialchars($_POST["phoneNumber"], ENT_QUOTES, "UTF-8");
+    $dateOfBirth = htmlspecialchars($_POST["dateOfBirth"], ENT_QUOTES, "UTF-8");
+    $aboutMeTitle = htmlspecialchars($_POST["aboutMeTitle"], ENT_QUOTES, "UTF-8");
+    $aboutMeText = htmlspecialchars($_POST["aboutMeText"], ENT_QUOTES, "UTF-8");
 
     // Update the session variables to contain the new userProfileID
     $_SESSION["auth_user"]['userProfileID'] = $userProfileID;

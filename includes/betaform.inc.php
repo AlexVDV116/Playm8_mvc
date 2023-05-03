@@ -13,9 +13,9 @@ error_reporting(E_ALL);
 
 if (isset($_POST["submit"])) {
 
-    // Grabbing the data
-    $name = $_POST["name"];
-    $email = $_POST["email"];
+    // Grabbing the data, use htmlspecialchars to convert user input to html entities including single and double quotes
+    $name = htmlspecialchars($_POST["name"], ENT_QUOTES, "UTF-8");
+    $email = htmlspecialchars($_POST["email"], ENT_QUOTES, "UTF-8");
 
 
     // Instantiate the betaFormController class

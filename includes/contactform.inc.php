@@ -14,12 +14,12 @@ error_reporting(E_ALL);
 
 if (isset($_POST["submit"])) {
 
-    // Grabbing the data
-    $name = $_POST["name"];
-    $lastname = $_POST["lastname"];
-    $email = $_POST["email"];
-    $need = $_POST["need"];
-    $message = $_POST["message"];
+    // Grabbing the data, use htmlspecialchars to convert user input to html entities including single and double quotes
+    $name = htmlspecialchars($_POST["name"], ENT_QUOTES, "UTF-8");
+    $lastname = htmlspecialchars($_POST["lastname"], ENT_QUOTES, "UTF-8");
+    $email = htmlspecialchars($_POST["email"], ENT_QUOTES, "UTF-8");
+    $need = htmlspecialchars($_POST["need"], ENT_QUOTES, "UTF-8");
+    $message = htmlspecialchars($_POST["message"], ENT_QUOTES, "UTF-8");
 
     // Assign all posted values to a session variable array
     if (!empty($_POST)) {

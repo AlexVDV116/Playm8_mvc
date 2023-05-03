@@ -8,11 +8,11 @@ error_reporting(E_ALL);
 
 if (isset($_POST["submit"])) {
 
-    // Grabbing the data
-    $selector = $_POST["selector"];
-    $validator = $_POST["validator"];
-    $password = $_POST["password"];
-    $passwordrepeat = $_POST["passwordrepeat"];
+    // Grabbing the data, use htmlspecialchars to convert user input to html entities including single and double quotes
+    $selector = htmlspecialchars($_POST["selector"], ENT_QUOTES, "UTF-8");
+    $validator = htmlspecialchars($_POST["validator"], ENT_QUOTES, "UTF-8");
+    $password = htmlspecialchars($_POST["password"], ENT_QUOTES, "UTF-8");
+    $passwordrepeat = htmlspecialchars($_POST["passwordrepeat"], ENT_QUOTES, "UTF-8");
 
     // Instantiate the forgotPasswordController class
     include "../framework/databaseHandler.php";
