@@ -76,7 +76,6 @@ class accountController extends Controller
             "activationCode" => password_hash($activationCode, PASSWORD_DEFAULT),
             "activationExpiry" => $expiryDate,
             "activatedAt" => '',
-            "roles" => [1], // Array with user roles, default role = user
             "userProfileID" => "UP" . substr($accountID, 3)
         );
 
@@ -86,8 +85,8 @@ class accountController extends Controller
         // Insert the account object data into the database accounts table
         $accountDAO->insert($account);
 
-        // Insert the roles array into the accountRoles table
-        $accountDAO->setRoleID($account->accountID, $account->roles);
+        // Insert default roleID 1 into the accountRoles table
+        $accountDAO->setRoleID($account->accountID, [1]);
 
         // Send email to user with activation code and link to activate the account
         $accountDAO->mailActivationCode($this->email, $activationCode);
