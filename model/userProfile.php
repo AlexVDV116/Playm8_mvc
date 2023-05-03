@@ -6,17 +6,26 @@ require_once '../framework/Model.php';
 
 class userProfile extends Model
 {
-    private string $userProfileID;
-    private string $firstName;
-    private string $lastName;
-    private string $location;
-    private string $phoneNumber;
-    private string $dateOfBirth;
-    private string $age;
+    public string $accountID;
+    public string $userProfileID;
+    public string $firstName;
+    public string $lastName;
+    public string $city;
+    public string $country;
+    public string $phoneNumber;
+    public string $dateOfBirth;
+    public string $age;
+    public string $aboutMeTitle;
+    public string $aboutMeText;
 
     public function __construct(?array $data = null)
     {
         parent::__construct($data);
+    }
+
+    public function getAccountID(): string
+    {
+        return $this->accountID;
     }
 
     public function getUserProfileID(): string
@@ -34,9 +43,14 @@ class userProfile extends Model
         return $this->lastName;
     }
 
-    public function getLocation(): string
+    public function getCity(): string
     {
-        return $this->location;
+        return $this->city;
+    }
+
+    public function getCountry(): string
+    {
+        return $this->country;
     }
 
     public function getPhoneNumber(): string
@@ -52,5 +66,15 @@ class userProfile extends Model
     public function getAge(): string
     {
         return $this->age;
+    }
+
+    public function getAboutMeTitle(): string
+    {
+        return $this->aboutMeTitle;
+    }
+
+    public function getAboutMeText(): string
+    {
+        return $this->aboutMeText;
     }
 }
