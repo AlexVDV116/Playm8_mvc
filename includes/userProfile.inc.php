@@ -1,16 +1,12 @@
 <?php
 
-// Check if user has created a userProfile
-// If true, retrieve data from database and create userProfile page
-// If false redirect user to userProfile creation page
-
 session_start();
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// If the user access this script trough the editUserProfile.php
+// Check if user is logged in and form is submitted
 if (isset($_SESSION["auth_user"]) && isset($_POST["submit"])) {
 
     // Grabbing the data, use htmlspecialchars to convert user input to html entities including single and double quotes
