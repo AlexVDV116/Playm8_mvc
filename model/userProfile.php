@@ -17,6 +17,7 @@ class userProfile extends Model
     public string $age;
     public string $aboutMeTitle;
     public string $aboutMeText;
+    public string $userProfilePicture;
 
     public function __construct(?array $data = null)
     {
@@ -76,5 +77,10 @@ class userProfile extends Model
     public function getAboutMeText(): string
     {
         return $this->aboutMeText;
+    }
+
+    public function getUserProfilePicture(): string
+    {
+        return $this->userProfilePicture;
     }
 }
