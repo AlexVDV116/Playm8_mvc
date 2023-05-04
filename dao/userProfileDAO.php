@@ -52,7 +52,7 @@ class userProfileDAO extends DAO
 
     public function setUserProfileInfo(userProfile $userProfile): void
     {
-        $stmt = $this->prepare('CALL insertNewUserProfile(?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?);');
+        $stmt = $this->prepare('CALL insertNewUserProfile(?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?);');
 
         $stmt->execute([
             $userProfile->getAccountID(),
@@ -65,7 +65,8 @@ class userProfileDAO extends DAO
             $userProfile->getDateOfBirth(),
             $userProfile->getAge(),
             $userProfile->getAboutMeTitle(),
-            $userProfile->getAboutMeText()
+            $userProfile->getAboutMeText(),
+            "default"
         ]);
         $stmt->closeCursor();
     }
@@ -84,5 +85,12 @@ class userProfileDAO extends DAO
             $resultCheck = false;
         }
         return $resultCheck;
+    }
+
+    public function updateUserProfilePicture($fileNameNew, $userProfileID): void
+    {
+        $stmt = $this->prepare('CALL updateUserProfilePicture(?, ?);');
+        $stmt->execute([$fileNameNew, $userProfileID]);
+        $stmt->closeCursor();
     }
 }
