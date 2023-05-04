@@ -149,15 +149,16 @@ class admin extends View
                         <?php require "{$view}.php"; ?>
                     </div>
                 </div>
+            </div>
 
 
 
 
-                <script src="../assets/js/scripts.js"></script>
-                <!-- <script src="./assets/js/features.js"></script> -->
-                <script src="../assets/js/features-new.js"></script>
-                <script src="../assets/js/scroll.js"></script>
-                <script src="../assets/js/form.js"></script>
+            <script src="../assets/js/scripts.js"></script>
+            <!-- <script src="./assets/js/features.js"></script> -->
+            <script src="../assets/js/features-new.js"></script>
+            <script src="../assets/js/scroll.js"></script>
+            <script src="../assets/js/form.js"></script>
 
         </body>
 
