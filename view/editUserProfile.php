@@ -99,10 +99,33 @@ class createUserProfile extends View
                                 <div class="row mt-3">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="form_phoneNumber">Telefoonnummer:</label>
+                                            <label for="form_phoneNumber">Telefoonnummer:</label><br>
                                             <input id="form_phoneNumber" type="tel" name="phoneNumber" class="form-control border-0" placeholder="Voer uw telefoonnummer in" value="<?php if (isset($userProfile)) {
                                                                                                                                                                                         echo $userProfile->getPhoneNumber();
                                                                                                                                                                                     } ?>">
+                                            <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/intlTelInput.min.js"></script>
+                                            <script>
+                                                var input = document.querySelector("#form_phoneNumber");
+                                                window.intlTelInput(input, {
+                                                    autoInsertDialCode: true,
+                                                    nationalMode: false,
+                                                    initialCountry: "auto",
+                                                    geoIpLookup: function(callback) {
+                                                        fetch("https://ipapi.co/json")
+                                                            .then(function(res) {
+                                                                return res.json();
+                                                            })
+                                                            .then(function(data) {
+                                                                callback(data.country_code);
+                                                            })
+                                                            .catch(function() {
+                                                                callback("nl");
+                                                            });
+                                                    }
+                                                }, {
+                                                    utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/utils.js",
+                                                });
+                                            </script>
                                         </div>
                                     </div>
                                     <div class="col-md-6">

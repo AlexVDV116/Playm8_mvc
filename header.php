@@ -41,6 +41,9 @@ echo '</pre>';
     <!-- Typekit font -->
     <link rel="stylesheet" href="https://use.typekit.net/unv5bor.css">
 
+    <!-- Int tel input plugin -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/css/intlTelInput.css">
+
     <!-- Custom CSS / JS -->
     <link rel="stylesheet" href="<?php echo $ROOT; ?>assets/css/style.css">
 

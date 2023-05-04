@@ -644,6 +644,14 @@ button.btn.btn-credits,
     margin: 6rem 0rem;
 }
 
+/* int tel input plugin */
+.iti {
+    width: 100%;
+}
+
+.iti__arrow {
+    border: none;
+}
 /** =================================================================
 *
 *    Media queries => Responsive elements
