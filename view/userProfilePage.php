@@ -1,6 +1,11 @@
 <?php
 session_start();
 
+ini_set('display_errors', 1);
+header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1
+header("Pragma: no-cache"); // HTTP 1.0 clients (IE6 / pre 1997)
+header("Expires: 0"); // HTTP 1.0 Proxies
+
 // Check if user does not have a userProfileID and redirect to createUserProfile page else continue
 if (!isset($_SESSION["auth_user"]["userProfileID"])) {
     header("location: ../view/editUserProfile.php");
@@ -32,8 +37,19 @@ class userProfilePage extends View
                     <div class="col col-lg-9 col-xl-7">
                         <div class="card shadow">
                             <div class="rounded-top text-white d-flex flex-row banner-top">
-                                <div class="ms-4 mt-5 d-flex flex-column" style="width: 250px;">
-                                    <img src="https://images.unsplash.com/photo-1557495235-340eb888a9fb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1713&q=80" alt="Profile picture" class="img-fluid img-thumbnail mt-4 mb-2">
+                                <div class="ms-4 mt-5 d-flex flex-column">
+                                    <?php
+                                    // If user has a default profile picture display default profile picture with his initials
+                                    // Else display his own profile picture
+                                    if ($userProfile->getUserProfilePicture() == "default") { ?>
+                                        <img src="../uploads/default.png" alt="Profile picture" class="profilePicture img-fluid img-thumbnail mt-4 mb-2">
+                                    <?php
+                                    } else {
+                                    ?>
+                                        <img src="../uploads/<?php echo $userProfile->getUserProfilePicture() ?>" alt="Profile picture" class="profilePicture img-fluid img-thumbnail mt-4 mb-2">
+                                    <?php
+                                    }
+                                    ?>
                                     <button onclick="location.href='../view/editUserProfile.php'" type="button" class="btn btn-outline-dark mb-5" data-mdb-ripple-color="dark" style="z-index: 1;">
                                         Wijzig profiel
                                     </button>
