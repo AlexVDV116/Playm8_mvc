@@ -652,6 +652,17 @@ button.btn.btn-credits,
 .iti__arrow {
     border: none;
 }
+
+/* Profile picture upload */
+
+.profilePicture {
+    width: 200px;
+}
+
+#editProfilePicture {
+    width: 200px;
+}
+
 /** =================================================================
 *
 *    Media queries => Responsive elements
