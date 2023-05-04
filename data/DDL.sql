@@ -62,7 +62,8 @@ CREATE TABLE IF NOT EXISTS `userProfiles` (
   `dateOfBirth` date NOT NULL,
   `age` smallint(6) NOT NULL,
   `aboutMeTitle` tinytext NOT NULL,
-  `aboutMeText` text NOT NULL
+  `aboutMeText` text NOT NULL,
+  `userProfilePicture` tinytext NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `passwordReset` (
@@ -248,10 +249,11 @@ CREATE PROCEDURE `insertNewUserProfile`(
   IN `dateOfBirth` DATE, 
   IN `age` INT, 
   IN `aboutMeTitle` TINYTEXT, 
-  IN `aboutMeText` TINYTEXT)
+  IN `aboutMeText` TINYTEXT,
+  IN `userProfilePicture` TINYTEXT)
 BEGIN
-  INSERT INTO `userProfiles` (`userProfileID`, `firstName`, `lastName`, `city`, `country`, `phoneNumber`, `dateOfBirth`, `age`, `aboutMeTitle`, `aboutMeText`) 
-    VALUES (userProfileID, firstName, lastName, city, country, phoneNumber, dateOfBirth, age, aboutMeTitle, aboutMeText);
+  INSERT INTO `userProfiles` (`userProfileID`, `firstName`, `lastName`, `city`, `country`, `phoneNumber`, `dateOfBirth`, `age`, `aboutMeTitle`, `aboutMeText`, `userProfilePicture`) 
+    VALUES (userProfileID, firstName, lastName, city, country, phoneNumber, dateOfBirth, age, aboutMeTitle, aboutMeText, userProfilePicture);
       UPDATE `accounts` SET accounts.userProfileID = userProfileID WHERE accounts.accountID = accountID;
 END$$
 DELIMITER ;
@@ -271,4 +273,11 @@ CREATE PROCEDURE `updateUserProfile`(
 UPDATE `userProfiles` 
 SET userProfiles.firstName = firstName, userProfiles.lastName = lastName, userProfiles.city = city, userProfiles.country = country, userProfiles.phoneNumber = phoneNumber, userProfiles.dateOfBirth = dateOfBirth, userProfiles.age = age, userProfiles.aboutMeTitle = aboutMeTitle, userProfiles.aboutMeText = aboutMeText
 WHERE userProfiles.userProfileID = userProfileID$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `updateUserProfilePicture`(
+  IN `userProfilePicture` TINYTEXT, 
+  IN `userProfileID` TINYTEXT)
+UPDATE userProfiles SET userProfiles.userProfilePicture = userProfilePicture WHERE userProfiles.userProfileID = userProfileID$$
 DELIMITER ;
