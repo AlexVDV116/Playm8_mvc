@@ -21,7 +21,6 @@ if ($_SESSION["auth"] == false) {
     exit();
 };
 
-
 class createUserProfile extends View
 {
 
@@ -35,17 +34,44 @@ class createUserProfile extends View
             }
         };
 ?>
-        <div class="container py-5 h-100">
-            <div class="d-flex justify-content-center align-items-center h-100">
+        <div class="container py-5">
+            <div class="d-flex justify-content-center align-items-center">
                 <div class="col col-lg-9 col-xl-7">
+
                     <div class="card shadow">
                         <div class="rounded-top text-white d-flex flex-column align-items-center justify-content-center banner-top">
                             <h2 style="color:#f8f9fa">Wijzig Gebruikersprofiel</h4>
                                 <p>Wijzig hier de gegevens die aan andere Playm8 gebruikers worden getoond.</p>
                         </div>
                         <div class="card-body bg-light p-4 text-black">
-                            <form action="../includes/userProfile.inc.php" method="post" class="needs-validation" novalidate>
+                            <div class="row mb-4">
+                                <div>
+                                    <div class="d-flex justify-content-center mb-2">
+                                        <?php
+                                        // If user has a default profile picture display default profile picture with his initials
+                                        // Else display his own profile picture
+                                        if ($userProfile->getUserProfilePicture() == "default") { ?>
+                                            <img src="../uploads/default.png" alt="Profile picture" class="profilePicture img-fluid img-thumbnail mt-4 mb-2">
+                                        <?php
+                                        } else {
+                                        ?>
+                                            <img src="../uploads/<?php echo $userProfile->getUserProfilePicture() ?>" alt="Profile picture" class="profilePicture img-fluid img-thumbnail mt-4 mb-2">
+                                        <?php
+                                        }
+                                        ?>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <div>
+                                            <form action="../includes/uploads.inc.php" method="post" enctype="multipart/form-data">
+                                                <input type="file" name="file">
+                                                <input type="submit" name="submit">
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
+                            <form action="../includes/userProfile.inc.php" method="post" class="needs-validation" novalidate>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
