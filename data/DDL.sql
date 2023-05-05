@@ -8,43 +8,43 @@ CREATE DATABASE IF NOT EXISTS `playm8`;
 USE `playm8`;
 
 CREATE TABLE IF NOT EXISTS `accounts` (
-  `accountID` varchar(255) NOT NULL,
-  `username` tinytext NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `password` tinytext NOT NULL,
+  `accountID` varchar(500) NOT NULL,
+  `username` varchar(500) NOT NULL,
+  `email` varchar(500) NOT NULL,
+  `password` varchar(500) NOT NULL,
   `isBetaUser` tinyint(1) NOT NULL DEFAULT 0,
-  `userProfileID` varchar(255) DEFAULT NULL,
+  `userProfileID` varchar(500) DEFAULT NULL,
   `isActive` tinyint(1) DEFAULT 0,
-  `activationCode` varchar(255) NOT NULL,
+  `activationCode` varchar(500) NOT NULL,
   `activationExpiry` datetime NOT NULL,
   `activatedAt` datetime DEFAULT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `accountsRoles` (
-  `accountID` varchar(255) NOT NULL,
+  `accountID` varchar(500) NOT NULL,
   `roleID` int(11) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `likes` (
-  `liker` varchar(255) NOT NULL,
-  `liked` varchar(255) NOT NULL
+  `liker` varchar(500) NOT NULL,
+  `liked` varchar(500) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `matches` (
-  `userProfileID_A` varchar(255) NOT NULL,
-  `userProfileID_B` varchar(255) NOT NULL
+  `userProfileID_A` varchar(500) NOT NULL,
+  `userProfileID_B` varchar(500) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `permissions` (
   `permissionID` int(16) NOT NULL,
-  `permissionName` tinytext NOT NULL,
-  `permissionDescription` tinytext NOT NULL
+  `permissionName` varchar(500) NOT NULL,
+  `permissionDescription` varchar(500) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `roles` (
   `roleID` int(16) NOT NULL,
-  `roleName` tinytext NOT NULL,
-  `roleDescription` tinytext NOT NULL
+  `roleName` varchar(500) NOT NULL,
+  `roleDescription` varchar(500) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `rolesPermissions` (
@@ -53,23 +53,23 @@ CREATE TABLE IF NOT EXISTS `rolesPermissions` (
 );
 
 CREATE TABLE IF NOT EXISTS `userProfiles` (
-  `userProfileID` varchar(255) NOT NULL,
-  `firstName` tinytext NOT NULL,
-  `lastName` tinytext NOT NULL,
-  `city` tinytext NOT NULL,
-  `country` tinytext NOT NULL,
-  `phoneNumber` tinytext NOT NULL,
+  `userProfileID` varchar(500) NOT NULL,
+  `firstName` varchar(500) NOT NULL,
+  `lastName` varchar(500) NOT NULL,
+  `city` varchar(500) NOT NULL,
+  `country` varchar(500) NOT NULL,
+  `phoneNumber` varchar(500) NOT NULL,
   `dateOfBirth` date NOT NULL,
   `age` smallint(6) NOT NULL,
-  `aboutMeTitle` tinytext NOT NULL,
-  `aboutMeText` text NOT NULL,
-  `userProfilePicture` tinytext NOT NULL
+  `aboutMeTitle` varchar(500) NOT NULL,
+  `aboutMeText` varchar(2000) NOT NULL,
+  `userProfilePicture` varchar(500) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `passwordReset` (
   `passwordResetID` int(11) NOT NULL,
-  `passwordResetEmail` varchar(255) NOT NULL,
-  `passwordResetSelector` tinytext NOT NULL,
+  `passwordResetEmail` varchar(500) NOT NULL,
+  `passwordResetSelector` varchar(500) NOT NULL,
   `passwordResetToken` longtext NOT NULL,
   `passwordResetExpires` datetime NOT NULL
 );
@@ -168,12 +168,12 @@ DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE `insertNewAccount`(
-    IN `accountID` varchar(255),
-    IN `username` TINYTEXT, 
-    IN `email` TINYTEXT, 
-    IN `password` TINYTEXT,
-    IN `activationCode` TINYTEXT,
-    IN `activationExpiry` TINYTEXT)
+    IN `accountID` varchar(500),
+    IN `username` varchar(500), 
+    IN `email` varchar(500), 
+    IN `password` varchar(500),
+    IN `activationCode` varchar(500),
+    IN `activationExpiry` varchar(500))
 INSERT INTO `accounts` (
     accountID, username, email, password, activationCode, activationExpiry)
      VALUES (accountID, username, email, password, activationCode, activationExpiry)$$
@@ -181,11 +181,11 @@ DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE `updateAccount`(
-    IN `username` TINYTEXT, 
-    IN `email` TINYTEXT, 
+    IN `username` varchar(500), 
+    IN `email` varchar(500), 
     IN `isActive` TINYINT, 
     IN `isBetaUser` TINYINT, 
-    IN `accountID` varchar(255))
+    IN `accountID` varchar(500))
 UPDATE `accounts` 
 SET username = username, email = email, isActive = isActive, isBetaUser = isBetaUser 
 WHERE accounts.accountID = accountID$$
@@ -200,20 +200,20 @@ DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE `getAccountMatchingEmail`(
-    IN `email` TINYTEXT)
+    IN `email` varchar(500))
 SELECT * FROM accounts WHERE accounts.email = email$$
 DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE `logInAccount`(
-    IN `email` TINYTEXT, 
-    IN `password` TINYTEXT)
+    IN `email` varchar(500), 
+    IN `password` varchar(500))
 SELECT * FROM accounts WHERE accounts.email = email AND accounts.password = password$$
 DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE `disableAccount`(
-    IN `accountID` varchar(255))
+    IN `accountID` varchar(500))
 UPDATE `accounts` 
 SET isEnabled = 0
 WHERE accounts.accountID = accountID$$
@@ -221,7 +221,7 @@ DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE `enableAccount`(
-    IN `accountID` varchar(255))
+    IN `accountID` varchar(500))
 UPDATE `accounts` 
 SET isEnabled = 1
 WHERE accounts.accountID = accountID$$
@@ -239,18 +239,18 @@ DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE `insertNewUserProfile`(
-  IN `accountID` TINYTEXT, 
-  IN `userProfileID` TINYTEXT, 
-  IN `firstName` TINYTEXT, 
-  IN `lastName` TINYTEXT, 
-  IN `city` TINYTEXT, 
-  IN `country` TINYTEXT, 
-  IN `phoneNumber` TINYTEXT, 
+  IN `accountID` varchar(500), 
+  IN `userProfileID` varchar(500), 
+  IN `firstName` varchar(500), 
+  IN `lastName` varchar(500), 
+  IN `city` varchar(500), 
+  IN `country` varchar(500), 
+  IN `phoneNumber` varchar(500), 
   IN `dateOfBirth` DATE, 
   IN `age` INT, 
-  IN `aboutMeTitle` TINYTEXT, 
-  IN `aboutMeText` TINYTEXT,
-  IN `userProfilePicture` TINYTEXT)
+  IN `aboutMeTitle` varchar(500), 
+  IN `aboutMeText` varchar(500),
+  IN `userProfilePicture` varchar(500))
 BEGIN
   INSERT INTO `userProfiles` (`userProfileID`, `firstName`, `lastName`, `city`, `country`, `phoneNumber`, `dateOfBirth`, `age`, `aboutMeTitle`, `aboutMeText`, `userProfilePicture`) 
     VALUES (userProfileID, firstName, lastName, city, country, phoneNumber, dateOfBirth, age, aboutMeTitle, aboutMeText, userProfilePicture);
@@ -260,16 +260,16 @@ DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE `updateUserProfile`(
-  IN `userProfileID` TINYTEXT, 
-  IN `firstName` TINYTEXT, 
-  IN `lastName` TINYTEXT, 
-  IN `city` TINYTEXT, 
-  IN `country` TINYTEXT, 
-  IN `phoneNumber` TINYTEXT, 
+  IN `userProfileID` varchar(500), 
+  IN `firstName` varchar(500), 
+  IN `lastName` varchar(500), 
+  IN `city` varchar(500), 
+  IN `country` varchar(500), 
+  IN `phoneNumber` varchar(500), 
   IN `dateOfBirth` DATE, 
   IN `age` INT, 
-  IN `aboutMeTitle` TINYTEXT, 
-  IN `aboutMeText` TINYTEXT)
+  IN `aboutMeTitle` varchar(500), 
+  IN `aboutMeText` varchar(500))
 UPDATE `userProfiles` 
 SET userProfiles.firstName = firstName, userProfiles.lastName = lastName, userProfiles.city = city, userProfiles.country = country, userProfiles.phoneNumber = phoneNumber, userProfiles.dateOfBirth = dateOfBirth, userProfiles.age = age, userProfiles.aboutMeTitle = aboutMeTitle, userProfiles.aboutMeText = aboutMeText
 WHERE userProfiles.userProfileID = userProfileID$$
@@ -277,7 +277,7 @@ DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE `updateUserProfilePicture`(
-  IN `userProfilePicture` TINYTEXT, 
-  IN `userProfileID` TINYTEXT)
+  IN `userProfilePicture` varchar(500), 
+  IN `userProfileID` varchar(500))
 UPDATE userProfiles SET userProfiles.userProfilePicture = userProfilePicture WHERE userProfiles.userProfileID = userProfileID$$
 DELIMITER ;
