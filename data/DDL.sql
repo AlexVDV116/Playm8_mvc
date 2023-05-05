@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `userProfiles` (
   `dateOfBirth` date NOT NULL,
   `age` smallint(6) NOT NULL,
   `aboutMeTitle` varchar(500) NOT NULL,
-  `aboutMeText` varchar(2000) NOT NULL,
+  `aboutMeText` varchar(10000) NOT NULL,
   `userProfilePicture` varchar(500) NOT NULL
 );
 
@@ -249,7 +249,7 @@ CREATE PROCEDURE `insertNewUserProfile`(
   IN `dateOfBirth` DATE, 
   IN `age` INT, 
   IN `aboutMeTitle` varchar(500), 
-  IN `aboutMeText` varchar(500),
+  IN `aboutMeText` varchar(10000),
   IN `userProfilePicture` varchar(500))
 BEGIN
   INSERT INTO `userProfiles` (`userProfileID`, `firstName`, `lastName`, `city`, `country`, `phoneNumber`, `dateOfBirth`, `age`, `aboutMeTitle`, `aboutMeText`, `userProfilePicture`) 
@@ -269,7 +269,7 @@ CREATE PROCEDURE `updateUserProfile`(
   IN `dateOfBirth` DATE, 
   IN `age` INT, 
   IN `aboutMeTitle` varchar(500), 
-  IN `aboutMeText` varchar(500))
+  IN `aboutMeText` varchar(10000))
 UPDATE `userProfiles` 
 SET userProfiles.firstName = firstName, userProfiles.lastName = lastName, userProfiles.city = city, userProfiles.country = country, userProfiles.phoneNumber = phoneNumber, userProfiles.dateOfBirth = dateOfBirth, userProfiles.age = age, userProfiles.aboutMeTitle = aboutMeTitle, userProfiles.aboutMeText = aboutMeText
 WHERE userProfiles.userProfileID = userProfileID$$
