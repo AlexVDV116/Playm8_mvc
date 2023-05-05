@@ -20,7 +20,7 @@ class databaseHandler
     protected function connect($host, $dbname, $user, $pass): void
     {
         try {
-            $dsn = "mysql:dbname=$dbname;host=$host;charset=utf8";
+            $dsn = "mysql:dbname=$dbname;host=$host;charset=utf8mb4";
             self::$pdo = new PDO($dsn, $user, $pass, null);
             self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
