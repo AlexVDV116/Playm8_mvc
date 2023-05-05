@@ -18,8 +18,10 @@ if (isset($_SESSION["auth_user"]) && isset($_POST["submit"])) {
     $country = htmlspecialchars($_POST["country"], ENT_QUOTES, "UTF-8");
     $phoneNumber = htmlspecialchars($_POST["phoneNumber"], ENT_QUOTES, "UTF-8");
     $dateOfBirth = htmlspecialchars($_POST["dateOfBirth"], ENT_QUOTES, "UTF-8");
-    $aboutMeTitle = htmlspecialchars($_POST["aboutMeTitle"], ENT_QUOTES, "UTF-8");
-    $aboutMeText = htmlspecialchars($_POST["aboutMeText"], ENT_QUOTES, "UTF-8");
+
+    // Use nl2br method to retain HTML line breaks
+    $aboutMeTitle = nl2br(htmlspecialchars($_POST["aboutMeTitle"], ENT_QUOTES, "UTF-8"));
+    $aboutMeText = nl2br(htmlspecialchars($_POST["aboutMeText"], ENT_QUOTES, "UTF-8"));
 
     // Update the session variables to contain the new userProfileID
     $_SESSION["auth_user"]['userProfileID'] = $userProfileID;
