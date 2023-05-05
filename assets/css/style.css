@@ -205,7 +205,6 @@ a:is(:link, :active, :visited):not(.nav-btn).active::after {
 section {
     padding: 75px 0;
     text-align: center;
-    background: #d6004a08;
 }
 
 section:nth-child(odd) {
@@ -638,7 +637,7 @@ form i.fa-key {
 }
 
 .about-me-section {
-    margin: 6rem 0rem;
+    margin: 8rem 0rem 2rem 0rem;
 }
 
 /* int tel input plugin */
@@ -654,10 +653,12 @@ form i.fa-key {
 
 .profilePicture {
     width: 200px;
+    height: 200px;
 }
 
-#editProfilePicture {
+.editProfilePicture {
     width: 200px;
+    height: 200px;
 }
 
 .btn-cancel {
