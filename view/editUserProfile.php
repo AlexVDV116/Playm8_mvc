@@ -205,9 +205,9 @@ class createUserProfile extends View
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="form_aboutMeText">Over:</label>
-                                                <textarea id="form_aboutMeText" name="aboutMeText" class="form-control border-0" placeholder="Vertel hier over de favoriete activiteiten, uitlaatplaatsen of andere leuke feitjes over jou en je huisdier! (20 -500 karakters)" rows="4" required><?php if (isset($userProfile)) {
-                                                                                                                                                                                                                                                                                                        echo $userProfile->getAboutMeText();
-                                                                                                                                                                                                                                                                                                    } ?></textarea>
+                                                <textarea id="form_aboutMeText" name="aboutMeText" class="form-control border-0" placeholder="Vertel hier over de favoriete activiteiten, uitlaatplaatsen of andere leuke feitjes over jou en je huisdier! (20 -255 karakters)" rows="4" maxlength="250" required><?php if (isset($userProfile)) {
+                                                                                                                                                                                                                                                                                                                        echo $userProfile->getAboutMeText();
+                                                                                                                                                                                                                                                                                                                    } ?></textarea>
                                                 <div class="invalid-feedback">
                                                     Dit veld is verplicht. (20 - 500 karakters)
                                                 </div>
