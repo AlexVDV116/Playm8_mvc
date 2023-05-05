@@ -42,11 +42,11 @@ class userProfilePage extends View
                                     // If user has a default profile picture display default profile picture with his initials
                                     // Else display his own profile picture
                                     if ($userProfile->getUserProfilePicture() == "default") { ?>
-                                        <img src="../uploads/default.png" alt="Profile picture" class="profilePicture img-fluid img-thumbnail mt-4 mb-2">
+                                        <img src="../uploads/profilePictures/default.png" alt="Profile picture" class="profilePicture img-fluid img-thumbnail mt-4 mb-2">
                                     <?php
                                     } else {
                                     ?>
-                                        <img src="../uploads/<?php echo $userProfile->getUserProfilePicture() ?>" alt="Profile picture" class="profilePicture img-fluid img-thumbnail mt-4 mb-2">
+                                        <img src="../uploads/profilePictures/<?php echo $userProfile->getUserProfilePicture() ?>" alt="Profile picture" class="profilePicture img-fluid img-thumbnail mt-4 mb-2">
                                     <?php
                                     }
                                     ?>
