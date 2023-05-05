@@ -1,10 +1,12 @@
 <?php
 session_start();
 
+/*
 ini_set('display_errors', 1);
 header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1
 header("Pragma: no-cache"); // HTTP 1.0 clients (IE6 / pre 1997)
 header("Expires: 0"); // HTTP 1.0 Proxies
+*/
 
 // Check if user does not have a userProfileID and redirect to createUserProfile page else continue
 if (!isset($_SESSION["auth_user"]["userProfileID"])) {
