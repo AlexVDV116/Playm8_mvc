@@ -51,8 +51,8 @@ class userProfileController extends Controller
             header("location: ../view/editUserProfile.php?error=titlelength");
             exit();
         }
-        if ($this->getMessageLength($this->aboutMeText) < 20 || $this->getMessageLength($this->aboutMeText) > 250) {
-            // echo "Uw bericht moet tussen de 20 tot 250 karakters bevatten!";
+        if ($this->getMessageLength($this->aboutMeText) < 20 || $this->getMessageLength($this->aboutMeText) > 10000) {
+            // echo "Uw bericht moet tussen de 20 tot 2500 karakters bevatten!";
             header("location: ../view/editUserProfile.php?error=textlength");
             exit();
         }
