@@ -17,7 +17,6 @@ class userProfileController extends Controller
     private string $country;
     private string $phoneNumber;
     private string $dateOfBirth;
-    private string $age;
     private string $aboutMeTitle;
     private string $aboutMeText;
 
