@@ -32,16 +32,28 @@ if (isset($_POST["submit"])) {
             // Check if the file size is less then 5 megabytes
             if ($fileSize < 5120000) {
                 // Generate an unique file name and concat with file extentsion
-                $fileNameNew = $userProfileID . "." . $fileActualExt;
-                $fileDest = '../uploads/' . $fileNameNew;
-
-                // Function that moves the file from the tmp location to the uploads folder
-                // If you run this using XAMPP make sure the Apache process owner has read/write permission to your file destination folder
-                move_uploaded_file($fileTmpName, $fileDest);
+                $fileNameNew = "profilePic_" . $userProfileID . "." . $fileActualExt;
+                $fileDest = '../uploads/profilePictures/' . $fileNameNew;
 
                 // Update the userProfiles.userProfilePicture collum with the new filename
                 $userProfileDAO = new userProfileDAO;
+                $userProfile = $userProfileDAO->get($userProfileID);
+
+                // Check if user has a user has a record in userProfiles
                 if ($userProfileDAO->checkRecordExists($userProfileID) == true) {
+                    // If he has a profilePicture set other then default
+                    if ($userProfile->userProfilePicture !== "default") {
+                        // Grab the location, name and extension of the old userProfilePicture
+                        $oldProfilePicture = "../uploads/profilePictures/" . $userProfile->userProfilePicture;
+                        // Delete the old profilePicture
+                        array_map('unlink', glob($oldProfilePicture));
+                    }
+
+                    // Move the file from the tmp location to the uploads folder
+                    // If you run this using XAMPP make sure the Apache process owner has read/write permission to your file destination folder
+                    move_uploaded_file($fileTmpName, $fileDest);
+
+                    // Update the userProfilePicture with the new filename and extension
                     $userProfileDAO->updateUserProfilePicture($fileNameNew, $userProfileID);
 
                     // Redirect user with success message
