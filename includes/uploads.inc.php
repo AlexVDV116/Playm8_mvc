@@ -24,6 +24,7 @@ if (isset($_POST["submit"])) {
     $fileActualExt = strtolower(end($fileExt));
 
     $allowedExt = ["jpg", "jpeg", "png"];
+    $time = time();
 
     // Check if file extension is allowed else redirect with error message
     if (in_array($fileActualExt, $allowedExt)) {
@@ -32,7 +33,8 @@ if (isset($_POST["submit"])) {
             // Check if the file size is less then 5 megabytes
             if ($fileSize < 5120000) {
                 // Generate an unique file name and concat with file extentsion
-                $fileNameNew = "profilePic_" . $userProfileID . "." . $fileActualExt;
+                // Add time in second since 1970 to generate a unique file name in order to force browser to recache/download image
+                $fileNameNew = "profilePic_" . $userProfileID . "_" . $time . "." . $fileActualExt;
                 $fileDest = '../uploads/profilePictures/' . $fileNameNew;
 
                 // Update the userProfiles.userProfilePicture collum with the new filename
