@@ -107,7 +107,7 @@ header.fixed-top {
 }
 
 #main-navbar .btn-register {
-    color: #ffffff;
+    color: #fff;
 }
 
 .menu-items-mobile {
@@ -249,6 +249,7 @@ section#about-section {
 }
 
 button.btn.btn-credits,
+a.btn.btn-cancel,
 .btn.btn-lg.btn-credits {
     background-color: #d6004a;
     border: 2px solid #d6004a !important;
@@ -257,6 +258,7 @@ button.btn.btn-credits,
 }
 
 button.btn.btn-credits-inverted,
+a.btn.btn-cancel-inverted,
 .btn.btn-lg.btn-credits-inverted {
     background-color: #d6004a;
     border: 2px solid #fff !important;
@@ -265,12 +267,14 @@ button.btn.btn-credits-inverted,
 }
 
 button.btn.btn-credits:hover,
+a.btn.btn-cancel:hover,
 .btn.btn-lg.btn-credits:hover {
     color: #d6004a;
     background-color: inherit;
 }
 
 button.btn.btn-credits-inverted:hover,
+a.btn.btn-cancel-inverted:hover,
 .btn.btn-lg.btn-credits-inverted:hover {
     color: #d6004a;
     background-color: #fff;
@@ -292,7 +296,8 @@ button.btn.btn-credits-inverted:hover,
 }
 
 .form-button-row {
-    justify-content: center;
+    display: flex;
+    align-items: end;
 }
 
 label > a,
@@ -607,14 +612,6 @@ form i.fa-key {
 *
 *  ================================================================= */
 
-button.btn.btn-credits,
-.btn.btn-lg.btn-credits {
-    background-color: #d6004a;
-    border: 2px solid #d6004a !important;
-    color: #fff;
-    border-radius: 25px;
-}
-
 @media (max-width: 992px) {
     .form-img {
         display: none;
@@ -661,6 +658,15 @@ button.btn.btn-credits,
 
 #editProfilePicture {
     width: 200px;
+}
+
+.btn-cancel {
+    color: #fff;
+}
+
+.btn-cancel:hover {
+    background-color: #d6004a;
+    color: #ffffff;
 }
 
 /** =================================================================
