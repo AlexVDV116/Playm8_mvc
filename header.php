@@ -130,7 +130,7 @@ echo '</pre>';
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" href="<?php echo $ROOT; ?>view/userProfilePage.php">Gebruikersprofiel</a></li>
-                                        <li><a class="dropdown-item" href="#">Wijzig profiel</a></li>
+                                        <li><a class="dropdown-item" href="<?php echo $ROOT; ?>view/editUserProfile.php">Wijzig profiel</a></li>
                                         <li><a class="dropdown-item" href="#">Vind matches!</a></li>
                                     </ul>
                                 </li>
