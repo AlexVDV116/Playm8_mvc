@@ -13,15 +13,13 @@ class accountController extends Controller
     private string $email;
     private string $password;
     private string $passwordrepeat;
-    private bool $enabled;
 
-    public function __construct($username, $email, $password, $passwordrepeat, $enabled)
+    public function __construct($username, $email, $password, $passwordrepeat)
     {
         $this->username = $username;
         $this->email = $email;
         $this->password = $password;
         $this->passwordrepeat = $passwordrepeat;
-        $this->enabled = $enabled;
     }
 
     public function run(): void
@@ -76,7 +74,7 @@ class accountController extends Controller
             "activationCode" => password_hash($activationCode, PASSWORD_DEFAULT),
             "activationExpiry" => $expiryDate,
             "activatedAt" => '',
-            "userProfileID" => "UP" . substr($accountID, 3)
+            "userProfileID" => "UID" . substr($accountID, 3)
         );
 
         // Create a new empty Account object with the user data
@@ -90,6 +88,123 @@ class accountController extends Controller
 
         // Send email to user with activation code and link to activate the account
         $accountDAO->mailActivationCode($this->email, $activationCode);
+    }
+
+    public function editAccount($email, $currentPassword): void
+    {
+        // Grab the account from the DB
+        $accountDAO = new AccountDAO;
+        $account = $accountDAO->get($email);
+
+        // use PHP built in method to check if the given password matches the hashed password stored in the DB (returns bool)
+        $checkPwd = password_verify($currentPassword, $account->getPassword());
+
+        // If the password match
+        if ($checkPwd == false) {
+            // echo "Onjuist wachtwoord.";
+            header("location: ../view/editAccount.php?error=wrongpassword");
+            exit();
+        } elseif ($checkPwd == true) {
+
+            // Validate user input
+
+
+            // Compare the new data against the data in the DB and update when changes have occured
+            if ($this->username !== $account->getUsername()) {
+                // Update username
+                $account->username = $this->username;
+                $_SESSION["auth_user"]["username"] = $this->username;
+            }
+            if ($this->email !== $account->getEmail()) {
+
+                // Check if email is valid
+                if ($this->hasInvalidEmail() == true) {
+                    // echo "Onjuist email format.";
+                    header("location: ../view/editAccount.php?error=invalidemail");
+                    exit();
+                }
+
+                // Check if email is already registered with us
+                if ($this->isKnownEmail() == true) {
+                    // echo "Email bestaat al in ons bestand.";
+                    header("location: ../view/editAccount.php?error=emailalreadyexists");
+                    exit();
+                }
+
+                // Update email, set account inactive, resent activation mil
+                $account->email = $this->email;
+                $account->isActive = false;
+
+                // Generate a new activationcode and expirydate
+                $activationCode = $accountDAO->generateActivationCode();
+                $hashedActivationCode = password_hash($activationCode, PASSWORD_DEFAULT);
+                $expiryDate = date("Y-m-d H:i:s", strtotime('+24 hours')); // ExpiryDate = now + 24 hours
+
+                // Set the account object properties to contain the new activationCode and expiryDate
+                $account->activationCode = $hashedActivationCode;
+                $account->activationExpiry = $expiryDate;
+
+                // Send email to user with activation code and link to activate the account
+                $accountDAO->mailActivationCode($this->email, $activationCode);
+
+                $emailChange = true;
+            }
+            // Check if user actually entered a new password
+            if (!empty($this->password)) {
+
+                // Check if these passwords match
+                if ($this->passwordMatch() == false) {
+                    // echo "Wachtwoorden komen niet overeen.";
+                    header("location: ../view/editAccount.php?error=passwordmatch");
+                    exit();
+                }
+                // Check if the passwords follow the passwords rules
+                if ($this->isPasswordStrong() == false) {
+                    // echo "Uw wachtwoord moet uit ten minste 8 tekens (maximaal 32) en ten minste één cijfer, één letter en één speciaal karakter bestaan.";
+                    header("location: ../view/editAccount.php?error=passwordstrength");
+                    exit();
+                }
+
+                // Compare the new password to the old password, if it has changed, update the password
+                if ($this->password !== $account->getPassword() && $this->passwordrepeat !== $account->getPassword()) {
+                    // Update password
+                    // Use PHP built in method to generate a password hash
+                    $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
+                    $account->password = $hashedPassword;
+                    $passwordChange = true;
+                }
+            }
+
+            // Update the database with the new account object 
+            $accountDAO->update($account);
+
+            // If the password or email has changed, log user out, redirect to loginpage with success message
+            if ($emailChange === true) {
+                // When logging out regenerate session id, unset session variables and destroy session to prevent session-fixation by malicious user
+                session_start();
+                session_regenerate_id();
+                session_unset();
+                session_destroy();
+
+                // Redirect user back to login page
+                header("location: ../view/login.php?emailChange=success");
+                exit();
+            } elseif ($passwordChange === true) {
+                // When logging out regenerate session id, unset session variables and destroy session to prevent session-fixation by malicious user
+                session_start();
+                session_regenerate_id();
+                session_unset();
+                session_destroy();
+
+                // Redirect user back to login page
+                header("location: ../view/login.php?passwordChange=success");
+                exit();
+            }
+
+            header("location: ../view/editAccount.php?usernameChange=success");
+        }
+
+        // If changes occured, update the DB with the new data
     }
 
     // Method that checks if for any empty inputs: returns true if empty inputs found
