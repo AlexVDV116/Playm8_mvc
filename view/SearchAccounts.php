@@ -51,7 +51,7 @@ class SearchAccounts extends View
                             <!-- PHP shorthand to echo the data in the table -->
                             <td><?= '# ' . $account->getAccountID() ?></td>
                             <td><?= '# ' . $account->getUserProfileID() ?></td>
-                            <td><?= $account->getName() ?></td>
+                            <td><?= $account->getUsername() ?></td>
                             <td><?= $account->getEmail() ?></td>
                             <td><?php if ($account->getActive()) {
                                     echo 'Ja';
