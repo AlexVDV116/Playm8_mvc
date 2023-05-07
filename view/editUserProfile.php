@@ -23,7 +23,7 @@ if ($_SESSION["auth"] == false) {
     exit();
 };
 
-class createUserProfile extends View
+class editUserProfile extends View
 {
 
     public function show()
@@ -80,7 +80,6 @@ class createUserProfile extends View
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </form>
                                     </div>
                                     <div class="d-flex justify-content-center">
@@ -149,10 +148,12 @@ class createUserProfile extends View
                                                 <input id="form_phoneNumber" type="tel" name="phoneNumber" class="form-control border-0" placeholder="Voer uw telefoonnummer in" value="<?php if (isset($userProfile)) {
                                                                                                                                                                                             echo $userProfile->getPhoneNumber();
                                                                                                                                                                                         } ?>">
-                                                <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/intlTelInput.min.js"></script>
-                                                <script>
-                                                    var input = document.querySelector("#form_phoneNumber");
-                                                    window.intlTelInput(input, {
+                                            </div>
+                                            <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/intlTelInput.min.js"></script>
+                                            <script>
+                                                let input = document.querySelector("#form_phoneNumber");
+                                                window.intlTelInput(
+                                                    input, {
                                                         autoInsertDialCode: true,
                                                         nationalMode: false,
                                                         initialCountry: "auto",
@@ -167,12 +168,12 @@ class createUserProfile extends View
                                                                 .catch(function() {
                                                                     callback("nl");
                                                                 });
-                                                        }
+                                                        },
                                                     }, {
                                                         utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/utils.js",
-                                                    });
-                                                </script>
-                                            </div>
+                                                    }
+                                                );
+                                            </script>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -236,18 +237,62 @@ class createUserProfile extends View
                                             echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Over mij text moet uit minimaal 20 en maximaal 2500 karakters bestaan.</p>';
                                         }
                                     }
+                                    if (isset($_GET["confirm"])) {
+                                        if ($_GET["confirm"] == "fail") {
+                                            echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Onjuiste bevestiging, gebruikersprofiel niet verwijderd.</p>';
+                                        }
+                                    }
                                     ?>
                                 </form>
+                                <div class="row mt-2">
+                                    <div class="d-flex justify-content-start">
+                                        <!-- Button trigger modal -->
+                                        <a href="#" type="button" data-bs-toggle="modal" data-bs-target="#deleteUserProfileModal">
+                                            Verwijder gebruikersprofiel
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- Modal -->
+                                <div class="modal fade" id="deleteUserProfileModal" tabindex="-1" aria-labelledby="deleteUserProfileModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title fs-5">Bevestig verwijderen van gebruikersprofiel</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <?php
+                                                $randomNumber = rand(10000, 99999);
+                                                echo "<div class='d-flex justify-content-center'>";
+                                                echo "<h5>" . $randomNumber . "</h5></div>";
+                                                $_SESSION["randomNumbers"] = $randomNumber;
+                                                ?>
+                                                <form action="../includes/deleteUserProfile.inc.php" method="post" class="needs-validation" novalidate>
+                                                    <input id="form_userConfirmNumbers" type="text" name="userConfirmNumbers" class="form-control border-1" placeholder="Voer de 5 cijfers in ter bevestiging om uw account te verwijderen" maxlength="5" required>
+                                                    <div class="row">
+                                                        <div class="d-flex justify-content-end">
+                                                            <button type="button" class="btn btn-cancel shadow-sm mt-3" data-bs-dismiss="modal">Annuleer</button>
+                                                            <button type="submit" name="submit" class="btn btn-credits shadow-sm mt-3">Bevestig</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <?php
-                include_once '../footer.php';
-                ?>
             </div>
+            <?php
+            // Setting the ROOT directory for this file so the relative paths used in included pages will still work
+            $ROOT = '../';
+            include_once '../footer.php';
+            ?>
+        </div>
         </div>
 <?php
     }
 }
-new createUserProfile;
+new editUserProfile;
