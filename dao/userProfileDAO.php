@@ -93,4 +93,15 @@ class userProfileDAO extends DAO
         $stmt->execute([$fileNameNew, $userProfileID]);
         $stmt->closeCursor();
     }
+
+    // Deletes a the record from the userProfiles table where the userProfileID matches
+    // Prepared statement that uses a stored procedure
+    public function deleteUserProfile(string $userProfileID): void
+    {
+        $sql = 'CALL deleteUserProfile(?);';
+        $args = [
+            $userProfileID
+        ];
+        $this->execute($sql, $args);
+    }
 }
