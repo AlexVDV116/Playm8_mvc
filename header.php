@@ -10,11 +10,11 @@ header("Pragma: no-cache"); // HTTP 1.0 clients (IE6 / pre 1997)
 header("Expires: 0"); // HTTP 1.0 Proxies
 
 
-/* Echo session variables 
+/* Echo session variables */
 echo '<pre>';
 var_dump($_SESSION);
 echo '</pre>';
-*/
+
 ?>
 
 <!DOCTYPE html>
@@ -110,8 +110,6 @@ echo '</pre>';
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" href="<?php echo $ROOT; ?>view/admin.php">Admin Dashboard</a></li>
-                                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
                                     </ul>
                                 </li>
                             </div>
@@ -129,9 +127,20 @@ echo '</pre>';
                                         <?php echo $_SESSION["auth_user"]["username"]; ?>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="<?php echo $ROOT; ?>view/userProfilePage.php">Gebruikersprofiel</a></li>
-                                        <li><a class="dropdown-item" href="<?php echo $ROOT; ?>view/editUserProfile.php">Wijzig profiel</a></li>
-                                        <li><a class="dropdown-item" href="#">Vind matches!</a></li>
+                                        <li><a class="dropdown-item" href="<?php echo $ROOT; ?>view/editAccount.php">Account</a></li>
+                                        <?php
+                                        if (isset($_SESSION["auth_user"]["userProfileID"])) {
+                                        ?>
+                                            <li><a class="dropdown-item" href="<?php echo $ROOT; ?>view/userProfilePage.php">Gebruikersprofiel</a></li>
+                                            <li><a class="dropdown-item" href="<?php echo $ROOT; ?>view/editUserProfile.php">Wijzig profiel</a></li>
+                                            <li><a class="dropdown-item" href="#">Vind matches</a></li>
+                                        <?php
+                                        } else {
+                                        ?>
+                                            <li><a class="dropdown-item" href="<?php echo $ROOT; ?>includes/createUserProfile.inc.php">Creëer gebruikersprofiel</a></li>
+                                        <?php
+                                        }
+                                        ?>
                                     </ul>
                                 </li>
                             </div>
