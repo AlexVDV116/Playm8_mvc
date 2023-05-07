@@ -153,7 +153,7 @@ class accountDAO extends DAO
         $sql = 'CALL insertNewAccount(?, ?, ?, ?, ?, ?);';
         $args = [
             $account->getAccountID(),
-            $account->getName(),
+            $account->getUsername(),
             $account->getEmail(),
             $account->getPassword(),
             $account->getActivationCode(),
@@ -166,12 +166,18 @@ class accountDAO extends DAO
     // Prepared statement that uses a stored procedure
     public function update(Account $account): void
     {
-        $sql = 'CALL updateAccount(?, ?, ?, ?, ?);';
+        $sql = 'CALL updateAccount(?, ?, ?, ?, ?, ?, ?);';
         $args = [
-            $account->getName(),
+            $account->getUsername(),
             $account->getEmail(),
-            $account->getActive(),
-            $account->getBetaUser(),
+            $account->getPassword(),
+
+            // Account model isActive property is of type boolean, which either return true or false
+            // MySQL does not have a boolean type, use tinyint(1)
+            // Convert value to integer to prevent MySQL invalid datetime format fatal error
+            (int)$account->getActive(),
+            $account->getActivationCode(),
+            $account->getExpiryDate(),
             $account->getAccountID()
         ];
         $this->execute($sql, $args);
