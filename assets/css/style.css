@@ -248,7 +248,6 @@ section#about-section {
 }
 
 button.btn.btn-credits,
-a.btn.btn-cancel,
 .btn.btn-lg.btn-credits {
     background-color: #d6004a;
     border: 2px solid #d6004a !important;
@@ -257,7 +256,6 @@ a.btn.btn-cancel,
 }
 
 button.btn.btn-credits-inverted,
-a.btn.btn-cancel-inverted,
 .btn.btn-lg.btn-credits-inverted {
     background-color: #d6004a;
     border: 2px solid #fff !important;
@@ -266,14 +264,12 @@ a.btn.btn-cancel-inverted,
 }
 
 button.btn.btn-credits:hover,
-a.btn.btn-cancel:hover,
 .btn.btn-lg.btn-credits:hover {
     color: #d6004a;
     background-color: inherit;
 }
 
 button.btn.btn-credits-inverted:hover,
-a.btn.btn-cancel-inverted:hover,
 .btn.btn-lg.btn-credits-inverted:hover {
     color: #d6004a;
     background-color: #fff;
@@ -524,19 +520,19 @@ label > a:visited {
 
 /** Signup page and Login page */
 form i.fa-user {
-    margin-bottom: 2rem;
+    margin-bottom: -2rem;
 }
 
 form i.fa-envelope {
-    margin-bottom: 2rem;
+    margin-bottom: -2rem;
 }
 
 form i.fa-lock {
-    margin-bottom: 2rem;
+    margin-bottom: -2rem;
 }
 
 form i.fa-key {
-    margin-bottom: 2rem;
+    margin-bottom: -2rem;
 }
 
 /** =================================================================
@@ -662,14 +658,16 @@ form i.fa-key {
 }
 
 .btn-cancel {
-    color: #fff;
+    color: #d6004a;
+    background-color: #fff;
+    border-radius: 25px;
+    border: 2px solid #d6004a;
 }
 
 .btn-cancel:hover {
+    color: #fff;
     background-color: #d6004a;
-    color: #ffffff;
 }
-
 /** =================================================================
 *
 *    Media queries => Responsive elements
