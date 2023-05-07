@@ -31,8 +31,8 @@ class login extends View
                                             <div class="d-flex flex-row align-items-center mb-4">
                                                 <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                                 <div class="form-outline flex-fill mb-0">
-                                                    <input id="form_email" type="email" name="email" class="form-control" required>
                                                     <label for="form_email" class="form-label">E-mailadres</label>
+                                                    <input id="form_email" type="email" name="email" class="form-control" required>
                                                     <div class="invalid-feedback">
                                                         Voer een geldig e-mailadres in.
                                                     </div>
@@ -40,10 +40,10 @@ class login extends View
                                             </div>
 
                                             <div class="d-flex flex-row align-items-center mb-4">
-                                                <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                                <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                                                 <div class="form-outline flex-fill mb-0">
-                                                    <input id="form_password" type="password" name="password" class="form-control" required>
                                                     <label for="form_password" class="form-label">Wachtwoord</label>
+                                                    <input id="form_password" type="password" name="password" class="form-control" required>
                                                     <div class="invalid-feedback">
                                                         Dit veld is verplicht.
                                                     </div>
@@ -85,7 +85,18 @@ class login extends View
                                                 if ($_GET["reset"] == "success") {
                                                     echo '<p class="form-success"><i class="fa-solid fa-circle-exclamation"></i> Uw wachtwoord is successvol gereset.<br> U kunt nu inloggen. </p>';
                                                 }
-                                            } ?>
+                                            }
+                                            if (isset($_GET["passwordChange"])) {
+                                                if ($_GET["passwordChange"] == "success") {
+                                                    echo '<p class="form-success"><i class="fa-solid fa-circle-exclamation"></i> Uw wachtwoord is successvol gewijzigd.<br> U kunt nu inloggen met het nieuwe wachtwoord. </p>';
+                                                }
+                                            }
+                                            if (isset($_GET["emailChange"])) {
+                                                if ($_GET["emailChange"] == "success") {
+                                                    echo '<p class="form-success"><i class="fa-solid fa-circle-exclamation"></i> Uw e-mailadres is successvol gewijzigd.<br> U dient uw email-adres te verifiëren voordat u kunt inloggen. </p>';
+                                                }
+                                            }
+                                            ?>
                                         </form>
                                     </div>
                                     <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
