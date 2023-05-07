@@ -28,7 +28,7 @@ INSERT INTO `accounts` (`accountID`, `username`, `email`, `password`, `isBetaUse
   ('AID644e579c94ba0', 'chrisjjee', 'chrisjee_3213@hotmail.com', '$2y$10$dV48fzD0CYxO80ERMMbAm.RoeYXW0c8TxE5JC6rzWjbC/M/mEBC42', 0, 'UID644e579c94ba0', 1, "$2y$10$t1jPI905mc34ImEgVdKemOwDd2mN0qKGGu8zxIZKWc9nySgqqe2w6", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
   ('AID644e579c94ba1', 'banaanaa', 'chiquitabanana@hotmail.com', '$2y$10$niMTxstvGyYBjZZQ/6hK8ei4P4FltVlt8zAT2Ts8XaZGyXoaA45mC', 0, 'UID644e579c94ba1', 1, "$2y$10$/6ogbuuLxH/wASmAEHbkGOFyPAMX.K7KQ9oc9mYCdefhw0kRgnm4W", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
   ('AID644e579c94ba2', 'connor', 'connorh@gmail.com', '$2y$10$YCHr7ZA8iHic1zdwLdd5zu1JSxG/Msa139I5QNvTwQb3Qcm09T0qG', 0, 'UID644e579c94ba2', 1, "$2y$10$oVOodTV6.UzmZzt4cHJ5SurCApL2PuLyazg4InlVg8Sfow8qnjoEC", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
-  ('AID644e579c94ba3', 'falcooo1991', 'falcoo_1991@email.com', '$2y$10$I/ZQpbJ3eCgehf6D1lRNj.uus3t.rXK16QTcSoQdOXOigLTDfEZMK', 0, 'UID644e579c94ba3', 1, "$2y$10$.0YmIpOMccc3GXlb/Nt.5.hnDFmz.0BrxbHBdvSzJ2Nd3HlAvPlp6", "2023-04-24 15:41:16", "2023-04-23 11:16:21");
+  ('AID644e579c94ba3', 'falcooo1991', 'falcoo_1991@email.com', '$2y$10$I/ZQpbJ3eCgehf6D1lRNj.uus3t.rXK16QTcSoQdOXOigLTDfEZMK', 0, NULL, 1, "$2y$10$.0YmIpOMccc3GXlb/Nt.5.hnDFmz.0BrxbHBdvSzJ2Nd3HlAvPlp6", "2023-04-24 15:41:16", "2023-04-23 11:16:21");
 
 -- Insert data into the 'userProfiles' table
 
