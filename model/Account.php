@@ -28,7 +28,7 @@ class Account extends Model
         return $this->accountID;
     }
 
-    public function getName(): string
+    public function getUsername(): string
     {
         return $this->username;
     }
