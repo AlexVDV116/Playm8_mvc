@@ -127,7 +127,7 @@ class admin extends View
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="?view=SearchAccounts" class="nav-link">
+                                    <a href="?view=searchAccounts" class="nav-link">
                                         Zoek accounts
                                     </a>
                                 </li>

@@ -6,7 +6,7 @@ require_once 'dao/accountDAO.php';
 ini_set('display_errors', 1);
 
 
-class SearchAccounts extends View
+class searchAccounts extends View
 {
 
     public function show()
@@ -73,4 +73,4 @@ class SearchAccounts extends View
     <?php
     }
 }
-new SearchAccounts;
+new searchAccounts;
