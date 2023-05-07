@@ -181,21 +181,23 @@ DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE `updateAccount`(
-    IN `username` varchar(500), 
-    IN `email` varchar(500), 
-    IN `isActive` TINYINT, 
-    IN `isBetaUser` TINYINT, 
-    IN `accountID` varchar(500))
+  IN `username` varchar(500), 
+  IN `email` varchar(500), 
+  IN `password` varchar(500), 
+  IN `isActive` TINYINT(1), 
+  IN `activationCode` varchar(500), 
+  IN `activationExpiry` varchar(500), 
+  IN `accountID` varchar(500))
 UPDATE `accounts` 
-SET username = username, email = email, isActive = isActive, isBetaUser = isBetaUser 
+SET username = username, email = email, password = password, isActive = isActive, activationCode = activationCode, activationExpiry = activationExpiry
 WHERE accounts.accountID = accountID$$
 DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE `deleteAccount`(
-    IN `account_id` INT(16))
+    IN `accountID` varchar(500))
 DELETE FROM `accounts` 
-WHERE `accounts_id` = account_id$$
+WHERE accounts.accountID = accountID$$
 DELIMITER ;
 
 DELIMITER $$
@@ -280,4 +282,13 @@ CREATE PROCEDURE `updateUserProfilePicture`(
   IN `userProfilePicture` varchar(500), 
   IN `userProfileID` varchar(500))
 UPDATE userProfiles SET userProfiles.userProfilePicture = userProfilePicture WHERE userProfiles.userProfileID = userProfileID$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `deleteUserProfile`(
+  IN `userProfileID` varchar(500))
+BEGIN
+  UPDATE `accounts` SET accounts.userProfileID = NULL WHERE accounts.userProfileID = userProfileID;
+    DELETE FROM `userProfiles` WHERE userProfiles.userProfileID = userProfileID;
+END$$
 DELIMITER ;
