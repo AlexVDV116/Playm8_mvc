@@ -1,10 +1,16 @@
 <?php
-require_once 'framework/View.php';
-require_once 'model/Account.php';
-require_once 'dao/accountDAO.php';
 
-ini_set('display_errors', 1);
+// Define the namespace of this class
+namespace View;
 
+// Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
+require '../vendor/autoload.php';
+
+// Import classes this class depends on
+use Framework\View;
+use DAO\accountDAO;
+
+// searchAccounts class that handles the admin func search of users in the database and allows him to edit that user account
 
 class searchAccounts extends View
 {
@@ -18,6 +24,13 @@ class searchAccounts extends View
             $accountDAO->startSearch($search);
         }
 ?>
+        <div>
+            <h4>Zoek account</h4>
+            <p>
+                Voer een accountnaam of email in om te zoeken:
+            </p>
+        </div>
+
         <div class="form-group d-flex justify-content-end">
             <form action="#" method="post">
                 <input class="rounded form-control-sm" type="text" name="search" placeholder="Zoek Accounts">
@@ -49,7 +62,7 @@ class searchAccounts extends View
                     ?>
                         <tr onclick="">
                             <!-- PHP shorthand to echo the data in the table -->
-                            <td><?= '# ' . $account->getAccountID() ?></td>
+                            <td><?= "# " . "<a href ='../view/admin.php?view=adminEditAccount&account=" . $account->getEmail() . "'>" . $account->getAccountID() ?></td>
                             <td><?= '# ' . $account->getUserProfileID() ?></td>
                             <td><?= $account->getUsername() ?></td>
                             <td><?= $account->getEmail() ?></td>
