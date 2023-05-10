@@ -1,6 +1,4 @@
 <?php
-// set include path to work from any directory level
-set_include_path('./' . PATH_SEPARATOR . '../');
 
 session_start();
 
@@ -9,8 +7,7 @@ header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1
 header("Pragma: no-cache"); // HTTP 1.0 clients (IE6 / pre 1997)
 header("Expires: 0"); // HTTP 1.0 Proxies
 
-
-/* Echo session variables */
+/* Echo session variables for development purposes */
 echo '<pre>';
 var_dump($_SESSION);
 echo '</pre>';
@@ -45,10 +42,10 @@ echo '</pre>';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/css/intlTelInput.css">
 
     <!-- Custom CSS / JS -->
-    <link rel="stylesheet" href="<?php echo $ROOT; ?>assets/css/style.css">
+    <link rel="stylesheet" href="<?= $ROOT ?>assets/css/style.css">
 
     <title>Playm8</title>
-    <link rel="icon" type="image/x-icon" href="<?php echo $ROOT; ?>assets/images/Playm8_favicon_32x32.png">
+    <link rel="icon" type="image/x-icon" href="<?= $ROOT ?>assets/images/Playm8_favicon_32x32.png">
 </head>
 
 <body>
@@ -67,8 +64,8 @@ echo '</pre>';
 
         <nav id="main-navbar" class="navbar navbar-expand-xxl">
             <div class="container">
-                <a class="navbar-brand" href="<?php echo $ROOT; ?>index.php">
-                    <img src="<?php echo $ROOT; ?>/assets/images/logo.svg" alt="Logo" class="img-fluid logo">
+                <a class="navbar-brand" href="<?= $ROOT ?>index.php">
+                    <img src="<?= $ROOT ?>assets/images/logo.svg" alt="Logo" class="img-fluid logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="bar"></span>
@@ -78,23 +75,23 @@ echo '</pre>';
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav align-items-center">
                         <li class="nav-item pt-2 px-3">
-                            <a class="nav-link active" href="<?php echo $ROOT; ?>index.php#about-section" data-action="about-section">
+                            <a class="nav-link active" href="<?= $ROOT ?>index.php#about-section" data-action="about-section">
                                 Over ons</a>
                         </li>
                         <li class="nav-item pt-2 px-3">
-                            <a class="nav-link" href="<?php echo $ROOT; ?>index.php#features-section" data-action="features-section">
+                            <a class="nav-link" href="<?= $ROOT ?>index.php#features-section" data-action="features-section">
                                 App Features</a>
                         </li>
                         <li class="nav-item pt-2 px-3">
-                            <a class="nav-link" href="<?php echo $ROOT; ?>index.php#impression-section" data-action="impression-section">
+                            <a class="nav-link" href="<?= $ROOT ?>index.php#impression-section" data-action="impression-section">
                                 Impressie</a>
                         </li>
                         <li class="nav-item pt-2 px-3">
-                            <a class="nav-link" href="<?php echo $ROOT; ?>index.php#credits-section" data-action="credits-section">
+                            <a class="nav-link" href="<?= $ROOT ?>index.php#credits-section" data-action="credits-section">
                                 Abbonementen</a>
                         </li>
                         <li class="nav-item pt-2 px-3">
-                            <a class="nav-link" href="<?php echo $ROOT; ?>index.php#tester-section" data-action="tester-section">
+                            <a class="nav-link" href="<?= $ROOT ?>index.php#tester-section" data-action="tester-section">
                                 Betatester</a>
                         </li>
                         <!-- If user is logged in show account name and logout button -->
@@ -109,12 +106,12 @@ echo '</pre>';
                                         <?php echo $_SESSION["auth_user"]["username"]; ?>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="<?php echo $ROOT; ?>view/admin.php">Admin Dashboard</a></li>
+                                        <li><a class="dropdown-item" href="<?= $ROOT ?>view/admin.php">Admin Dashboard</a></li>
                                     </ul>
                                 </li>
                             </div>
                             <li class="nav-item px-2">
-                                <a class="nav-link btn btn-login nav-btn" href="<?php echo $ROOT; ?>includes/logout.inc.php" role="button">
+                                <a class="nav-link btn btn-login nav-btn" href="<?= $ROOT ?>includes/logout.inc.php" role="button">
                                     Uitloggen
                                 </a>
                             </li>
@@ -127,17 +124,17 @@ echo '</pre>';
                                         <?php echo $_SESSION["auth_user"]["username"]; ?>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="<?php echo $ROOT; ?>view/editAccount.php">Account</a></li>
+                                        <li><a class="dropdown-item" href="<?= $ROOT ?>view/editAccount.php">Account</a></li>
                                         <?php
                                         if (isset($_SESSION["auth_user"]["userProfileID"])) {
                                         ?>
-                                            <li><a class="dropdown-item" href="<?php echo $ROOT; ?>view/userProfilePage.php">Gebruikersprofiel</a></li>
-                                            <li><a class="dropdown-item" href="<?php echo $ROOT; ?>view/editUserProfile.php">Wijzig profiel</a></li>
+                                            <li><a class="dropdown-item" href="<?= $ROOT ?>view/userProfilePage.php">Gebruikersprofiel</a></li>
+                                            <li><a class="dropdown-item" href="<?= $ROOT ?>view/editUserProfile.php">Wijzig profiel</a></li>
                                             <li><a class="dropdown-item" href="#">Vind matches</a></li>
                                         <?php
                                         } else {
                                         ?>
-                                            <li><a class="dropdown-item" href="<?php echo $ROOT; ?>includes/createUserProfile.inc.php">Creëer gebruikersprofiel</a></li>
+                                            <li><a class="dropdown-item" href="<?= $ROOT ?>view/editUserProfile.php">Creëer gebruikersprofiel</a></li>
                                         <?php
                                         }
                                         ?>
@@ -145,7 +142,7 @@ echo '</pre>';
                                 </li>
                             </div>
                             <li class="nav-item px-2">
-                                <a class="nav-link btn btn-login nav-btn" href="<?php echo $ROOT; ?>includes/logout.inc.php" role="button">
+                                <a class="nav-link btn btn-login nav-btn" href="<?= $ROOT ?>includes/logout.inc.php" role="button">
                                     Uitloggen
                                 </a>
                             </li>
@@ -153,12 +150,12 @@ echo '</pre>';
                         } else {
                         ?>
                             <li class="nav-item pl-3 pr-1">
-                                <a class="nav-link btn btn-register nav-btn" href="<?php echo $ROOT; ?>view/signup.php" role="button">
+                                <a class="nav-link btn btn-register nav-btn" href="<?= $ROOT ?>view/signup.php" role="button">
                                     Registreren
                                 </a>
                             </li>
                             <li class="nav-item px-2">
-                                <a class="nav-link btn btn-login nav-btn" href="<?php echo $ROOT; ?>view/login.php" role="button">
+                                <a class="nav-link btn btn-login nav-btn" href="<?= $ROOT ?>view/login.php" role="button">
                                     Inloggen
                                 </a>
                             </li>
