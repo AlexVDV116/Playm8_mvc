@@ -1,10 +1,19 @@
 <?php
 
+// Define the namespace of this class
+namespace Framework;
+
+// Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
+require '../vendor/autoload.php';
+
+// Import classes this class depends on
+use Framework\databaseHandler;
+use Framework\Model;
+use Model\Account;
+
 // Data Abstraction Object
 // Interacts with the Databasehandler to set up a connection with the database
 // Contains all the methods to interact with the database
-
-require_once '../framework/databaseHandler.php';
 
 abstract class DAO extends databaseHandler
 {
@@ -46,5 +55,10 @@ abstract class DAO extends databaseHandler
         $result = $this->object;
         $this->object = $this->stmt->fetchObject($this->class) ?: null;
         return $result;
+    }
+
+    function closeConnection(): void
+    {
+        $this->stmt->closeCursor();
     }
 }
