@@ -1,8 +1,17 @@
 <?php
 
-// Databasehandler class that opens up the database connection
+// Define the namespace of this class
+namespace Framework;
 
-require_once '../data/secret.php';
+// Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
+require '../vendor/autoload.php';
+
+// Import classes this class depends on
+use Data\Secret;
+use PDO;
+use PDOException;
+
+// Databasehandler class that handles the database connection
 
 class databaseHandler
 {
