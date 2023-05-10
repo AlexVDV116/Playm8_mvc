@@ -1,44 +1,40 @@
 <?php
 
-// Role class
+// Define the namespace of this class
+namespace Model;
 
-require_once '../framework/Model.php';
+// Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
+require '../vendor/autoload.php';
+
+// Import classes this class depends on
+use Framework\Model;
+
+// Role class with several methods to get it's own attribute values
+
 
 class Role extends Model
 {
-    private string $roleName;
-    private string $roleDescription;
-    private array $permissions;
+    public int $roleID;
+    public string $roleName;
+    public string $roleDescription;
 
-    public function __construct($roleName, $roleDescription)
+    public function __construct(?array $data = null)
     {
-        $this->roleName = $roleName;
-        $this->roleDescription = $roleDescription;
-        $this->permissions = array();
+        parent::__construct($data);
     }
 
-    public function __toString(): string
+    public function getRoleID(): int
+    {
+        return $this->roleID;
+    }
+
+    public function getRoleName(): string
     {
         return $this->roleName;
     }
 
-    public function addPermission(Permission $permission): void
+    public function getRoleDescription(): string
     {
-        $this->permissions[] = $permission;
-    }
-
-    public function deletePermission(Permission $permission): void
-    {
-        unset($this->permissions[array_search($permission, $this->permissions)]);
-    }
-
-    public function getPermission(): array
-    {
-        return $this->permissions;
-    }
-
-    public function hasPermission(Permission $permission): bool
-    {
-        return in_array($permission, $this->permissions);
+        return $this->roleDescription;
     }
 }
