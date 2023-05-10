@@ -115,34 +115,30 @@ INSERT INTO `matches` (`userProfileID_A`, `userProfileID_B`) VALUES
 -- Insert data into the 'permissions' table
  
 INSERT INTO `permissions` (`permissionID`, `permissionName`, `permissionDescription`) VALUES
-  ('01', 'CreateAccount', 'The permission to create an account.'),
-  ('02', 'DeleteAccount', 'The permission to delete an account.'),
-  ('03', 'DisableEnableAccount', 'The permission to disable or enable an account.'),
-  ('04', 'ChangePassword', 'The permission to set the password for an account.'),
-  ('05', 'ForceLogout', 'The permission to force an account to log out.'),
-  ('06', 'CreatePermission', 'The permission to create a permission.'),
-  ('07', 'CreateRole', 'The permission to create a new role.'),
-  ('08', 'GivePermission', 'The permission to give permission to a role.'),
-  ('09', 'GiveRole', 'The permission to give a role to a user.'),
-  ('10', 'EditProfile', 'The permission to edit a user profile.'),
-  ('11', 'ResetPassword', 'The permission to reset the password for an account.'),
-  ('12', 'DeleteOwnAccount', 'The permission to delete your own account.'),
-  ('13', 'EditCompanyPage', 'The permission to edit company page.');;
+  ('01', 'CreateAccount', 'De permissie om een account te kunnen creëren.'),
+  ('02', 'DeleteAccount', 'De permissie om een account te kunnen verwijderen.'),
+  ('03', 'DisableEnableAccount', 'De permissie om een account te kunnen aanzetten of uitzetten.'),
+  ('04', 'ChangePassword', 'De permissie om het wachtwoord van een account te kunnen wijzigen.'),
+  ('05', 'ForceLogout', 'De permissie om een account geforceerd uit te kunnen loggen.'),
+  ('06', 'CreatePermission', 'De permissie om een permissie te kunnen creëren.'),
+  ('07', 'CreateRole', 'De permissie om een rol te kunnen creëren'),
+  ('08', 'GivePermission', 'De permissie om een permissie toe te kunnen wijzen.'),
+  ('09', 'GiveRole', 'De permissie om een rol toe te kunnen wijzen.'),
+  ('10', 'EditProfile', 'De permissie om een profiel te kunnen wijzigen.'),
+  ('11', 'ResetPassword', 'De permissie om het wachtwoord van een account te kunnen wijzigen.');
 
 -- Insert data into the 'roles' table
 
 INSERT INTO `roles`(`roleID`, `roleName`, `roleDescription`) VALUES
-  ('01','User','Basic user account'),
-  ('02','Moderator','Basic moderator account'),
-  ('03','Admin','Basic admin account'),
-  ('04','Company','Basic company account');
+  ('01','User','Basis gebruikers account'),
+  ('02','Moderator','Basis moderator account'),
+  ('03','Admin','Basis admin account');
 
  -- Insert data into the 'rolesPermissions' table
 
  INSERT INTO `rolesPermissions`(`roleID`, `permissionID`) VALUES
   ('01','10'),
   ('01','11'),
-  ('01','12'),
   ('02','03'),
   ('02','04'),
   ('02','11'),
@@ -156,9 +152,7 @@ INSERT INTO `roles`(`roleID`, `roleName`, `roleDescription`) VALUES
   ('03','08'),
   ('03','09'),
   ('03','10'),
-  ('03','11'),
-  ('04','12'),
-  ('04','13');
+  ('03','11');
 
   -- Insert data into the 'accountsRoles' table
 
