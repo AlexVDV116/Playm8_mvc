@@ -1,14 +1,22 @@
 <?php
 
+// Define the namespace of this class
+namespace DAO;
+
+// Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
+require '../vendor/autoload.php';
+
+// Import the parent class Controller 
+use Framework\DAO;
+use Model\Account;
+use Model\Mail;
+use PDO;
+use Data\mailConfig;
+
 ini_set('display_errors', 1);
 
 // Data Abstraction Object for an Account object
-// Can access the database create, read, update, or delete data (CRUD)
-
-require_once '../framework/DAO.php';
-require_once '../model/Account.php';
-require_once '../data/secret.php';
-require_once '../model/Mail.php';
+// Can access the database and create, read, update, or delete (CRUD) the accounts table
 
 class accountDAO extends DAO
 {
@@ -17,7 +25,7 @@ class accountDAO extends DAO
 
     public function __construct()
     {
-        parent::__construct('Account');
+        parent::__construct('Model\Account');
     }
 
     // Method that checks if the account exists in our database
@@ -107,7 +115,7 @@ class accountDAO extends DAO
         $this->startListSql($sql);
     }
 
-    // Select all records from accounts table and order them by accountID
+    // Select all records from accounts table that match search term
     public function startSearch($search): void
     {
         $search = "%" . $search . "%";
@@ -300,6 +308,7 @@ class accountDAO extends DAO
         $body = "<p><strong>Thank you for registering at Playm8!</strong></p>";
         $body .= "<p>Please follow this link to activate your account:<br>";
         $body .= "{$activationLink}</p>";
+        $body .= "<p>This link will expire in 1 hour.</p>";
 
         $activationMail = new Mail($senderName, $senderEmail, $senderEmailPassword);
         $activationMail->sendMail($recieverEmail, $subject, $body);
