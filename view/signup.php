@@ -1,12 +1,21 @@
 <?php
-// set include path to work from any directory level
-set_include_path('./' . PATH_SEPARATOR . '../');
 
-// Setting the ROOT directory for this file so the relative paths used in included pages will still work
+// Define the namespace of this class
+namespace View;
+
+// Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
+require '../vendor/autoload.php';
+
+// Import classes this class depends on
+use Framework\View;
+
+// Setting the ROOT directory for this file so the relative paths used in any included pages will still work
 $ROOT = '../';
 
-include_once '../header.php';
-require_once 'framework/View.php';
+// Include the header
+include_once('../header.php');
+
+// signup class that has the signup form and echos various error messages after the accountController class validated user input
 
 class signup extends View
 {
@@ -141,4 +150,4 @@ class signup extends View
     }
 }
 new signup;
-include_once '../footer.php';
+include_once('../footer.php');
