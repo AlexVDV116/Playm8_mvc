@@ -1,10 +1,15 @@
 <?php
 
-session_start();
+// Define the namespace of this script
+namespace Includes;
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
+require '../vendor/autoload.php';
+
+// Import classes this script depends on
+use Controller\userProfileController;
+
+session_start();
 
 // Check if user is logged in and form is submitted
 if (isset($_SESSION["auth_user"]) && isset($_POST["submit"])) {

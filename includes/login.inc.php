@@ -1,15 +1,19 @@
 <?php
 
+// Define the namespace of this script
+namespace Includes;
+
+// Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
+require '../vendor/autoload.php';
+
+// Import classes this script depends on
+use Controller\loginController;
+
 // An include file that runs a PHP script
 // Gets the data from the loginform trough the $_POST method
 // Uses this data to instantiate a loginController object
 // The loginController will run several server side validations
 // If no errors return user to the index.php with a success message
-
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
 if (isset($_POST["submit"])) {
 

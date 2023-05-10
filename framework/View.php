@@ -1,5 +1,8 @@
 <?php
 
+// Define the namespace of this class
+namespace Framework;
+
 abstract class View
 {
 

@@ -1,10 +1,15 @@
 <?php
 
-session_start();
+// Define the namespace of this script
+namespace Includes;
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
+require '../vendor/autoload.php';
+
+// Import classes this script depends on
+use DAO\userProfileDAO;
+
+session_start();
 
 if (isset($_POST["submit"])) {
 
