@@ -1,13 +1,18 @@
 <?php
 
-// Controller class that handles user input when using the forgot password form
-// Connects to the database trough an instance of the accountDAO class
+// Define the namespace of this class
+namespace Controller;
 
-require_once '../framework/Controller.php';
-require_once '../dao/accountDAO.php';
+// Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
+require '../vendor/autoload.php';
+
+// Import classes this class depends on
+use Framework\Controller;
+use DAO\accountDAO;
 
 // This class performs several error checks on the data the user supplies to us when he request to reset his password
 // If there are no errors it will instantiate an accountDAO and use its resetPassword method with the supplied user email
+
 class forgotPasswordController extends Controller
 {
 
