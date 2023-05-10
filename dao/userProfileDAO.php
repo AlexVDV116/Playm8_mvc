@@ -1,12 +1,19 @@
 <?php
 
+// Define the namespace of this class
+namespace DAO;
+
+// Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
+require '../vendor/autoload.php';
+
+// Import classes this class depends on
+use Framework\DAO;
+use Model\userProfile;
+
 ini_set('display_errors', 1);
 
 // Data Abstraction Object for an UserProfile object
-// Can access the database create, read, update, or delete data (CRUD)
-
-require_once '../framework/DAO.php';
-require_once '../model/userProfile.php';
+// Can access the database create, read, update, or delete data (CRUD) on the userProfiles table
 
 class userProfileDAO extends DAO
 {
@@ -15,7 +22,7 @@ class userProfileDAO extends DAO
 
     public function __construct()
     {
-        parent::__construct('userProfile');
+        parent::__construct('Model\userProfile');
     }
 
     // Returns a new userProfile object if no email provided
