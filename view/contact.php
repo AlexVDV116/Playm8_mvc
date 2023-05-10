@@ -1,4 +1,14 @@
 <?php
+
+// Define the namespace of this class
+namespace View;
+
+// Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
+require '../vendor/autoload.php';
+
+// Import classes this class depends on
+use Framework\View;
+
 // set include path to work from any directory level
 set_include_path('./' . PATH_SEPARATOR . '../');
 
@@ -12,9 +22,10 @@ if (isset($_SESSION['contact_form']) && !empty($_SESSION['contact_form'])) {
 // Setting the ROOT directory for this file so the relative paths used in included pages will still work
 $ROOT = '../';
 
+// Include the header
 include_once '../header.php';
-require_once 'framework/View.php';
 
+// Contact class that contains the contact form
 
 class contact extends View
 {
