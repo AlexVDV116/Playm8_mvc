@@ -1,10 +1,18 @@
 <?php
 
-require_once 'framework/View.php';
-require_once 'model/Account.php';
-require_once 'dao/accountDAO.php';
+// Define the namespace of this class
+namespace View;
 
-class ListAccounts extends View
+// Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
+require '../vendor/autoload.php';
+
+// Import classes this class depends on
+use Framework\View;
+use DAO\accountDAO;
+
+// listAccounts class that lists all accounts in the accounts table and gives the administrator the option to edit each one of them
+
+class listAccounts extends View
 {
 
     public function show()
@@ -12,6 +20,12 @@ class ListAccounts extends View
         $accountDAO = new accountDAO;
         $accountsCount = $accountDAO->getCount("accounts");
         $accountDAO->startList();
+
+        if (isset($_GET["deleteAccount"])) {
+            if ($_GET["deleteAccount"] == "success") {
+                echo '<p class="form-success"><i class="fa-solid fa-circle-exclamation"></i> Account succesvol verwijderd.</p>';
+            }
+        }
 ?>
         <div>
             <p>Total number of accounts: <?= $accountsCount ?></p>
@@ -36,7 +50,7 @@ class ListAccounts extends View
                     ?>
                         <tr onclick="">
                             <!-- PHP shorthand to echo the data in the table -->
-                            <td><?= '# ' . $account->getAccountID() ?></td>
+                            <td><?= "# " . $account->getAccountID() ?></td>
                             <td><?= '# ' . $account->getUserProfileID() ?></td>
                             <td><?= $account->getUsername() ?></td>
                             <td><?= $account->getEmail() ?></td>
@@ -50,14 +64,19 @@ class ListAccounts extends View
                                 } else {
                                     echo 'Nee';
                                 } ?>
+                            <td><?= "<a href ='../view/admin.php?view=adminEditAccount&account=" . $account->getEmail() . "'>Wijzig" ?></td>
+
                         </tr>
                     <?php
                     }
                     ?>
+                    <tr>
+                        <td colspan="7"><a href="../view/admin.php?view=addAccount"><i class="fa-solid fa-plus"></i> </a></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
 <?php
     }
 }
-new ListAccounts;
+new listAccounts;
