@@ -1,11 +1,24 @@
 <?php
+
+// Define the namespace of this class
+namespace View;
+
+// Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
+require '../vendor/autoload.php';
+
+// Import classes this class depends on
+use Framework\View;
+
 // set include path to work from any directory level
 set_include_path('./' . PATH_SEPARATOR . '../');
 
-// Session start and error headings because we do not include_once header.php in this file
+// Session start and error headings because we do not include the header.php in this file
 session_start();
 
-require_once 'framework/View.php';
+/* Echo session variables for development purposes */
+echo '<pre>';
+var_dump($_SESSION);
+echo '</pre>';
 
 // Check if user is logged in if false redirect to index page else check if user has the correct admin role
 if ($_SESSION["auth"] == false) {
@@ -132,13 +145,8 @@ class admin extends View
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="?view=Home" class="nav-link">
+                                    <a href="?view=listRolesPermissions" class="nav-link">
                                         Rollen en Permissies
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="?view=Home" class="nav-link">
-                                        Downloads
                                     </a>
                                 </li>
                             </ul>
