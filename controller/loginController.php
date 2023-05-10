@@ -1,18 +1,20 @@
 <?php
 
-// Controller class that handles user input when logging in as a user
-// Connects to the database trough an instance of the accountDAO class
+// Define the namespace of this class
+namespace Controller;
+
+// Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
+require '../vendor/autoload.php';
+
+// Import classes this class depends on
+use Framework\Controller;
+use DAO\accountDAO;
 
 // Server side user input validation when submitting the inlog form data
 // Gets the data from the login.inc.php
 // If no errors found, instantiates an accountDAO object and runs the getUser method to log the user in
 
-require_once '../framework/Controller.php';
-require_once '../dao/accountDAO.php';
-
-// This class performs several error checks on the data the user supplies to us when logging in
-// If there are no errors it will use the getUser method inherited from the Login class
-class LoginController extends Controller
+class loginController extends Controller
 {
 
     private string $email;
