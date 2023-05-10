@@ -1,9 +1,17 @@
 <?php
 
+// Define the namespace of this class
+namespace Controller;
+
+// Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
+require '../vendor/autoload.php';
+
+// Import classes this class depends on
+use Framework\Controller;
+use DAO\accountDAO;
+
 // Controller class that handles user input when registering as a beta user
 // Connects to the database trough an instance of the accountDAO class
-
-require_once '../framework/Controller.php';
 
 class betaFormController extends Controller
 {
