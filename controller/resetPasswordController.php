@@ -1,10 +1,17 @@
 <?php
 
-// Controller class for the resetPassword that handles user input
-// Connects to the database trough an instance of the accountDAO class
+// Define the namespace of this class
+namespace Controller;
 
-require_once '../framework/Controller.php';
-require_once '../dao/accountDAO.php';
+// Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
+require '../vendor/autoload.php';
+
+// Import classes this class depends on
+use Framework\Controller;
+use DAO\accountDAO;
+
+// Controller class for the resetPassword that handles user input
+// Connects to the database trough an instance of the accountDAO class and updates the user password
 
 class resetPasswordController extends Controller
 {
