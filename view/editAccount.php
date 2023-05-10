@@ -1,27 +1,28 @@
 <?php
-session_start();
 
-/*
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);\
-*/
+// Define the namespace of this class
+namespace View;
 
-// set include path to work from any directory level
-set_include_path('./' . PATH_SEPARATOR . '../');
+// Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
+require '../vendor/autoload.php';
 
-// Setting the ROOT directory for this file so the relative paths used in included pages will still work
+// Import classes this class depends on
+use Framework\View;
+use DAO\accountDAO;
+
+// Setting the ROOT directory for this file so the relative paths used in any included pages will still work
 $ROOT = '../';
 
+// Include the header
 include_once '../header.php';
-require_once 'framework/View.php';
-require_once 'dao/accountDAO.php';
 
 // Check if user is logged in if false redirect to index page else continue
 if ($_SESSION["auth"] == false) {
     header("location: ../index.php");
     exit();
 };
+
+// editAccount class that has a form where the user can edit its own account details
 
 class editAccount extends View
 {
@@ -96,8 +97,8 @@ class editAccount extends View
                                     <div class="row mt-4">
                                         <div class="col-md-6">
                                             <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                                            <label for="form_currentPassword" class="form-label">Huidig wachtwoord</label>
-                                            <input id="form_currentPasswordrepeat" type="password" name="currentPassword" class="form-control" placeholder="Voer huidig wachtwoord in" required>
+                                            <label for="form_currentPasswordrepeat" class="form-label">Huidig wachtwoord</label>
+                                            <input id="form_currentPasswordrepeat" type="password" name="currentPasswordrepeat" class="form-control" placeholder="Voer huidig wachtwoord in" required>
                                             <div class="invalid-feedback">
                                                 Dit veld is verplicht.
                                             </div>
