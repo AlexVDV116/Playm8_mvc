@@ -1,12 +1,14 @@
 <?php
-session_start();
 
-/*
-ini_set('display_errors', 1);
-header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1
-header("Pragma: no-cache"); // HTTP 1.0 clients (IE6 / pre 1997)
-header("Expires: 0"); // HTTP 1.0 Proxies
-*/
+// Define the namespace of this class
+namespace View;
+
+// Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
+require '../vendor/autoload.php';
+
+// Import classes this class depends on
+use Framework\View;
+use DAO\userProfileDAO;
 
 // Check if user does not have a userProfileID and redirect to createUserProfile page else continue
 if (!isset($_SESSION["auth_user"]["userProfileID"])) {
@@ -20,9 +22,10 @@ set_include_path('./' . PATH_SEPARATOR . '../');
 // Setting the ROOT directory for this file so the relative paths used in included pages will still work
 $ROOT = '../';
 
+// Include the header
 include_once '../header.php';
-require_once 'framework/View.php';
-require_once 'dao/userProfileDAO.php';
+
+// userProfilePage class that displays the userProfile details of the user
 
 class userProfilePage extends View
 {
