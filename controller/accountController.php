@@ -1,20 +1,28 @@
 <?php
 
+// Define the namespace of this class
+namespace Controller;
+
+// Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
+require '../vendor/autoload.php';
+
+// Import classes this class depends on
+use Framework\Controller;
+use DAO\accountDAO;
+use DAO\roleDAO;
+use Model\Account;
+
 // Controller class that handles user input when registering an account
 // Connects to the database trough an instance of the accountDAO class
 
-require_once '../framework/Controller.php';
-require_once '../dao/accountDAO.php';
-require_once '../model/Mail.php';
-
 class accountController extends Controller
 {
-    private string $username;
-    private string $email;
-    private string $password;
-    private string $passwordrepeat;
+    private ?string $username;
+    private ?string $email;
+    private ?string $password;
+    private ?string $passwordrepeat;
 
-    public function __construct($username, $email, $password, $passwordrepeat)
+    public function __construct($username = NULL, $email = NULL, $password = NULL, $passwordrepeat = NULL)
     {
         $this->username = $username;
         $this->email = $email;
@@ -58,7 +66,7 @@ class accountController extends Controller
         // Generate an expiry date that is now + 24 hours for the activation code expiry date
         $accountDAO = new accountDAO();
         $activationCode = $accountDAO->generateActivationCode();
-        $expiryDate = date("Y-m-d H:i:s", strtotime('+24 hours')); // ExpiryDate = now + 24 hours
+        $expiryDate = date("Y-m-d H:i:s", strtotime('+1 hour')); // ExpiryDate = now + 1 hour
 
         // Generate an unique ID with the prefix AID for AccountID
         $accountID = uniqid("AID");
@@ -203,8 +211,164 @@ class accountController extends Controller
 
             header("location: ../view/editAccount.php?usernameChange=success");
         }
+    }
 
-        // If changes occured, update the DB with the new data
+    public function adminEditAccount($userEmail, $adminEmail, $adminPassword, $isActive, $selectedRoles): void
+    {
+        // Grab the account from the DB
+        $accountDAO = new AccountDAO;
+        $userAccount = $accountDAO->get($userEmail);
+        $userAccountID = $userAccount->accountID;
+        $adminAccount = $accountDAO->get($adminEmail);
+        $emailChange = false;
+        $userNameChange = false;
+        $passwordChange = false;
+
+
+        // use PHP built in method to check if the given admin password matches the hashed password stored in the DB (returns bool)
+        $checkPwd = password_verify($adminPassword, $adminAccount->getPassword());
+
+        // If the password match
+        if ($checkPwd == false) {
+            // echo "Onjuist wachtwoord.";
+            header("location: ../view/admin.php?view=adminEditAccount&account=" . $userEmail . "&error=wrongpassword");
+            exit();
+        } elseif ($checkPwd == true) {
+
+            // Validate user input
+
+
+            // Compare the new data against the data in the DB and update when changes have occured
+            if ($this->username !== $userAccount->getUsername()) {
+                // Update username
+                $userAccount->username = $this->username;
+                $userNameChange = true;
+            }
+            if ($this->email !== $userAccount->getEmail()) {
+
+                // Check if email is valid
+                if ($this->hasInvalidEmail() == true) {
+                    // echo "Onjuist email format.";
+                    header("location: ../view/admin.php?view=adminEditAccount&account=" . $userEmail . "&error=invalidemail");
+                    exit();
+                }
+
+                // Check if email is already registered with us
+                if ($this->isKnownEmail() == true) {
+                    // echo "Email bestaat al in ons bestand.";
+                    header("location: ../view/admin.php?view=adminEditAccount&account=" . $userEmail . "&error=emailalreadyexists");
+                    exit();
+                }
+
+                // Update email, resent activation mail
+                $userAccount->email = $this->email;
+
+                // Generate a new activationcode and expirydate
+                $activationCode = $accountDAO->generateActivationCode();
+                $hashedActivationCode = password_hash($activationCode, PASSWORD_DEFAULT);
+                $expiryDate = date("Y-m-d H:i:s", strtotime('+24 hours')); // ExpiryDate = now + 24 hours
+
+                // Set the account object properties to contain the new activationCode and expiryDate
+                $userAccount->activationCode = $hashedActivationCode;
+                $userAccount->activationExpiry = $expiryDate;
+
+                // Send email to user with activation code and link to activate the account
+                $accountDAO->mailActivationCode($this->email, $activationCode);
+
+                $emailChange = true;
+            }
+            // Check if a new password was entered
+            if (!empty($this->password)) {
+
+                // Check if these passwords match
+                if ($this->passwordMatch() == false) {
+                    // echo "Wachtwoorden komen niet overeen.";
+                    header("location: ../view/admin.php?view=adminEditAccount&account=" . $userEmail . "?error=passwordmatch");
+                    exit();
+                }
+                // Check if the passwords follow the passwords rules
+                if ($this->isPasswordStrong() == false) {
+                    // echo "Uw wachtwoord moet uit ten minste 8 tekens (maximaal 32) en ten minste één cijfer, één letter en één speciaal karakter bestaan.";
+                    header("location: ../view/admin.php?view=adminEditAccount&account=" . $userEmail . "&error=passwordstrength");
+                    exit();
+                }
+
+                // Compare the new password to the old password, if it has changed, update the password
+                if ($this->password !== $userAccount->getPassword() && $this->passwordrepeat !== $userAccount->getPassword()) {
+                    // Update password
+                    // Use PHP built in method to generate a password hash
+                    $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
+                    $userAccount->password = $hashedPassword;
+                    $passwordChange = true;
+                }
+            }
+
+            // If the email has changed set the account isActive to false
+            if ($emailChange == true) {
+                $userAccount->isActive = false;
+            } else {
+                // Else set the isActive according to the HMTL select element
+                $userAccount->isActive = $isActive;
+            }
+
+            // Remove all previous set roles
+            $roleDAO = new roleDAO;
+            $roleDAO->deleteRolesFromAccount($userAccountID);
+
+            // For each checked role insert this role into the accountsRoles table for this account
+            foreach ($selectedRoles as $role) {
+                $roleDAO->insertRolesForAccount($userAccountID, $role);
+            }
+
+
+            // Update the database with the new account object 
+            $accountDAO->update($userAccount);
+
+            // If the password or email has changed, log user out, redirect to loginpage with success message
+            if ($emailChange === true) {
+
+                // Redirect user back to adminEdit page
+                header("location: ../view/admin.php?view=adminEditAccount&account=" . $this->email . "&emailChange=success");
+                exit();
+            } elseif ($passwordChange === true) {
+
+                // Redirect user back to adminEdit page
+                header("location: ../view/admin.php?view=adminEditAccount&account=" . $this->email . "&passwordChange=success");
+                exit();
+            } elseif ($userNameChange === true) {
+
+                // Redirect user back to adminEdit page
+                header("location: ../view/admin.php?view=adminEditAccount&account=" . $this->email . "&usernameChange=success");
+                exit();
+            } else {
+                // Redirect user back to adminEdit page
+                header("location: ../view/admin.php?view=adminEditAccount&account=" . $this->email);
+                exit();
+            }
+        }
+    }
+
+    public function adminDeleteAccount($userEmail, $adminEmail, $adminPassword): void
+    {
+        // Grab the account from the DB
+        $accountDAO = new AccountDAO;
+        $adminAccount = $accountDAO->get($adminEmail);
+        $userAccount = $accountDAO->get($userEmail);
+        $userAccountID = $userAccount->getAccountID();
+
+        // use PHP built in method to check if the given admin password matches the hashed password stored in the DB (returns bool)
+        $checkPwd = password_verify($adminPassword, $adminAccount->getPassword());
+
+        // If the password match
+        if ($checkPwd == false) {
+            // echo "Onjuist wachtwoord.";
+            header("location: ../view/admin.php?view=adminEditAccount&account=" . $userEmail . "&error=wrongpassword");
+            exit();
+        } elseif ($checkPwd == true) {
+            $accountDAO->delete($userAccountID);
+            // Redirect user to admin page with success message
+            header("location: ../view/admin.php?view=listAccounts&deleteAccount=success");
+        }
     }
 
     // Method that checks if for any empty inputs: returns true if empty inputs found
