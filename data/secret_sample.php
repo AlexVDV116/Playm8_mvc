@@ -1,11 +1,14 @@
 <?php
 
+// Define the namespace of this class
+namespace Data;
+
 // Rename this file, or create a new file named secret.php
 // Copy this template to to 'secret.php' and fill in your own database credentials and mail configuration
 // Make sure the name 'secret.php' is in .gitignore
 
 // Class containing database credentials
-class Secret
+class secret
 {
     const DB_HOST = 'localhost';
     const DB_NAME = 'playm8';
