@@ -1,8 +1,15 @@
 <?php
 
-// userProfile class with several methods to get it's own attributes
+// Define the namespace of this class
+namespace Model;
 
-require_once '../framework/Model.php';
+// Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
+require '../vendor/autoload.php';
+
+// Import classes this class depends on
+use Framework\Model;
+
+// userProfile class with several methods to get it's own attribute values
 
 class userProfile extends Model
 {
