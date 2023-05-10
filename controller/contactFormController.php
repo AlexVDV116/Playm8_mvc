@@ -1,17 +1,20 @@
 <?php
 
+// Define the namespace of this class
+namespace Controller;
+
+// Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
+require '../vendor/autoload.php';
+
+// Import classes this class depends on
+use Framework\Controller;
+use Model\Mail;
+use Data\mailConfig;
+
 // Controller class that handles user input when using the contact form
 // Gets the data from the contactform.inc.php
 // If no errors found, sends an e-mail to the Playm8 e-mailadress with the data using PHPMailer plugin
 // Sends an additional email to the client confirming that his contact support is being processed
-
-require_once '../framework/Controller.php';
-require_once '../model/Mail.php';
-require_once '../data/secret.php';
-
-//error_reporting(-1);
-//ini_set('display_errors', 1);
-//set_error_handler("var_dump");
 
 class contactFormController extends Controller
 {
