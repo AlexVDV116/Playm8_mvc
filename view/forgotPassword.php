@@ -1,5 +1,14 @@
 <?php
 
+// Define the namespace of this class
+namespace View;
+
+// Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
+require '../vendor/autoload.php';
+
+// Import classes this class depends on
+use Framework\View;
+
 // set include path to work from any directory level
 set_include_path('./' . PATH_SEPARATOR . '../');
 
@@ -7,7 +16,8 @@ set_include_path('./' . PATH_SEPARATOR . '../');
 $ROOT = '../';
 
 include_once '../header.php';
-require_once 'framework/View.php';
+
+// forgotPassword class that has a form that allows the user to reset his password
 
 class forgotPassword extends View
 {
