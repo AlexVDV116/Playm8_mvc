@@ -1,16 +1,17 @@
 <?php
-ini_set('display_errors', 1);
+
+// Define the namespace of this class
+namespace Model;
+
+// Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
+require '../vendor/autoload.php';
+
+// Import classes this class depends on
+use Framework\Model;
+use PHPMailer\PHPMailer\PHPMailer;
+use Data\mailConfig;
 
 // Mail class with a method to send email using PHPMailer
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-
-require_once '../framework/Model.php';
-require_once '../data/secret.php';
-require_once '../plugins/PHPMailer/src/Exception.php';
-require_once '../plugins/PHPMailer/src/PHPMailer.php';
-require_once '../plugins/PHPMailer/src/SMTP.php';
 
 class Mail extends Model
 {
@@ -31,7 +32,7 @@ class Mail extends Model
         $mail = new PHPMailer;
 
         //Server settings
-        $mail->SMTPDebug = 0;                          //Enable verbose debug output
+        $mail->SMTPDebug = 0;                                           //Enable verbose debug output
         $mail->isSMTP();                                                //Send using SMTP
         $mail->Host       = mailConfig::CONFIG['email']['host'];        //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                       //Enable SMTP authentication
