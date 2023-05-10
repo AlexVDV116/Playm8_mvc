@@ -1,11 +1,18 @@
 <?php
 
-// Controller class for the userProfile that handles user input
-// Connects to the database trough an instance of the userProfileDAO class
+// Define the namespace of this class
+namespace Controller;
 
-require_once '../framework/Controller.php';
-require_once '../dao/userProfileDAO.php';
-require_once '../model/userProfile.php';
+// Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
+require '../vendor/autoload.php';
+
+// Import classes this class depends on
+use Framework\Controller;
+use DAO\userProfileDAO;
+use Model\userProfile;
+
+// Controller class for the userProfile that handles user input
+// Connects to the database trough an instance of the userProfileDAO class and creates or updates the userProfile
 
 class userProfileController extends Controller
 {
