@@ -1,14 +1,14 @@
 <?php
 
-// Set include path to work from any directory level
-set_include_path('./' . PATH_SEPARATOR . '../');
+// Setting the ROOT directory for this file so the relative paths used in any included pages will still work
+$ROOT = '';
 
-// Setting the ROOT directory for this file so the relative paths used in included pages will still work
-$ROOT = './';
+// Include the header
 include_once 'header.php';
 
-?>
+ini_set('display_errors', 1);
 
+?>
 <section id="hero-section">
     <div class="container hero-section">
         <div class="row">
@@ -328,7 +328,5 @@ include_once 'header.php';
         </div>
     </div>
 </section>
-
 <?php
 include_once 'footer.php';
-?>
