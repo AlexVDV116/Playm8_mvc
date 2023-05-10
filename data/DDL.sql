@@ -167,6 +167,92 @@ SELECT * FROM accounts ORDER BY accounts.accountID$$
 DELIMITER ;
 
 DELIMITER $$
+CREATE PROCEDURE `getAllRolesOrderByRoleID`()
+SELECT * FROM roles ORDER BY roles.roleID$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `getRole`(
+  IN `roleID` int(16))
+SELECT * FROM roles WHERE roles.roleID = roleID$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `getAllPermissionsOrderByPermissionID`()
+SELECT * FROM permissions ORDER BY permissions.permissionID$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `getPermissionsbyRoleID`(
+    IN `roleID` varchar(500))
+SELECT permissionID FROM rolesPermissions WHERE rolesPermissions.roleID = roleID$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `updatePermission`(
+  IN `permissionName` varchar(500), 
+  IN `permissionDescription` varchar(500),
+  IN `permissionID` int(16))
+UPDATE `permissions` 
+SET permissions.permissionName = permissionName, permissions.permissionDescription = permissionDescription
+WHERE permissions.permissionID = permissionID$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `deletePermissionsFromRole`(
+  IN `roleID` int(16))
+DELETE FROM rolesPermissions WHERE rolesPermissions.roleID = roleID$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `insertPermissionsForRole`(
+  IN `roleID` int(16),
+  IN `permissionID` int(16))
+INSERT INTO `rolesPermissions`(`roleID`, `permissionID`) VALUES (roleID, permissionID)$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `getRolePermissions`(
+  IN `roleID` int(16))
+SELECT permissionID FROM rolesPermissions WHERE rolesPermissions.roleID = roleID$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `getRolesbyAccountID`(
+  IN `accountID` varchar(500))
+SELECT roleID FROM accountsRoles WHERE accountsRoles.accountID = accountID$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `getRoleName`(
+  IN `roleID` int(16))
+SELECT roleName FROM roles WHERE roles.roleID = roleID$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `deleteRolesFromAccount`(
+  IN `accountID` varchar(500))
+DELETE FROM accountsRoles WHERE accountsRoles.accountID = accountID$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `insertRolesForAccount`(
+  IN `accountID` varchar(500),
+  IN `roleID` int(16))
+INSERT INTO `accountsRoles`(`accountID`, `roleID`) VALUES (accountID, roleID)$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `updateRole`(
+  IN `roleName` varchar(500), 
+  IN `roleDescription` varchar(500),
+  IN `roleID` int(16))
+UPDATE `roles` 
+SET roles.roleName = roleName, roles.roleDescription = roleDescription
+WHERE roles.roleID = roleID$$
+DELIMITER ;
+
+DELIMITER $$
 CREATE PROCEDURE `insertNewAccount`(
     IN `accountID` varchar(500),
     IN `username` varchar(500), 
@@ -198,6 +284,20 @@ CREATE PROCEDURE `deleteAccount`(
     IN `accountID` varchar(500))
 DELETE FROM `accounts` 
 WHERE accounts.accountID = accountID$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `deleteRole`(
+    IN `roleID` int(16))
+DELETE FROM `roles` 
+WHERE roles.roleID = roleID$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `deletePermission`(
+    IN `permissionID` int(16))
+DELETE FROM `permissions` 
+WHERE permissions.permissionID = permissionID$$
 DELIMITER ;
 
 DELIMITER $$
