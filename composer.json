@@ -1,0 +1,26 @@
+{
+    "name": "alexvdv116/playm8_mvc",
+    "description": "Package dependency manager for the Playm8_MVC project",
+    "type": "project",
+    "require": {
+        "phpmailer/phpmailer": "^6.8",
+        "league/oauth2-client": "^2.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Controller\\": "controller/",
+            "DAO\\": "dao/",
+            "Data\\": "data/",
+            "Framework\\": "framework/",
+            "Includes\\": "includes/",
+            "Model\\": "model/",
+            "View\\": "view/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Alex Van der Velden",
+            "email": "a.vandervelden3@student.avans.nl"
+        }
+    ]
+}
