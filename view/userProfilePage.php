@@ -23,7 +23,9 @@ class userProfilePage extends View
 
     public function show()
     {
-        $userProfileID = $_SESSION["auth_user"]["userProfileID"];
+        if (isset($_SESSION["auth_user"]["userProfileID"])) {
+            $userProfileID = $_SESSION["auth_user"]["userProfileID"];
+        };
         $userProfileDAO = new userProfileDAO;
         $userProfile = $userProfileDAO->get($userProfileID);
 ?>
