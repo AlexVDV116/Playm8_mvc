@@ -31,6 +31,11 @@ class listAccounts extends View
                 echo '<p class="form-success"><i class="fa-solid fa-circle-exclamation"></i> Account succesvol verwijderd.</p>';
             }
         }
+        if (isset($_GET["deleteUserProfile"])) {
+            if ($_GET["deleteUserProfile"] == "success") {
+                echo '<p class="form-success"><i class="fa-solid fa-circle-exclamation"></i> Gebruikersprofiel succesvol verwijderd.</p>';
+            }
+        }
 ?>
         <div>
             <p>Total number of accounts: <?= $accountsCount ?></p>
@@ -56,7 +61,7 @@ class listAccounts extends View
                         <tr onclick="">
                             <!-- PHP shorthand to echo the data in the table -->
                             <td><?= "# " . $account->getAccountID() ?></td>
-                            <td><?= '# ' . $account->getUserProfileID() ?></td>
+                            <td><?= "<a href ='../view/admin.php?view=adminEditUserProfile&userProfileID=" . $account->getUserProfileID() . "&accountID=" . $account->getAccountID() . "'>" . $account->getUserProfileID() . "</a>" ?></td>
                             <td><?= $account->getUsername() ?></td>
                             <td><?= $account->getEmail() ?></td>
                             <td><?php if ($account->getActive()) {
