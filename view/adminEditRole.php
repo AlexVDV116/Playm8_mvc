@@ -68,7 +68,7 @@ class adminEditRole extends View
                                     <div class="row mt-4">
                                         <div class="col-md-12">
                                             <i class="fa-solid fa-list"></i>
-                                            <label class="form-label">Toegewezen rol(len):</label><br>
+                                            <label class="form-label">Toegewezen permissies:</label><br>
                                             <?php
                                             // For each role in the roles table echo a input type checkbox
                                             // Check the boxes that the user has a role by setting the echoing the checked attribute
