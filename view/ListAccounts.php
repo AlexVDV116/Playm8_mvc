@@ -26,6 +26,11 @@ class listAccounts extends View
                 echo '<p class="form-success"><i class="fa-solid fa-circle-exclamation"></i> Account succesvol verwijderd.</p>';
             }
         }
+        if (isset($_GET["addAccount"])) {
+            if ($_GET["addAccount"] == "success") {
+                echo '<p class="form-success"><i class="fa-solid fa-circle-exclamation"></i> Account succesvol toegevoegd.</p>';
+            }
+        }
 ?>
         <div>
             <p>Total number of accounts: <?= $accountsCount ?></p>
@@ -71,7 +76,7 @@ class listAccounts extends View
                     }
                     ?>
                     <tr>
-                        <td colspan="7"><a href="../view/admin.php?view=addAccount"><i class="fa-solid fa-plus"></i> </a></td>
+                        <td colspan="7"><a href="../view/admin.php?view=adminAddAccount" class="no-underline"><i class="fa-solid fa-plus"></i> Voeg een account toe</a></td>
                     </tr>
                 </tbody>
             </table>
