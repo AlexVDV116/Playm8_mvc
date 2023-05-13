@@ -76,6 +76,7 @@ class searchAccounts extends View
                                 } else {
                                     echo 'Nee';
                                 } ?>
+                            <td><?= "<a href ='../view/admin.php?view=adminEditAccount&account=" . $account->getEmail() . "'>Wijzig" ?></td>
                         </tr>
                     <?php
                     }
