@@ -169,6 +169,11 @@ SELECT * FROM accounts ORDER BY accounts.accountID$$
 DELIMITER ;
 
 DELIMITER $$
+CREATE PROCEDURE `getAllBetaAccounts`()
+SELECT * FROM accounts WHERE accounts.isBetaUser = 1 ORDER BY accounts.accountID$$
+DELIMITER ;
+
+DELIMITER $$
 CREATE PROCEDURE `getAllRolesOrderByRoleID`()
 SELECT * FROM roles ORDER BY roles.roleID$$
 DELIMITER ;
@@ -297,13 +302,14 @@ DELIMITER $$
 CREATE PROCEDURE `updateAccount`(
   IN `username` varchar(500), 
   IN `email` varchar(500), 
-  IN `password` varchar(500), 
+  IN `password` varchar(500),
+  IN `isBetaUser` TINYINT(1), 
   IN `isActive` TINYINT(1), 
   IN `activationCode` varchar(500), 
   IN `activationExpiry` varchar(500), 
   IN `accountID` varchar(500))
 UPDATE `accounts` 
-SET username = username, email = email, password = password, isActive = isActive, activationCode = activationCode, activationExpiry = activationExpiry
+SET username = username, email = email, password = password, isBetaUser = isBetaUser, isActive = isActive, activationCode = activationCode, activationExpiry = activationExpiry
 WHERE accounts.accountID = accountID$$
 DELIMITER ;
 
