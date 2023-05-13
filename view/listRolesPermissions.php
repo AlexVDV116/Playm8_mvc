@@ -72,7 +72,7 @@ class listRolesPermissions extends View
                     }
                     ?>
                     <tr>
-                        <td colspan="5"><a href="../view/admin.php?view=addRole"><i class="fa-solid fa-plus"></i> </a></td>
+                        <td colspan="5"><a href="../view/admin.php?view=addRole" class="no-underline"><i class="fa-solid fa-plus"></i> Voeg een rol toe</a></td>
                     </tr>
                 </tbody>
             </table>
@@ -111,7 +111,7 @@ class listRolesPermissions extends View
                     }
                     ?>
                     <tr>
-                        <td colspan="4"><a href="../view/admin.php?view=addPermission"><i class="fa-solid fa-plus"></i></a></td>
+                        <td colspan="4"><a href="../view/admin.php?view=addPermission" class="no-underline"><i class="fa-solid fa-plus"></i> Voeg een permissie toe</a></td>
                     </tr>
                 </tbody>
             </table>
