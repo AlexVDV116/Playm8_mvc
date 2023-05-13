@@ -32,7 +32,6 @@ if (isset($_SESSION["auth_user"]) && isset($_POST["submit"])) {
     $_SESSION["auth_user"]['userProfileID'] = $userProfileID;
 
     // Instantiate the accountController class
-    include "../controller/userProfileController.php";
     $userProfileController = new userProfileController($accountID, $userProfileID, $firstName, $lastName, $city, $country, $phoneNumber, $dateOfBirth, $aboutMeTitle, $aboutMeText);
     $userProfileController->run();
 
