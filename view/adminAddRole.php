@@ -13,7 +13,7 @@ use DAO\roleDAO;
 
 // adminEditAccount class that has a form so that an admin can edit a user account
 
-class adminEditRole extends View
+class adminAddRole extends View
 {
 
     public function show()
@@ -124,4 +124,4 @@ class adminEditRole extends View
 <?php
     }
 }
-new adminEditRole;
+new adminAddRole;
