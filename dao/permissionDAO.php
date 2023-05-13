@@ -89,4 +89,27 @@ class permissionDAO extends DAO
         ];
         $this->execute($sql, $args);
     }
+
+    // Insert new permission object 
+    public function insertNewPermission($permission): void
+    {
+        $stmt = $this->prepare('CALL insertNewPermission(?, ?, ?);');
+        $stmt->execute([
+            $permission->getPermissionID(),
+            $permission->getPermissionName(),
+            $permission->getPermissionDescription()
+        ]);
+        $stmt->closeCursor();
+    }
+
+    // Get the highest permissionID from the permissionID collum
+    public function getHighestPermissionID(): int
+    {
+        $stmt = $this->prepare('CALL getHighestPermissionID();');
+        $stmt->execute();
+        $result = $stmt->fetch();
+        $stmt->closeCursor();
+
+        return $result[0];
+    }
 }
