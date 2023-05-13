@@ -117,18 +117,19 @@ class roleDAO extends DAO
         $stmt->closeCursor();
     }
 
-    // Set roles for Account in accountRoles table 
+    // Insert new role object 
     public function insertNewRole($role): void
     {
-        $stmt = $this->prepare('CALL insertNewRole(?, ?);');
+        $stmt = $this->prepare('CALL insertNewRole(?, ?, ?);');
         $stmt->execute([
+            $role->getRoleID(),
             $role->getRoleName(),
             $role->getRoleDescription()
         ]);
         $stmt->closeCursor();
     }
 
-    // Set roles for Account in accountRoles table 
+    // Get the highest roleID from the roleID collum
     public function getHighestRoleID(): int
     {
         $stmt = $this->prepare('CALL getHighestRoleID();');
