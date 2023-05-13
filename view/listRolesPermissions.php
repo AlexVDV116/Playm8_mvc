@@ -32,6 +32,16 @@ class listRolesPermissions extends View
                 echo '<p class="form-success"><i class="fa-solid fa-circle-exclamation"></i> Permissie succesvol verwijderd.</p>';
             }
         }
+        if (isset($_GET["edit"])) {
+            if ($_GET["edit"] == "success") {
+                echo '<p class="form-success"><i class="fa-solid fa-circle-exclamation"></i> Rol succesvol gewijzigd.</p>';
+            }
+        }
+        if (isset($_GET["addRole"])) {
+            if ($_GET["addRole"] == "success") {
+                echo '<p class="form-success"><i class="fa-solid fa-circle-exclamation"></i> Rol succesvol toegevoegd.</p>';
+            }
+        }
 ?>
         <div class="class-responsive">
             <table class="table table-striped table-sm">
@@ -72,7 +82,7 @@ class listRolesPermissions extends View
                     }
                     ?>
                     <tr>
-                        <td colspan="5"><a href="../view/admin.php?view=addRole" class="no-underline"><i class="fa-solid fa-plus"></i> Voeg een rol toe</a></td>
+                        <td colspan="5"><a href="../view/admin.php?view=adminAddRole" class="no-underline"><i class="fa-solid fa-plus"></i> Voeg een rol toe</a></td>
                     </tr>
                 </tbody>
             </table>
@@ -111,7 +121,7 @@ class listRolesPermissions extends View
                     }
                     ?>
                     <tr>
-                        <td colspan="4"><a href="../view/admin.php?view=addPermission" class="no-underline"><i class="fa-solid fa-plus"></i> Voeg een permissie toe</a></td>
+                        <td colspan="4"><a href="../view/admin.php?view=adminAddPermission" class="no-underline"><i class="fa-solid fa-plus"></i> Voeg een permissie toe</a></td>
                     </tr>
                 </tbody>
             </table>
