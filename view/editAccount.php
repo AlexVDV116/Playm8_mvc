@@ -98,7 +98,7 @@ class editAccount extends View
                                         <div class="col-md-6">
                                             <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                                             <label for="form_currentPasswordrepeat" class="form-label">Huidig wachtwoord</label>
-                                            <input id="form_currentPasswordrepeat" type="password" name="currentPasswordrepeat" class="form-control" placeholder="Voer huidig wachtwoord in" required>
+                                            <input id="form_currentPasswordrepeat" type="password" name="currentPassword" class="form-control" placeholder="Voer huidig wachtwoord in" required>
                                             <div class="invalid-feedback">
                                                 Dit veld is verplicht.
                                             </div>
