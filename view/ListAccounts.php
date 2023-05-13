@@ -21,14 +21,14 @@ class listAccounts extends View
         $accountsCount = $accountDAO->getCount("accounts");
         $accountDAO->startList();
 
-        if (isset($_GET["deleteAccount"])) {
-            if ($_GET["deleteAccount"] == "success") {
-                echo '<p class="form-success"><i class="fa-solid fa-circle-exclamation"></i> Account succesvol verwijderd.</p>';
-            }
-        }
         if (isset($_GET["addAccount"])) {
             if ($_GET["addAccount"] == "success") {
                 echo '<p class="form-success"><i class="fa-solid fa-circle-exclamation"></i> Account succesvol toegevoegd.</p>';
+            }
+        }
+        if (isset($_GET["deleteAccount"])) {
+            if ($_GET["deleteAccount"] == "success") {
+                echo '<p class="form-success"><i class="fa-solid fa-circle-exclamation"></i> Account succesvol verwijderd.</p>';
             }
         }
 ?>
