@@ -53,7 +53,7 @@ class roleController extends Controller
             $permissionDAO->insertPermissionsForRole($this->roleID, $permission);
         }
 
-        header("location: ../view/admin.php?view=listRolesPermissions&edit=success");
+        header("location: ../view/admin.php?view=listRolesPermissions&editRole=success");
         exit();
     }
 
