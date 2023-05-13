@@ -44,5 +44,5 @@ if (isset($_POST["submit"])) {
 
     // Instantiate the roleController class
     $roleController = new roleController($roleID, $newRoleName, $newRoleDescription, $selectedPermissions);
-    $roleController->run();
+    $roleController->adminEditRole($roleID, $adminEmail, $adminPassword);
 }
