@@ -91,6 +91,37 @@ class userProfileController extends Controller
         };
     }
 
+    // Method that allows an admin to edit a user profile
+    public function adminEditUserProfile(): void
+    {
+        // Assocaitive array containing the userProfile data
+        $data = array(
+            "accountID" => $this->accountID,
+            "userProfileID" => $this->userProfileID,
+            "firstName" => $this->firstName,
+            "lastName" => $this->lastName,
+            "city" => $this->city,
+            "country" => $this->country,
+            "phoneNumber" => $this->phoneNumber,
+
+            // Reformat date of birth to match SQL date format YYYY-mm-dd
+            "dateOfBirth" => date("Y-m-d", strtotime($this->dateOfBirth)),
+            "age" => $this->calculateAge($this->dateOfBirth),
+            "aboutMeTitle" => $this->aboutMeTitle,
+            "aboutMeText" => $this->aboutMeText
+        );
+
+        $userProfile = new userProfile($data);
+        $userProfileDAO = new userProfileDAO;
+
+        if ($userProfileDAO->checkRecordExists($this->userProfileID) == true) {
+            $userProfileDAO->updateUserProfileInfo($userProfile);
+        } else {
+            $userProfileDAO->setUserProfileInfo($userProfile);
+        };
+    }
+
+
     // Method that checks if for any empty inputs: returns true if empty inputs found
     private function hasEmptyInput(): bool
     {
