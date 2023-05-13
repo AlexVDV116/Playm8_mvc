@@ -26,7 +26,7 @@ class adminAddAccount extends View
 
                         <div class="card shadow">
                             <div class="rounded-top text-white d-flex flex-column align-items-center justify-content-center banner-top">
-                                <h2 style="color:#f8f9fa">Voeg Account toe</h4>
+                                <h2 style="color:#f8f9fa">Voeg account toe</h4>
                                     <p>Voeg hier een nieuw account toe</p>
                             </div>
                             <div class="card-body bg-light p-4 text-black">
