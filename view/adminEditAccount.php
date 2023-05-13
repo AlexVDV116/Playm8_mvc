@@ -140,6 +140,28 @@ class adminEditAccount extends View
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="row mt-4">
+                                        <div class="col-md-6">
+                                            <i class="fa-solid fa-user"></i>
+                                            <label for="form_isBeta" class="form-label">Beta user:</label><br>
+                                            <select id="form_isBeta" name="isBetaUser" class="form_control" required>
+                                                <option value="1" <?php
+                                                                    if ($account->getBetaUser() === true) {
+                                                                        echo "selected";
+                                                                    }
+                                                                    ?>>-- Ja --</option>
+                                                <option value="0" <?php
+                                                                    if ($account->getBetaUser() === false) {
+                                                                        echo "selected";
+                                                                    }
+                                                                    ?>>-- Nee --</option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Dit veld is verplicht.
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="row mt-4">
                                         <div class="col-md-6">
                                             <i class="fas fa-key fa-lg me-3 fa-fw"></i>
@@ -151,9 +173,10 @@ class adminEditAccount extends View
                                         </div>
                                     </div>
 
-                                    <input type="hidden" id="form_userEmail" name="userEmail" value="<?php if (isset($account)) {
-                                                                                                            echo $account->getEmail();
-                                                                                                        } ?>" required>
+                                    <!-- Grab the current user email and sent it with the form -->
+                                    <input type="hidden" id="form_currentUserEmail" name="currentUserEmail" value="<?php if (isset($account)) {
+                                                                                                                        echo $account->getEmail();
+                                                                                                                    } ?>" required>
 
                                     <div class="row mt-4">
                                         <div class="d-flex justify-content-end mt-3">
@@ -180,6 +203,9 @@ class adminEditAccount extends View
                                         }
                                         if ($_GET["error"] == "wrongpassword") {
                                             echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i>Onjuist wachtwoord.</p>';
+                                        }
+                                        if ($_GET["error"] == "none") {
+                                            echo '<p class="form-success"><i class="fa-solid fa-circle-exclamation"></i>Wijziging toegepast.</p>';
                                         }
                                     }
                                     if (isset($_GET["usernameChange"])) {
