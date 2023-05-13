@@ -23,20 +23,19 @@ if (isset($_POST["submit"])) {
     $email = htmlspecialchars($_POST["email"], ENT_QUOTES, "UTF-8");
     $password = htmlspecialchars($_POST["password"], ENT_QUOTES, "UTF-8");
     $passwordrepeat = htmlspecialchars($_POST["passwordrepeat"], ENT_QUOTES, "UTF-8");
-    $enabled = true;
 
     // Assign session variables to retain form values for username and password after error handling
     $_SESSION['signup_form']['username'] = $username;
     $_SESSION['signup_form']['email'] = $email;
 
     // Instantiate the accountController class
-    include "../framework/databaseHandler.php";
-    include "../dao/accountDAO.php";
-    include "../controller/accountController.php";
-    $signup = new accountController($username, $email, $password, $passwordrepeat, $enabled);
+    $view = "signup";
+    $accountController = new accountController($view, $username, $email, $password, $passwordrepeat);
 
     // Running server side validation, error handling and user sign up
-    $signup->run();
+    if ($accountController->run() === true) {
+        $accountController->addAccount();
+    }
 
     // Redirect user back to the front page when sucsessfull
     header("location: ../view/login.php?error=none");
