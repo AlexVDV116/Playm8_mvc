@@ -17,15 +17,13 @@ use Model\Account;
 
 class accountController extends Controller
 {
-    private ?string $view;
     private ?string $username;
     private ?string $email;
     private ?string $password;
     private ?string $passwordrepeat;
 
-    public function __construct($view = NULL, $username = NULL, $email = NULL, $password = NULL, $passwordrepeat = NULL)
+    public function __construct($username = NULL, $email = NULL, $password = NULL, $passwordrepeat = NULL)
     {
-        $this->view = $view;
         $this->username = $username;
         $this->email = $email;
         $this->password = $password;
@@ -36,49 +34,28 @@ class accountController extends Controller
     {
         if ($this->hasEmptyInput() == true) {
             // echo "Alle velden zijn verplicht.";
-            if ($this->view == "signup") {
-                header("location: ../view/signup.php?error=emptyinput");
-                exit();
-            } elseif ($this->view == "admin") {
-                header("location: ../view/admin.php?view=adminAddAccount&error=emptyinput");
-                exit();
-            }
-        } elseif ($this->hasInvalidEmail() == true) {
+            header("location: ../view/signup.php?error=emptyinput");
+            exit();
+        }
+        if ($this->hasInvalidEmail() == true) {
             // echo "Onjuist email format.";
-            if ($this->view == "signup") {
-                header("location: ../view/signup.php?error=invalidemail");
-                exit();
-            } elseif ($this->view == "admin") {
-                header("location: ../view/admin.php?view=adminAddAccount&error=invalidemail");
-                exit();
-            }
-        } elseif ($this->isKnownEmail() == true) {
+            header("location: ../view/signup.php?error=invalidemail");
+            exit();
+        }
+        if ($this->isKnownEmail() == true) {
             // echo "Email bestaat al in ons bestand.";
-            if ($this->view == "signup") {
-                header("location: ../view/signup.php?error=emailalreadyexists");
-                exit();
-            } elseif ($this->view == "admin") {
-                header("location: ../view/admin.php?view=adminAddAccount&error=emailalreadyexists");
-                exit();
-            }
-        } elseif ($this->passwordMatch() == false) {
+            header("location: ../view/signup.php?error=emailalreadyexists");
+            exit();
+        }
+        if ($this->passwordMatch() == false) {
             // echo "Wachtwoorden komen niet overeen.";
-            if ($this->view == "signup") {
-                header("location: ../view/signup.php?error=passwordmatch");
-                exit();
-            } elseif ($this->view == "admin") {
-                header("location: ../view/admin.php?view=adminAddAccount&error=passwordmatch");
-                exit();
-            }
-        } elseif ($this->isPasswordStrong() == false) {
+            header("location: ../view/signup.php?error=passwordmatch");
+            exit();
+        }
+        if ($this->isPasswordStrong() == false) {
             // echo "Uw wachtwoord moet uit ten minste 8 tekens (maximaal 32) en ten minste één cijfer, één letter en één speciaal karakter bestaan.";
-            if ($this->view == "signup") {
-                header("location: ../view/signup.php?error=passwordstrength");
-                exit();
-            } elseif ($this->view == "admin") {
-                header("location: ../view/admin.php?view=adminAddAccount&error=passwordstrength");
-                exit();
-            }
+            header("location: ../view/signup.php?error=passwordstrength");
+            exit();
         }
         return true;
     }
@@ -239,11 +216,11 @@ class accountController extends Controller
         }
     }
 
-    public function adminEditAccount($userEmail, $adminEmail, $adminPassword, $isActive, $selectedRoles): void
+    public function adminEditAccount($currentUserEmail, $adminEmail, $adminPassword, $isActive, $selectedRoles, $isBetaUser): void
     {
         // Grab the account from the DB
         $accountDAO = new AccountDAO;
-        $userAccount = $accountDAO->get($userEmail);
+        $userAccount = $accountDAO->get($currentUserEmail);
         $userAccountID = $userAccount->accountID;
         $adminAccount = $accountDAO->get($adminEmail);
         $emailChange = false;
@@ -257,7 +234,7 @@ class accountController extends Controller
         // If the password match
         if ($checkPwd == false) {
             // echo "Onjuist wachtwoord.";
-            header("location: ../view/admin.php?view=adminEditAccount&account=" . $userEmail . "&error=wrongpassword");
+            header("location: ../view/admin.php?view=adminEditAccount&account=" . $currentUserEmail . "&error=wrongpassword");
             exit();
         } elseif ($checkPwd == true) {
 
@@ -275,14 +252,14 @@ class accountController extends Controller
                 // Check if email is valid
                 if ($this->hasInvalidEmail() == true) {
                     // echo "Onjuist email format.";
-                    header("location: ../view/admin.php?view=adminEditAccount&account=" . $userEmail . "&error=invalidemail");
+                    header("location: ../view/admin.php?view=adminEditAccount&account=" . $currentUserEmail . "&error=invalidemail");
                     exit();
                 }
 
                 // Check if email is already registered with us
                 if ($this->isKnownEmail() == true) {
                     // echo "Email bestaat al in ons bestand.";
-                    header("location: ../view/admin.php?view=adminEditAccount&account=" . $userEmail . "&error=emailalreadyexists");
+                    header("location: ../view/admin.php?view=adminEditAccount&account=" . $currentUserEmail . "&error=emailalreadyexists");
                     exit();
                 }
 
@@ -309,13 +286,13 @@ class accountController extends Controller
                 // Check if these passwords match
                 if ($this->passwordMatch() == false) {
                     // echo "Wachtwoorden komen niet overeen.";
-                    header("location: ../view/admin.php?view=adminEditAccount&account=" . $userEmail . "?error=passwordmatch");
+                    header("location: ../view/admin.php?view=adminEditAccount&account=" . $currentUserEmail . "?error=passwordmatch");
                     exit();
                 }
                 // Check if the passwords follow the passwords rules
                 if ($this->isPasswordStrong() == false) {
                     // echo "Uw wachtwoord moet uit ten minste 8 tekens (maximaal 32) en ten minste één cijfer, één letter en één speciaal karakter bestaan.";
-                    header("location: ../view/admin.php?view=adminEditAccount&account=" . $userEmail . "&error=passwordstrength");
+                    header("location: ../view/admin.php?view=adminEditAccount&account=" . $currentUserEmail . "&error=passwordstrength");
                     exit();
                 }
 
@@ -346,6 +323,8 @@ class accountController extends Controller
                 $roleDAO->insertRolesForAccount($userAccountID, $role);
             }
 
+            // set the account isBeta attribute according to the HTML select element
+            $userAccount->isBetaUser = $isBetaUser;
 
             // Update the database with the new account object 
             $accountDAO->update($userAccount);
