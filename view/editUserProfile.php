@@ -39,6 +39,11 @@ class editUserProfile extends View
                 $userProfile = $userProfileDAO->get($userProfileID);
             }
         };
+        if (isset($_GET["createUserProfile"])) {
+            if ($_GET["createUserProfile"] == "success") {
+                echo '<div class="d-flex justify-content-center"><p class="form-success"><i class="fa-solid fa-circle-exclamation"></i> Gebruikersprofiel succesvol aangemaakt, vul uw gegevens in.</p></div>';
+            }
+        };
 ?>
         <div class="container py-5">
             <div class="row">
