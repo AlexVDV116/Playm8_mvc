@@ -164,9 +164,6 @@ class admin extends View
                 </div>
             </div>
 
-
-
-
             <script src="../assets/js/scripts.js"></script>
             <!-- <script src="./assets/js/features.js"></script> -->
             <script src="../assets/js/features-new.js"></script>
