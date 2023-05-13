@@ -347,7 +347,7 @@ class accountController extends Controller
                 exit();
             } else {
                 // Redirect user back to adminEdit page
-                header("location: ../view/admin.php?view=adminEditAccount&account=" . $this->email);
+                header("location: ../view/admin.php?view=adminEditAccount&account=" . $this->email . "&error=none");
                 exit();
             }
         }
