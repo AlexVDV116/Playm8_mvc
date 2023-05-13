@@ -22,24 +22,19 @@ class listRolesPermissions extends View
         $roleDAO = new roleDAO;
         $roleDAO->startList();
 
-        if (isset($_GET["deleteRole"])) {
-            if ($_GET["deleteRole"] == "success") {
-                echo '<p class="form-success"><i class="fa-solid fa-circle-exclamation"></i> Rol succesvol verwijderd.</p>';
-            }
-        }
-        if (isset($_GET["deletePermission"])) {
-            if ($_GET["deletePermission"] == "success") {
-                echo '<p class="form-success"><i class="fa-solid fa-circle-exclamation"></i> Permissie succesvol verwijderd.</p>';
-            }
-        }
-        if (isset($_GET["edit"])) {
-            if ($_GET["edit"] == "success") {
-                echo '<p class="form-success"><i class="fa-solid fa-circle-exclamation"></i> Rol succesvol gewijzigd.</p>';
-            }
-        }
         if (isset($_GET["addRole"])) {
             if ($_GET["addRole"] == "success") {
                 echo '<p class="form-success"><i class="fa-solid fa-circle-exclamation"></i> Rol succesvol toegevoegd.</p>';
+            }
+        }
+        if (isset($_GET["editRole"])) {
+            if ($_GET["editRole"] == "success") {
+                echo '<p class="form-success"><i class="fa-solid fa-circle-exclamation"></i> Rol succesvol gewijzigd.</p>';
+            }
+        }
+        if (isset($_GET["deleteRole"])) {
+            if ($_GET["deleteRole"] == "success") {
+                echo '<p class="form-success"><i class="fa-solid fa-circle-exclamation"></i> Rol succesvol verwijderd.</p>';
             }
         }
 ?>
@@ -95,6 +90,23 @@ class listRolesPermissions extends View
         ?>
 
         <div class="class-responsive mt-5">
+            <?php
+            if (isset($_GET["addPermission"])) {
+                if ($_GET["addPermission"] == "success") {
+                    echo '<p class="form-success"><i class="fa-solid fa-circle-exclamation"></i> Permissie succesvol toegevoegd.</p>';
+                }
+            }
+            if (isset($_GET["editPermission"])) {
+                if ($_GET["editPermission"] == "success") {
+                    echo '<p class="form-success"><i class="fa-solid fa-circle-exclamation"></i> Permissie succesvol gewijzigd.</p>';
+                }
+            }
+            if (isset($_GET["deletePermission"])) {
+                if ($_GET["deletePermission"] == "success") {
+                    echo '<p class="form-success"><i class="fa-solid fa-circle-exclamation"></i> Permissie succesvol verwijderd.</p>';
+                }
+            }
+            ?>
             <table class="table table-striped table-sm">
                 <thead>
                     <tr>
