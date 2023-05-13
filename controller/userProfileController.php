@@ -89,10 +89,6 @@ class userProfileController extends Controller
         } else {
             $userProfileDAO->setUserProfileInfo($userProfile);
         };
-
-        // Redirect user back to his profile page
-        header("location: ../view/userProfilePage.php");
-        exit();
     }
 
     // Method that checks if for any empty inputs: returns true if empty inputs found
