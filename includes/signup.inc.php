@@ -29,8 +29,7 @@ if (isset($_POST["submit"])) {
     $_SESSION['signup_form']['email'] = $email;
 
     // Instantiate the accountController class
-    $view = "signup";
-    $accountController = new accountController($view, $username, $email, $password, $passwordrepeat);
+    $accountController = new accountController($username, $email, $password, $passwordrepeat);
 
     // Running server side validation, error handling and user sign up
     if ($accountController->run() === true) {
