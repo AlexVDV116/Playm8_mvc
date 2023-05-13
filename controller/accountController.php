@@ -17,47 +17,74 @@ use Model\Account;
 
 class accountController extends Controller
 {
+    private ?string $view;
     private ?string $username;
     private ?string $email;
     private ?string $password;
     private ?string $passwordrepeat;
 
-    public function __construct($username = NULL, $email = NULL, $password = NULL, $passwordrepeat = NULL)
+    public function __construct($view = NULL, $username = NULL, $email = NULL, $password = NULL, $passwordrepeat = NULL)
     {
+        $this->view = $view;
         $this->username = $username;
         $this->email = $email;
         $this->password = $password;
         $this->passwordrepeat = $passwordrepeat;
     }
 
-    public function run(): void
+    public function run(): bool
     {
         if ($this->hasEmptyInput() == true) {
             // echo "Alle velden zijn verplicht.";
-            header("location: ../view/signup.php?error=emptyinput");
-            exit();
-        }
-        if ($this->hasInvalidEmail() == true) {
+            if ($this->view == "signup") {
+                header("location: ../view/signup.php?error=emptyinput");
+                exit();
+            } elseif ($this->view == "admin") {
+                header("location: ../view/admin.php?view=adminAddAccount&error=emptyinput");
+                exit();
+            }
+        } elseif ($this->hasInvalidEmail() == true) {
             // echo "Onjuist email format.";
-            header("location: ../view/signup.php?error=invalidemail");
-            exit();
-        }
-        if ($this->isKnownEmail() == true) {
+            if ($this->view == "signup") {
+                header("location: ../view/signup.php?error=invalidemail");
+                exit();
+            } elseif ($this->view == "admin") {
+                header("location: ../view/admin.php?view=adminAddAccount&error=invalidemail");
+                exit();
+            }
+        } elseif ($this->isKnownEmail() == true) {
             // echo "Email bestaat al in ons bestand.";
-            header("location: ../view/signup.php?error=emailalreadyexists");
-            exit();
-        }
-        if ($this->passwordMatch() == false) {
+            if ($this->view == "signup") {
+                header("location: ../view/signup.php?error=emailalreadyexists");
+                exit();
+            } elseif ($this->view == "admin") {
+                header("location: ../view/admin.php?view=adminAddAccount&error=emailalreadyexists");
+                exit();
+            }
+        } elseif ($this->passwordMatch() == false) {
             // echo "Wachtwoorden komen niet overeen.";
-            header("location: ../view/signup.php?error=passwordmatch");
-            exit();
-        }
-        if ($this->isPasswordStrong() == false) {
+            if ($this->view == "signup") {
+                header("location: ../view/signup.php?error=passwordmatch");
+                exit();
+            } elseif ($this->view == "admin") {
+                header("location: ../view/admin.php?view=adminAddAccount&error=passwordmatch");
+                exit();
+            }
+        } elseif ($this->isPasswordStrong() == false) {
             // echo "Uw wachtwoord moet uit ten minste 8 tekens (maximaal 32) en ten minste één cijfer, één letter en één speciaal karakter bestaan.";
-            header("location: ../view/signup.php?error=passwordstrength");
-            exit();
+            if ($this->view == "signup") {
+                header("location: ../view/signup.php?error=passwordstrength");
+                exit();
+            } elseif ($this->view == "admin") {
+                header("location: ../view/admin.php?view=adminAddAccount&error=passwordstrength");
+                exit();
+            }
         }
+        return true;
+    }
 
+    public function addAccount(): void
+    {
         // Use PHP built in method to generate a password hash
         $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
 
@@ -81,8 +108,7 @@ class accountController extends Controller
             "isActive" => false,
             "activationCode" => password_hash($activationCode, PASSWORD_DEFAULT),
             "activationExpiry" => $expiryDate,
-            "activatedAt" => '',
-            "userProfileID" => "UID" . substr($accountID, 3)
+            "activatedAt" => ''
         );
 
         // Create a new empty Account object with the user data
