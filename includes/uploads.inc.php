@@ -14,8 +14,6 @@ use Controller\fileController;
 session_start();
 $userProfileID = $_SESSION["auth_user"]["userProfileID"];
 
-require_once '../dao/userProfileDAO.php';
-
 if (isset($_POST["submit"])) {
 
     // Grab the data of the file
