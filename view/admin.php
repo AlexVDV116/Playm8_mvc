@@ -149,6 +149,11 @@ class admin extends View
                                         Rollen en Permissies
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="?view=listBetaTesters" class="nav-link">
+                                        Betatesters
+                                    </a>
+                                </li>
                             </ul>
                             <hr>
                         </div>
