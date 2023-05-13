@@ -35,7 +35,6 @@ if (isset($_POST["submit"])) {
     session_unset();
     session_destroy();
 
-
     // Redirect user to register page with success message
     header("location: ../view/signup.php?deleteAccount=success");
 }
