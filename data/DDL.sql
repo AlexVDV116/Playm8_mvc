@@ -95,11 +95,12 @@ ALTER TABLE `matches`
   ADD KEY `userProfileID_B` (`userProfileID_B`);
 
 ALTER TABLE `permissions`
-  ADD PRIMARY KEY (`permissionID`);
+  ADD PRIMARY KEY (`permissionID`),
+  MODIFY `permissionID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`roleID`),
-  MODIFY `roleID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;;
+  MODIFY `roleID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 ALTER TABLE `rolesPermissions`
   ADD PRIMARY KEY (`roleID`,`permissionID`),
@@ -245,14 +246,28 @@ DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE `insertNewRole`(
+  IN `roleID` int(16),
   IN `roleName` varchar(500),
   IN `roleDescription` varchar(500))
-INSERT INTO `roles`(`roleName`, `roleDescription`) VALUES (roleName, roleDescription)$$
+INSERT INTO `roles`(`roleID`, `roleName`, `roleDescription`) VALUES (roleID, roleName, roleDescription)$$
 DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE `getHighestRoleID`()
 select MAX(roleID) from roles$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `getHighestPermissionID`()
+select MAX(permissionID) from permissions$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `insertNewPermission`(
+  IN `permissionID` int(16),
+  IN `permissionName` varchar(500),
+  IN `permissionDescription` varchar(500))
+INSERT INTO `permissions`(`permissionID`, `permissionName`, `permissionDescription`) VALUES (permissionID, permissionName, permissionDescription)$$
 DELIMITER ;
 
 DELIMITER $$
