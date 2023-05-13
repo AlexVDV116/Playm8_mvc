@@ -134,7 +134,7 @@ echo '</pre>';
                                         <?php
                                         } else {
                                         ?>
-                                            <li><a class="dropdown-item" href="<?= $ROOT ?>view/editUserProfile.php">Creëer gebruikersprofiel</a></li>
+                                            <li><a class="dropdown-item" href="<?= $ROOT ?>includes/createUserProfile.inc.php">Creëer gebruikersprofiel</a></li>
                                         <?php
                                         }
                                         ?>
