@@ -10,15 +10,6 @@ require '../vendor/autoload.php';
 use Framework\View;
 use DAO\userProfileDAO;
 
-// Check if user does not have a userProfileID and redirect to createUserProfile page else continue
-if (!isset($_SESSION["auth_user"]["userProfileID"])) {
-    header("location: ../view/editUserProfile.php");
-    exit();
-};
-
-// set include path to work from any directory level
-set_include_path('./' . PATH_SEPARATOR . '../');
-
 // Setting the ROOT directory for this file so the relative paths used in included pages will still work
 $ROOT = '../';
 
