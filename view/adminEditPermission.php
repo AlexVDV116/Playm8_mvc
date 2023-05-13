@@ -90,6 +90,9 @@ class adminEditPermission extends View
                                         if ($_GET["error"] == "emptyinput") {
                                             echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Alle velden zijn verplicht.</p>';
                                         }
+                                        if ($_GET["error"] == "wrongpassword") {
+                                            echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Onjuist wachtwoord.</p>';
+                                        }
                                     }
                                     ?>
                                 </form>
