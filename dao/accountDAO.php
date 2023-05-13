@@ -115,6 +115,13 @@ class accountDAO extends DAO
         $this->startListSql($sql);
     }
 
+    // Select all records from accounts table and order them by accountID where isBeta = 1
+    public function startListBeta(): void
+    {
+        $sql = 'CALL getAllBetaAccounts();';
+        $this->startListSql($sql);
+    }
+
     // Select all records from accounts table that match search term
     public function startSearch($search): void
     {
@@ -174,15 +181,16 @@ class accountDAO extends DAO
     // Prepared statement that uses a stored procedure
     public function update(Account $account): void
     {
-        $sql = 'CALL updateAccount(?, ?, ?, ?, ?, ?, ?);';
+        $sql = 'CALL updateAccount(?, ?, ?, ?, ?, ?, ?, ?);';
         $args = [
             $account->getUsername(),
             $account->getEmail(),
             $account->getPassword(),
 
-            // Account model isActive property is of type boolean, which either return true or false
+            // Account model isActive and isBeta property is of type boolean, which either return true or false
             // MySQL does not have a boolean type, use tinyint(1)
             // Convert value to integer to prevent MySQL invalid datetime format fatal error
+            (int)$account->getBetaUser(),
             (int)$account->getActive(),
             $account->getActivationCode(),
             $account->getExpiryDate(),
@@ -254,6 +262,16 @@ class accountDAO extends DAO
     public function getCount(string $dbName): int
     {
         $stmt = $this->prepare("SELECT count(*) from $dbName");
+        $stmt->execute();
+        $result = $stmt->fetch();
+
+        return $result[0];
+    }
+
+    // Select all records with a matching table name from the database and returns the number of rows as an int
+    public function getBetaCount(): int
+    {
+        $stmt = $this->prepare("SELECT count(*) from `accounts` WHERE `isBetaUser` = 1;");
         $stmt->execute();
         $result = $stmt->fetch();
 
