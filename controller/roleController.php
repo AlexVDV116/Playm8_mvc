@@ -33,28 +33,7 @@ class roleController extends Controller
 
     public function run(): void
     {
-        // Get the role object from the DB
-        $roleDAO = new roleDAO;
-        $role = $roleDAO->get($this->roleID);
-
-        // Update the role object with the new values
-        $role->roleName = $this->roleName;
-        $role->roleDescription = $this->roleDescription;
-
-        // Update the database with the updated role object
-        $roleDAO->update($role);
-
-        // Remove all previous set permissions
-        $permissionDAO = new permissionDAO;
-        $permissionDAO->deletePermissionsFromRole($this->roleID);
-
-        // For each checked permission insert this permission into the rolesPermissions table for this role
-        foreach ($this->selectedPermissions as $permission) {
-            $permissionDAO->insertPermissionsForRole($this->roleID, $permission);
-        }
-
-        header("location: ../view/admin.php?view=listRolesPermissions&editRole=success");
-        exit();
+        return;
     }
 
     public function adminAddNewRole($adminEmail, $adminPassword): void
@@ -91,6 +70,46 @@ class roleController extends Controller
 
             // Redirect user to admin page with success message
             header("location: ../view/admin.php?view=listRolesPermissions&addRole=success");
+        }
+    }
+
+    public function adminEditRole($roleID, $adminEmail, $adminPassword): void
+    {
+        // Grab the admin account from the DB
+        $accountDAO = new AccountDAO;
+        $adminAccount = $accountDAO->get($adminEmail);
+
+        // use PHP built in method to check if the given admin password matches the hashed password stored in the DB (returns bool)
+        $checkPwd = password_verify($adminPassword, $adminAccount->getPassword());
+
+        // If the password match
+        if ($checkPwd == false) {
+            // echo "Onjuist wachtwoord.";
+            header("location: ../view/admin.php?view=adminEditRole&roleID=" . $roleID . "&error=wrongpassword");
+            exit();
+        } elseif ($checkPwd == true) {
+            // Get the role object from the DB
+            $roleDAO = new roleDAO;
+            $role = $roleDAO->get($this->roleID);
+
+            // Update the role object with the new values
+            $role->roleName = $this->roleName;
+            $role->roleDescription = $this->roleDescription;
+
+            // Update the database with the updated role object
+            $roleDAO->update($role);
+
+            // Remove all previous set permissions
+            $permissionDAO = new permissionDAO;
+            $permissionDAO->deletePermissionsFromRole($this->roleID);
+
+            // For each checked permission insert this permission into the rolesPermissions table for this role
+            foreach ($this->selectedPermissions as $permission) {
+                $permissionDAO->insertPermissionsForRole($this->roleID, $permission);
+            }
+
+            header("location: ../view/admin.php?view=listRolesPermissions&editRole=success");
+            exit();
         }
     }
 
