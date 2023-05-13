@@ -98,7 +98,8 @@ ALTER TABLE `permissions`
   ADD PRIMARY KEY (`permissionID`);
 
 ALTER TABLE `roles`
-  ADD PRIMARY KEY (`roleID`);
+  ADD PRIMARY KEY (`roleID`),
+  MODIFY `roleID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;;
 
 ALTER TABLE `rolesPermissions`
   ADD PRIMARY KEY (`roleID`,`permissionID`),
@@ -240,6 +241,18 @@ CREATE PROCEDURE `insertRolesForAccount`(
   IN `accountID` varchar(500),
   IN `roleID` int(16))
 INSERT INTO `accountsRoles`(`accountID`, `roleID`) VALUES (accountID, roleID)$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `insertNewRole`(
+  IN `roleName` varchar(500),
+  IN `roleDescription` varchar(500))
+INSERT INTO `roles`(`roleName`, `roleDescription`) VALUES (roleName, roleDescription)$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `getHighestRoleID`()
+select MAX(roleID) from roles$$
 DELIMITER ;
 
 DELIMITER $$
