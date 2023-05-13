@@ -43,5 +43,5 @@ if ($_SESSION["auth_user"]["userProfileID"] !== "test") {
 
     header("location: ../view/editUserProfile.php?createUserProfile=success");
 } else {
-    header("location: ../view/editUserProfile.php?createUserProfile=fail");
+    header("location: ../index.php?createUserProfile=fail");
 }
