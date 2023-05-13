@@ -41,6 +41,10 @@ class fileController extends Controller
         $allowedExt = ["jpg", "jpeg", "png"];
         $time = time();
 
+        // Grab the userProfile
+        $userProfileDAO = new userProfileDAO;
+        $userProfile = $userProfileDAO->get($this->userProfileID);
+
         // Check if file extension is allowed else redirect with error message
         if (in_array($fileActualExt, $allowedExt)) {
             // Check if an error occuroed while uploading
@@ -51,10 +55,6 @@ class fileController extends Controller
                     // Add time in second since 1970 to generate a unique file name in order to force browser to recache/download image
                     $fileNameNew = "profilePic_" . $this->userProfileID . "_" . $time . "." . $fileActualExt;
                     $fileDest = '../uploads/profilePictures/' . $fileNameNew;
-
-                    // Update the userProfiles.userProfilePicture collum with the new filename
-                    $userProfileDAO = new userProfileDAO;
-                    $userProfile = $userProfileDAO->get($this->userProfileID);
 
                     // Check if user has a user has a record in userProfiles
                     if ($userProfileDAO->checkRecordExists($this->userProfileID) == true) {
@@ -74,21 +74,52 @@ class fileController extends Controller
                         $userProfileDAO->updateUserProfilePicture($fileNameNew, $this->userProfileID);
 
                         // Redirect user with success message
-                        header("location: ../view/editUserProfile.php?upload=success");
+                        if (!in_array(3, $_SESSION["auth_role"])) {
+                            header("location: ../view/editUserProfile.php?upload=success");
+                            exit();
+                        } else {
+                            header("location: ../view/admin.php?view=adminEditUserProfile&userProfileID=" . $userProfile->getUserProfileID() . "&accountID=" . $_SESSION["adminEditUserProfile"]["accountID"] . "&error=none");
+                            exit();
+                        }
+                        // User has no record in UserProfiles, redirect with role dependent error message
                     } else {
-                        header("location: ../view/editUserProfile.php?upload=fail");
+                        if (!in_array(3, $_SESSION["auth_role"])) {
+                            header("location: ../view/editUserProfile.php?upload=fail");
+                            exit();
+                        } else {
+                            header("location: ../view/admin.php?view=adminEditUserProfile&userProfileID=" . $userProfile->getUserProfileID() . "&accountID=" . $_SESSION["adminEditUserProfile"]["accountID"] . "&upload=fail");
+                            exit();
+                        }
                     }
+                    // Filesize greater then allowed, redirect with role dependent error message
                 } else {
-                    header("location: ../view/editUserProfile.php?error=filesize");
+                    if (!in_array(3, $_SESSION["auth_role"])) {
+                        header("location: ../view/editUserProfile.php?error=filesize");
+                        exit();
+                    } else {
+                        header("location: ../view/admin.php?view=adminEditUserProfile&userProfileID=" . $userProfile->getUserProfileID() . "&accountID=" . $_SESSION["adminEditUserProfile"]["accountID"] . "&error=filesize");
+                        exit();
+                    }
+                }
+                // // File error is not equal to 0, redirect with role dependent error message
+            } else {
+                if (!in_array(3, $_SESSION["auth_role"])) {
+                    header("location: ../view/editUserProfile.php?error=uploaderror&error=" . $this->fileError);
+                    exit();
+                } else {
+                    header("location: ../view/admin.php?view=adminEditUserProfile&userProfileID=" . $userProfile->getUserProfileID() . "&accountID=" . $_SESSION["adminEditUserProfile"]["accountID"] . "&error=" . $this->fileError);
                     exit();
                 }
+            }
+            // File extension not allowed, redirect with role dependent error message
+        } else {
+            if (!in_array(3, $_SESSION["auth_role"])) {
+                header("location: ../view/editUserProfile.php?error=fileextnotallowed");
+                exit();
             } else {
-                header("location: ../view/editUserProfile.php?error=uploaderror&error=" . $this->fileError);
+                header("location: ../view/admin.php?view=adminEditUserProfile&userProfileID=" . $userProfile->getUserProfileID() . "&accountID=" . $_SESSION["adminEditUserProfile"]["accountID"] . "error=fileextnotallowed");
                 exit();
             }
-        } else {
-            header("location: ../view/editUserProfile.php?error=fileextnotallowed");
-            exit();
         }
     }
 }
