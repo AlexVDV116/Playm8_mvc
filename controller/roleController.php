@@ -8,6 +8,7 @@ require '../vendor/autoload.php';
 
 // Import classes this class depends on
 use Framework\Controller;
+use Model\Role;
 use DAO\permissionDAO;
 use DAO\roleDAO;
 use DAO\accountDAO;
@@ -52,8 +53,45 @@ class roleController extends Controller
             $permissionDAO->insertPermissionsForRole($this->roleID, $permission);
         }
 
-        header("location: ../view/admin.php?view=adminEditRole&roleID=" . $this->roleID . "&error=none");
+        header("location: ../view/admin.php?view=listRolesPermissions&edit=success");
         exit();
+    }
+
+    public function adminAddNewRole($adminEmail, $adminPassword): void
+    {
+        // Grab the admin account from the DB
+        $accountDAO = new AccountDAO;
+        $adminAccount = $accountDAO->get($adminEmail);
+
+        // use PHP built in method to check if the given admin password matches the hashed password stored in the DB (returns bool)
+        $checkPwd = password_verify($adminPassword, $adminAccount->getPassword());
+
+        // If the password match
+        if ($checkPwd == false) {
+            // echo "Onjuist wachtwoord.";
+            header("location: ../view/admin.php?view=adminAddRole&error=wrongpassword");
+            exit();
+        } elseif ($checkPwd == true) {
+            // Create a new Role object with the roleName and roleDescription
+            $role = new Role;
+            $roleDAO = new roleDAO;
+            $permissionDAO = new permissionDAO;
+
+            $role->roleID = $roleDAO->getHighestRoleID() + 1;
+            $role->roleName = $this->roleName;
+            $role->roleDescription = $this->roleDescription;
+
+            // Insert this role into the DB
+            $roleDAO->insertNewRole($role);
+
+            // For each checked permission insert this permission into the rolesPermissions table for this role
+            foreach ($this->selectedPermissions as $permission) {
+                $permissionDAO->insertPermissionsForRole($role->roleID, $permission);
+            }
+
+            // Redirect user to admin page with success message
+            header("location: ../view/admin.php?view=listRolesPermissions&addRole=success");
+        }
     }
 
     public function adminDeleteRole($roleID, $adminEmail, $adminPassword): void
