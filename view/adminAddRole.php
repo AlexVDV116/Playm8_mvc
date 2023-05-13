@@ -114,44 +114,6 @@ class adminEditRole extends View
                                     </div>
                                 </form>
 
-                                <div class="row mt-2">
-                                    <div class="d-flex justify-content-start">
-                                        <!-- Button trigger modal -->
-                                        <a href="#" type="button" data-bs-toggle="modal" data-bs-target="#deleteRoleModal">
-                                            Verwijder Rol
-                                        </a>
-                                    </div>
-                                </div>
-                                <!-- Modal -->
-                                <div class="modal fade" id="deleteRoleModal" tabindex="-1" aria-labelledby="deleteRoleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title fs-5">Bevestig verwijderen van rol</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <?php
-                                                echo "<div class='d-flex justify-content-center'>";
-                                                echo "<p>Voer wachtwoord in ter bevestiging</p></div>";
-                                                ?>
-                                                <form action="../includes/adminDeleteRole.inc.php" method="post" class="needs-validation" novalidate>
-                                                    <input type="hidden" id="form_roleID" name="roleID" value="<?php if (isset($role)) {
-                                                                                                                    echo $role->getRoleID();
-                                                                                                                } ?>" required>
-                                                    <input id="form_adminPassword" type="password" name="form_adminPassword" class="form-control border-1" placeholder="Voer admin wachtwoord in" required>
-                                                    <div class="row">
-                                                        <div class="d-flex justify-content-end">
-                                                            <button type="button" class="btn btn-cancel shadow-sm mt-3" data-bs-dismiss="modal">Annuleer</button>
-                                                            <button type="submit" name="submit" class="btn btn-credits shadow-sm mt-3">Bevestig</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
                     </div>
