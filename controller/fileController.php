@@ -44,7 +44,7 @@ class fileController extends Controller
         // Check if file extension is allowed else redirect with error message
         if (in_array($fileActualExt, $allowedExt)) {
             // Check if an error occuroed while uploading
-            if ($this->fileError === 0) {
+            if ($this->fileError == 0) {
                 // Check if the file size is less then 5 megabytes
                 if ($this->fileSize < 5120000) {
                     // Generate an unique file name and concat with file extentsion
@@ -83,7 +83,7 @@ class fileController extends Controller
                     exit();
                 }
             } else {
-                header("location: ../view/editUserProfile.php?error=uploaderror");
+                header("location: ../view/editUserProfile.php?error=uploaderror&error=" . $this->fileError);
                 exit();
             }
         } else {
