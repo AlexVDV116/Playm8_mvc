@@ -30,19 +30,7 @@ class permissionController extends Controller
 
     public function run(): void
     {
-        // Get the permission object from the DB
-        $permissionDAO = new permissionDAO;
-        $permission = $permissionDAO->get($this->permissionID);
-
-        // Update the permission object with the new values
-        $permission->permissionName = $this->permissionName;
-        $permission->permissionDescription = $this->permissionDescription;
-
-        // Update the database with the updated role object
-        $permissionDAO->update($permission);
-
-        header("location: ../view/admin.php?view=listRolesPermissions&editPermission=success");
-        exit();
+        return;
     }
 
     public function adminAddPermission($adminEmail, $adminPassword): void
@@ -73,6 +61,37 @@ class permissionController extends Controller
 
             // Redirect user to admin page with success message
             header("location: ../view/admin.php?view=listRolesPermissions&addPermission=success");
+        }
+    }
+
+    public function adminEditPermission($permissionID, $adminEmail, $adminPassword): void
+    {
+        // Grab the admin account from the DB
+        $accountDAO = new AccountDAO;
+        $adminAccount = $accountDAO->get($adminEmail);
+
+        // use PHP built in method to check if the given admin password matches the hashed password stored in the DB (returns bool)
+        $checkPwd = password_verify($adminPassword, $adminAccount->getPassword());
+
+        // If the password match
+        if ($checkPwd == false) {
+            // echo "Onjuist wachtwoord.";
+            header("location: ../view/admin.php?view=adminEditPermission&permissionID=" . $permissionID . "&error=wrongpassword");
+            exit();
+        } elseif ($checkPwd == true) {
+            // Get the permission object from the DB
+            $permissionDAO = new permissionDAO;
+            $permission = $permissionDAO->get($this->permissionID);
+
+            // Update the permission object with the new values
+            $permission->permissionName = $this->permissionName;
+            $permission->permissionDescription = $this->permissionDescription;
+
+            // Update the database with the updated role object
+            $permissionDAO->update($permission);
+
+            header("location: ../view/admin.php?view=listRolesPermissions&editPermission=success");
+            exit();
         }
     }
 
