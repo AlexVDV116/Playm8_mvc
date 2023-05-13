@@ -25,6 +25,7 @@ if (isset($_POST["submit"])) {
     $newPassword = htmlspecialchars($_POST["newPassword"], ENT_QUOTES, "UTF-8");
     $newPasswordrepeat = htmlspecialchars($_POST["newPasswordrepeat"], ENT_QUOTES, "UTF-8");
     $isActive = (bool)$_POST["isActive"];
+    $isBetaUser = (bool)$_POST["isBetaUser"];
 
     // Array with all rolesID's set in the form checkboxes
     $selectedRoles = $_POST["selectedRoles"];
@@ -37,9 +38,9 @@ if (isset($_POST["submit"])) {
 
     // Grab the email adress from the hidden input
     // the editAccount method uses this to get the account from the DB so we can compare any changes made
-    $userEmail = $_POST["userEmail"];
+    $currentUserEmail = $_POST["currentUserEmail"];
 
     // Instantiate the accountController class
     $accountController = new accountController($newUsername, $newEmail, $newPassword, $newPasswordrepeat);
-    $accountController->adminEditAccount($userEmail, $adminEmail, $adminPassword, $isActive, $selectedRoles);
+    $accountController->adminEditAccount($currentUserEmail, $adminEmail, $adminPassword, $isActive, $selectedRoles, $isBetaUser);
 }
