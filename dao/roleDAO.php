@@ -91,7 +91,7 @@ class roleDAO extends DAO
     }
 
     // Deletes roles from accountRoles table 
-    public function deleteRolesFromAccount($accountID)
+    public function deleteRolesFromAccount($accountID): void
     {
         $stmt = $this->prepare('CALL deleteRolesFromAccount(?);');
         $stmt->execute([$accountID]);
@@ -110,10 +110,32 @@ class roleDAO extends DAO
     }
 
     // Set roles for Account in accountRoles table 
-    public function insertRolesForAccount($accountID, $roleID)
+    public function insertRolesForAccount($accountID, $roleID): void
     {
         $stmt = $this->prepare('CALL insertRolesForAccount(?, ?);');
         $stmt->execute([$accountID, $roleID]);
         $stmt->closeCursor();
+    }
+
+    // Set roles for Account in accountRoles table 
+    public function insertNewRole($role): void
+    {
+        $stmt = $this->prepare('CALL insertNewRole(?, ?);');
+        $stmt->execute([
+            $role->getRoleName(),
+            $role->getRoleDescription()
+        ]);
+        $stmt->closeCursor();
+    }
+
+    // Set roles for Account in accountRoles table 
+    public function getHighestRoleID(): int
+    {
+        $stmt = $this->prepare('CALL getHighestRoleID();');
+        $stmt->execute();
+        $result = $stmt->fetch();
+        $stmt->closeCursor();
+
+        return $result[0];
     }
 }
