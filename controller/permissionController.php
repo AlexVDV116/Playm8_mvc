@@ -8,6 +8,7 @@ require '../vendor/autoload.php';
 
 // Import classes this class depends on
 use Framework\Controller;
+use Model\Permission;
 use DAO\permissionDAO;
 use DAO\accountDAO;
 
@@ -40,8 +41,39 @@ class permissionController extends Controller
         // Update the database with the updated role object
         $permissionDAO->update($permission);
 
-        header("location: ../view/admin.php?view=adminEditPermission&permissionID=" . $this->permissionID . "&error=none");
+        header("location: ../view/admin.php?view=listRolesPermissions&editPermission=success");
         exit();
+    }
+
+    public function adminAddPermission($adminEmail, $adminPassword): void
+    {
+        // Grab the admin account from the DB
+        $accountDAO = new AccountDAO;
+        $adminAccount = $accountDAO->get($adminEmail);
+
+        // use PHP built in method to check if the given admin password matches the hashed password stored in the DB (returns bool)
+        $checkPwd = password_verify($adminPassword, $adminAccount->getPassword());
+
+        // If the password match
+        if ($checkPwd == false) {
+            // echo "Onjuist wachtwoord.";
+            header("location: ../view/admin.php?view=adminAddPermission&error=wrongpassword");
+            exit();
+        } elseif ($checkPwd == true) {
+            // Create a new permission object with the permissionName and permissionDescription
+            $permission = new Permission;
+            $permissionDAO = new permissionDAO;
+
+            $permission->permissionID = $permissionDAO->getHighestPermissionID() + 1;
+            $permission->permissionName = $this->permissionName;
+            $permission->permissionDescription = $this->permissionDescription;
+
+            // Insert this permission into the DB
+            $permissionDAO->insertNewPermission($permission);
+
+            // Redirect user to admin page with success message
+            header("location: ../view/admin.php?view=listRolesPermissions&addPermission=success");
+        }
     }
 
     public function adminDeletePermission($permissionID, $adminEmail, $adminPassword): void
@@ -50,7 +82,7 @@ class permissionController extends Controller
         $accountDAO = new AccountDAO;
         $adminAccount = $accountDAO->get($adminEmail);
 
-        // Grab the role from the DB
+        // Grab the permission from the DB
         $permissionDAO = new permissionDAO;
         $permission = $permissionDAO->get($permissionID);
 
