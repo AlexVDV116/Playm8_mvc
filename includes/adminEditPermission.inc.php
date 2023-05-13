@@ -41,5 +41,5 @@ if (isset($_POST["submit"])) {
 
     // Instantiate the permissionController class
     $permissionController = new permissionController($permissionID, $newPermissionName, $newPermissionDescription);
-    $permissionController->run();
+    $permissionController->adminEditPermission($permissionID, $adminEmail, $adminPassword);
 }
