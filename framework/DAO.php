@@ -22,7 +22,7 @@ abstract class DAO extends databaseHandler
     private $object;
     private $stmt;
 
-    function __construct($class)
+    public function __construct($class)
     {
         parent::__construct();
         $this->class = $class;
@@ -44,20 +44,20 @@ abstract class DAO extends databaseHandler
     }
 
     // Returns true if $object is not null
-    function hasNext(): bool
+    public function hasNext(): bool
     {
         return $this->object !== null;
     }
 
     // fetches the next object then returns this object
-    function getNext(): Model
+    public function getNext(): Model
     {
         $result = $this->object;
         $this->object = $this->stmt->fetchObject($this->class) ?: null;
         return $result;
     }
 
-    function closeConnection(): void
+    public function closeConnection(): void
     {
         $this->stmt->closeCursor();
     }

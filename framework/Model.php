@@ -13,7 +13,7 @@ class Model
      * 3. create from assosciative array like new..($_POST) 
      *      to copy fields from posted form
      */
-    function __construct(?array $form)
+    public function __construct(?array $form)
     {
         if (!empty($form)) {
             foreach ($form as $key => $value) {

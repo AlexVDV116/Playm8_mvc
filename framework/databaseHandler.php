@@ -19,7 +19,7 @@ class databaseHandler
     private static $pdo = null;
     static $debug = false;
 
-    function __construct()
+    public function __construct()
     {
         if (self::$pdo === null) {
             $this->connect(Secret::DB_HOST, Secret::DB_NAME, Secret::DB_USERNAME, Secret::DB_PASSWORD);
@@ -37,12 +37,12 @@ class databaseHandler
         }
     }
 
-    function prepare($sql)
+    public function prepare($sql)
     {
         return self::$pdo->prepare($sql);
     }
 
-    function execute($sql, $args = [])
+    public function execute($sql, $args = [])
     {
         $stmt = $this->prepare($sql);
         return $stmt->execute($args);

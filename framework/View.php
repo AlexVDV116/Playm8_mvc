@@ -8,7 +8,7 @@ abstract class View
 
     abstract function show();
 
-    function __construct()
+    public function __construct()
     {
         $this->show();
     }
