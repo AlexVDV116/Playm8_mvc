@@ -4,7 +4,7 @@
 namespace Includes;
 
 // Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
-require '../vendor/autoload.php';
+require_once '../vendor/autoload.php';
 
 // Import classes this script depends on
 use Controller\fileController;
