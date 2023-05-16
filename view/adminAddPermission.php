@@ -4,11 +4,10 @@
 namespace View;
 
 // Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
-require '../vendor/autoload.php';
+require_once '../vendor/autoload.php';
 
 // Import classes this class depends on
 use Framework\View;
-use DAO\permissionDAO;
 
 // adminEditAccount class that has a form so that an admin can edit a user account
 

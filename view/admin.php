@@ -4,21 +4,19 @@
 namespace View;
 
 // Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
-require '../vendor/autoload.php';
+require_once '../vendor/autoload.php';
 
 // Import classes this class depends on
 use Framework\View;
 
-// set include path to work from any directory level
-set_include_path('./' . PATH_SEPARATOR . '../');
-
 // Session start and error headings because we do not include the header.php in this file
 session_start();
 
-/* Echo session variables for development purposes */
+/* Echo session variables for development purposes
 echo '<pre>';
 var_dump($_SESSION);
 echo '</pre>';
+*/
 
 // Check if user is logged in if false redirect to index page else check if user has the correct admin role
 if ($_SESSION["auth"] == false) {

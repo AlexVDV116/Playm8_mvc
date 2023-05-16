@@ -4,13 +4,10 @@
 namespace View;
 
 // Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
-require '../vendor/autoload.php';
+require_once '../vendor/autoload.php';
 
 // Import classes this class depends on
 use Framework\View;
-
-// set include path to work from any directory level
-set_include_path('./' . PATH_SEPARATOR . '../');
 
 // If a session variable array exists store the contents in the form_data variable
 // So we can retain the form values for better user experience

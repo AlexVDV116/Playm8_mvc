@@ -3,7 +3,7 @@
 namespace View;
 
 // Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
-require $ROOT . 'vendor/autoload.php';
+require_once $ROOT . 'vendor/autoload.php';
 
 // Import classes this class depends on
 use Framework\View;
