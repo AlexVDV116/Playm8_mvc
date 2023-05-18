@@ -31,7 +31,7 @@ class editUserProfile extends View
     {
         if ($_SESSION["auth_user"]["userProfileID"]) {
             $userProfileID = $_SESSION["auth_user"]["userProfileID"];
-            $userProfileDAO = new userProfileDAO;
+            $userProfileDAO = new userProfileDAO();
             if ($userProfileDAO->checkRecordExists($userProfileID)) {
                 $userProfile = $userProfileDAO->get($userProfileID);
             }
@@ -59,12 +59,12 @@ class editUserProfile extends View
                                             <?php
                                             // If user has a default profile picture display default profile picture with his initials
                                             // Else display his own profile picture
-                                            if ($userProfile->getUserProfilePicture() == "default") { ?>
+                                            if ($userProfile->get("userProfilePicture") == "default") { ?>
                                                 <img src="../uploads/profilePictures/default.png" alt="Profile picture" class="editProfilePicture img-fluid img-thumbnail mt-4 mb-2">
                                             <?php
                                             } else {
                                             ?>
-                                                <img src="../uploads/profilePictures/<?php echo $userProfile->getUserProfilePicture() ?>" alt="Profile picture" class="editProfilePicture img-fluid img-thumbnail mt-4 mb-2">
+                                                <img src="../uploads/profilePictures/<?php echo $userProfile->get("userProfilePicture") ?>" alt="Profile picture" class="editProfilePicture img-fluid img-thumbnail mt-4 mb-2">
                                             <?php
                                             }
                                             ?>
@@ -102,7 +102,7 @@ class editUserProfile extends View
                                             <div class="form-group">
                                                 <label for="form_name">Voornaam:</label>
                                                 <input id="form_name" type="text" name="firstName" class="form-control border-0" placeholder="Voer uw voornaam in" value="<?php if (isset($userProfile)) {
-                                                                                                                                                                                echo $userProfile->getFirstName();
+                                                                                                                                                                                echo $userProfile->get("firstName");
                                                                                                                                                                             } ?>" required>
                                                 <div class="invalid-feedback">
                                                     Dit veld is verplicht.
@@ -113,7 +113,7 @@ class editUserProfile extends View
                                             <div class="form-group">
                                                 <label for="form_lastname">Achternaam:</label>
                                                 <input id="form_lastname" type="text" name="lastName" class="form-control border-0" placeholder="Voer uw achternaam in" value="<?php if (isset($userProfile)) {
-                                                                                                                                                                                    echo $userProfile->getLastName();
+                                                                                                                                                                                    echo $userProfile->get("lastName");
                                                                                                                                                                                 } ?>" required>
                                                 <div class="invalid-feedback">
                                                     Dit veld is verplicht.
@@ -127,7 +127,7 @@ class editUserProfile extends View
                                             <div class="form-group">
                                                 <label for="form_city">Stad:</label>
                                                 <input id="form_city" type="text" name="city" class="form-control border-0" placeholder="Voer uw stad in" value="<?php if (isset($userProfile)) {
-                                                                                                                                                                        echo $userProfile->getCity();
+                                                                                                                                                                        echo $userProfile->get("city");
                                                                                                                                                                     } ?>" required>
                                                 <div class="invalid-feedback">
                                                     Dit veld is verplicht.
@@ -138,7 +138,7 @@ class editUserProfile extends View
                                             <div class="form-group">
                                                 <label for="form_country">Land:</label>
                                                 <input id="form_country" type="text" name="country" class="form-control border-0" placeholder="Voer uw land in" value="<?php if (isset($userProfile)) {
-                                                                                                                                                                            echo $userProfile->getCountry();
+                                                                                                                                                                            echo $userProfile->get("country");
                                                                                                                                                                         } ?>" required>
                                                 <div class="invalid-feedback">
                                                     Dit veld is verplicht.
@@ -152,7 +152,7 @@ class editUserProfile extends View
                                             <div class="form-group">
                                                 <label for="form_phoneNumber">Telefoonnummer:</label><br>
                                                 <input id="form_phoneNumber" type="tel" name="phoneNumber" class="form-control border-0" placeholder="Voer uw telefoonnummer in" value="<?php if (isset($userProfile)) {
-                                                                                                                                                                                            echo $userProfile->getPhoneNumber();
+                                                                                                                                                                                            echo $userProfile->get("phoneNumber");
                                                                                                                                                                                         } ?>">
                                             </div>
                                             <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/intlTelInput.min.js"></script>
@@ -185,7 +185,7 @@ class editUserProfile extends View
                                             <div class="form-group">
                                                 <label for="form_dateOfBirth">Geboortedatum:</label>
                                                 <input id="form_dateOfBirth" type="date" name="dateOfBirth" class="form-control border-0" placeholder="Voer uw geboortedatum in" value="<?php if (isset($userProfile)) {
-                                                                                                                                                                                            echo $userProfile->getDateOfBirth();
+                                                                                                                                                                                            echo $userProfile->get("dateOfBirth");
                                                                                                                                                                                         } ?>" required>
                                                 <div class="invalid-feedback">
                                                     Dit veld is verplicht.
@@ -199,7 +199,7 @@ class editUserProfile extends View
                                             <div class="form-group">
                                                 <label for="form_aboutMeTitle">Over mij koptext:</label>
                                                 <input id="form_aboutMeTitle" type="aboutMeTitle" name="aboutMeTitle" class="form-control border-0" placeholder="Voer de titel van uw profielpagina in" value="<?php if (isset($userProfile)) {
-                                                                                                                                                                                                                    echo $userProfile->getAboutMeTitle();
+                                                                                                                                                                                                                    echo $userProfile->get("aboutMeTitle");
                                                                                                                                                                                                                 } ?>" required>
                                                 <div class="invalid-feedback">
                                                     Dit veld is verplicht.
@@ -213,7 +213,7 @@ class editUserProfile extends View
                                             <div class="form-group">
                                                 <label for="form_aboutMeText">Over:</label>
                                                 <textarea id="form_aboutMeText" name="aboutMeText" class="form-control border-0" placeholder="Vertel hier over de favoriete activiteiten, uitlaatplaatsen of andere leuke feitjes over jou en je huisdier! (20 -255 karakters)" rows="4" maxlength="10000" required><?php if (isset($userProfile)) {
-                                                                                                                                                                                                                                                                                                                        echo $userProfile->getAboutMeText();
+                                                                                                                                                                                                                                                                                                                        echo $userProfile->get("aboutMeText");
                                                                                                                                                                                                                                                                                                                     } ?></textarea>
                                                 <div class="invalid-feedback">
                                                     Dit veld is verplicht. (20 - 500 karakters)
@@ -301,4 +301,4 @@ class editUserProfile extends View
 <?php
     }
 }
-new editUserProfile;
+new editUserProfile();
