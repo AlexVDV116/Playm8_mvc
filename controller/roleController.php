@@ -56,16 +56,16 @@ class roleController extends Controller
             $roleDAO = new roleDAO();
             $permissionDAO = new permissionDAO();
 
-            $role->roleID = $roleDAO->getHighestRoleID() + 1;
-            $role->roleName = $this->roleName;
-            $role->roleDescription = $this->roleDescription;
+            $role->set("roleID", $roleDAO->getHighestRoleID() + 1);
+            $role->set("roleName", $this->roleName);
+            $role->set("roleDescription", $this->roleDescription);
 
             // Insert this role into the DB
             $roleDAO->insertNewRole($role);
 
             // For each checked permission insert this permission into the rolesPermissions table for this role
             foreach ($this->selectedPermissions as $permission) {
-                $permissionDAO->insertPermissionsForRole($role->roleID, $permission);
+                $permissionDAO->insertPermissionsForRole($role->get("roleID"), $permission);
             }
 
             // Redirect user to admin page with success message
@@ -93,8 +93,8 @@ class roleController extends Controller
             $role = $roleDAO->get($this->roleID);
 
             // Update the role object with the new values
-            $role->roleName = $this->roleName;
-            $role->roleDescription = $this->roleDescription;
+            $role->set("roleName", $this->roleName);
+            $role->set("roleDescription", $this->roleDescription);
 
             // Update the database with the updated role object
             $roleDAO->update($role);
