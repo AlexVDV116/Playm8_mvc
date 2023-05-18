@@ -201,5 +201,5 @@ class termsAndConditions extends View
 <?php
     }
 }
-new termsAndConditions;
+new termsAndConditions();
 include_once '../footer.php';
