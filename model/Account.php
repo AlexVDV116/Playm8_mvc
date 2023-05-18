@@ -22,7 +22,7 @@ class Account extends Model
     private bool $isActive;
     private string $activationCode;
     private string $activationExpiry;
-    private ?string $activatedAtt;
+    private ?string $activatedAt;
     private ?string $userProfileID;
 
     public function __construct(?array $data = null)
