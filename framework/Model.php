@@ -18,7 +18,7 @@ class Model
         if (!empty($form)) {
             foreach ($form as $key => $value) {
                 if (property_exists($this, $key)) {
-                    $this->$key = $value;
+                    $this->set($key, $value);
                 }
             }
         }
