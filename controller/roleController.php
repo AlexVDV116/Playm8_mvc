@@ -39,11 +39,11 @@ class roleController extends Controller
     public function adminAddNewRole($adminEmail, $adminPassword): void
     {
         // Grab the admin account from the DB
-        $accountDAO = new AccountDAO;
+        $accountDAO = new AccountDAO();
         $adminAccount = $accountDAO->get($adminEmail);
 
         // use PHP built in method to check if the given admin password matches the hashed password stored in the DB (returns bool)
-        $checkPwd = password_verify($adminPassword, $adminAccount->getPassword());
+        $checkPwd = password_verify($adminPassword, $adminAccount->get("password"));
 
         // If the password match
         if ($checkPwd == false) {
@@ -52,9 +52,9 @@ class roleController extends Controller
             exit();
         } elseif ($checkPwd == true) {
             // Create a new Role object with the roleName and roleDescription
-            $role = new Role;
-            $roleDAO = new roleDAO;
-            $permissionDAO = new permissionDAO;
+            $role = new Role();
+            $roleDAO = new roleDAO();
+            $permissionDAO = new permissionDAO();
 
             $role->roleID = $roleDAO->getHighestRoleID() + 1;
             $role->roleName = $this->roleName;
@@ -76,11 +76,11 @@ class roleController extends Controller
     public function adminEditRole($roleID, $adminEmail, $adminPassword): void
     {
         // Grab the admin account from the DB
-        $accountDAO = new AccountDAO;
+        $accountDAO = new AccountDAO();
         $adminAccount = $accountDAO->get($adminEmail);
 
         // use PHP built in method to check if the given admin password matches the hashed password stored in the DB (returns bool)
-        $checkPwd = password_verify($adminPassword, $adminAccount->getPassword());
+        $checkPwd = password_verify($adminPassword, $adminAccount->get("password"));
 
         // If the password match
         if ($checkPwd == false) {
@@ -89,7 +89,7 @@ class roleController extends Controller
             exit();
         } elseif ($checkPwd == true) {
             // Get the role object from the DB
-            $roleDAO = new roleDAO;
+            $roleDAO = new roleDAO();
             $role = $roleDAO->get($this->roleID);
 
             // Update the role object with the new values
@@ -100,7 +100,7 @@ class roleController extends Controller
             $roleDAO->update($role);
 
             // Remove all previous set permissions
-            $permissionDAO = new permissionDAO;
+            $permissionDAO = new permissionDAO();
             $permissionDAO->deletePermissionsFromRole($this->roleID);
 
             // For each checked permission insert this permission into the rolesPermissions table for this role
@@ -116,20 +116,20 @@ class roleController extends Controller
     public function adminDeleteRole($roleID, $adminEmail, $adminPassword): void
     {
         // Grab the admin account from the DB
-        $accountDAO = new AccountDAO;
+        $accountDAO = new AccountDAO();
         $adminAccount = $accountDAO->get($adminEmail);
 
         // Grab the role from the DB
-        $roleDAO = new roleDAO;
+        $roleDAO = new roleDAO();
         $role = $roleDAO->get($roleID);
 
         // use PHP built in method to check if the given admin password matches the hashed password stored in the DB (returns bool)
-        $checkPwd = password_verify($adminPassword, $adminAccount->getPassword());
+        $checkPwd = password_verify($adminPassword, $adminAccount->get("password"));
 
         // If the password match
         if ($checkPwd == false) {
             // echo "Onjuist wachtwoord.";
-            header("location: ../view/admin.php?view=adminEditRole&roleID=" . $role->getRoleID() . "&error=wrongpassword");
+            header("location: ../view/admin.php?view=adminEditRole&roleID=" . $role->get("roleID") . "&error=wrongpassword");
             exit();
         } elseif ($checkPwd == true) {
             $roleDAO->delete($roleID);
