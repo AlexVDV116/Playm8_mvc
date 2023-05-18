@@ -26,7 +26,7 @@ class databaseHandler
         }
     }
 
-    protected function connect($host, $dbname, $user, $pass): void
+    protected function connect(string $host, string $dbname, string $user, string $pass): void
     {
         try {
             $dsn = "mysql:dbname=$dbname;host=$host;charset=utf8mb4";
@@ -37,12 +37,12 @@ class databaseHandler
         }
     }
 
-    public function prepare($sql)
+    public function prepare(string $sql)
     {
         return self::$pdo->prepare($sql);
     }
 
-    public function execute($sql, $args = [])
+    public function execute(string $sql, array $args = [])
     {
         $stmt = $this->prepare($sql);
         return $stmt->execute($args);
