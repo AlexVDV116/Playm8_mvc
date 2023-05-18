@@ -28,7 +28,7 @@ abstract class DAO extends databaseHandler
         $this->class = $class;
     }
 
-    protected function startListSql($sql, $args = []): void
+    protected function startListSql(string $sql, array $args = []): void
     {
         $this->stmt = $this->prepare($sql);
         $this->stmt->execute($args);
@@ -36,7 +36,7 @@ abstract class DAO extends databaseHandler
     }
 
     // Returns an instance of the required class with property names that correspond to the column names or false on failure.
-    protected function getObjectSql($sql, $args = []): ?Model
+    protected function getObjectSql(string $sql, array $args = []): ?Model
     {
         $this->stmt = $this->prepare($sql);
         $this->stmt->execute($args);
