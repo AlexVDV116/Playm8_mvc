@@ -50,16 +50,15 @@ class permissionDAO extends DAO
         return $roles;
     }
 
-    // Deletes permissions from rolesPermissions table 
-    public function deletePermissionsFromRole($roleID)
+    // Deletes all permissions from rolesPermissions table with a specific role ID
+    public function deleteAllPermissionsFromRole($roleID)
     {
-        $stmt = $this->prepare('CALL deletePermissionsFromRole(?);');
+        $stmt = $this->prepare('CALL deleteAllPermissionsFromRole(?);');
         $stmt->execute([$roleID]);
         $stmt->closeCursor();
     }
 
     // Deletes a the record from the permissions table where the permissionID matches
-    // Prepared statement that uses a stored procedure
     public function delete(string $permissionID): void
     {
         $sql = 'CALL deletePermission(?);';
@@ -78,7 +77,6 @@ class permissionDAO extends DAO
     }
 
     // Updates the record in the permission table with the data from the permission object
-    // Prepared statement that uses a stored procedure
     public function update(Permission $permission): void
     {
         $sql = 'CALL updatePermission(?, ?, ?);';
