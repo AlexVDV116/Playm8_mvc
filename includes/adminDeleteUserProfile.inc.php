@@ -20,11 +20,11 @@ if (isset($_POST["submit"])) {
     $adminPassword = $_POST["adminPassword"];
 
     // Grab the account from the DB
-    $accountDAO = new AccountDAO;
+    $accountDAO = new AccountDAO();
     $adminAccount = $accountDAO->get($adminEmail);
 
     // use PHP built in method to check if the given admin password matches the hashed password stored in the DB (returns bool)
-    $checkPwd = password_verify($adminPassword, $adminAccount->getPassword());
+    $checkPwd = password_verify($adminPassword, $adminAccount->get("password"));
 
     // If the password match
     if ($checkPwd == false) {
