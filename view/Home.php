@@ -23,4 +23,4 @@ class home extends View
 <?php
     }
 }
-new home;
+new home();
