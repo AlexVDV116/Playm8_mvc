@@ -63,7 +63,7 @@ class searchAccounts extends View
                         <tr onclick="">
                             <!-- PHP shorthand to echo the data in the table -->
                             <td><?= "# " . "<a href ='../view/admin.php?view=adminEditAccount&account=" . $account->get("email") . "'>" . $account->get("accountID") ?></td>
-                            <td><?= '# ' . $account->get("userProfileID") ?></td>
+                            <td><?= "<a href ='../view/admin.php?view=adminEditUserProfile&userProfileID=" . $account->get("userProfileID") . "&accountID=" . $account->get("accountID") . "'>" . $account->get("userProfileID") . "</a>" ?></td>
                             <td><?= $account->get("username") ?></td>
                             <td><?= $account->get("email") ?></td>
                             <td><?php if ($account->get("isActive")) {
@@ -76,7 +76,6 @@ class searchAccounts extends View
                                 } else {
                                     echo 'Nee';
                                 } ?>
-                            <td><?= "<a href ='../view/admin.php?view=adminEditAccount&account=" . $account->get("email") . "'>Wijzig" ?></td>
                         </tr>
                     <?php
                     }
