@@ -31,8 +31,8 @@ if (isset($_POST["submit"])) {
     $email = $_SESSION["auth_user"]["email"];
 
     // Instantiate the accountController class
-    $editAccount = new accountController($newUsername, $newEmail, $newPassword, $newPasswordrepeat);
+    $accountController = new accountController($newUsername, $newEmail, $newPassword, $newPasswordrepeat);
 
     // Running server side validation, error handling and user sign up
-    $editAccount->editAccount($email, $currentPassword);
+    $accountController->editAccount($email, $currentPassword);
 }
