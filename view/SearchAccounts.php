@@ -17,7 +17,7 @@ class searchAccounts extends View
 
     public function show()
     {
-        $accountDAO = new accountDAO;
+        $accountDAO = new accountDAO();
         if (isset($_POST['search'])) { // Check if form was submitted
 
             $search = $_POST['search']; // Get input text
@@ -62,21 +62,21 @@ class searchAccounts extends View
                     ?>
                         <tr onclick="">
                             <!-- PHP shorthand to echo the data in the table -->
-                            <td><?= "# " . "<a href ='../view/admin.php?view=adminEditAccount&account=" . $account->getEmail() . "'>" . $account->getAccountID() ?></td>
-                            <td><?= '# ' . $account->getUserProfileID() ?></td>
-                            <td><?= $account->getUsername() ?></td>
-                            <td><?= $account->getEmail() ?></td>
-                            <td><?php if ($account->getActive()) {
+                            <td><?= "# " . "<a href ='../view/admin.php?view=adminEditAccount&account=" . $account->get("email") . "'>" . $account->get("accountID") ?></td>
+                            <td><?= '# ' . $account->get("userProfileID") ?></td>
+                            <td><?= $account->get("username") ?></td>
+                            <td><?= $account->get("email") ?></td>
+                            <td><?php if ($account->get("isActive")) {
                                     echo 'Ja';
                                 } else {
                                     echo 'Nee';
                                 } ?></td>
-                            <td><?php if ($account->getBetaUser()) {
+                            <td><?php if ($account->get("isBetaUser")) {
                                     echo 'Ja';
                                 } else {
                                     echo 'Nee';
                                 } ?>
-                            <td><?= "<a href ='../view/admin.php?view=adminEditAccount&account=" . $account->getEmail() . "'>Wijzig" ?></td>
+                            <td><?= "<a href ='../view/admin.php?view=adminEditAccount&account=" . $account->get("email") . "'>Wijzig" ?></td>
                         </tr>
                     <?php
                     }
@@ -87,4 +87,4 @@ class searchAccounts extends View
     <?php
     }
 }
-new searchAccounts;
+new searchAccounts();
