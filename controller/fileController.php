@@ -59,9 +59,9 @@ class fileController extends Controller
                     // Check if user has a user has a record in userProfiles
                     if ($userProfileDAO->checkRecordExists($this->userProfileID) == true) {
                         // If he has a profilePicture set other then default
-                        if ($userProfile->userProfilePicture !== "default") {
+                        if ($userProfile->get("userProfilePicture") !== "default") {
                             // Grab the location, name and extension of the old userProfilePicture
-                            $oldProfilePicture = "../uploads/profilePictures/" . $userProfile->userProfilePicture;
+                            $oldProfilePicture = "../uploads/profilePictures/" . $userProfile->get("userProfilePicture");
                             // Delete the old profilePicture
                             array_map('unlink', glob($oldProfilePicture));
                         }
