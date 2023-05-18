@@ -17,7 +17,7 @@ class listBetaTesters extends View
 
     public function show()
     {
-        $accountDAO = new accountDAO;
+        $accountDAO = new accountDAO();
         $betaCount = $accountDAO->getBetaCount();
         $accountDAO->startListBeta();
 
@@ -55,21 +55,21 @@ class listBetaTesters extends View
                     ?>
                         <tr onclick="">
                             <!-- PHP shorthand to echo the data in the table -->
-                            <td><?= "# " . $account->getAccountID() ?></td>
-                            <td><?= '# ' . $account->getUserProfileID() ?></td>
-                            <td><?= $account->getUsername() ?></td>
-                            <td><?= $account->getEmail() ?></td>
-                            <td><?php if ($account->getActive()) {
+                            <td><?= "# " . $account->get("accountID") ?></td>
+                            <td><?= '# ' . $account->get("userProfileID") ?></td>
+                            <td><?= $account->get("username") ?></td>
+                            <td><?= $account->get("email") ?></td>
+                            <td><?php if ($account->get("isActive")) {
                                     echo 'Ja';
                                 } else {
                                     echo 'Nee';
                                 } ?></td>
-                            <td><?php if ($account->getBetaUser()) {
+                            <td><?php if ($account->get("isBetaUser")) {
                                     echo 'Ja';
                                 } else {
                                     echo 'Nee';
                                 } ?>
-                            <td><?= "<a href ='../view/admin.php?view=adminEditAccount&account=" . $account->getEmail() . "'>Wijzig" ?></td>
+                            <td><?= "<a href ='../view/admin.php?view=adminEditAccount&account=" . $account->get("email") . "'>Wijzig" ?></td>
 
                         </tr>
                     <?php
@@ -81,4 +81,4 @@ class listBetaTesters extends View
 <?php
     }
 }
-new listBetaTesters;
+new listBetaTesters();
