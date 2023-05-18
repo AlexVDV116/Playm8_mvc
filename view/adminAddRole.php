@@ -61,7 +61,7 @@ class adminAddRole extends View
                                             <label class="form-label">Toegewezen permissies:</label><br>
                                             <?php
                                             // For each role in the roles table echo a input type checkbox
-                                            $permissionDAO = new permissionDAO;
+                                            $permissionDAO = new permissionDAO();
                                             $permissionDAO->startList();
 
                                             // While we have another object in our query
@@ -72,8 +72,8 @@ class adminAddRole extends View
                                                 // If role is set echo the input checkbox as checked
                                                 // Else echo the checkbox without the checked attribute 
                                             ?>
-                                                <input type="checkbox" id=<?= "permission" . $permission->getPermissionID() ?> name="selectedPermissions[]" value="<?= $permission->getPermissionID() ?>">
-                                                <label for=<?= "role" . $permission->getPermissionID() ?>><?= $permission->getPermissionID() . " - " . $permission->getPermissionDescription() ?></label><br>
+                                                <input type="checkbox" id=<?= "permission" . $permission->get("permissionID") ?> name="selectedPermissions[]" value="<?= $permission->getPermissionID() ?>">
+                                                <label for=<?= "role" . $permission->get("permissionID") ?>><?= $permission->get("permissionID") . " - " . $permission->get("permissionDescription") ?></label><br>
 
                                             <?php
                                             }
@@ -123,4 +123,4 @@ class adminAddRole extends View
 <?php
     }
 }
-new adminAddRole;
+new adminAddRole();
