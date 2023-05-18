@@ -22,7 +22,7 @@ class accountController extends Controller
     private ?string $password;
     private ?string $passwordrepeat;
 
-    public function __construct($username = NULL, $email = NULL, $password = NULL, $passwordrepeat = NULL)
+    public function __construct(string $username = NULL, string $email = NULL, string $password = NULL, string $passwordrepeat = NULL)
     {
         $this->username = $username;
         $this->email = $email;
@@ -101,7 +101,7 @@ class accountController extends Controller
         $accountDAO->mailActivationCode($this->email, $activationCode);
     }
 
-    public function editAccount($email, $currentPassword): void
+    public function editAccount(string $email, string $currentPassword): void
     {
         // Grab the account from the DB
         $accountDAO = new AccountDAO();
@@ -213,8 +213,14 @@ class accountController extends Controller
         }
     }
 
-    public function adminEditAccount($currentUserEmail, $adminEmail, $adminPassword, $isActive, $selectedRoles, $isBetaUser): void
-    {
+    public function adminEditAccount(
+        string $currentUserEmail,
+        string $adminEmail,
+        string $adminPassword,
+        bool $isActive,
+        array $selectedRoles,
+        bool $isBetaUser
+    ): void {
         // Grab the account from the DB
         $accountDAO = new AccountDAO();
         $userAccount = $accountDAO->get($currentUserEmail);
@@ -350,7 +356,7 @@ class accountController extends Controller
         }
     }
 
-    public function adminDeleteAccount($userEmail, $adminEmail, $adminPassword): void
+    public function adminDeleteAccount(string $userEmail, string $adminEmail, string $adminPassword): void
     {
         // Grab the account from the DB
         $accountDAO = new AccountDAO();
