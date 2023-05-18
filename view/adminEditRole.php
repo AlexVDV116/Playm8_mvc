@@ -18,7 +18,7 @@ class adminEditRole extends View
 
     public function show()
     {
-        $roleDAO = new roleDAO;
+        $roleDAO = new roleDAO();
         if (isset($_GET['roleID'])) {
             $roleID = $_GET["roleID"];
         }
@@ -44,7 +44,7 @@ class adminEditRole extends View
                                                 <i class="fas fa-circle-info fa-lg me-3 fa-fw"></i>
                                                 <label for="form_roleName" class="form-label">Naam:</label>
                                                 <input id="form_roleName" type="text" name="roleName" class="form-control" value="<?php if (isset($role)) {
-                                                                                                                                        echo $role->getRoleName();
+                                                                                                                                        echo $role->get("roleName");
                                                                                                                                     } ?>" required>
                                                 <div class="invalid-feedback">
                                                     Dit veld is verplicht.
@@ -56,7 +56,7 @@ class adminEditRole extends View
                                                 <i class="fas fa-message fa-lg me-3 fa-fw"></i>
                                                 <label for="form_roleDescription" class="form-label">Beschrijving</label>
                                                 <input id="form_roleDescription" type="text" name="roleDescription" class="form-control" value="<?php if (isset($role)) {
-                                                                                                                                                    echo $role->getRoleDescription();
+                                                                                                                                                    echo $role->get("roleDescription");
                                                                                                                                                 } ?>" required>
                                                 <div class="invalid-feedback">
                                                     Dit veld is verplicht.
@@ -72,9 +72,9 @@ class adminEditRole extends View
                                             <?php
                                             // For each role in the roles table echo a input type checkbox
                                             // Check the boxes that the user has a role by setting the echoing the checked attribute
-                                            $permissionDAO = new permissionDAO;
+                                            $permissionDAO = new permissionDAO();
                                             // Get the roles the user has set
-                                            $permissionsSet = $permissionDAO->getPermissionsbyRoleID($role->getRoleID());
+                                            $permissionsSet = $permissionDAO->getPermissionsbyRoleID($role->get("roleID"));
                                             $permissionDAO->startList();
 
                                             // While we have another object in our query
@@ -85,12 +85,12 @@ class adminEditRole extends View
                                                 // If role is set echo the input checkbox as checked
                                                 // Else echo the checkbox without the checked attribute 
                                             ?>
-                                                <input type="checkbox" id=<?= "permission" . $permission->getPermissionID() ?> name="selectedPermissions[]" value="<?= $permission->getPermissionID() ?>" <?php
-                                                                                                                                                                                                            if (in_array($permission->getPermissionID(), $permissionsSet)) {
-                                                                                                                                                                                                                echo "checked";
-                                                                                                                                                                                                            }
-                                                                                                                                                                                                            ?>>
-                                                <label for=<?= "role" . $permission->getPermissionID() ?>><?= $permission->getPermissionID() . " - " . $permission->getPermissionDescription() ?></label><br>
+                                                <input type="checkbox" id=<?= "permission" . $permission->get("permissionID") ?> name="selectedPermissions[]" value="<?= $permission->get("permissionID") ?>" <?php
+                                                                                                                                                                                                                if (in_array($permission->get("permissionID"), $permissionsSet)) {
+                                                                                                                                                                                                                    echo "checked";
+                                                                                                                                                                                                                }
+                                                                                                                                                                                                                ?>>
+                                                <label for=<?= "role" . $permission->get("permisisonID") ?>><?= $permission->get("permisisonID") . " - " . $permission->get("permissionDescription") ?></label><br>
 
                                             <?php
                                             }
@@ -157,7 +157,7 @@ class adminEditRole extends View
                                                 ?>
                                                 <form action="../includes/adminDeleteRole.inc.php" method="post" class="needs-validation" novalidate>
                                                     <input type="hidden" id="form_roleID" name="roleID" value="<?php if (isset($role)) {
-                                                                                                                    echo $role->getRoleID();
+                                                                                                                    echo $role->get("roleID");
                                                                                                                 } ?>" required>
                                                     <input id="form_adminPassword" type="password" name="form_adminPassword" class="form-control border-1" placeholder="Voer admin wachtwoord in" required>
                                                     <div class="row">
@@ -182,4 +182,4 @@ class adminEditRole extends View
 <?php
     }
 }
-new adminEditRole;
+new adminEditRole();
