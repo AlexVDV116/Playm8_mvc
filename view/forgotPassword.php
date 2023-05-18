@@ -86,5 +86,5 @@ class forgotPassword extends View
 <?php
     }
 }
-new forgotPassword;
+new forgotPassword();
 include_once '../footer.php';
