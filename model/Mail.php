@@ -29,7 +29,7 @@ class Mail extends Model
 
     public function sendMail($reciever, $subject, $body): void
     {
-        $mail = new PHPMailer;
+        $mail = new PHPMailer();
 
         //Server settings
         $mail->SMTPDebug = 0;                                           //Enable verbose debug output
