@@ -34,14 +34,14 @@ class roleDAO extends DAO
     }
 
     // Get role object by roleID
-    public function get($roleID): Role
+    public function get(int $roleID): Role
     {
         $sql = 'SELECT * FROM roles WHERE roles.roleID = ?';
         return $this->getObjectSql($sql, [$roleID]);
     }
 
     // Select all records from accounts table and order them by accountID
-    public function getRolesbyAccountID($accountID): array
+    public function getRolesbyAccountID(string $accountID): array
     {
         $stmt = $this->prepare('CALL getRolesbyAccountID(?);');
         $stmt->execute([$accountID]);
@@ -54,7 +54,7 @@ class roleDAO extends DAO
     }
 
     // Select all permissions belonging to a role
-    public function getRolePermissions($roleID): array
+    public function getRolePermissions(int $roleID): array
     {
         $stmt = $this->prepare('CALL getRolePermissions(?);');
         $stmt->execute([$roleID]);
@@ -67,7 +67,7 @@ class roleDAO extends DAO
     }
 
     // Get role name belonging to role ID
-    public function getRoleName($roleID): string
+    public function getRoleName(int $roleID): string
     {
         $stmt = $this->prepare('CALL getRoleName(?);');
         $stmt->execute([$roleID]);
@@ -91,7 +91,7 @@ class roleDAO extends DAO
     }
 
     // Deletes roles from accountRoles table 
-    public function deleteRolesFromAccount($accountID): void
+    public function deleteRolesFromAccount(string $accountID): void
     {
         $stmt = $this->prepare('CALL deleteRolesFromAccount(?);');
         $stmt->execute([$accountID]);
@@ -110,7 +110,7 @@ class roleDAO extends DAO
     }
 
     // Set roles for Account in accountRoles table 
-    public function insertRolesForAccount($accountID, $roleID): void
+    public function insertRolesForAccount(string $accountID, int $roleID): void
     {
         $stmt = $this->prepare('CALL insertRolesForAccount(?, ?);');
         $stmt->execute([$accountID, $roleID]);
@@ -118,7 +118,7 @@ class roleDAO extends DAO
     }
 
     // Insert new role object 
-    public function insertNewRole($role): void
+    public function insertNewRole(Role $role): void
     {
         $stmt = $this->prepare('CALL insertNewRole(?, ?, ?);');
         $stmt->execute([
