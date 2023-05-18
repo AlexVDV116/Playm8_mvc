@@ -14,27 +14,22 @@ use Framework\Model;
 
 class Role extends Model
 {
-    public int $roleID;
-    public string $roleName;
-    public string $roleDescription;
+    private int $roleID;
+    private string $roleName;
+    private string $roleDescription;
 
     public function __construct(?array $data = null)
     {
         parent::__construct($data);
     }
 
-    public function getRoleID(): int
+    public function get(mixed $attribute): mixed
     {
-        return $this->roleID;
+        return $this->$attribute;
     }
 
-    public function getRoleName(): string
+    public function set(mixed $attribute, $value): void
     {
-        return $this->roleName;
-    }
-
-    public function getRoleDescription(): string
-    {
-        return $this->roleDescription;
+        $this->$attribute = $value;
     }
 }

@@ -13,81 +13,31 @@ use Framework\Model;
 
 class userProfile extends Model
 {
-    public string $accountID;
-    public string $userProfileID;
-    public string $firstName;
-    public string $lastName;
-    public string $city;
-    public string $country;
-    public string $phoneNumber;
-    public string $dateOfBirth;
-    public string $age;
-    public string $aboutMeTitle;
-    public string $aboutMeText;
-    public string $userProfilePicture;
+    private string $accountID;
+    private string $userProfileID;
+    private string $firstName;
+    private string $lastName;
+    private string $city;
+    private string $country;
+    private string $phoneNumber;
+    private string $dateOfBirth;
+    private string $age;
+    private string $aboutMeTitle;
+    private string $aboutMeText;
+    private string $userProfilePicture;
 
     public function __construct(?array $data = null)
     {
         parent::__construct($data);
     }
 
-    public function getAccountID(): string
+    public function get(mixed $attribute): mixed
     {
-        return $this->accountID;
+        return $this->$attribute;
     }
 
-    public function getUserProfileID(): string
+    public function set(mixed $attribute, $value): void
     {
-        return $this->userProfileID;
-    }
-
-    public function getFirstName(): string
-    {
-        return $this->firstName;
-    }
-
-    public function getLastName(): string
-    {
-        return $this->lastName;
-    }
-
-    public function getCity(): string
-    {
-        return $this->city;
-    }
-
-    public function getCountry(): string
-    {
-        return $this->country;
-    }
-
-    public function getPhoneNumber(): string
-    {
-        return $this->phoneNumber;
-    }
-
-    public function getDateOfBirth(): string
-    {
-        return $this->dateOfBirth;
-    }
-
-    public function getAge(): string
-    {
-        return $this->age;
-    }
-
-    public function getAboutMeTitle(): string
-    {
-        return $this->aboutMeTitle;
-    }
-
-    public function getAboutMeText(): string
-    {
-        return $this->aboutMeText;
-    }
-
-    public function getUserProfilePicture(): string
-    {
-        return $this->userProfilePicture;
+        $this->$attribute = $value;
     }
 }

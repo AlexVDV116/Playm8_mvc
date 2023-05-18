@@ -13,27 +13,22 @@ use Framework\Model;
 
 class Permission extends Model
 {
-    public int $permissionID;
-    public string $permissionName;
-    public string $permissionDescription;
+    private int $permissionID;
+    private string $permissionName;
+    private string $permissionDescription;
 
     public function __construct(?array $data = null)
     {
         parent::__construct($data);
     }
 
-    public function getPermissionID(): int
+    public function get(mixed $attribute): mixed
     {
-        return $this->permissionID;
+        return $this->$attribute;
     }
 
-    public function getPermissionName(): string
+    public function set(mixed $attribute, $value): void
     {
-        return $this->permissionName;
-    }
-
-    public function getPermissionDescription(): string
-    {
-        return $this->permissionDescription;
+        $this->$attribute = $value;
     }
 }
