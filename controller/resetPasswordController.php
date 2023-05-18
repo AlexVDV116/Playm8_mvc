@@ -20,7 +20,7 @@ class resetPasswordController extends Controller
     private string $password;
     private string $passwordrepeat;
 
-    public function __construct($selector, $validator, $password, $passwordrepeat)
+    public function __construct(string $selector, string $validator, string $password, string $passwordrepeat)
     {
         $this->selector = $selector;
         $this->validator = $validator;
