@@ -62,7 +62,7 @@ class userProfileDAO extends DAO
         $stmt = $this->prepare('CALL insertNewUserProfile(?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?);');
 
         $stmt->execute([
-            $userProfile->getAccountID(),
+            $userProfile->get("accountID"),
             $userProfile->get("userProfileID"),
             $userProfile->get("firstName"),
             $userProfile->get("lastName"),
