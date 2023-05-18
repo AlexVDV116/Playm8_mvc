@@ -23,7 +23,7 @@ class fileController extends Controller
     private string $fileError;
 
 
-    public function __construct($userProfileID, $file)
+    public function __construct(string $userProfileID, string $file)
     {
         $this->userProfileID = $userProfileID;
         $this->fileName = $file["name"];
