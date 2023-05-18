@@ -23,7 +23,7 @@ class roleController extends Controller
     private ?string $roleDescription;
     private ?array $selectedPermissions;
 
-    public function __construct($roleID = NULL, $roleName = NULL, $roleDescription = NULL, $selectedPermissions = NULL)
+    public function __construct(int $roleID = NULL, string $roleName = NULL, string $roleDescription = NULL, array $selectedPermissions = NULL)
     {
         $this->roleID = $roleID;
         $this->roleName = $roleName;
@@ -36,7 +36,7 @@ class roleController extends Controller
         return;
     }
 
-    public function adminAddNewRole($adminEmail, $adminPassword): void
+    public function adminAddNewRole(string $adminEmail, string $adminPassword): void
     {
         // Grab the admin account from the DB
         $accountDAO = new AccountDAO();
@@ -73,7 +73,7 @@ class roleController extends Controller
         }
     }
 
-    public function adminEditRole($roleID, $adminEmail, $adminPassword): void
+    public function adminEditRole(int $roleID, string $adminEmail, string $adminPassword): void
     {
         // Grab the admin account from the DB
         $accountDAO = new AccountDAO();
@@ -113,7 +113,7 @@ class roleController extends Controller
         }
     }
 
-    public function adminDeleteRole($roleID, $adminEmail, $adminPassword): void
+    public function adminDeleteRole(int $roleID, string $adminEmail, string $adminPassword): void
     {
         // Grab the admin account from the DB
         $accountDAO = new AccountDAO();
