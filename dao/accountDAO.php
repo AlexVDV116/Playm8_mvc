@@ -31,7 +31,7 @@ class accountDAO extends DAO
     // Method that checks if the account exists in our database
     // If true, check if password matches the hashed password in our database
     // If true log user in 
-    public function logInUser($email, $password): void
+    public function logInUser(string $email, string $password): void
     {
         $stmt = $this->prepare('CALL getAccountMatchingEmail(?);');
         $stmt->execute([$email]);
@@ -123,7 +123,7 @@ class accountDAO extends DAO
     }
 
     // Select all records from accounts table that match search term
-    public function startSearch($search): void
+    public function startSearch(string $search): void
     {
         $search = "%" . $search . "%";
         $search2 = $search;
@@ -312,7 +312,7 @@ class accountDAO extends DAO
     }
 
     // Send the activation code to the email registered
-    public function mailActivationCode($email, $activationCode): void
+    public function mailActivationCode(string $email, string $activationCode): void
     {
         $activationLink = mailConfig::APP_URL;
         $activationLink .= "Playm8_mvc/includes/activate.inc.php?email={$email}&activationCode={$activationCode}";
@@ -451,7 +451,7 @@ class accountDAO extends DAO
 
     // Validate the user by comparing the validator from to our hashed token in the database
     // If successfull update the user account in the db with the new hashed password
-    function updatePassword($selector, $validator, $hashedPassword)
+    function updatePassword(string $selector, string $validator, string $hashedPassword)
     {
         $now = date("Y-m-d H:i:s");
 
@@ -504,7 +504,7 @@ class accountDAO extends DAO
     }
 
     // Set the isBetaUser collum to true
-    public function setBeta($email): void
+    public function setBeta(string $email): void
     {
         $stmt = $this->prepare("UPDATE `accounts` 
         SET isBetaUser = 1 
