@@ -149,5 +149,5 @@ class signup extends View
 <?php
     }
 }
-new signup;
+new signup();
 include_once('../footer.php');
