@@ -38,7 +38,7 @@ if ($_SESSION["auth_user"]["userProfileID"] !== "test") {
     $userProfile = new userProfile($data);
 
     include "../DAO/userProfileDAO.php";
-    $userProfileDAO = new userProfileDAO;
+    $userProfileDAO = new userProfileDAO();
     $userProfileDAO->setUserProfileInfo($userProfile);
 
     header("location: ../view/editUserProfile.php?createUserProfile=success");
