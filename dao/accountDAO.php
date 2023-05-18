@@ -168,11 +168,11 @@ class accountDAO extends DAO
         $sql = 'CALL insertNewAccount(?, ?, ?, ?, ?, ?);';
         $args = [
             $account->get("accountID"),
-            $account->get("username")),
+            $account->get("username"),
             $account->get("email"),
             $account->get("password"),
             $account->get("activationCode"),
-            $account->get("expiryDate"),
+            $account->get("activationExpiry")
         ];
         $this->execute($sql, $args);
     }
@@ -193,7 +193,7 @@ class accountDAO extends DAO
             (int)$account->get("isBetaUser"),
             (int)$account->get("isActive"),
             $account->get("activationCode"),
-            $account->get("expiryDate"),
+            $account->get("activationExpiry"),
             $account->get("accountID")
         ];
         $this->execute($sql, $args);
