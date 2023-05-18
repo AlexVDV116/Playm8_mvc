@@ -21,7 +21,7 @@ class permissionController extends Controller
     private ?string $permissionName;
     private ?string $permissionDescription;
 
-    public function __construct($permissionID = NULL, $permissionName = NULL, $permissionDescription = NULL)
+    public function __construct(int $permissionID = NULL, string $permissionName = NULL, string $permissionDescription = NULL)
     {
         $this->permissionID = $permissionID;
         $this->permissionName = $permissionName;
@@ -33,7 +33,7 @@ class permissionController extends Controller
         return;
     }
 
-    public function adminAddPermission($adminEmail, $adminPassword): void
+    public function adminAddPermission(string $adminEmail, string $adminPassword): void
     {
         // Grab the admin account from the DB
         $accountDAO = new AccountDAO();
@@ -64,7 +64,7 @@ class permissionController extends Controller
         }
     }
 
-    public function adminEditPermission($permissionID, $adminEmail, $adminPassword): void
+    public function adminEditPermission(int $permissionID, string $adminEmail, string $adminPassword): void
     {
         // Grab the admin account from the DB
         $accountDAO = new AccountDAO();
@@ -95,7 +95,7 @@ class permissionController extends Controller
         }
     }
 
-    public function adminDeletePermission($permissionID, $adminEmail, $adminPassword): void
+    public function adminDeletePermission(int $permissionID, string $adminEmail, string $adminPassword): void
     {
         // Grab the admin account from the DB
         $accountDAO = new AccountDAO();
