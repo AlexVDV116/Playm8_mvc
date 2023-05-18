@@ -16,9 +16,9 @@ use Data\mailConfig;
 class Mail extends Model
 {
 
-    public $senderName;
-    public $senderEmail;
-    public $password;
+    private string $senderName;
+    private string $senderEmail;
+    private string $password;
 
     public function __construct($senderName, $senderEmail, $password)
     {
