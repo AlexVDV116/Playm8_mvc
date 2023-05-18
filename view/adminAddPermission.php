@@ -93,4 +93,4 @@ class adminAddPermission extends View
 <?php
     }
 }
-new adminAddPermission;
+new adminAddPermission();
