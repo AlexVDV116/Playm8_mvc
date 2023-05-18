@@ -63,4 +63,4 @@ class footer extends View
 <?php
     }
 }
-new footer;
+new footer();
