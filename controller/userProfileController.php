@@ -27,8 +27,18 @@ class userProfileController extends Controller
     private string $aboutMeTitle;
     private string $aboutMeText;
 
-    public function __construct($accountID, $userProfileID, $firstName, $lastName, $city, $country, $phoneNumber, $dateOfBirth, $aboutMeTitle, $aboutMeText)
-    {
+    public function __construct(
+        string $accountID,
+        string $userProfileID,
+        string $firstName,
+        string $lastName,
+        string $city,
+        string $country,
+        string $phoneNumber,
+        string $dateOfBirth,
+        string $aboutMeTitle,
+        string $aboutMeText
+    ) {
         $this->accountID = $accountID;
         $this->userProfileID = $userProfileID;
         $this->firstName = $firstName;
@@ -134,7 +144,7 @@ class userProfileController extends Controller
         return $result;
     }
 
-    public function calculateAge($dateOfBirth): string
+    public function calculateAge(string $dateOfBirth): string
     {
         $today = date("Y-m-d");
         $diff = date_diff(date_create($dateOfBirth), date_create($today));
@@ -142,7 +152,7 @@ class userProfileController extends Controller
     }
 
     // Method that uses the strlen() method to return the bytes in a string (including whitespace and special characters)
-    private function getMessageLength($message): int
+    private function getMessageLength(string $message): int
     {
         return strlen($message);
     }
