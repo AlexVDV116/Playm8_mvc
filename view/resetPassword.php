@@ -123,5 +123,5 @@ class resetPassword extends View
         }
     }
 }
-new resetPassword;
+new resetPassword();
 include_once '../footer.php';
