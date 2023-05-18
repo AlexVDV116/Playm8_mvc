@@ -83,9 +83,9 @@ class roleDAO extends DAO
     {
         $sql = 'CALL updateRole(?, ?, ?);';
         $args = [
-            $role->getRoleName(),
-            $role->getRoleDescription(),
-            $role->getRoleID()
+            $role->get("roleName"),
+            $role->get("roleDescription"),
+            $role->get("roleID")
         ];
         $this->execute($sql, $args);
     }
@@ -122,9 +122,9 @@ class roleDAO extends DAO
     {
         $stmt = $this->prepare('CALL insertNewRole(?, ?, ?);');
         $stmt->execute([
-            $role->getRoleID(),
-            $role->getRoleName(),
-            $role->getRoleDescription()
+            $role->get("roleID"),
+            $role->get("roleName"),
+            $role->get("roleDescription")
         ]);
         $stmt->closeCursor();
     }
