@@ -31,7 +31,7 @@ class userProfileDAO extends DAO
     public function get(?string $userProfileID): userProfile
     {
         if (empty($userProfileID)) {
-            return new userProfile;
+            return new userProfile();
         } else {
             $sql = self::$select;
             $sql .= ' WHERE `userProfiles`.`userProfileID` = ?';
@@ -43,16 +43,16 @@ class userProfileDAO extends DAO
     {
         $stmt = $this->prepare('CALL updateUserProfile(?, ?, ?, ?, ?, ?, ?, ? ,?, ?);');
         $stmt->execute([
-            $userProfile->getUserProfileID(),
-            $userProfile->getFirstName(),
-            $userProfile->getLastName(),
-            $userProfile->getCity(),
-            $userProfile->getCountry(),
-            $userProfile->getPhoneNumber(),
-            $userProfile->getDateOfBirth(),
-            $userProfile->getAge(),
-            $userProfile->getAboutMeTitle(),
-            $userProfile->getAboutMeText()
+            $userProfile->get("userProfileID"),
+            $userProfile->get("firstName"),
+            $userProfile->get("lastName"),
+            $userProfile->get("city"),
+            $userProfile->get("country"),
+            $userProfile->get("phoneNumber"),
+            $userProfile->get("dateOfBirth"),
+            $userProfile->get("age"),
+            $userProfile->get("aboutMeTitle"),
+            $userProfile->get("aboutMeText")
         ]);
         $stmt->closeCursor();
     }
@@ -63,16 +63,16 @@ class userProfileDAO extends DAO
 
         $stmt->execute([
             $userProfile->getAccountID(),
-            $userProfile->getUserProfileID(),
-            $userProfile->getFirstName(),
-            $userProfile->getLastName(),
-            $userProfile->getCity(),
-            $userProfile->getCountry(),
-            $userProfile->getPhoneNumber(),
-            $userProfile->getDateOfBirth(),
-            $userProfile->getAge(),
-            $userProfile->getAboutMeTitle(),
-            $userProfile->getAboutMeText(),
+            $userProfile->get("userProfileID"),
+            $userProfile->get("firstName"),
+            $userProfile->get("lastName"),
+            $userProfile->get("city"),
+            $userProfile->get("country"),
+            $userProfile->get("phoneNumber"),
+            $userProfile->get("dateOfBirth"),
+            $userProfile->get("age"),
+            $userProfile->get("aboutMeTitle"),
+            $userProfile->get("aboutMeText"),
             "default"
         ]);
         $stmt->closeCursor();
