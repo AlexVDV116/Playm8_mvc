@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 
 CREATE TABLE IF NOT EXISTS `accountsRoles` (
   `accountID` varchar(500) NOT NULL,
-  `roleID` int(11) NOT NULL
+  `roleID` int(16) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `likes` (
@@ -33,6 +33,14 @@ CREATE TABLE IF NOT EXISTS `likes` (
 CREATE TABLE IF NOT EXISTS `matches` (
   `userProfileID_A` varchar(500) NOT NULL,
   `userProfileID_B` varchar(500) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS `passwordReset` (
+  `passwordResetID` int(16) NOT NULL,
+  `passwordResetEmail` varchar(500) NOT NULL,
+  `passwordResetSelector` varchar(500) NOT NULL,
+  `passwordResetToken` longtext NOT NULL,
+  `passwordResetExpires` datetime NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `permissions` (
@@ -48,8 +56,8 @@ CREATE TABLE IF NOT EXISTS `roles` (
 );
 
 CREATE TABLE IF NOT EXISTS `rolesPermissions` (
-  `roleID` int(11) NOT NULL,
-  `permissionID` int(11) NOT NULL
+  `roleID` int(16) NOT NULL,
+  `permissionID` int(16) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `userProfiles` (
@@ -66,17 +74,10 @@ CREATE TABLE IF NOT EXISTS `userProfiles` (
   `userProfilePicture` varchar(500) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS `passwordReset` (
-  `passwordResetID` int(11) NOT NULL,
-  `passwordResetEmail` varchar(500) NOT NULL,
-  `passwordResetSelector` varchar(500) NOT NULL,
-  `passwordResetToken` longtext NOT NULL,
-  `passwordResetExpires` datetime NOT NULL
-);
-
 --
 -- Setting Primary Keys
 --
+
 ALTER TABLE `accounts`
   ADD PRIMARY KEY (`accountID`),
   ADD KEY `userProfileID` (`userProfileID`),
@@ -94,6 +95,13 @@ ALTER TABLE `matches`
   ADD KEY `userProfileID_A` (`userProfileID_A`),
   ADD KEY `userProfileID_B` (`userProfileID_B`);
 
+ALTER TABLE `passwordReset`
+ADD PRIMARY KEY (`passwordResetEmail`);
+
+ALTER TABLE `passwordReset`
+  ADD KEY `passwordResetID` (`passwordResetID`),
+  MODIFY `passwordResetID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
 ALTER TABLE `permissions`
   ADD PRIMARY KEY (`permissionID`),
   MODIFY `permissionID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
@@ -108,13 +116,6 @@ ALTER TABLE `rolesPermissions`
 
 ALTER TABLE `userProfiles`
   ADD PRIMARY KEY (`userProfileID`);
-
-ALTER TABLE `passwordReset`
-ADD PRIMARY KEY (`passwordResetEmail`);
-
-ALTER TABLE `passwordReset`
-  ADD KEY `passwordResetID` (`passwordResetID`),
-  MODIFY `passwordResetID` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- Setting Foreign Keys
@@ -134,12 +135,12 @@ ALTER TABLE `matches`
   ADD CONSTRAINT `matches_ibfk_1` FOREIGN KEY (`userProfileID_A`) REFERENCES `userProfiles` (`userProfileID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `matches_ibfk_2` FOREIGN KEY (`userProfileID_B`) REFERENCES `userProfiles` (`userProfileID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
+ALTER TABLE `passwordReset`
+  ADD CONSTRAINT `passwordreset_ibfk_1` FOREIGN KEY (`passwordResetEmail`) REFERENCES `accounts` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 ALTER TABLE `rolesPermissions`
   ADD CONSTRAINT `rolespermissions_ibfk_1` FOREIGN KEY (`roleID`) REFERENCES `roles` (`roleID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `rolespermissions_ibfk_2` FOREIGN KEY (`permissionID`) REFERENCES `permissions` (`permissionID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-ALTER TABLE `passwordReset`
-  ADD CONSTRAINT `passwordreset_ibfk_1` FOREIGN KEY (`passwordResetEmail`) REFERENCES `accounts` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 COMMIT;
 
@@ -163,127 +164,9 @@ CREATE USER
 -- Creating stored procedures
 --
 
-DELIMITER $$
-CREATE PROCEDURE `getAllAccountsOrderByAccountID`()
-SELECT * FROM accounts ORDER BY accounts.accountID$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE PROCEDURE `getAllBetaAccounts`()
-SELECT * FROM accounts WHERE accounts.isBetaUser = 1 ORDER BY accounts.accountID$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE PROCEDURE `getAllRolesOrderByRoleID`()
-SELECT * FROM roles ORDER BY roles.roleID$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE PROCEDURE `getRole`(
-  IN `roleID` int(16))
-SELECT * FROM roles WHERE roles.roleID = roleID$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE PROCEDURE `getAllPermissionsOrderByPermissionID`()
-SELECT * FROM permissions ORDER BY permissions.permissionID$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE PROCEDURE `getPermissionsbyRoleID`(
-    IN `roleID` varchar(500))
-SELECT permissionID FROM rolesPermissions WHERE rolesPermissions.roleID = roleID$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE PROCEDURE `updatePermission`(
-  IN `permissionName` varchar(500), 
-  IN `permissionDescription` varchar(500),
-  IN `permissionID` int(16))
-UPDATE `permissions` 
-SET permissions.permissionName = permissionName, permissions.permissionDescription = permissionDescription
-WHERE permissions.permissionID = permissionID$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE PROCEDURE `deletePermissionsFromRole`(
-  IN `roleID` int(16))
-DELETE FROM rolesPermissions WHERE rolesPermissions.roleID = roleID$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE PROCEDURE `insertPermissionsForRole`(
-  IN `roleID` int(16),
-  IN `permissionID` int(16))
-INSERT INTO `rolesPermissions`(`roleID`, `permissionID`) VALUES (roleID, permissionID)$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE PROCEDURE `getRolePermissions`(
-  IN `roleID` int(16))
-SELECT permissionID FROM rolesPermissions WHERE rolesPermissions.roleID = roleID$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE PROCEDURE `getRolesbyAccountID`(
-  IN `accountID` varchar(500))
-SELECT roleID FROM accountsRoles WHERE accountsRoles.accountID = accountID$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE PROCEDURE `getRoleName`(
-  IN `roleID` int(16))
-SELECT roleName FROM roles WHERE roles.roleID = roleID$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE PROCEDURE `deleteRolesFromAccount`(
-  IN `accountID` varchar(500))
-DELETE FROM accountsRoles WHERE accountsRoles.accountID = accountID$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE PROCEDURE `insertRolesForAccount`(
-  IN `accountID` varchar(500),
-  IN `roleID` int(16))
-INSERT INTO `accountsRoles`(`accountID`, `roleID`) VALUES (accountID, roleID)$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE PROCEDURE `insertNewRole`(
-  IN `roleID` int(16),
-  IN `roleName` varchar(500),
-  IN `roleDescription` varchar(500))
-INSERT INTO `roles`(`roleID`, `roleName`, `roleDescription`) VALUES (roleID, roleName, roleDescription)$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE PROCEDURE `getHighestRoleID`()
-select MAX(roleID) from roles$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE PROCEDURE `getHighestPermissionID`()
-select MAX(permissionID) from permissions$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE PROCEDURE `insertNewPermission`(
-  IN `permissionID` int(16),
-  IN `permissionName` varchar(500),
-  IN `permissionDescription` varchar(500))
-INSERT INTO `permissions`(`permissionID`, `permissionName`, `permissionDescription`) VALUES (permissionID, permissionName, permissionDescription)$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE PROCEDURE `updateRole`(
-  IN `roleName` varchar(500), 
-  IN `roleDescription` varchar(500),
-  IN `roleID` int(16))
-UPDATE `roles` 
-SET roles.roleName = roleName, roles.roleDescription = roleDescription
-WHERE roles.roleID = roleID$$
-DELIMITER ;
+--
+-- Accounts
+--
 
 DELIMITER $$
 CREATE PROCEDURE `insertNewAccount`(
@@ -321,17 +204,13 @@ WHERE accounts.accountID = accountID$$
 DELIMITER ;
 
 DELIMITER $$
-CREATE PROCEDURE `deleteRole`(
-    IN `roleID` int(16))
-DELETE FROM `roles` 
-WHERE roles.roleID = roleID$$
+CREATE PROCEDURE `getAllAccountsOrderByAccountID`()
+SELECT * FROM accounts ORDER BY accounts.accountID$$
 DELIMITER ;
 
 DELIMITER $$
-CREATE PROCEDURE `deletePermission`(
-    IN `permissionID` int(16))
-DELETE FROM `permissions` 
-WHERE permissions.permissionID = permissionID$$
+CREATE PROCEDURE `getAllBetaAccounts`()
+SELECT * FROM accounts WHERE accounts.isBetaUser = 1 ORDER BY accounts.accountID$$
 DELIMITER ;
 
 DELIMITER $$
@@ -363,15 +242,152 @@ SET isEnabled = 1
 WHERE accounts.accountID = accountID$$
 DELIMITER ;
 
+--
+-- Permissions
+--
+
 DELIMITER $$
-CREATE TRIGGER `foundMatch` BEFORE INSERT ON `likes`
-  FOR EACH ROW 
-  BEGIN
-    IF EXISTS( SELECT * FROM likes WHERE NEW.liker = likes.liked AND NEW.liked = likes.liker ) THEN 
-        INSERT INTO matches (userProfileID_A, userProfileID_B) VALUES (NEW.liker, NEW.liked);
-    END IF;
-  END
+CREATE PROCEDURE `getAllPermissionsOrderByPermissionID`()
+SELECT * FROM permissions ORDER BY permissions.permissionID$$
 DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `updatePermission`(
+  IN `permissionName` varchar(500), 
+  IN `permissionDescription` varchar(500),
+  IN `permissionID` int(16))
+UPDATE `permissions` 
+SET permissions.permissionName = permissionName, permissions.permissionDescription = permissionDescription
+WHERE permissions.permissionID = permissionID$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `getHighestPermissionID`()
+select MAX(permissionID) from permissions$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `insertNewPermission`(
+  IN `permissionID` int(16),
+  IN `permissionName` varchar(500),
+  IN `permissionDescription` varchar(500))
+INSERT INTO `permissions`(`permissionID`, `permissionName`, `permissionDescription`) VALUES (permissionID, permissionName, permissionDescription)$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `deletePermission`(
+    IN `permissionID` int(16))
+DELETE FROM `permissions` 
+WHERE permissions.permissionID = permissionID$$
+DELIMITER ;
+
+--
+-- Roles
+--
+
+DELIMITER $$
+CREATE PROCEDURE `getRole`(
+  IN `roleID` int(16))
+SELECT * FROM roles WHERE roles.roleID = roleID$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `getAllRolesOrderByRoleID`()
+SELECT * FROM roles ORDER BY roles.roleID$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `getRoleName`(
+  IN `roleID` int(16))
+SELECT roleName FROM roles WHERE roles.roleID = roleID$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `insertNewRole`(
+  IN `roleID` int(16),
+  IN `roleName` varchar(500),
+  IN `roleDescription` varchar(500))
+INSERT INTO `roles`(`roleID`, `roleName`, `roleDescription`) VALUES (roleID, roleName, roleDescription)$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `getHighestRoleID`()
+select MAX(roleID) from roles$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `updateRole`(
+  IN `roleName` varchar(500), 
+  IN `roleDescription` varchar(500),
+  IN `roleID` int(16))
+UPDATE `roles` 
+SET roles.roleName = roleName, roles.roleDescription = roleDescription
+WHERE roles.roleID = roleID$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `deleteRole`(
+    IN `roleID` int(16))
+DELETE FROM `roles` 
+WHERE roles.roleID = roleID$$
+DELIMITER ;
+
+--
+-- rolesPermissions
+--
+
+DELIMITER $$
+CREATE PROCEDURE `deleteAllPermissionsFromRole`(
+  IN `roleID` int(16))
+DELETE FROM rolesPermissions WHERE rolesPermissions.roleID = roleID$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `insertPermissionsForRole`(
+  IN `roleID` int(16),
+  IN `permissionID` int(16))
+INSERT INTO `rolesPermissions`(`roleID`, `permissionID`) VALUES (roleID, permissionID)$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `getRolePermissions`(
+  IN `roleID` int(16))
+SELECT permissionID FROM rolesPermissions WHERE rolesPermissions.roleID = roleID$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `getPermissionsbyRoleID`(
+    IN `roleID` varchar(500))
+SELECT permissionID FROM rolesPermissions WHERE rolesPermissions.roleID = roleID$$
+DELIMITER ;
+
+
+--
+-- accountRoles
+--
+
+DELIMITER $$
+CREATE PROCEDURE `deleteRolesFromAccount`(
+  IN `accountID` varchar(500))
+DELETE FROM accountsRoles WHERE accountsRoles.accountID = accountID$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `insertRolesForAccount`(
+  IN `accountID` varchar(500),
+  IN `roleID` int(16))
+INSERT INTO `accountsRoles`(`accountID`, `roleID`) VALUES (accountID, roleID)$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `getRolesbyAccountID`(
+  IN `accountID` varchar(500))
+SELECT roleID FROM accountsRoles WHERE accountsRoles.accountID = accountID$$
+DELIMITER ;
+
+--
+-- UserProfiles
+--
 
 DELIMITER $$
 CREATE PROCEDURE `insertNewUserProfile`(
@@ -425,4 +441,18 @@ BEGIN
   UPDATE `accounts` SET accounts.userProfileID = NULL WHERE accounts.userProfileID = userProfileID;
     DELETE FROM `userProfiles` WHERE userProfiles.userProfileID = userProfileID;
 END$$
+DELIMITER ;
+
+--
+-- foundMatch trigger
+--
+
+DELIMITER $$
+CREATE TRIGGER `foundMatch` BEFORE INSERT ON `likes`
+  FOR EACH ROW 
+  BEGIN
+    IF EXISTS( SELECT * FROM likes WHERE NEW.liker = likes.liked AND NEW.liked = likes.liker ) THEN 
+        INSERT INTO matches (userProfileID_A, userProfileID_B) VALUES (NEW.liker, NEW.liked);
+    END IF;
+  END
 DELIMITER ;
