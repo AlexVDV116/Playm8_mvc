@@ -90,7 +90,7 @@ class adminEditRole extends View
                                                                                                                                                                                                                     echo "checked";
                                                                                                                                                                                                                 }
                                                                                                                                                                                                                 ?>>
-                                                <label for=<?= "role" . $permission->get("permisisonID") ?>><?= $permission->get("permisisonID") . " - " . $permission->get("permissionDescription") ?></label><br>
+                                                <label for=<?= "role" . $permission->get("permissionID") ?>><?= $permission->get("permissionID") . " - " . $permission->get("permissionDescription") ?></label><br>
 
                                             <?php
                                             }
@@ -111,7 +111,7 @@ class adminEditRole extends View
                                             </div>
 
                                             <input type="hidden" id="form_roleID" name="roleID" value="<?php if (isset($role)) {
-                                                                                                            echo $role->getRoleID();
+                                                                                                            echo $role->get("roleID");
                                                                                                         } ?>" required>
 
                                             <div class="row mt-4">
