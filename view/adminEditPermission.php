@@ -17,7 +17,7 @@ class adminEditPermission extends View
 
     public function show()
     {
-        $permissionDAO = new permissionDAO;
+        $permissionDAO = new permissionDAO();
         if (isset($_GET['permissionID'])) {
             $permissionID = $_GET["permissionID"];
         }
@@ -43,7 +43,7 @@ class adminEditPermission extends View
                                                 <i class="fas fa-circle-info fa-lg me-3 fa-fw"></i>
                                                 <label for="form_permissionName" class="form-label">Naam:</label>
                                                 <input id="form_permissionName" type="text" name="permissionName" class="form-control" value="<?php if (isset($permission)) {
-                                                                                                                                                    echo $permission->getPermissionName();
+                                                                                                                                                    echo $permission->get("permissionName");
                                                                                                                                                 } ?>" required>
                                                 <div class="invalid-feedback">
                                                     Dit veld is verplicht.
@@ -55,7 +55,7 @@ class adminEditPermission extends View
                                                 <i class="fas fa-message fa-lg me-3 fa-fw"></i>
                                                 <label for="form_permissionDescription" class="form-label">Beschrijving</label>
                                                 <textarea id="form_permissionDescription" type="text" name="permissionDescription" class="form-control" rows="3" required><?php if (isset($permission)) {
-                                                                                                                                                                                echo $permission->getPermissionDescription();
+                                                                                                                                                                                echo $permission->get("permissionDescription");
                                                                                                                                                                             } ?></textarea>
                                                 <div class="invalid-feedback">
                                                     Dit veld is verplicht.
@@ -76,7 +76,7 @@ class adminEditPermission extends View
                                     </div>
 
                                     <input type="hidden" id="form_permissionID" name="permissionID" value="<?php if (isset($permission)) {
-                                                                                                                echo $permission->getPermissionID();
+                                                                                                                echo $permission->get("permissionID");
                                                                                                             } ?>" required>
 
                                     <div class="row mt-4">
@@ -121,7 +121,7 @@ class adminEditPermission extends View
                                                 ?>
                                                 <form action="../includes/adminDeletePermission.inc.php" method="post" class="needs-validation" novalidate>
                                                     <input type="hidden" id="form_permissionID" name="permissionID" value="<?php if (isset($permission)) {
-                                                                                                                                echo $permission->getPermissionID();
+                                                                                                                                echo $permission->get("permissionID");
                                                                                                                             } ?>" required>
                                                     <input id="form_adminPassword" type="password" name="form_adminPassword" class="form-control border-1" placeholder="Voer admin wachtwoord in" required>
                                                     <div class="row">
@@ -146,4 +146,4 @@ class adminEditPermission extends View
 <?php
     }
 }
-new adminEditPermission;
+new adminEditPermission();
