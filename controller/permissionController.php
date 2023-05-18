@@ -36,11 +36,11 @@ class permissionController extends Controller
     public function adminAddPermission($adminEmail, $adminPassword): void
     {
         // Grab the admin account from the DB
-        $accountDAO = new AccountDAO;
+        $accountDAO = new AccountDAO();
         $adminAccount = $accountDAO->get($adminEmail);
 
         // use PHP built in method to check if the given admin password matches the hashed password stored in the DB (returns bool)
-        $checkPwd = password_verify($adminPassword, $adminAccount->getPassword());
+        $checkPwd = password_verify($adminPassword, $adminAccount->get("password"));
 
         // If the password match
         if ($checkPwd == false) {
@@ -49,8 +49,8 @@ class permissionController extends Controller
             exit();
         } elseif ($checkPwd == true) {
             // Create a new permission object with the permissionName and permissionDescription
-            $permission = new Permission;
-            $permissionDAO = new permissionDAO;
+            $permission = new Permission();
+            $permissionDAO = new permissionDAO();
 
             $permission->permissionID = $permissionDAO->getHighestPermissionID() + 1;
             $permission->permissionName = $this->permissionName;
@@ -67,11 +67,11 @@ class permissionController extends Controller
     public function adminEditPermission($permissionID, $adminEmail, $adminPassword): void
     {
         // Grab the admin account from the DB
-        $accountDAO = new AccountDAO;
+        $accountDAO = new AccountDAO();
         $adminAccount = $accountDAO->get($adminEmail);
 
         // use PHP built in method to check if the given admin password matches the hashed password stored in the DB (returns bool)
-        $checkPwd = password_verify($adminPassword, $adminAccount->getPassword());
+        $checkPwd = password_verify($adminPassword, $adminAccount->get("password"));
 
         // If the password match
         if ($checkPwd == false) {
@@ -80,7 +80,7 @@ class permissionController extends Controller
             exit();
         } elseif ($checkPwd == true) {
             // Get the permission object from the DB
-            $permissionDAO = new permissionDAO;
+            $permissionDAO = new permissionDAO();
             $permission = $permissionDAO->get($this->permissionID);
 
             // Update the permission object with the new values
@@ -98,20 +98,20 @@ class permissionController extends Controller
     public function adminDeletePermission($permissionID, $adminEmail, $adminPassword): void
     {
         // Grab the admin account from the DB
-        $accountDAO = new AccountDAO;
+        $accountDAO = new AccountDAO();
         $adminAccount = $accountDAO->get($adminEmail);
 
         // Grab the permission from the DB
-        $permissionDAO = new permissionDAO;
+        $permissionDAO = new permissionDAO();
         $permission = $permissionDAO->get($permissionID);
 
         // use PHP built in method to check if the given admin password matches the hashed password stored in the DB (returns bool)
-        $checkPwd = password_verify($adminPassword, $adminAccount->getPassword());
+        $checkPwd = password_verify($adminPassword, $adminAccount->get("password"));
 
         // If the password match
         if ($checkPwd == false) {
             // echo "Onjuist wachtwoord.";
-            header("location: ../view/admin.php?view=adminEditPermission&permissionID=" . $permission->getPermissionID() . "&error=wrongpassword");
+            header("location: ../view/admin.php?view=adminEditPermission&permissionID=" . $permission->get("permissionID") . "&error=wrongpassword");
             exit();
         } elseif ($checkPwd == true) {
             $permissionDAO->delete($permissionID);
