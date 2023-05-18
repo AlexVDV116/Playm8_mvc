@@ -52,9 +52,9 @@ class permissionController extends Controller
             $permission = new Permission();
             $permissionDAO = new permissionDAO();
 
-            $permission->permissionID = $permissionDAO->getHighestPermissionID() + 1;
-            $permission->permissionName = $this->permissionName;
-            $permission->permissionDescription = $this->permissionDescription;
+            $permission->set("permissionID", $permissionDAO->getHighestPermissionID() + 1);
+            $permission->set("permissionName", $this->permissionName);
+            $permission->set("permissionDescription", $this->permissionDescription);
 
             // Insert this permission into the DB
             $permissionDAO->insertNewPermission($permission);
@@ -84,8 +84,8 @@ class permissionController extends Controller
             $permission = $permissionDAO->get($this->permissionID);
 
             // Update the permission object with the new values
-            $permission->permissionName = $this->permissionName;
-            $permission->permissionDescription = $this->permissionDescription;
+            $permission->set("permissionName", $this->permissionName);
+            $permission->set("permissionDescription", $this->permissionDescription);
 
             // Update the database with the updated role object
             $permissionDAO->update($permission);
