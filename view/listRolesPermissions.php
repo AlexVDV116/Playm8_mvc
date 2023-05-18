@@ -19,7 +19,7 @@ class listRolesPermissions extends View
 
     public function show()
     {
-        $roleDAO = new roleDAO;
+        $roleDAO = new roleDAO();
         $roleDAO->startList();
 
         if (isset($_GET["addRole"])) {
@@ -63,15 +63,15 @@ class listRolesPermissions extends View
 
                     // So we can execute another query and get the permissions belonging to this role
                     foreach ($recordArray as $record) {
-                        $permission =  $roleDAO->getRolePermissions($record->getRoleID());
+                        $permission =  $roleDAO->getRolePermissions($record->get("roleID"));
                     ?>
                         <tr onclick="">
                             <!-- PHP shorthand to echo the data in the table -->
-                            <td><?= $record->getRoleID()  ?></td>
-                            <td><?= $record->getRoleName() ?></td>
-                            <td><?= $record->getRoleDescription() ?></td>
+                            <td><?= $record->get("roleID")  ?></td>
+                            <td><?= $record->get("roleName") ?></td>
+                            <td><?= $record->get("roleDescription") ?></td>
                             <td><?= implode(", ", $permission); ?></td>
-                            <td><?= "<a href ='../view/admin.php?view=adminEditRole&roleID=" . $record->getRoleID() . "'>Wijzig" ?></td>
+                            <td><?= "<a href ='../view/admin.php?view=adminEditRole&roleID=" . $record->get("roleID") . "'>Wijzig" ?></td>
                         </tr>
                     <?php
                     }
@@ -85,7 +85,7 @@ class listRolesPermissions extends View
 
         <?php
         $roleDAO->closeConnection();
-        $permissionDAO = new permissionDAO;
+        $permissionDAO = new permissionDAO();
         $permissionDAO->startList();
         ?>
 
@@ -124,10 +124,10 @@ class listRolesPermissions extends View
                     ?>
                         <tr onclick="">
                             <!-- PHP shorthand to echo the data in the table -->
-                            <td><?= "# " . $permission->getPermissionID() ?></td>
-                            <td><?= $permission->getPermissionName() ?></td>
-                            <td><?= $permission->getPermissionDescription() ?></td>
-                            <td><?= "<a href ='../view/admin.php?view=adminEditPermission&permissionID=" . $permission->getPermissionID() . "'>Wijzig" ?></td>
+                            <td><?= "# " . $permission->get("permissionID") ?></td>
+                            <td><?= $permission->get("permissionName") ?></td>
+                            <td><?= $permission->get("permissionDescription") ?></td>
+                            <td><?= "<a href ='../view/admin.php?view=adminEditPermission&permissionID=" . $permission->get("permissionID") . "'>Wijzig" ?></td>
                         </tr>
                     <?php
                     }
@@ -141,4 +141,4 @@ class listRolesPermissions extends View
 <?php
     }
 }
-new listRolesPermissions;
+new listRolesPermissions();
