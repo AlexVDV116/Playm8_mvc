@@ -101,7 +101,7 @@ class roleController extends Controller
 
             // Remove all previous set permissions
             $permissionDAO = new permissionDAO();
-            $permissionDAO->deletePermissionsFromRole($this->roleID);
+            $permissionDAO->deleteAllPermissionsFromRole($this->roleID);
 
             // For each checked permission insert this permission into the rolesPermissions table for this role
             foreach ($this->selectedPermissions as $permission) {
