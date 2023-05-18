@@ -19,7 +19,7 @@ class betaFormController extends Controller
     private string $name;
     private string $email;
 
-    public function __construct($name, $email)
+    public function __construct(string $name, string $email)
     {
         $this->name = $name;
         $this->email = $email;
