@@ -42,7 +42,7 @@ class fileController extends Controller
         $time = time();
 
         // Grab the userProfile
-        $userProfileDAO = new userProfileDAO;
+        $userProfileDAO = new userProfileDAO();
         $userProfile = $userProfileDAO->get($this->userProfileID);
 
         // Check if file extension is allowed else redirect with error message
@@ -78,7 +78,7 @@ class fileController extends Controller
                             header("location: ../view/editUserProfile.php?upload=success");
                             exit();
                         } else {
-                            header("location: ../view/admin.php?view=adminEditUserProfile&userProfileID=" . $userProfile->getUserProfileID() . "&accountID=" . $_SESSION["adminEditUserProfile"]["accountID"] . "&error=none");
+                            header("location: ../view/admin.php?view=adminEditUserProfile&userProfileID=" . $userProfile->get("userProfileID") . "&accountID=" . $_SESSION["adminEditUserProfile"]["accountID"] . "&error=none");
                             exit();
                         }
                         // User has no record in UserProfiles, redirect with role dependent error message
@@ -87,7 +87,7 @@ class fileController extends Controller
                             header("location: ../view/editUserProfile.php?upload=fail");
                             exit();
                         } else {
-                            header("location: ../view/admin.php?view=adminEditUserProfile&userProfileID=" . $userProfile->getUserProfileID() . "&accountID=" . $_SESSION["adminEditUserProfile"]["accountID"] . "&upload=fail");
+                            header("location: ../view/admin.php?view=adminEditUserProfile&userProfileID=" . $userProfile->get("userProfileID") . "&accountID=" . $_SESSION["adminEditUserProfile"]["accountID"] . "&upload=fail");
                             exit();
                         }
                     }
@@ -97,7 +97,7 @@ class fileController extends Controller
                         header("location: ../view/editUserProfile.php?error=filesize");
                         exit();
                     } else {
-                        header("location: ../view/admin.php?view=adminEditUserProfile&userProfileID=" . $userProfile->getUserProfileID() . "&accountID=" . $_SESSION["adminEditUserProfile"]["accountID"] . "&error=filesize");
+                        header("location: ../view/admin.php?view=adminEditUserProfile&userProfileID=" . $userProfile->get("userProfileID") . "&accountID=" . $_SESSION["adminEditUserProfile"]["accountID"] . "&error=filesize");
                         exit();
                     }
                 }
@@ -107,7 +107,7 @@ class fileController extends Controller
                     header("location: ../view/editUserProfile.php?error=uploaderror&error=" . $this->fileError);
                     exit();
                 } else {
-                    header("location: ../view/admin.php?view=adminEditUserProfile&userProfileID=" . $userProfile->getUserProfileID() . "&accountID=" . $_SESSION["adminEditUserProfile"]["accountID"] . "&error=" . $this->fileError);
+                    header("location: ../view/admin.php?view=adminEditUserProfile&userProfileID=" . $userProfile->get("userProfileID") . "&accountID=" . $_SESSION["adminEditUserProfile"]["accountID"] . "&error=" . $this->fileError);
                     exit();
                 }
             }
@@ -117,7 +117,7 @@ class fileController extends Controller
                 header("location: ../view/editUserProfile.php?error=fileextnotallowed");
                 exit();
             } else {
-                header("location: ../view/admin.php?view=adminEditUserProfile&userProfileID=" . $userProfile->getUserProfileID() . "&accountID=" . $_SESSION["adminEditUserProfile"]["accountID"] . "error=fileextnotallowed");
+                header("location: ../view/admin.php?view=adminEditUserProfile&userProfileID=" . $userProfile->get("userProfileID") . "&accountID=" . $_SESSION["adminEditUserProfile"]["accountID"] . "error=fileextnotallowed");
                 exit();
             }
         }
