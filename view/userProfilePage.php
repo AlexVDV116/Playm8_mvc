@@ -26,7 +26,7 @@ class userProfilePage extends View
         if (isset($_SESSION["auth_user"]["userProfileID"])) {
             $userProfileID = $_SESSION["auth_user"]["userProfileID"];
         };
-        $userProfileDAO = new userProfileDAO;
+        $userProfileDAO = new userProfileDAO();
         $userProfile = $userProfileDAO->get($userProfileID);
 ?>
         <div class="container py-5">
@@ -40,12 +40,12 @@ class userProfilePage extends View
                                     <?php
                                     // If user has a default profile picture display default profile picture with his initials
                                     // Else display his own profile picture
-                                    if ($userProfile->getUserProfilePicture() == "default") { ?>
+                                    if ($userProfile->get("userProfilePicture") == "default") { ?>
                                         <img src="../uploads/profilePictures/default.png" alt="Profile picture" class="profilePicture img-fluid img-thumbnail mt-4 mb-2">
                                     <?php
                                     } else {
                                     ?>
-                                        <img src="../uploads/profilePictures/<?php echo $userProfile->getUserProfilePicture() ?>" alt="Profile picture" class="profilePicture img-fluid img-thumbnail mt-4 mb-2">
+                                        <img src="../uploads/profilePictures/<?php echo $userProfile->get("userProfilePicture") ?>" alt="Profile picture" class="profilePicture img-fluid img-thumbnail mt-4 mb-2">
                                     <?php
                                     }
                                     ?>
@@ -54,17 +54,17 @@ class userProfilePage extends View
                                     </button>
                                 </div>
                                 <div class="ms-3" style="margin-top: 80px;">
-                                    <h5 style="color: #fff"><?= $userProfile->getFirstName() ?></h5>
-                                    <p><?= $userProfile->getCity() . ", " . $userProfile->getCountry() ?></p>
-                                    <p><?= $userProfile->getAge() ?></p>
+                                    <h5 style="color: #fff"><?= $userProfile->get("firstName") ?></h5>
+                                    <p><?= $userProfile->get("city") . ", " . $userProfile->get("country") ?></p>
+                                    <p><?= $userProfile->get("age") ?></p>
                                 </div>
                             </div>
                             <div class="card-body p-4 text-black">
                                 <div class="row d-flex justify-content-center">
                                     <div class="about-me-section">
-                                        <p class="lead fw-normal mb-1"><?= $userProfile->getAboutMeTitle() ?></p>
+                                        <p class="lead fw-normal mb-1"><?= $userProfile->get("aboutMeTitle") ?></p>
                                         <div class="p-4" style="background-color: #f8f9fa;">
-                                            <p class="font-italic mb-1"><?= $userProfile->getAboutMeText() ?></p>
+                                            <p class="font-italic mb-1"><?= $userProfile->get("aboutMeText") ?></p>
                                         </div>
                                     </div>
                                 </div>
@@ -104,4 +104,4 @@ class userProfilePage extends View
 <?php
     }
 }
-new userProfilePage;
+new userProfilePage();
