@@ -25,7 +25,7 @@ class contactFormController extends Controller
     private string $need;
     private string $message;
 
-    public function __construct($name, $lastname, $email, $need, $message)
+    public function __construct(string $name, string $lastname, string $email, string $need, string $message)
     {
         $this->name = $name;
         $this->lastname = $lastname;
