@@ -289,7 +289,7 @@ class accountController extends Controller
                 // Check if these passwords match
                 if ($this->passwordMatch() == false) {
                     // echo "Wachtwoorden komen niet overeen.";
-                    header("location: ../view/admin.php?view=adminEditAccount&account=" . $currentUserEmail . "?error=passwordmatch");
+                    header("location: ../view/admin.php?view=adminEditAccount&account=" . $currentUserEmail . "&error=passwordmatch");
                     exit();
                 }
                 // Check if the passwords follow the passwords rules
