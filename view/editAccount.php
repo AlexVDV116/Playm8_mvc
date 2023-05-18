@@ -31,7 +31,7 @@ class editAccount extends View
     {
         if ($_SESSION["auth_user"]["accountID"]) {
             $accountEmail = $_SESSION["auth_user"]["email"];
-            $accountDAO = new AccountDAO;
+            $accountDAO = new AccountDAO();
             $account = $accountDAO->get($accountEmail);
         }
 ?>
@@ -54,7 +54,7 @@ class editAccount extends View
                                                 <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                                 <label for="form_newUsername" class="form-label">Gebruikersnaam</label>
                                                 <input id="form_newUsername" type="text" name="newUsername" class="form-control" value="<?php if (isset($account)) {
-                                                                                                                                            echo $account->getUsername();
+                                                                                                                                            echo $account->get("username");
                                                                                                                                         } ?>" required>
                                                 <div class="invalid-feedback">
                                                     Dit veld is verplicht.
@@ -66,7 +66,7 @@ class editAccount extends View
                                                 <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                                 <label for="form_newEmail" class="form-label">E-mailadres</label>
                                                 <input id="form_newEmail" type="email" name="newEmail" class="form-control" value="<?php if (isset($account)) {
-                                                                                                                                        echo $account->getEmail();
+                                                                                                                                        echo $account->get("email");
                                                                                                                                     } ?>" required>
                                                 <div class="invalid-feedback">
                                                     Voer een geldig e-mailadres in.
@@ -194,4 +194,4 @@ class editAccount extends View
 <?php
     }
 }
-new editAccount;
+new editAccount();
