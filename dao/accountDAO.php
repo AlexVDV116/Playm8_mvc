@@ -139,10 +139,10 @@ class accountDAO extends DAO
     // Returns a new Account object if no email provided
     // Else select all records from accounts table where the email matches the given email
     // Returns an instance of the Account model with the property names set to the data from the selected record
-    public function get(?string $email)
+    public function get(?string $email): Account
     {
         if (empty($email)) {
-            return new Account;
+            return new Account();
         } else {
             $sql = self::$select;
             $sql .= ' WHERE `accounts`.`email` = ?';
@@ -167,12 +167,12 @@ class accountDAO extends DAO
     {
         $sql = 'CALL insertNewAccount(?, ?, ?, ?, ?, ?);';
         $args = [
-            $account->getAccountID(),
-            $account->getUsername(),
-            $account->getEmail(),
-            $account->getPassword(),
-            $account->getActivationCode(),
-            $account->getExpiryDate(),
+            $account->get("accountID"),
+            $account->get("username")),
+            $account->get("email"),
+            $account->get("password"),
+            $account->get("activationCode"),
+            $account->get("expiryDate"),
         ];
         $this->execute($sql, $args);
     }
@@ -183,18 +183,18 @@ class accountDAO extends DAO
     {
         $sql = 'CALL updateAccount(?, ?, ?, ?, ?, ?, ?, ?);';
         $args = [
-            $account->getUsername(),
-            $account->getEmail(),
-            $account->getPassword(),
+            $account->get("username"),
+            $account->get("email"),
+            $account->get("password"),
 
             // Account model isActive and isBeta property is of type boolean, which either return true or false
             // MySQL does not have a boolean type, use tinyint(1)
             // Convert value to integer to prevent MySQL invalid datetime format fatal error
-            (int)$account->getBetaUser(),
-            (int)$account->getActive(),
-            $account->getActivationCode(),
-            $account->getExpiryDate(),
-            $account->getAccountID()
+            (int)$account->get("isBetaUser"),
+            (int)$account->get("isActive"),
+            $account->get("activationCode"),
+            $account->get("expiryDate"),
+            $account->get("accountID")
         ];
         $this->execute($sql, $args);
     }
@@ -202,7 +202,7 @@ class accountDAO extends DAO
     // ...
     public function save(Account $account): void
     {
-        if (empty($account->getAccountID())) {
+        if (empty($account->get("accountID"))) {
             $this->insert($account);
         } else {
             $this->update($account);
