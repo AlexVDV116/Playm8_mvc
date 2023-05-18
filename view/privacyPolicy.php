@@ -106,5 +106,5 @@ class privacyPolicy extends View
 <?php
     }
 }
-new privacyPolicy;
+new privacyPolicy();
 include_once '../footer.php';
