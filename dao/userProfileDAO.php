@@ -78,7 +78,7 @@ class userProfileDAO extends DAO
         $stmt->closeCursor();
     }
 
-    public function checkRecordExists($userProfileID): bool
+    public function checkRecordExists(string $userProfileID): bool
     {
         $stmt = $this->prepare('SELECT * FROM `UserProfiles` WHERE `userProfileID` = ?');
         $stmt->execute([$userProfileID]);
@@ -94,7 +94,7 @@ class userProfileDAO extends DAO
         return $resultCheck;
     }
 
-    public function updateUserProfilePicture($fileNameNew, $userProfileID): void
+    public function updateUserProfilePicture(string $fileNameNew, string $userProfileID): void
     {
         $stmt = $this->prepare('CALL updateUserProfilePicture(?, ?);');
         $stmt->execute([$fileNameNew, $userProfileID]);
