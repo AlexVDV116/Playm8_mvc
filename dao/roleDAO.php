@@ -67,7 +67,7 @@ class roleDAO extends DAO
     }
 
     // Get role name belonging to role ID
-    public function getRoleName($roleID)
+    public function getRoleName($roleID): string
     {
         $stmt = $this->prepare('CALL getRoleName(?);');
         $stmt->execute([$roleID]);
