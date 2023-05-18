@@ -38,7 +38,7 @@ class listAccounts extends View
         }
 ?>
         <div>
-            <p>Total number of accounts: <?= $accountsCount ?></p>
+            <p>Aantal gebruikersaccounts: <?= $accountsCount ?></p>
         </div>
 
         <div class="class-responsive">
@@ -60,7 +60,7 @@ class listAccounts extends View
                     ?>
                         <tr onclick="">
                             <!-- PHP shorthand to echo the data in the table -->
-                            <td><?= "# " . $account->get("accountID") ?></td>
+                            <td><?= "# " . "<a href ='../view/admin.php?view=adminEditAccount&account=" . $account->get("email") . "'>" . $account->get("accountID") ?></td>
                             <td><?= "<a href ='../view/admin.php?view=adminEditUserProfile&userProfileID=" . $account->get("userProfileID") . "&accountID=" . $account->get("accountID") . "'>" . $account->get("userProfileID") . "</a>" ?></td>
                             <td><?= $account->get("username") ?></td>
                             <td><?= $account->get("email") ?></td>
@@ -74,7 +74,6 @@ class listAccounts extends View
                                 } else {
                                     echo 'Nee';
                                 } ?>
-                            <td><?= "<a href ='../view/admin.php?view=adminEditAccount&account=" . $account->get("email") . "'>Wijzig" ?></td>
                         </tr>
                     <?php
                     }
