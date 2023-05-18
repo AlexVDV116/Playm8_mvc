@@ -122,5 +122,5 @@ class login extends View
 <?php
     }
 }
-new login;
+new login();
 include_once '../footer.php';
