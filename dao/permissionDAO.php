@@ -83,9 +83,9 @@ class permissionDAO extends DAO
     {
         $sql = 'CALL updatePermission(?, ?, ?);';
         $args = [
-            $permission->getPermissionName(),
-            $permission->getPermissionDescription(),
-            $permission->getPermissionID()
+            $permission->get("permissionName"),
+            $permission->get("permissionDescription"),
+            $permission->get("permissionID")
         ];
         $this->execute($sql, $args);
     }
@@ -95,9 +95,9 @@ class permissionDAO extends DAO
     {
         $stmt = $this->prepare('CALL insertNewPermission(?, ?, ?);');
         $stmt->execute([
-            $permission->getPermissionID(),
-            $permission->getPermissionName(),
-            $permission->getPermissionDescription()
+            $permission->get("permissionID"),
+            $permission->get("permissionName"),
+            $permission->get("permissionDescription")
         ]);
         $stmt->closeCursor();
     }
