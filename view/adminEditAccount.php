@@ -18,7 +18,7 @@ class adminEditAccount extends View
 
     public function show()
     {
-        $accountDAO = new accountDAO;
+        $accountDAO = new accountDAO();
         $accountDAO->startList();
         if (isset($_GET['account'])) {
             $accountEmail = $_GET["account"];
@@ -45,7 +45,7 @@ class adminEditAccount extends View
                                                 <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                                 <label for="form_newUsername" class="form-label">Gebruikersnaam</label>
                                                 <input id="form_newUsername" type="text" name="newUsername" class="form-control" value="<?php if (isset($account)) {
-                                                                                                                                            echo $account->getUsername();
+                                                                                                                                            echo $account->get("username");
                                                                                                                                         } ?>" required>
                                                 <div class="invalid-feedback">
                                                     Dit veld is verplicht.
@@ -57,7 +57,7 @@ class adminEditAccount extends View
                                                 <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                                 <label for="form_newEmail" class="form-label">E-mailadres</label>
                                                 <input id="form_newEmail" type="email" name="newEmail" class="form-control" value="<?php if (isset($account)) {
-                                                                                                                                        echo $account->getEmail();
+                                                                                                                                        echo $account->get("email");
                                                                                                                                     } ?>" required>
                                                 <div class="invalid-feedback">
                                                     Voer een geldig e-mailadres in.
@@ -91,12 +91,12 @@ class adminEditAccount extends View
                                             <label for="form_isActive" class="form-label">Status account:</label><br>
                                             <select id="form_isActive" name="isActive" class="form_control" required>
                                                 <option value="1" <?php
-                                                                    if ($account->getActive() === true) {
+                                                                    if ($account->get("isActive") === true) {
                                                                         echo "selected";
                                                                     }
                                                                     ?>>-- Actief --</option>
                                                 <option value="0" <?php
-                                                                    if ($account->getActive() === false) {
+                                                                    if ($account->get("isActive") === false) {
                                                                         echo "selected";
                                                                     }
                                                                     ?>>-- Inactief --</option>
@@ -111,9 +111,9 @@ class adminEditAccount extends View
                                             <?php
                                             // For each role in the roles table echo a input type checkbox
                                             // Check the boxes that the user has a role by setting the echoing the checked attribute
-                                            $roleDAO = new roleDAO;
+                                            $roleDAO = new roleDAO();
                                             // Get the roles the user has set
-                                            $rolesSet = $roleDAO->getRolesbyAccountID($account->getAccountID());
+                                            $rolesSet = $roleDAO->getRolesbyAccountID($account->get("accountID"));
                                             $roleDAO->startList();
 
                                             // While we have another object in our query
@@ -124,12 +124,12 @@ class adminEditAccount extends View
                                                 // If role is set echo the input checkbox as checked
                                                 // Else echo the checkbox without the checked attribute 
                                             ?>
-                                                <input type="checkbox" id=<?= "role" . $role->getRoleID() ?> name="selectedRoles[]" value="<?= $role->getRoleID() ?>" <?php
-                                                                                                                                                                        if (in_array($role->getRoleID(), $rolesSet)) {
-                                                                                                                                                                            echo "checked";
-                                                                                                                                                                        }
-                                                                                                                                                                        ?>>
-                                                <label for=<?= "role" . $role->getRoleID() ?>><?= $role->getRoleID() . " - " . $role->getRoleName() ?></label><br>
+                                                <input type="checkbox" id=<?= "role" . $role->get("roleID") ?> name="selectedRoles[]" value="<?= $role->get("roleID") ?>" <?php
+                                                                                                                                                                            if (in_array($role->get("roleID"), $rolesSet)) {
+                                                                                                                                                                                echo "checked";
+                                                                                                                                                                            }
+                                                                                                                                                                            ?>>
+                                                <label for=<?= "role" . $role->get("roleID") ?>><?= $role->get("roleID") . " - " . $role->get("roleName") ?></label><br>
 
                                             <?php
                                             }
@@ -147,12 +147,12 @@ class adminEditAccount extends View
                                             <label for="form_isBeta" class="form-label">Beta user:</label><br>
                                             <select id="form_isBeta" name="isBetaUser" class="form_control" required>
                                                 <option value="1" <?php
-                                                                    if ($account->getBetaUser() === true) {
+                                                                    if ($account->get("isBetaUser") === true) {
                                                                         echo "selected";
                                                                     }
                                                                     ?>>-- Ja --</option>
                                                 <option value="0" <?php
-                                                                    if ($account->getBetaUser() === false) {
+                                                                    if ($account->get("isBetaUser") === false) {
                                                                         echo "selected";
                                                                     }
                                                                     ?>>-- Nee --</option>
@@ -175,7 +175,7 @@ class adminEditAccount extends View
 
                                     <!-- Grab the current user email and sent it with the form -->
                                     <input type="hidden" id="form_currentUserEmail" name="currentUserEmail" value="<?php if (isset($account)) {
-                                                                                                                        echo $account->getEmail();
+                                                                                                                        echo $account->get("email");
                                                                                                                     } ?>" required>
 
                                     <div class="row mt-4">
@@ -253,7 +253,7 @@ class adminEditAccount extends View
                                                 ?>
                                                 <form action="../includes/adminDeleteAccount.inc.php" method="post" class="needs-validation" novalidate>
                                                     <input type="hidden" id="form_userEmail" name="form_userEmail" value="<?php if (isset($account)) {
-                                                                                                                                echo $account->getEmail();
+                                                                                                                                echo $account->get("email");
                                                                                                                             } ?>" required>
                                                     <input id="form_adminPassword" type="password" name="form_adminPassword" class="form-control border-1" placeholder="Voer admin wachtwoord in" required>
                                                     <div class="row">
@@ -277,4 +277,4 @@ class adminEditAccount extends View
 <?php
     }
 }
-new adminEditAccount;
+new adminEditAccount();
