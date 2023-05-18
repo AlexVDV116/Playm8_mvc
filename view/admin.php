@@ -174,4 +174,4 @@ class admin extends View
 <?php
     }
 }
-new admin;
+new admin();
