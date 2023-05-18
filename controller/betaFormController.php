@@ -87,7 +87,7 @@ class betaFormController extends Controller
     private function isKnownEmail(): bool
     {
         $result = null;
-        $accountDAO = new accountDAO;
+        $accountDAO = new accountDAO();
         if ($accountDAO->knownEmail($this->email)) {
             $result = true;
         } else {
@@ -101,7 +101,7 @@ class betaFormController extends Controller
     private function isAlreadyBeta(): bool
     {
         $result = null;
-        $accountDAO = new accountDAO;
+        $accountDAO = new accountDAO();
         if ($accountDAO->isBeta($this->email)) {
             $result = true;
         } else {
@@ -116,7 +116,7 @@ class betaFormController extends Controller
     private function isAccountActive(): bool
     {
         $result = null;
-        $accountDAO = new accountDAO;
+        $accountDAO = new accountDAO();
         if ($accountDAO->isActive($this->email)) {
             $result = true;
         } else {
