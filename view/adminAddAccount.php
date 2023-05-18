@@ -80,7 +80,7 @@ class adminAddAccount extends View
                                             <label class="form-label">Wijs rol(len) toe:</label><br>
                                             <?php
                                             // For each role in the roles table echo a input type checkbox
-                                            $roleDAO = new roleDAO;
+                                            $roleDAO = new roleDAO();
                                             $roleDAO->startList();
 
                                             // While we have another object in our query
@@ -91,8 +91,8 @@ class adminAddAccount extends View
                                                 // If role is set echo the input checkbox as checked
                                                 // Else echo the checkbox without the checked attribute 
                                             ?>
-                                                <input type="checkbox" id=<?= "role" . $role->getRoleID() ?> name="selectedRoles[]">
-                                                <label for=<?= "role" . $role->getRoleID() ?>><?= $role->getRoleID() . " - " . $role->getRoleName() ?></label><br>
+                                                <input type="checkbox" id=<?= "role" . $role->get("roleID") ?> name="selectedRoles[]">
+                                                <label for=<?= "role" . $role->get("roleID") ?>><?= $role->get("roleID") . " - " . $role->get("roleName") ?></label><br>
 
                                             <?php
                                             }
@@ -173,4 +173,4 @@ class adminAddAccount extends View
 <?php
     }
 }
-new adminAddAccount;
+new adminAddAccount();
