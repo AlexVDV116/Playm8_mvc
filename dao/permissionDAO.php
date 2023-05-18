@@ -31,14 +31,14 @@ class permissionDAO extends DAO
     }
 
     // Get permission object by permissionID
-    public function get($permissionID): Permission
+    public function get(int $permissionID): Permission
     {
         $sql = 'SELECT * FROM permissions WHERE permissions.permissionID = ?';
         return $this->getObjectSql($sql, [$permissionID]);
     }
 
     // Select all records from the rolesPermissions table and order them by permissionID
-    public function getPermissionsbyRoleID($roleID): array
+    public function getPermissionsbyRoleID(int $roleID): array
     {
         $stmt = $this->prepare('CALL getPermissionsbyRoleID(?);');
         $stmt->execute([$roleID]);
@@ -69,7 +69,7 @@ class permissionDAO extends DAO
     }
 
     // Set permissions for Role in rolesPermissions table 
-    public function insertPermissionsForRole($roleID, $permissionID)
+    public function insertPermissionsForRole(int $roleID, int $permissionID)
     {
         $stmt = $this->prepare('CALL insertPermissionsForRole(?, ?);');
         $stmt->execute([$roleID, $permissionID]);
@@ -89,7 +89,7 @@ class permissionDAO extends DAO
     }
 
     // Insert new permission object 
-    public function insertNewPermission($permission): void
+    public function insertNewPermission(Permission $permission): void
     {
         $stmt = $this->prepare('CALL insertNewPermission(?, ?, ?);');
         $stmt->execute([
