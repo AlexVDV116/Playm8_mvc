@@ -72,7 +72,7 @@ class adminAddRole extends View
                                                 // If role is set echo the input checkbox as checked
                                                 // Else echo the checkbox without the checked attribute 
                                             ?>
-                                                <input type="checkbox" id=<?= "permission" . $permission->get("permissionID") ?> name="selectedPermissions[]" value="<?= $permission->getPermissionID() ?>">
+                                                <input type="checkbox" id=<?= "permission" . $permission->get("permissionID") ?> name="selectedPermissions[]" value="<?= $permission->get("permissionID") ?>">
                                                 <label for=<?= "role" . $permission->get("permissionID") ?>><?= $permission->get("permissionID") . " - " . $permission->get("permissionDescription") ?></label><br>
 
                                             <?php
