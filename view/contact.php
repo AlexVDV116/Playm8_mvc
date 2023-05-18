@@ -155,5 +155,5 @@ class contact extends View
 <?php
 	}
 }
-new contact;
+new contact();
 include_once '../footer.php';
