@@ -82,7 +82,7 @@ class userProfileController extends Controller
         );
 
         $userProfile = new userProfile($data);
-        $userProfileDAO = new userProfileDAO;
+        $userProfileDAO = new userProfileDAO();
 
         if ($userProfileDAO->checkRecordExists($this->userProfileID) == true) {
             $userProfileDAO->updateUserProfileInfo($userProfile);
@@ -112,7 +112,7 @@ class userProfileController extends Controller
         );
 
         $userProfile = new userProfile($data);
-        $userProfileDAO = new userProfileDAO;
+        $userProfileDAO = new userProfileDAO();
 
         if ($userProfileDAO->checkRecordExists($this->userProfileID) == true) {
             $userProfileDAO->updateUserProfileInfo($userProfile);
