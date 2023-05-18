@@ -95,7 +95,7 @@ class accountController extends Controller
         $accountDAO->insert($account);
 
         // Insert default roleID 1 into the accountRoles table
-        $accountDAO->setRoleID($account->accountID, [1]);
+        $accountDAO->setRoleID($account->get("accountID"), [1]);
 
         // Send email to user with activation code and link to activate the account
         $accountDAO->mailActivationCode($this->email, $activationCode);
@@ -117,13 +117,10 @@ class accountController extends Controller
             exit();
         } elseif ($checkPwd == true) {
 
-            // Validate user input
-
-
             // Compare the new data against the data in the DB and update when changes have occured
             if ($this->username !== $account->get("username")) {
                 // Update username
-                $account->username = $this->username;
+                $account->set("username", $this->username);
                 $_SESSION["auth_user"]["username"] = $this->username;
             }
             if ($this->email !== $account->get("email")) {
@@ -143,8 +140,8 @@ class accountController extends Controller
                 }
 
                 // Update email, set account inactive, resent activation mil
-                $account->email = $this->email;
-                $account->isActive = false;
+                $account->set("email", $this->email);
+                $account->set("isActive", false);
 
                 // Generate a new activationcode and expirydate
                 $activationCode = $accountDAO->generateActivationCode();
@@ -152,8 +149,8 @@ class accountController extends Controller
                 $expiryDate = date("Y-m-d H:i:s", strtotime('+24 hours')); // ExpiryDate = now + 24 hours
 
                 // Set the account object properties to contain the new activationCode and expiryDate
-                $account->activationCode = $hashedActivationCode;
-                $account->activationExpiry = $expiryDate;
+                $account->set("activationCode", $hashedActivationCode);
+                $account->set("activationExpiry", $expiryDate);
 
                 // Send email to user with activation code and link to activate the account
                 $accountDAO->mailActivationCode($this->email, $activationCode);
@@ -181,7 +178,7 @@ class accountController extends Controller
                     // Update password
                     // Use PHP built in method to generate a password hash
                     $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
-                    $account->password = $hashedPassword;
+                    $account->set("password", $hashedPassword);
                     $passwordChange = true;
                 }
             }
@@ -264,7 +261,7 @@ class accountController extends Controller
                 }
 
                 // Update email, resent activation mail
-                $userAccount->email = $this->email;
+                $userAccount->set("email", $this->email);
 
                 // Generate a new activationcode and expirydate
                 $activationCode = $accountDAO->generateActivationCode();
@@ -272,8 +269,8 @@ class accountController extends Controller
                 $expiryDate = date("Y-m-d H:i:s", strtotime('+24 hours')); // ExpiryDate = now + 24 hours
 
                 // Set the account object properties to contain the new activationCode and expiryDate
-                $userAccount->activationCode = $hashedActivationCode;
-                $userAccount->activationExpiry = $expiryDate;
+                $userAccount->set("activationCode", $hashedActivationCode);
+                $userAccount->set("activationExpiry", $expiryDate);
 
                 // Send email to user with activation code and link to activate the account
                 $accountDAO->mailActivationCode($this->email, $activationCode);
@@ -301,14 +298,14 @@ class accountController extends Controller
                     // Update password
                     // Use PHP built in method to generate a password hash
                     $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
-                    $userAccount->password = $hashedPassword;
+                    $userAccount->set("password", $hashedPassword);
                     $passwordChange = true;
                 }
             }
 
             // If the email has changed set the account isActive to false
             if ($emailChange == true) {
-                $userAccount->isActive = false;
+                $userAccount->set("isActive", false);
             } else {
                 // Else set the isActive according to the HMTL select element
                 $userAccount->set("isActive", $isActive);
