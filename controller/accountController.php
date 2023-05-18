@@ -104,11 +104,11 @@ class accountController extends Controller
     public function editAccount($email, $currentPassword): void
     {
         // Grab the account from the DB
-        $accountDAO = new AccountDAO;
+        $accountDAO = new AccountDAO();
         $account = $accountDAO->get($email);
 
         // use PHP built in method to check if the given password matches the hashed password stored in the DB (returns bool)
-        $checkPwd = password_verify($currentPassword, $account->getPassword());
+        $checkPwd = password_verify($currentPassword, $account->get("password"));
 
         // If the password match
         if ($checkPwd == false) {
@@ -121,12 +121,12 @@ class accountController extends Controller
 
 
             // Compare the new data against the data in the DB and update when changes have occured
-            if ($this->username !== $account->getUsername()) {
+            if ($this->username !== $account->get("username")) {
                 // Update username
                 $account->username = $this->username;
                 $_SESSION["auth_user"]["username"] = $this->username;
             }
-            if ($this->email !== $account->getEmail()) {
+            if ($this->email !== $account->get("email")) {
 
                 // Check if email is valid
                 if ($this->hasInvalidEmail() == true) {
@@ -177,7 +177,7 @@ class accountController extends Controller
                 }
 
                 // Compare the new password to the old password, if it has changed, update the password
-                if ($this->password !== $account->getPassword() && $this->passwordrepeat !== $account->getPassword()) {
+                if ($this->password !== $account->get("password") && $this->passwordrepeat !== $account->get("password")) {
                     // Update password
                     // Use PHP built in method to generate a password hash
                     $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
@@ -219,9 +219,9 @@ class accountController extends Controller
     public function adminEditAccount($currentUserEmail, $adminEmail, $adminPassword, $isActive, $selectedRoles, $isBetaUser): void
     {
         // Grab the account from the DB
-        $accountDAO = new AccountDAO;
+        $accountDAO = new AccountDAO();
         $userAccount = $accountDAO->get($currentUserEmail);
-        $userAccountID = $userAccount->accountID;
+        $userAccountID = $userAccount->get("accountID");
         $adminAccount = $accountDAO->get($adminEmail);
         $emailChange = false;
         $userNameChange = false;
@@ -229,7 +229,7 @@ class accountController extends Controller
 
 
         // use PHP built in method to check if the given admin password matches the hashed password stored in the DB (returns bool)
-        $checkPwd = password_verify($adminPassword, $adminAccount->getPassword());
+        $checkPwd = password_verify($adminPassword, $adminAccount->get("password"));
 
         // If the password match
         if ($checkPwd == false) {
@@ -242,12 +242,12 @@ class accountController extends Controller
 
 
             // Compare the new data against the data in the DB and update when changes have occured
-            if ($this->username !== $userAccount->getUsername()) {
+            if ($this->username !== $userAccount->get("username")) {
                 // Update username
-                $userAccount->username = $this->username;
+                $userAccount->set("username", $this->username);
                 $userNameChange = true;
             }
-            if ($this->email !== $userAccount->getEmail()) {
+            if ($this->email !== $userAccount->get("email")) {
 
                 // Check if email is valid
                 if ($this->hasInvalidEmail() == true) {
@@ -297,7 +297,7 @@ class accountController extends Controller
                 }
 
                 // Compare the new password to the old password, if it has changed, update the password
-                if ($this->password !== $userAccount->getPassword() && $this->passwordrepeat !== $userAccount->getPassword()) {
+                if ($this->password !== $userAccount->get("password") && $this->passwordrepeat !== $userAccount->get("password")) {
                     // Update password
                     // Use PHP built in method to generate a password hash
                     $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
@@ -311,11 +311,11 @@ class accountController extends Controller
                 $userAccount->isActive = false;
             } else {
                 // Else set the isActive according to the HMTL select element
-                $userAccount->isActive = $isActive;
+                $userAccount->set("isActive", $isActive);
             }
 
             // Remove all previous set roles
-            $roleDAO = new roleDAO;
+            $roleDAO = new roleDAO();
             $roleDAO->deleteRolesFromAccount($userAccountID);
 
             // For each checked role insert this role into the accountsRoles table for this account
@@ -324,7 +324,7 @@ class accountController extends Controller
             }
 
             // set the account isBeta attribute according to the HTML select element
-            $userAccount->isBetaUser = $isBetaUser;
+            $userAccount->set("isBetaUser", $isBetaUser);
 
             // Update the database with the new account object 
             $accountDAO->update($userAccount);
@@ -356,13 +356,13 @@ class accountController extends Controller
     public function adminDeleteAccount($userEmail, $adminEmail, $adminPassword): void
     {
         // Grab the account from the DB
-        $accountDAO = new AccountDAO;
+        $accountDAO = new AccountDAO();
         $adminAccount = $accountDAO->get($adminEmail);
         $userAccount = $accountDAO->get($userEmail);
-        $userAccountID = $userAccount->getAccountID();
+        $userAccountID = $userAccount->get("accountID");
 
         // use PHP built in method to check if the given admin password matches the hashed password stored in the DB (returns bool)
-        $checkPwd = password_verify($adminPassword, $adminAccount->getPassword());
+        $checkPwd = password_verify($adminPassword, $adminAccount->get("password"));
 
         // If the password match
         if ($checkPwd == false) {
@@ -436,7 +436,7 @@ class accountController extends Controller
     private function isKnownEmail(): bool
     {
         $result = null;
-        $accountDAO = new accountDAO;
+        $accountDAO = new accountDAO();
         if ($accountDAO->knownEmail($this->email)) {
             $result = true;
         } else {
