@@ -74,6 +74,12 @@ CREATE TABLE IF NOT EXISTS `userProfiles` (
   `userProfilePicture` varchar(500) NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS `loginAttempts` (
+  `accountID` varchar(500) NOT NULL,
+  `failedLoginAttempts` int(16) DEFAULT 0,
+  `lastLoginAttempt` datetime DEFAULT NULL
+);
+
 --
 -- Setting Primary Keys
 --
@@ -117,6 +123,9 @@ ALTER TABLE `rolesPermissions`
 ALTER TABLE `userProfiles`
   ADD PRIMARY KEY (`userProfileID`);
 
+ALTER TABLE `loginAttempts`
+  ADD PRIMARY KEY (`accountID`);
+
 --
 -- Setting Foreign Keys
 --
@@ -141,6 +150,9 @@ ALTER TABLE `passwordReset`
 ALTER TABLE `rolesPermissions`
   ADD CONSTRAINT `rolespermissions_ibfk_1` FOREIGN KEY (`roleID`) REFERENCES `roles` (`roleID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `rolespermissions_ibfk_2` FOREIGN KEY (`permissionID`) REFERENCES `permissions` (`permissionID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `loginAttempts`
+  ADD CONSTRAINT `loginAttempts_ibfk_1` FOREIGN KEY (`accountID`) REFERENCES `accounts` (`accountID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 COMMIT;
 
@@ -230,7 +242,7 @@ DELIMITER $$
 CREATE PROCEDURE `disableAccount`(
     IN `accountID` varchar(500))
 UPDATE `accounts` 
-SET isEnabled = 0
+SET isActive = 0
 WHERE accounts.accountID = accountID$$
 DELIMITER ;
 
@@ -238,9 +250,47 @@ DELIMITER $$
 CREATE PROCEDURE `enableAccount`(
     IN `accountID` varchar(500))
 UPDATE `accounts` 
-SET isEnabled = 1
+SET isActive = 1
 WHERE accounts.accountID = accountID$$
 DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `addFailedLoginAttempt`(
+    IN `accountID` varchar(500),
+    IN `lastLoginAttempt` datetime)
+UPDATE `loginAttempts` 
+SET failedLoginAttempts = failedLoginAttempts + 1, lastLoginAttempt = lastLoginAttempt 
+WHERE loginAttempts.accountID = accountID$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `insertFailedLoginAttempt`(
+    IN `accountID` varchar(500),
+    IN `failedLoginAttempts` int(16),
+    IN `lastLoginAttempt` datetime)
+INSERT INTO `loginAttempts`(`accountID`, `failedLoginAttempts`, `lastLoginAttempt`) VALUES (accountID, failedLoginAttempts, lastLoginAttempt)$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `getFailedLoginAttempts`(
+  IN `accountID` varchar(500))
+SELECT failedLoginAttempts FROM loginAttempts WHERE loginAttempts.accountID = accountID$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `getLastLoginAttempt`(
+  IN `accountID` varchar(500))
+SELECT lastLoginAttempt FROM loginAttempts WHERE loginAttempts.accountID = accountID$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `resetFailedLoginAttempts`(
+    IN `accountID` varchar(500))
+DELETE FROM `loginAttempts` 
+WHERE loginAttempts.accountID = accountID$$
+DELIMITER ;
+
+
 
 --
 -- Permissions
