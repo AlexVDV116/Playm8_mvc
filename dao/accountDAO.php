@@ -12,6 +12,7 @@ use Model\Account;
 use Model\Mail;
 use PDO;
 use Data\mailConfig;
+use DateTime;
 
 ini_set('display_errors', 1);
 
@@ -26,86 +27,6 @@ class accountDAO extends DAO
     public function __construct()
     {
         parent::__construct('Model\Account');
-    }
-
-    // Method that checks if the account exists in our database
-    // If true, check if password matches the hashed password in our database
-    // If true log user in 
-    public function logInUser(string $email, string $password): void
-    {
-        $stmt = $this->prepare('CALL getAccountMatchingEmail(?);');
-        $stmt->execute([$email]);
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        // If query gets no result exit script and redirect user to index with error message
-        if (!$result) {
-            // echo "Onbekend e-mailadres..";
-            header("location: ../view/login.php?error=accountnotfound");
-            exit();
-        };
-
-        // use PHP built in method to check if the given password matches the hashed password stored in the DB (returns bool)
-        $checkPwd = password_verify($password, $result[0]["password"]);
-
-        // If the password match
-        if ($checkPwd == false) {
-            $stmt = null;
-            // echo "Onjuist wachtwoord.";
-            header("location: ../view/login.php?error=wrongpassword");
-            exit();
-        } elseif ($checkPwd == true) {
-            // Prepared satement that selects all rows in the accounts table where user credentials match the given credentials
-            $stmt = $this->prepare('CALL logInAccount(?, ?)');
-
-            // If they do not match, set statement to null and redirect user to index with error message
-            if (!$stmt->execute(array($email, $result[0]["password"]))) {
-                $stmt = null;
-                // echo "Onjuist wachtwoord.";
-                header("location: ../view/login.php?error=wrongpassword");
-                exit;
-            };
-
-            // Check if the user has verified its email-adress and that his account isActive = 1
-            if ($this->isActive($email) == 0) {
-                // echo "Account niet geactiveerd";
-                header("location: ../view/login.php?error=accountnotactivated");
-                exit();
-            };
-
-            // Before logging in the user check if the database query retrieves any results
-            if ($stmt->rowCount() == 0) {
-                $stmt = null;
-                header("location: ../view/login.php?error=accountnotfound");
-                exit();
-            };
-
-            // Log user in
-            // Create a user variable with the results from the statement and return these results in an associative array
-            // This user variable now contains all data from the database belonging to the account
-            $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-            // Free up the connection to the server so that other SQL statements may be issued
-            $stmt->closeCursor();
-
-            // Create a new session 
-            session_start();
-            // Regenerate session id to prevent session fixation-by malicious user
-            session_regenerate_id();
-
-            // Set session super global variables containing user information
-            $_SESSION["auth"] = true;
-            $_SESSION["auth_role"] = $this->getRoleID($user[0]["accountID"]);
-            $_SESSION["auth_user"] = [
-                'accountID' => $user[0]["accountID"],
-                'username' => $user[0]["username"],
-                'email' => $user[0]["email"],
-                'isActive' => $user[0]["isActive"],
-                'isBetaUser' => $user[0]["isBetaUser"],
-                'userProfileID' => $user[0]["userProfileID"],
-            ];
-        }
-
-        $stmt = null;
     }
 
     // Select all records from accounts table and order them by accountID
@@ -510,6 +431,74 @@ class accountDAO extends DAO
         SET isBetaUser = 1 
         WHERE email = ?");
         $stmt->execute([$email]);
+        $stmt->closeCursor();
+    }
+
+    // Set the failedLoginAttempt += 1 and return the new value
+    public function addFailedLoginAttempt(string $accountID): void
+    {
+        $stmt = $this->prepare("SELECT * FROM loginAttempts WHERE accountID = ?");
+        $stmt->execute([$accountID]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+
+        $now = date("Y-m-d H:i:s");
+
+        // Verify that at least one login attempt is in database, else insert new record
+        if ($result) {
+            $stmt = $this->prepare('CALL addFailedLoginAttempt(?, ?);');
+            $stmt->execute([$accountID, $now]);
+            $stmt->closeCursor();
+        } else {
+            $stmt = $this->prepare('CALL insertFailedLoginAttempt(?, ? ,?);');
+            $stmt->execute([$accountID, 1, $now]);
+            $stmt->closeCursor();
+        }
+    }
+
+    // Set the failedLoginAttempt += 1 and return the new value
+    public function getFailedLoginAttempts(string $accountID): int
+    {
+        $stmt = $this->prepare('CALL getFailedLoginAttempts(?);');
+        $stmt->execute([$accountID]);
+        $result = $stmt->fetch();
+        $stmt->closeCursor();
+
+        return $result[0];
+    }
+
+    // Set the failedLoginAttempt += 1 and return the new value
+    public function resetFailedLoginAttempts(string $accountID): void
+    {
+        $stmt = $this->prepare('CALL resetFailedLoginAttempts(?);');
+        $stmt->execute([$accountID]);
+        $stmt->closeCursor();
+    }
+
+    // Get the datetime of the last login attempt
+    public function getLastLoginAttempt(string $accountID): string
+    {
+        $stmt = $this->prepare('CALL getLastLoginAttempt(?);');
+        $stmt->execute([$accountID]);
+        $result = $stmt->fetch();
+        $stmt->closeCursor();
+
+        return $result[0];
+    }
+
+    // Enable an acount by setting the isActive value to true
+    public function enableAccount(string $accountID): void
+    {
+        $stmt = $this->prepare('CALL enableAccount(?);');
+        $stmt->execute([$accountID]);
+        $stmt->closeCursor();
+    }
+
+    // Disable an acount by setting the isActive value to false
+    public function disableAccount(string $accountID): void
+    {
+        $stmt = $this->prepare('CALL disableAccount(?);');
+        $stmt->execute([$accountID]);
         $stmt->closeCursor();
     }
 }
