@@ -63,7 +63,7 @@ class login extends View
                                                 <button class="btn btn-credits shadow-sm my-2" type="submit" name="submit">Inloggen</button>
                                             </div>
 
-                                            <div class="forgotpassword mt-5 d-flex justify-content-center">
+                                            <div class="forgotpassword mt-5 mb-3 d-flex justify-content-center">
                                                 <a href="../view/forgotPassword.php">Wachtwoord vergeten?</a>
                                             </div>
                                             <?php
@@ -81,6 +81,8 @@ class login extends View
                                                     echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Onjuist wachtwoord.</p>';
                                                 } elseif ($_GET["error"] == "accountnotactivated") {
                                                     echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Inactief Account. Verifieer uw email-adres.</p>';
+                                                } elseif ($_GET["error"] == "blockedaccount") {
+                                                    echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Uw account is tijdelijk gedeactiveerd wegens te veel foutieve inlogpogingen. <br> Probeer het over 30 minuten opnieuw of neem contact op met een administrator.</p>';
                                                 }
                                             }
 
