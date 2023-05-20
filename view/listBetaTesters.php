@@ -32,6 +32,9 @@ class listBetaTesters extends View
             }
         }
 ?>
+        <div class="mb-4">
+            <h4>Beta accounts</h4>
+        </div>
         <div>
             <p>Total number of beta users: <?= $betaCount ?></p>
         </div>
