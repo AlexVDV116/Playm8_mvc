@@ -130,12 +130,21 @@ header.fixed-top {
 }
 
 #sideBarNav .nav-link {
-    color: #d6004a;
+    color: #fff;
 }
 
 #sideBarNav .nav-link:hover {
-    color: #d6004a;
+    color: #fff;
     font-weight: 900;
+}
+
+.card-gradient {
+    background: rgb(214, 0, 74);
+    background: linear-gradient(
+        90deg,
+        rgba(214, 0, 74, 1) 1%,
+        rgba(255, 255, 255, 1) 35%
+    );
 }
 
 /** =================================================================
