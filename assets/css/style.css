@@ -142,8 +142,8 @@ header.fixed-top {
     background: rgb(214, 0, 74);
     background: linear-gradient(
         90deg,
-        rgba(214, 0, 74, 1) 1%,
-        rgba(255, 255, 255, 1) 35%
+        rgba(214, 0, 74, 1) 11%,
+        rgba(255, 255, 255, 1) 33%
     );
 }
 
@@ -691,6 +691,10 @@ form i.fa-key {
 
 a.no-underline {
     text-decoration: none;
+}
+
+.light-bg {
+    background-color: #d6004a00;
 }
 
 /** =================================================================
