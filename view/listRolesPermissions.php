@@ -39,7 +39,7 @@ class listRolesPermissions extends View
         }
 ?>
         <div class="class-responsive">
-            <table class="table table-striped table-sm">
+            <table class="table table-striped table-sm table-hover">
                 <thead>
                     <tr>
                         <th>Rol ID</th>
@@ -107,7 +107,7 @@ class listRolesPermissions extends View
                 }
             }
             ?>
-            <table class="table table-striped table-sm">
+            <table class="table table-striped table-sm table-hover">
                 <thead>
                     <tr>
                         <th>Permissie ID</th>
