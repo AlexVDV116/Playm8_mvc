@@ -70,7 +70,7 @@ class admin extends View
             <link rel="icon" type="image/x-icon" href="../assets/images/Playm8_favicon_32x32.png">
         </head>
 
-        <body>
+        <body class="light-bg">
             <header id="branding" class="fixed-top">
 
                 <nav id="main-navbar" class="navbar navbar-expand-xxl">
@@ -124,46 +124,50 @@ class admin extends View
 
             <div class="container">
                 <div class="row">
-                    <nav id="sideBarNav" class=" col-4 ml-5">
-                        <div class="p-3" style="width: 280px;">
-                            <ul class="nav flex-column mb-auto">
-                                <li class="nav-item">
-                                    <a href="?view=Home" class="nav-link">
-                                        <h4>Admin Dashboard</h4>
-                                    </a>
-                                </li>
-                                <hr>
-                                <li class="nav-item">
-                                    <a href="?view=ListAccounts" class="nav-link">
-                                        Bekijk accounts
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="?view=searchAccounts" class="nav-link">
-                                        Zoek accounts
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="?view=listRolesPermissions" class="nav-link">
-                                        Rollen en Permissies
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="?view=listBetaTesters" class="nav-link">
-                                        Betatesters
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="?view=uploadCSV" class="nav-link">
-                                        Upload CSV bestand
-                                    </a>
-                                </li>
-                            </ul>
-                            <hr>
+                    <div class="card shadow card-gradient my-5">
+                        <div class="card-body d-flex">
+                            <nav id="sideBarNav" class=" col-4 ml-5">
+                                <div class="p-3" style="width: 280px;">
+                                    <ul class="nav flex-column mb-auto">
+                                        <li class="nav-item">
+                                            <a href="?view=Home" class="nav-link">
+                                                <h4 class="text-white">Admin Dashboard</h4>
+                                            </a>
+                                        </li>
+                                        <hr>
+                                        <li class="nav-item">
+                                            <a href="?view=ListAccounts" class="nav-link">
+                                                Bekijk accounts
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="?view=searchAccounts" class="nav-link">
+                                                Zoek accounts
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="?view=listRolesPermissions" class="nav-link">
+                                                Rollen en Permissies
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="?view=listBetaTesters" class="nav-link">
+                                                Betatesters
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="?view=uploadCSV" class="nav-link">
+                                                Upload CSV bestand
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <hr>
+                                </div>
+                            </nav>
+                            <div class="col-8 pt-4">
+                                <?php require "{$view}.php"; ?>
+                            </div>
                         </div>
-                    </nav>
-                    <div class="col-8 pt-4">
-                        <?php require "{$view}.php"; ?>
                     </div>
                 </div>
             </div>
