@@ -133,6 +133,11 @@ header.fixed-top {
     color: #d6004a;
 }
 
+#sideBarNav .nav-link:hover {
+    color: #d6004a;
+    font-weight: 900;
+}
+
 /** =================================================================
 *
 *    Navbar toggler
