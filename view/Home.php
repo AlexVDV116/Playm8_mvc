@@ -17,7 +17,7 @@ class home extends View
     public function show()
     {
 ?>
-        <h4>Admin Home</h4>
+        <h4>Welkom, <?php echo $_SESSION["auth_user"]["username"] ?></h4>
         <p>Selecteer een van de administrator functionaliteiten.</p>
 
 <?php
