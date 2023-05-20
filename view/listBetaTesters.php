@@ -37,7 +37,7 @@ class listBetaTesters extends View
         </div>
 
         <div class="class-responsive">
-            <table class="table table-striped table-sm">
+            <table class="table table-striped table-sm table-hover">
                 <thead>
                     <tr>
                         <th>Account ID</th>
