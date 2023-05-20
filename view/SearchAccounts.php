@@ -24,8 +24,10 @@ class searchAccounts extends View
             $accountDAO->startSearch($search);
         }
 ?>
+        <div class="mb-4">
+            <h4>Zoek accounts</h4>
+        </div>
         <div>
-            <h4>Zoek account</h4>
             <p>
                 Voer een accountnaam of email in om te zoeken:
             </p>
