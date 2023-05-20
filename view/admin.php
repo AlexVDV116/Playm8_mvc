@@ -132,6 +132,7 @@ class admin extends View
                                         <h4>Admin Dashboard</h4>
                                     </a>
                                 </li>
+                                <hr>
                                 <li class="nav-item">
                                     <a href="?view=ListAccounts" class="nav-link">
                                         Bekijk accounts
@@ -161,7 +162,7 @@ class admin extends View
                             <hr>
                         </div>
                     </nav>
-                    <div class="col-8 pt-5">
+                    <div class="col-8 pt-4">
                         <?php require "{$view}.php"; ?>
                     </div>
                 </div>
