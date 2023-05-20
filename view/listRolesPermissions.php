@@ -38,6 +38,9 @@ class listRolesPermissions extends View
             }
         }
 ?>
+        <div class="mb-4">
+            <h4>Rollen en Permissies</h4>
+        </div>
         <div class="class-responsive">
             <table class="table table-striped table-sm table-hover">
                 <thead>
