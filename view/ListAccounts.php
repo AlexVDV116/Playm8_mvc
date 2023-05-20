@@ -37,6 +37,9 @@ class listAccounts extends View
             }
         }
 ?>
+        <div class="mb-4">
+            <h4>Accounts</h4>
+        </div>
         <div>
             <p>Aantal gebruikersaccounts: <?= $accountsCount ?></p>
         </div>
