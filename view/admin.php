@@ -152,6 +152,11 @@ class admin extends View
                                         Betatesters
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="?view=uploadCSV" class="nav-link">
+                                        Upload CSV bestand
+                                    </a>
+                                </li>
                             </ul>
                             <hr>
                         </div>
