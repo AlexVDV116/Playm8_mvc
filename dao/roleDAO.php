@@ -9,6 +9,7 @@ require_once '../vendor/autoload.php';
 // Import classes this class depends on
 use Framework\DAO;
 use Model\Role;
+use PDO;
 
 ini_set('display_errors', 1);
 
@@ -38,6 +39,16 @@ class roleDAO extends DAO
     {
         $sql = 'SELECT * FROM roles WHERE roles.roleID = ?';
         return $this->getObjectSql($sql, [$roleID]);
+    }
+
+    // Get all roles
+    public function getAllRoles(): array
+    {
+        $stmt = $this->prepare('CALL getAllRolesOrderByRoleID();');
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
     }
 
     // Select all records from accounts table and order them by accountID
