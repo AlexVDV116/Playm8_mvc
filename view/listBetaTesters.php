@@ -80,6 +80,13 @@ class listBetaTesters extends View
                     ?>
                 </tbody>
             </table>
+            <div class="d-flex justify-content-end">
+                <!-- form that handles the submission of the serializeAccountsArray -->
+                <form method='post' action='../includes/adminExportCSV.inc.php'>
+                    <input type='submit' class="btn btn-credits shadow-sm my-2" value='Exporteer CSV' name='Export'>
+                    <input type="hidden" name="fileName" value="betaTesters.csv">
+                </form>
+            </div>
         </div>
 <?php
     }
