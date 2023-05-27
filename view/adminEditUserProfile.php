@@ -50,7 +50,7 @@ class adminEditUserProfile extends View
                             <div class="card-body bg-light p-4 text-black">
                                 <div class="row mb-4">
                                     <div class="d-flex justify-content-center mb-2">
-                                        <form action="../includes/adminUploads.inc.php" method="post" enctype="multipart/form-data">
+                                        <form action="../includes/adminEditUserProfilePicture.inc.php" method="post" enctype="multipart/form-data">
                                             <?php
                                             // If user has a default profile picture display default profile picture with his initials
                                             // Else display his own profile picture
