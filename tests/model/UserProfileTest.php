@@ -5,8 +5,9 @@ use PHPUnit\Framework\TestCase;
 
 require_once '../Playm8_mvc/model/userProfile.php';
 
-class UserProfileTest extends TestCase
+final class UserProfileTest extends TestCase
 {
+
     public function testGet(): void
     {
         // Associative array which contains the data used to instantiate the userProfile class
