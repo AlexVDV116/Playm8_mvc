@@ -43,6 +43,16 @@ class accountDAO extends DAO
         $this->startListSql($sql);
     }
 
+    // Get all betatesters in an assoc array
+    public function getAllBetaUsers(): array
+    {
+        $stmt = $this->prepare('CALL getAllBetaAccounts();');
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
     // Select all records from accounts table that match search term
     public function startSearch(string $search): void
     {
@@ -69,6 +79,16 @@ class accountDAO extends DAO
             $sql .= ' WHERE `accounts`.`email` = ?';
             return $this->getObjectSql($sql, [$email]);
         }
+    }
+
+    // Get all accounts
+    public function getAllAccounts(): array
+    {
+        $stmt = $this->prepare('CALL getAllAccountsOrderByAccountID();');
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
     }
 
     // Deletes a the record from the accounts table where the accountID matches
