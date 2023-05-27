@@ -331,6 +331,11 @@ DELETE FROM `permissions`
 WHERE permissions.permissionID = permissionID$$
 DELIMITER ;
 
+DELIMITER $$
+CREATE PROCEDURE `getAllPermissionsOrderByPermissionID`()
+SELECT * FROM permissions ORDER BY permissions.permissionID$$
+DELIMITER ;
+
 --
 -- Roles
 --
@@ -380,6 +385,11 @@ CREATE PROCEDURE `deleteRole`(
     IN `roleID` int(16))
 DELETE FROM `roles` 
 WHERE roles.roleID = roleID$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `getAllRolesOrderByRoleID`()
+SELECT * FROM roles ORDER BY roles.roleID$$
 DELIMITER ;
 
 --
