@@ -5,8 +5,9 @@ use PHPUnit\Framework\TestCase;
 
 require_once '../Playm8_mvc/model/Role.php';
 
-class RoleTest extends TestCase
+final class RoleTest extends TestCase
 {
+
     public function testGet(): void
     {
         // Associative array which contains the data used to instantiate the Role class
