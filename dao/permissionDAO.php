@@ -9,6 +9,7 @@ require_once '../vendor/autoload.php';
 // Import classes this class depends on
 use Framework\DAO;
 use Model\Permission;
+use PDO;
 
 ini_set('display_errors', 1);
 
@@ -35,6 +36,16 @@ class permissionDAO extends DAO
     {
         $sql = 'SELECT * FROM permissions WHERE permissions.permissionID = ?';
         return $this->getObjectSql($sql, [$permissionID]);
+    }
+
+    // Get all permissions
+    public function getAllPermissions(): array
+    {
+        $stmt = $this->prepare('CALL getAllPermissionsOrderByPermissionID();');
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
     }
 
     // Select all records from the rolesPermissions table and order them by permissionID
