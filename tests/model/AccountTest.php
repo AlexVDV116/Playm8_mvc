@@ -5,12 +5,12 @@ use PHPUnit\Framework\TestCase;
 
 require_once '../Playm8_mvc/model/Account.php';
 
-/**
- * @coversNothing
- */
 final class AccountTest extends TestCase
 {
 
+    /**
+     * @covers \Account::__construct
+     */
     public function testClassConstructor(): void
     {
         // Associative array which contains the data used to instantiate the Account class
@@ -41,6 +41,9 @@ final class AccountTest extends TestCase
         $this->assertSame("testuserProfileID", $account->get("userProfileID"));
     }
 
+    /**
+     * @covers \Account::get
+     */
     public function testGet(): void
     {
         // Associative array which contains the data used to instantiate the Account class
@@ -68,6 +71,9 @@ final class AccountTest extends TestCase
         }
     }
 
+    /**
+     * @covers \Account::set
+     */
     public function testSet(): void
     {
         // Associative array which contains the data used to instantiate the Account class
@@ -103,6 +109,9 @@ final class AccountTest extends TestCase
         }
     }
 
+    /**
+     * @covers \Account::getAllAttributes
+     */
     public function testGetAllAttributes(): void
     {
         // Associative array which contains the data used to instantiate the Account class
