@@ -57,10 +57,8 @@ class searchAccounts extends View
                     <tbody>
                     <?php
                 }
-                    ?>
-                    <?php
-                    while ($accountDAO->hasNext()) {
-                        $account = $accountDAO->getNext();
+                while ($accountDAO->hasNext()) {
+                    $account = $accountDAO->getNext();
                     ?>
                         <tr onclick="">
                             <!-- PHP shorthand to echo the data in the table -->
@@ -80,10 +78,24 @@ class searchAccounts extends View
                                 } ?>
                         </tr>
                     <?php
-                    }
+                }
                     ?>
                     </tbody>
                 </table>
+                <?php
+                if (isset($_POST['search'])) { // Check if form was submitted
+                ?>
+                    <div class="d-flex justify-content-end">
+                        <!-- form that handles the submission of the serializeAccountsArray -->
+                        <form method='post' action='../includes/adminExportCSV.inc.php'>
+                            <input type='submit' class="btn btn-credits shadow-sm my-2" value='Exporteer CSV' name='Export'>
+                            <input type="hidden" name="fileName" value="search.csv">
+                            <input type="hidden" name="search" value="<?php echo $search ?>">
+                        </form>
+                    </div>
+                <?php
+                }
+                ?>
             </div>
     <?php
     }
