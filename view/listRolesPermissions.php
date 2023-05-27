@@ -54,7 +54,6 @@ class listRolesPermissions extends View
                 <tbody>
                     <?php
                     // Save all records to a recordArray
-
                     $recordArray = [];
                     while ($roleDAO->hasNext()) {
                         $record = $roleDAO->getNext();
@@ -84,6 +83,13 @@ class listRolesPermissions extends View
                     </tr>
                 </tbody>
             </table>
+            <div class="d-flex justify-content-end">
+                <!-- form that handles the submission of the serializeAccountsArray -->
+                <form method='post' action='../includes/adminExportCSV.inc.php'>
+                    <input type='submit' class="btn btn-credits shadow-sm my-2" value='Exporteer CSV' name='Export'>
+                    <input type="hidden" name="fileName" value="roles.csv">
+                </form>
+            </div>
         </div>
 
         <?php
@@ -140,6 +146,13 @@ class listRolesPermissions extends View
                     </tr>
                 </tbody>
             </table>
+            <div class="d-flex justify-content-end">
+                <!-- form that handles the submission of the serializeAccountsArray -->
+                <form method='post' action='../includes/adminExportCSV.inc.php'>
+                    <input type='submit' class="btn btn-credits shadow-sm my-2" value='Exporteer CSV' name='Export'>
+                    <input type="hidden" name="fileName" value="permissions.csv">
+                </form>
+            </div>
         </div>
 <?php
     }
