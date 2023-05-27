@@ -5,8 +5,9 @@ use PHPUnit\Framework\TestCase;
 
 require_once '../Playm8_mvc/model/Permission.php';
 
-class PermissionTest extends TestCase
+final class PermissionTest extends TestCase
 {
+
     public function testGet(): void
     {
         // Associative array which contains the data used to instantiate the Permission class
