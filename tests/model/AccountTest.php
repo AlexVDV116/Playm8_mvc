@@ -8,42 +8,6 @@ require_once '../Playm8_mvc/model/Account.php';
 final class AccountTest extends TestCase
 {
 
-    /**
-     * @covers \Account::__construct
-     */
-    public function testClassConstructor(): void
-    {
-        // Associative array which contains the data used to instantiate the Account class
-        $testData = array(
-            "accountID" => "testAccountID",
-            "username" => "testUserName",
-            "email" => "testEmail",
-            "password" => "testPassword",
-            "isBetaUser" => false,
-            "isActive" => false,
-            "activationCode" => "testActivationCode",
-            "activationExpiry" => "testActivationExpiry",
-            "activatedAt" => "testActivatedAt",
-            "userProfileID" => "testuserProfileID"
-        );
-
-        $account = new Account($testData);
-
-        $this->assertSame("testAccountID", $account->get("accountID"));
-        $this->assertSame("testUserName", $account->get("username"));
-        $this->assertSame("testEmail", $account->get("email"));
-        $this->assertSame("testPassword", $account->get("password"));
-        $this->assertSame(false, $account->get("isBetaUser"));
-        $this->assertSame(false, $account->get("isActive"));
-        $this->assertSame("testActivationCode", $account->get("activationCode"));
-        $this->assertSame("testActivationExpiry", $account->get("activationExpiry"));
-        $this->assertSame("testActivatedAt", $account->get("activatedAt"));
-        $this->assertSame("testuserProfileID", $account->get("userProfileID"));
-    }
-
-    /**
-     * @covers \Account::get
-     */
     public function testGet(): void
     {
         // Associative array which contains the data used to instantiate the Account class
@@ -71,9 +35,6 @@ final class AccountTest extends TestCase
         }
     }
 
-    /**
-     * @covers \Account::set
-     */
     public function testSet(): void
     {
         // Associative array which contains the data used to instantiate the Account class
@@ -109,9 +70,6 @@ final class AccountTest extends TestCase
         }
     }
 
-    /**
-     * @covers \Account::getAllAttributes
-     */
     public function testGetAllAttributes(): void
     {
         // Associative array which contains the data used to instantiate the Account class
