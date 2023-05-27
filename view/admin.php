@@ -18,6 +18,11 @@ var_dump($_SESSION);
 echo '</pre>';
 */
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+
 // Check if user is logged in if false redirect to index page else check if user has the correct admin role
 if ($_SESSION["auth"] == false) {
     header("location: ../index.php");
@@ -156,8 +161,8 @@ class admin extends View
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="?view=uploadCSV" class="nav-link">
-                                                Upload CSV bestand
+                                            <a href="?view=adminImportCSV" class="nav-link">
+                                                Importeer CSV
                                             </a>
                                         </li>
                                     </ul>
