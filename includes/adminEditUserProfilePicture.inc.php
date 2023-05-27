@@ -10,9 +10,8 @@ require_once '../vendor/autoload.php';
 use Controller\profilePictureController;
 
 // Include script that handles the user pictures upload
-
 session_start();
-$userProfileID = $_SESSION["auth_user"]["userProfileID"];
+$userProfileID = $_SESSION["adminEditUserProfile"]["userProfileID"];
 
 if (isset($_POST["submit"])) {
 
@@ -24,6 +23,6 @@ if (isset($_POST["submit"])) {
     $fileType = $_FILES["file"]["type"];
     $fileError = $_FILES["file"]["error"];
 
-    $fileController = new profilePictureController($userProfileID, $file);
-    $fileController->run();
+    $profilePictureController = new profilePictureController($userProfileID, $file);
+    $fileConprofilePictureControllertroller->run();
 }
