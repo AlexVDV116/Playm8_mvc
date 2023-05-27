@@ -75,7 +75,7 @@ class accountController extends Controller
         // Generate an unique ID with the prefix AID for AccountID
         $accountID = uniqid("AID");
 
-        // Assocaitive array containing the user data
+        // Associative array containing the user data
         $data = array(
             "accountID" => $accountID,
             "username" => $this->username,
