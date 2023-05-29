@@ -69,7 +69,7 @@ header.fixed-top {
     font-size: 1rem;
     line-height: 1rem;
     font-weight: 100;
-    padding: 14px 0;
+    padding: 11px 0;
 }
 
 .usp-nav {
@@ -88,6 +88,11 @@ header.fixed-top {
 .social-icons i,
 .social-icons a:hover i {
     color: #d6004a;
+}
+
+#top-bar .dropdown-toggle {
+    color: #000;
+    text-decoration: none;
 }
 
 #main-navbar .nav-link {
@@ -147,6 +152,14 @@ header.fixed-top {
     );
 }
 
+.nav-item-lang {
+    list-style: none;
+}
+
+.dropdown {
+    z-index: 1010;
+}
+
 /** =================================================================
 *
 *    Navbar toggler
@@ -194,7 +207,7 @@ header.fixed-top {
     transform: translateY(-8px) rotate(-45deg);
 }
 
-a:is(:link, :active, :visited):not(.nav-btn).active {
+#main-navbar a:is(:link, :active, :visited):not(.nav-btn).active {
     font-weight: 900;
 }
 
