@@ -3,16 +3,19 @@
 // Define the namespace of this class
 namespace View;
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 // Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
 require_once '../vendor/autoload.php';
 
 // Import classes this class depends on
 use Framework\View;
+use Controller\translatorController;
 
-// Setting the ROOT directory for this file so the relative paths used in included pages will still work
+// Setting the ROOT directory for this file so the relative paths used in any included pages will still work
 $ROOT = '../';
-
-include_once '../header.php';
 
 // forgotPassword class that has a form that allows the user to reset his password
 
@@ -21,6 +24,14 @@ class forgotPassword extends View
 
     public function show()
     {
+        $ROOT = '../';
+
+        // Used to translate page content
+        $translator = new translatorController;
+        // Use the getLanguageFile method of the languageSelector and require the correct language file
+        require $ROOT . $translator->getLanguageFile();
+
+        $header = new header();
 ?>
 
         <section>
@@ -87,4 +98,5 @@ class forgotPassword extends View
     }
 }
 new forgotPassword();
-include_once '../footer.php';
+// Include the footer
+$footer = new footer();
