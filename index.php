@@ -1,12 +1,25 @@
 <?php
 
-// Setting the ROOT directory for this file so the relative paths used in any included pages will still work
-$ROOT = '';
-
-// Include the header
-include_once 'header.php';
+/* Echo errors for development purposes */
 
 ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+// Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
+require_once 'vendor/autoload.php';
+
+// Import classes this class depends on
+use View\header;
+use View\footer;
+use Controller\translatorController;
+
+$translator = new translatorController;
+// Use the getLanguageFile method of the languageSelector and require the correct language file
+require $ROOT . $translator->getLanguageFile();
+
+// Include the header
+$header = new header();
 
 ?>
 <section id="hero-section">
@@ -15,16 +28,14 @@ ini_set('display_errors', 1);
             <div class="col-lg-6 order-2 order-lg-1">
 
                 <p class="hero-app-text">
-                    Binnenkort beschikbaar voor iOS en Android
+                    <?= $translator->__('Binnenkort beschikbaar voor iOS en Android!') ?>
                 </p>
                 <h1 class="mb-4">
-                    De meet-up app voor <br>
-                    jou en je viervoeter
+                    <?= $translator->__('De meet-up app voor') ?> <br>
+                    <?= $translator->__('jou en je viervoeter') ?>
                 </h1>
                 <p>
-                    Playm8 is de app waarbij je connecties aangaat samen met je huisdier. Swipe, like, chat en
-                    ontmoet baasjes en hun huisdieren bij jou in je buurt. Op zoek naar de dichtstbijzijnde
-                    dierenvoorziening? Een last minute oppas? Een beschikbare uitlaatservice? Playm8 heeft het.
+                    <?= $translator->__('Playm8 is de app waarbij je connecties aangaat samen met je huisdier. Swipe, like, chat en ontmoet baasjes en hun huisdieren bij jou in je buurt. Op zoek naar de dichtstbijzijnde dierenvoorziening? Een last minute oppas? Een beschikbare uitlaatservice? Playm8 heeft het.') ?>
                 </p>
 
                 <br>
@@ -63,22 +74,16 @@ ini_set('display_errors', 1);
 
             <div class="col-lg-7 order-2 order-lg-2 gx-5">
                 <h2 class="mb-4">
-                    Data tegen eenzaamheid
+                    <?= $translator->__('Data tegen eenzaamheid') ?>
                 </h2>
                 <p>
-                    Eenzaamheid is een groot maatschappelijk probleem in Nederland; in een onderzoek van het RIVM
-                    uit 2020 gaf maar liefst 47% van de volwassen bevolking (18 jaar en ouder) aan eenzaam te zijn.
-                    De cijfers van 85-plussers zijn nog schrikbarender: 66% gaf hier aan zich regelmatig eenzaam te
-                    voelen (Eenzaamheid | Infographic, z.d.).
+                    <?= $translator->__('Eenzaamheid is een groot maatschappelijk probleem in Nederland; in een onderzoek van het RIVM uit 2020 gaf maar liefst 47% van de volwassen bevolking (18 jaar en ouder) aan eenzaam te zijn. De cijfers van 85-plussers zijn nog schrikbarender: 66% gaf hier aan zich regelmatig eenzaam te voelen (Eenzaamheid | Infographic, z.d.).') ?>
                 </p>
                 <p>
-                    De visie van Playm8 is om eenzaamheid in onze maatschappij met behulp van technologie en data te
-                    reduceren. Onze organisatie hecht waarde aan vriendschap en verbinding in het leven. Het is
-                    altijd fijn om een persoon in je leven te hebben die jou kan laten lachen zelfs als diegene niet
-                    bij je is.
+                    <?= $translator->__('De visie van Playm8 is om eenzaamheid in onze maatschappij met behulp van technologie en data te reduceren. Onze organisatie hecht waarde aan vriendschap en verbinding in het leven. Het is altijd fijn om een persoon in je leven te hebben die jou kan laten lachen zelfs als diegene niet bij je is.') ?>
                 </p>
                 <p>
-                    Het leven draait niet om wat je hebt, maar om wie je hebt, dat is wat telt.
+                    <?= $translator->__('Het leven draait niet om wat je hebt, maar om wie je hebt, dat is wat telt.') ?>
                 </p>
             </div>
         </div>
@@ -89,7 +94,7 @@ ini_set('display_errors', 1);
     <div class="container">
         <div class="row">
             <div class="col">
-                <h2 class="text-center mb-5">Features</h2>
+                <h2 class="text-center mb-5"><?= $translator->__('Features') ?></h2>
             </div>
         </div>
         <div id="outsider" class="d-flex flex-row flex-nowrap features-row">
@@ -97,51 +102,48 @@ ini_set('display_errors', 1);
                 <div class="feature-icon">
                     <i class="fa-solid fa-map-location"></i>
                 </div>
-                <h4>Alles voor je dier op de wandelkaart</h4>
-                <p>Krijg snel inzichtelijk waar de dichtstbijzijnde hondentrimmer of hondenuitlaatplaats te vinden
-                    is.
+                <h4><?= $translator->__('Alles voor je dier op de wandelkaart') ?></h4>
+                <p><?= $translator->__('Krijg snel inzichtelijk waar de dichtstbijzijnde hondentrimmer of hondenuitlaatplaats te vinden is.') ?>
                 </p>
             </div>
             <div class="card card-block text-center">
                 <div class="feature-icon">
                     <i class="fa-solid fa-paw"></i>
                 </div>
-                <h4>In-app oppas en uitlaatservice</h4>
-                <p>Op zoek naar een uitlaatservice? Of een service aanbieden? Kom in contact met elkaar.
+                <h4><?= $translator->__('In-app oppas en uitlaatservice') ?></h4>
+                <p><?= $translator->__('Op zoek naar een uitlaatservice? Of een service aanbieden? Kom in contact met elkaar.') ?>
                 </p>
             </div>
             <div class="card card-block text-center">
                 <div class="feature-icon">
                     <i class="fa-solid fa-dog"></i>
                 </div>
-                <h4>Een (gezond) maatje voor het leven</h4>
-                <p>Dieren die bewegen blijven fit en gezond. Voldoende beweging houdt de spieren en botten sterk,
-                    zorgt ervoor dat het hart en de longen
-                    gezond blijven en voorkomt overgewicht.
+                <h4><?= $translator->__('Een (gezond) maatje voor het leven') ?></h4>
+                <p><?= $translator->__('Dieren die bewegen blijven fit en gezond. Voldoende beweging houdt de spieren en botten sterk, zorgt ervoor dat het hart en de longen gezond blijven en voorkomt overgewicht.') ?>
                 </p>
             </div>
             <div class="card card-block text-center">
                 <div class="feature-icon">
                     <i class="fa-solid fa-map-location"></i>
                 </div>
-                <h4>Alles voor je dier op de wandelkaart</h4>
-                <p>Krijg snel inzichtelijk waar de dichtstbijzijnde hondentrimmer of dierenarts te vinden is.
+                <h4><?= $translator->__('Alles voor je dier op de wandelkaart') ?></h4>
+                <p><?= $translator->__('Krijg snel inzichtelijk waar de dichtstbijzijnde hondentrimmer of dierenarts te vinden is.') ?>
                 </p>
             </div>
             <div class="card card-block text-center">
                 <div class="feature-icon">
                     <i class="fa-regular fa-comments"></i>
                 </div>
-                <h4>Chat en maak nieuwe vrienden</h4>
-                <p>Chat met huisdiereigenaren in de buurt en maak nieuwe vrienden.
+                <h4><?= $translator->__('Chat en maak nieuwe vrienden') ?></h4>
+                <p><?= $translator->__('Chat met huisdiereigenaren in de buurt en maak nieuwe vrienden.') ?>
                 </p>
             </div>
             <div class="card card-block text-center">
                 <div class="feature-icon">
                     <i class="fa-regular fa-hospital"></i>
                 </div>
-                <h4>Vind de dichtsbijzijnde dierenarts</h4>
-                <p>Vind en kom gemakkelijk in contact met verschillende dierenartspraktijken in uw buurt.
+                <h4><?= $translator->__('Vind de dichtsbijzijnde dierenarts') ?></h4>
+                <p><?= $translator->__('Vind en kom gemakkelijk in contact met verschillende dierenartspraktijken in uw buurt.') ?>
                 </p>
             </div>
 
@@ -175,7 +177,7 @@ ini_set('display_errors', 1);
     <div class="container">
         <div class="row">
             <div class="col">
-                <h2 class="text-center mb-5">Impressie</h2>
+                <h2 class="text-center mb-5"><?= $translator->__('Impressie') ?></h2>
             </div>
         </div>
 
@@ -191,7 +193,7 @@ ini_set('display_errors', 1);
     <div class="container">
         <div class="row">
             <div class="col">
-                <h2 class="text-center mb-5">Credits</h2>
+                <h2 class="text-center mb-5"><?= $translator->__('Credits') ?></h2>
             </div>
         </div>
 
@@ -199,13 +201,13 @@ ini_set('display_errors', 1);
             <div class="col-10 col-lg-4 mx-auto d-flex">
                 <div class="card mx-auto">
                     <div class="card-body text-center d-flex flex-column">
-                        <h6 class="card-subtitle mb-2 text-muted">Pakket 1</h6>
-                        <h5 class="card-title">Chihuahua</h5>
+                        <h6 class="card-subtitle mb-2 text-muted"><?= $translator->__('Pakket 1') ?></h6>
+                        <h5 class="card-title"><?= $translator->__('Chihuahua') ?>Chihuahua</h5>
                         <h1>&euro;2,50</h1>
-                        <p class="card-text">Maximaal 50 swipes per 24 uur
+                        <p class="card-text"><?= $translator->__('Maximaal 50 swipes per 24 uur') ?>
                         </p>
-                        <button class="btn btn-lg btn-credits shadow-sm mt-auto mb-2">Binnenkort
-                            verkrijgbaar
+                        <button class="btn btn-lg btn-credits shadow-sm mt-auto mb-2">
+                            <?= $translator->__('Binnenkort verkrijgbaar') ?>
                         </button>
                     </div>
                 </div>
@@ -214,13 +216,13 @@ ini_set('display_errors', 1);
             <div class="col-10 col-lg-4 mx-auto d-flex">
                 <div class="card mx-auto">
                     <div class="card-body text-center d-flex flex-column">
-                        <h6 class="card-subtitle mb-2 text-muted">Pakket 2</h6>
-                        <h5 class="card-title">Labrador</h5>
+                        <h6 class="card-subtitle mb-2 text-muted"><?= $translator->__('Pakket 2') ?></h6>
+                        <h5 class="card-title"><?= $translator->__('Labrador') ?></h5>
                         <h1>&euro;5,00</h1>
-                        <p class="card-text">Maximaal 150 swipes per 24 uur <br>
+                        <p class="card-text"><?= $translator->__('Maximaal 150 swipes per 24 uur') ?><br>
                         </p>
-                        <button class="btn btn-lg btn-credits shadow-sm mt-auto mb-2">Binnenkort
-                            verkrijgbaar
+                        <button class="btn btn-lg btn-credits shadow-sm mt-auto mb-2">
+                            <?= $translator->__('Binnenkort verkrijgbaar') ?>
                         </button>
                     </div>
                 </div>
@@ -229,13 +231,14 @@ ini_set('display_errors', 1);
             <div class="col-10 col-lg-4 mx-auto d-flex">
                 <div class="card mx-auto">
                     <div class="card-body text-center d-flex flex-column">
-                        <h6 class="card-subtitle mb-2 text-muted">Pakket 3</h6>
-                        <h5 class="card-title">Pitbull</h5>
+                        <h6 class="card-subtitle mb-2 text-muted"><?= $translator->__('Pakket 3') ?></h6>
+                        <h5 class="card-title"><?= $translator->__('Pitbull') ?></h5>
                         <h1>&euro;7,50</h1>
-                        <p class="card-text">Onbeperkt aantal swipes <br>
-                            Reclamevrij
+                        <p class="card-text"><?= $translator->__('Onbeperkt aantal swipes') ?> <br>
+                            <?= $translator->__('Reclamevrij') ?>
                         </p>
-                        <button class="btn btn-lg btn-credits shadow-sm mt-auto mb-2">Binnenkort verkrijgbaar
+                        <button class="btn btn-lg btn-credits shadow-sm mt-auto mb-2">
+                            <?= $translator->__('Binnenkort verkrijgbaar') ?>
                         </button>
                     </div>
                 </div>
@@ -249,67 +252,65 @@ ini_set('display_errors', 1);
         <div class="row">
             <div class="col-lg-6 order-2 order-lg-1 d-flex flex-row justify-content-center">
                 <div class="container register-form">
-                    <h2>Registreer je nu!</h2>
+                    <h2><?= $translator->__('Registreer je nu!') ?></h2>
                     <form action="<?php echo $ROOT; ?>includes/betaform.inc.php" method="post" class="needs-validation" novalidate>
                         <div class="col">
-                            <input type="text" class="form-control mt-5 border-0" id="name" name="name" placeholder="Gebruikersnaam" required>
+                            <input type="text" class="form-control mt-5 border-0" id="name" name="name" placeholder="<?= $translator->__('Gebruikersnaam') ?>" required>
                             <div class="invalid-feedback">
-                                Dit veld is verplicht.
+                                <?= $translator->__('Dit veld is verplicht') ?>
                             </div>
                         </div>
                         <div class="col">
                             <input type="email" class="form-control mt-2 border-0" id="email" name="email" placeholder="E-mail" required>
                             <div class="invalid-feedback">
-                                Voer een geldig email-adress in.
+                                <?= $translator->__('Voer een geldig e-mailadres in.') ?>
                             </div>
                         </div>
                         <div class="form-check form-switch mt-4">
                             <input class="form-check-input" type="checkbox" role="switch" name="privacy-policy" id="privacy-policy" value="agreed" required>
                             <label class="form-check-label" for="privacy-policy">
-                                Ik ga akkoord met het <a href="./view/privacy-policy.php" target=”_blank”>privacy
-                                    beleid</a>.
+                                <?= $translator->__('Ik ga akkoord met het ') ?><a href="./view/privacy-policy.php" target=”_blank”><?= $translator->__('privacy beleid.') ?></a>.
                             </label>
                             <div class="invalid-feedback">
-                                U dient akkoord te gaan met ons privacy beleid.
+                                <?= $translator->__('U dient akkoord te gaan met ons privacy beleid.') ?>
                             </div>
                         </div>
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" role="switch" name="terms-and-conditions" id="terms-and-conditions" value="agreed" required>
                             <label class="form-check-label" for="terms-and-conditions">
-                                Ik ga akkoord met de <a href="./view/terms-and-conditions.php" target="_blank">algemene
-                                    voorwaarden</a>.
+                                <?= $translator->__('Ik ga akkoord met de ') ?><a href="./view/terms-and-conditions.php" target="_blank"><?= $translator->__('algemene voorwaarden.') ?></a>.
                             </label>
                             <div class="invalid-feedback">
-                                U dient akkoord te gaan met onze algemene voorwaarden.
+                                <?= $translator->__('U dient akkoord te gaan met onze algemene voorwaarden.') ?>
                             </div>
                         </div>
                         <div class="alert alert-success register-success d-none" role="alert">
-                            Bedankt voor uw registratie.
+                            <?= $translator->__('Bedankt voor uw registratie.') ?>
                         </div>
                         <div class="form-button-row d-flex flex-row mt-3">
-                            <button class="btn btn-credits shadow-sm my-2" type="submit" name="submit">Verzenden</button>
+                            <button class="btn btn-credits shadow-sm my-2" type="submit" name="submit"><?= $translator->__('Verzenden') ?></button>
                         </div>
                         <?php
                         if (isset($_GET["error"])) {
                             if ($_GET["error"] == "emptyinput") {
-                                echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Alle velden zijn verplicht.</p>';
+                                echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i>' . $translator->__('Alle velden zijn verplicht.') . '</p>';
                             }
                             if ($_GET["error"] == "invalidemail") {
-                                echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Onjuist email format.</p>';
+                                echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i>' . $translator->__('Onjuist e-mail format.') . '</p>';
                             }
                             if ($_GET["error"] == "unknownuser") {
-                                echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Dit e-mailadres is niet bij ons bekend.</p>';
+                                echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i>' . $translator->__('Dit e-mailadres is niet bij ons bekend.') . '</p>';
                             }
                             if ($_GET["error"] == "alreadybeta") {
-                                echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Dit account staat al ingeschreven als beta-tester.</p>';
+                                echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i>' . $translator->__('Dit account staat al geregistreerd als beta-tester.') . '</p>';
                             }
                             if ($_GET["error"] == "accountdisabled") {
-                                echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Dit account is inactief.</p>';
+                                echo '<p class="form-error"><i class="fa-solid fa-circle-exclamation"></i>' . $translator->__('Dit account is inactief.') . '.</p>';
                             }
                         }
                         if (isset($_GET["beta"])) {
                             if ($_GET["beta"] == "success") {
-                                echo '<p class="form-success"><i class="fa-regular fa-circle-check"></i> Bedankt voor je inschrijving als betatester.<br> Wij behandelen je verzoek zo snel mogelijk.</p>';
+                                echo '<p class="form-success"><i class="fa-regular fa-circle-check"></i>' . $translator->__('Bedankt voor je inschrijving als betatester.') . '<br>' . $translator->__('Wij behandelen je verzoek zo snel mogelijk.') . '</p>';
                             }
                         }
                         ?>
@@ -317,16 +318,13 @@ ini_set('display_errors', 1);
                 </div>
             </div>
             <div class="col-lg-6 order-1 order-lg-2">
-                <h2>Meld je aan en word Betatester!</h2>
-                <p>Bij Playm8 zijn wij op zoek naar mensen met voldoende analytisch denkvermogen en affiniteit met
-                    IT die
-                    Beta-tester willen worden. Met ons Beta-test programma willen wij de functionaliteit en de
-                    bruikbaarheid van onze mobiele applicatie testen. Issues en bugs worden direct met onze
-                    software-ontwikkelaars teruggekoppeld wat bijdraagt aan de kwaliteit van ons product.</p>
-                <p>Meld je aan met de gebruikersnaam en het e-mailadres van je Playm8 account!</p>
+                <h2><?= $translator->__('Meld je aan en wordt Betatester!') ?></h2>
+                <p><?= $translator->__('Bij Playm8 zijn wij op zoek naar mensen met voldoende analytisch denkvermogen en affiniteit met IT die Beta-tester willen worden. Met ons Beta-test programma willen wij de functionaliteit en de bruikbaarheid van onze mobiele applicatie testen. Issues en bugs worden direct met onze software-ontwikkelaars teruggekoppeld wat bijdraagt aan de kwaliteit van ons product.') ?></p>
+                <p><?= $translator->__('Meld je aan met de gebruikersnaam en het e-mailadres van je Playm8 account!') ?></p>
             </div>
         </div>
     </div>
 </section>
 <?php
-include_once 'footer.php';
+// Include the footer
+$footer = new footer();
