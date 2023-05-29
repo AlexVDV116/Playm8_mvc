@@ -3,25 +3,50 @@
 // Define the namespace of this class
 namespace View;
 
+/* Echo errors for development purposes */
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Setting the ROOT directory for this file so the relative paths used in included pages will still work
+$ROOT = '../';
+
 // Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
-require_once '../vendor/autoload.php';
+require_once $ROOT . 'vendor/autoload.php';
 
 // Import classes this class depends on
 use Framework\View;
+use View\header;
+use Controller\translatorController;
 
-// Setting the ROOT directory for this file so the relative paths used in any included pages will still work
-$ROOT = '../';
+// Used to translate the header on this page
+$translator = new translatorController;
+// Use the getLanguageFile method of the languageSelector and require the correct language file
+require $ROOT . $translator->getLanguageFile();
 
-// Include the header
-include_once('../header.php');
 
 // signup class that has the signup form and echos various error messages after the accountController class validated user input
-
 class signup extends View
 {
 
     public function show()
     {
+        // Setting the ROOT directory for this file so the relative paths used in included pages will still work
+        $ROOT = '../';
+
+        // Used to translate page content
+        $translator = new translatorController;
+        // Use the getLanguageFile method of the languageSelector and require the correct language file
+        require $ROOT . $translator->getLanguageFile();
+
+        // Include the header
+        $header = new header();
+
         // If a session variable array exists store the contents in the form_data variable
         // So we can retain the form values for better user experience
         if (isset($_SESSION['signup_form']) && !empty($_SESSION['signup_form'])) {
@@ -29,7 +54,6 @@ class signup extends View
             $email = $_SESSION['signup_form']['email'];
             unset($_SESSION['your_form']);
         }
-
 ?>
 
         <section>
@@ -41,14 +65,14 @@ class signup extends View
                                 <div class="row justify-content-center">
                                     <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
-                                        <h2 class="text-center mb-5">Registreren</h2>
+                                        <h2 class="text-center mb-5"><?= $translator->__('Registreren') ?></h2>
 
                                         <form action="../includes/signup.inc.php" method="post" class="needs-validation mx-1 mx-md-4" novalidate>
 
                                             <div class="d-flex flex-row align-items-center mb-4">
                                                 <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                                 <div class="form-outline flex-fill mb-0">
-                                                    <label for="form_username" class="form-label">Gebruikersnaam</label>
+                                                    <label for="form_username" class="form-label"><?= $translator->__('Gebruikersnaam') ?></label>
                                                     <input id="username" type="text" name="username" class="form-control" value="<?php if (isset($username)) {
                                                                                                                                         echo $username;
                                                                                                                                     } ?>" required>
@@ -61,7 +85,7 @@ class signup extends View
                                             <div class="d-flex flex-row align-items-center mb-4">
                                                 <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                                 <div class="form-outline flex-fill mb-0">
-                                                    <label for="form_email" class="form-label">E-mailadres</label>
+                                                    <label for="form_email" class="form-label"><?= $translator->__('E-mailadres') ?></label>
                                                     <input id="form_email" type="email" name="email" class="form-control" value="<?php if (isset($email)) {
                                                                                                                                         echo $email;
                                                                                                                                     } ?>" required>
@@ -74,7 +98,7 @@ class signup extends View
                                             <div class="d-flex flex-row align-items-center mb-4">
                                                 <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                                                 <div class="form-outline flex-fill mb-0">
-                                                    <label for="form_password" class="form-label">Wachtwoord</label>
+                                                    <label for="form_password" class="form-label"><?= $translator->__('Wachtwoord') ?></label>
                                                     <input id="form_password" type="password" name="password" class="form-control" required>
                                                     <div class="invalid-feedback">
                                                         Dit veld is verplicht.
@@ -85,7 +109,7 @@ class signup extends View
                                             <div class="d-flex flex-row align-items-center mb-4">
                                                 <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                                                 <div class="form-outline flex-fill mb-0">
-                                                    <label for="form_passwordrepeat" class="form-label">Herhaal uw wachtwoord</label>
+                                                    <label for="form_passwordrepeat" class="form-label"><?= $translator->__('Herhaal uw wachtwoord') ?></label>
                                                     <input id="form_passwordrepeat" type="password" name="passwordrepeat" class="form-control" required>
                                                     <div class="invalid-feedback">
                                                         Dit veld is verplicht.
@@ -96,7 +120,7 @@ class signup extends View
                                             <div class="form-check d-flex justify-content-center mb-3 form-switch">
                                                 <input class="form-check-input" type="checkbox" role="switch" name="privacyPolicy" id="privacyPolicy" value="agreed" required>
                                                 <label class="form-check-label" for="privacyPolicy">
-                                                    Ik ga akkoord met het <a href="./privacyPolicy.php" target=”_blank”>privacy beleid</a>.
+                                                    <?= $translator->__('Ik ga akkoord met het ') ?> <a href="./privacyPolicy.php" target=”_blank”><?= $translator->__('privacy beleid.') ?></a>
                                                 </label>
                                             </div>
 
@@ -150,4 +174,5 @@ class signup extends View
     }
 }
 new signup();
-include_once('../footer.php');
+// Include the footer
+$footer = new footer();
