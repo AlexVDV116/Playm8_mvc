@@ -40,7 +40,7 @@ class admin extends View
     {
         $view = filter_input(INPUT_GET, 'view');
         if (empty($view)) {
-            $view = 'Home';
+            $view = 'adminHome';
         }
 ?>
 
@@ -135,7 +135,7 @@ class admin extends View
                                 <div class="p-3" style="width: 280px;">
                                     <ul class="nav flex-column mb-auto">
                                         <li class="nav-item">
-                                            <a href="?view=Home" class="nav-link">
+                                            <a href="?view=adminHome" class="nav-link">
                                                 <h4 class="text-white">Admin Dashboard</h4>
                                             </a>
                                         </li>
