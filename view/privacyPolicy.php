@@ -3,25 +3,26 @@
 // Define the namespace of this class
 namespace View;
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 // Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
 require_once '../vendor/autoload.php';
 
 // Import classes this class depends on
 use Framework\View;
 
-// Setting the ROOT directory for this file so the relative paths used in included pages will still work
+// Setting the ROOT directory for this file so the relative paths used in any included pages will still work
 $ROOT = '../';
 
-// Include the header
-include_once '../header.php';
-
 // privacyPolicy class that contains our privacy policy
-
 class privacyPolicy extends View
 {
 
     public function show()
     {
+        $header = new header();
 ?>
 
         <section>
@@ -107,4 +108,5 @@ class privacyPolicy extends View
     }
 }
 new privacyPolicy();
-include_once '../footer.php';
+// Include the footer
+$footer = new footer();
