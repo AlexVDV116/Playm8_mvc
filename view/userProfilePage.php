@@ -7,19 +7,21 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// Setting the ROOT directory for this file so the relative paths used in included pages will still work
+$ROOT = '../';
+
 // Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
-require_once '../vendor/autoload.php';
+require_once $ROOT . 'vendor/autoload.php';
 
 // Import classes this class depends on
 use Framework\View;
 use DAO\userProfileDAO;
 use Controller\translatorController;
 
-// Setting the ROOT directory for this file so the relative paths used in included pages will still work
-$ROOT = '../';
-
-// Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
-require_once $ROOT . 'vendor/autoload.php';
+// Used to translate the header on this page
+$translator = new translatorController;
+// Use the getLanguageFile method of the languageSelector and require the correct language file
+require $ROOT . $translator->getLanguageFile();
 
 // userProfilePage class that displays the userProfile details of the user
 class userProfilePage extends View
@@ -65,7 +67,7 @@ class userProfilePage extends View
                                     }
                                     ?>
                                     <button onclick="location.href='../view/editUserProfile.php'" type="button" class="btn btn-outline-dark mb-5" data-mdb-ripple-color="dark" style="z-index: 1;">
-                                        Wijzig profiel
+                                        <?= $translator->__('Wijzig profiel') ?>
                                     </button>
                                 </div>
                                 <div class="ms-3" style="margin-top: 80px;">
@@ -85,8 +87,8 @@ class userProfilePage extends View
                                 </div>
                                 <div class="row">
                                     <div class="d-flex justify-content-between align-items-center mb-4">
-                                        <p class="lead fw-normal mb-0">Recent photos</p>
-                                        <p class="mb-0"><a href="#!" class="text-muted">Show all</a></p>
+                                        <p class="lead fw-normal mb-0"><?= $translator->__('Recente afbeeldingen') ?></p>
+                                        <p class="mb-0"><a href="#!" class="text-muted"><?= $translator->__('Alle afbeeldingen weergeven') ?></a></p>
                                     </div>
                                 </div>
                                 <div class="row g-2">
