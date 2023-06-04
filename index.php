@@ -41,9 +41,9 @@ $header = new header();
                 <br>
                 <div class="download-buttons d-flex flex-row justify-content-start">
                     <?php
-                    $lang = $_SESSION['lang'];
+                    $buttonLang = $_SESSION['lang'];
 
-                    switch ($lang) {
+                    switch ($buttonLang) {
                         case 'nl':
                             echo "<div><a href=#><img src='https://play.google.com/intl/en_us/badges/static/images/badges/nl_badge_web_generic.png' alt='Ontdek het op Google Play' width='200px' height='78px' /></a></div>";
                             echo "<div class='mx-3'><a href=#><img src='https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/nl-nl?size=250x83&amp;releaseDate=1598227200' alt='Download on the App Store' width='180px' height='78px' ></a></div>";
