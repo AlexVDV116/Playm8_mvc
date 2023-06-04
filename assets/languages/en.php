@@ -16,8 +16,8 @@ $lang = [
     "Wijzig profiel" => "Edit userprofile",
     "Vind matches" => "Find matches",
     "Creëer gebruikersprofiel" => "Create userprofile",
-    "Registreren" => "Register",
-    "Log in" => "Sign in",
+    "Registreren" => "Sign up",
+    "Inloggen" => "Login",
 
     // Banner
     "Binnenkort beschikbaar voor iOS en Android" => "Available for iOS and Android soon!",
@@ -91,13 +91,12 @@ $lang = [
     "contact-formulier." => "contact form",
 
     // Signup page
-    "Gebruikersnaam" => "Username",
-    "E-mailadres" => "Email",
-    "Wachtwoord" => "Password",
-    "Herhaal uw wachtwoord" => "Repeat your password",
+    "Gebruikersnaam:" => "Username:",
+    "E-mailadres:" => "Email:",
+    "Wachtwoord:" => "Password:",
+    "Herhaal uw wachtwoord:" => "Repeat your password:",
 
     // Login page
-    "Inloggen" => "Log in",
     "Wachtwoord vergeten?" => "Forgot password?",
 
     // Contact form
@@ -122,9 +121,9 @@ $lang = [
     // Account page
     "Wijzig account" => "Edit account",
     "Wijzig hier je gebruikersnaam, email en wachtwoord." => "Edit your username, email and password.",
-    "Nieuw wachtwoord" => "New password",
-    "Herhaal nieuw wachtwoord" => "Repeat new password",
-    "Huidig wachtwoord" => "Current password",
+    "Nieuw wachtwoord:" => "New password:",
+    "Herhaal nieuw wachtwoord:" => "Repeat new password:",
+    "Huidig wachtwoord:" => "Current password:",
     "Voer nieuw wachtwoord in" => "Enter new password",
     "Voer huidig wachtwoord in" => "Enter current password",
     "Annuleer" => "Cancel",
