@@ -7,16 +7,21 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// Setting the ROOT directory for this file so the relative paths used in included pages will still work
+$ROOT = '../';
+
 // Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
-require_once '../vendor/autoload.php';
+require_once $ROOT . 'vendor/autoload.php';
 
 // Import classes this class depends on
 use Framework\View;
 use DAO\accountDAO;
 use Controller\translatorController;
 
-// Setting the ROOT directory for this file so the relative paths used in any included pages will still work
-$ROOT = '../';
+// Used to translate the header on this page
+$translator = new translatorController;
+// Use the getLanguageFile method of the languageSelector and require the correct language file
+require $ROOT . $translator->getLanguageFile();
 
 // Check if user is logged in if false redirect to index page else continue
 if ($_SESSION["auth"] == false) {
@@ -52,8 +57,8 @@ class editAccount extends View
 
                         <div class="card shadow">
                             <div class="rounded-top text-white d-flex flex-column align-items-center justify-content-center banner-top">
-                                <h2 style="color:#f8f9fa">Wijzig Account</h4>
-                                    <p>Wijzig hier je gebruikersnaam, email en wachtwoord.</p>
+                                <h2 style="color:#f8f9fa"><?= $translator->__('Wijzig account') ?></h4>
+                                    <p><?= $translator->__('Wijzig hier je gebruikersnaam, email en wachtwoord.') ?></p>
                             </div>
                             <div class="card-body bg-light p-4 text-black">
 
@@ -62,7 +67,7 @@ class editAccount extends View
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                                                <label for="form_newUsername" class="form-label">Gebruikersnaam</label>
+                                                <label for="form_newUsername" class="form-label"><?= $translator->__('Gebruikersnaam') ?></label>
                                                 <input id="form_newUsername" type="text" name="newUsername" class="form-control" value="<?php if (isset($account)) {
                                                                                                                                             echo $account->get("username");
                                                                                                                                         } ?>" required>
@@ -74,7 +79,7 @@ class editAccount extends View
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                                                <label for="form_newEmail" class="form-label">E-mailadres</label>
+                                                <label for="form_newEmail" class="form-label"><?= $translator->__('E-mailadres') ?></label>
                                                 <input id="form_newEmail" type="email" name="newEmail" class="form-control" value="<?php if (isset($account)) {
                                                                                                                                         echo $account->get("email");
                                                                                                                                     } ?>" required>
@@ -88,16 +93,16 @@ class editAccount extends View
                                     <div class="row mt-4">
                                         <div class="col-md-6">
                                             <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                                            <label for="form_newPassword" class="form-label">Nieuw wachtwoord</label>
-                                            <input id="form_newPassword" type="password" name="newPassword" class="form-control" placeholder="Voer nieuw wachtwoord in">
+                                            <label for="form_newPassword" class="form-label"><?= $translator->__('Nieuw wachtwoord') ?></label>
+                                            <input id="form_newPassword" type="password" name="newPassword" class="form-control" placeholder="<?= $translator->__('Voer nieuw wachtwoord in') ?>">
                                             <div class="invalid-feedback">
                                                 Dit veld is verplicht.
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                                            <label for="form_newPasswordrepeat" class="form-label">Herhaal nieuw wachtwoord</label>
-                                            <input id="form_newPasswordrepeat" type="password" name="newPasswordrepeat" class="form-control" placeholder="Herhaal nieuw wachtwoord">
+                                            <label for="form_newPasswordrepeat" class="form-label"><?= $translator->__('Herhaal nieuw wachtwoord') ?></label>
+                                            <input id="form_newPasswordrepeat" type="password" name="newPasswordrepeat" class="form-control" placeholder="<?= $translator->__('Herhaal nieuw wachtwoord') ?>">
                                             <div class="invalid-feedback">
                                                 Dit veld is verplicht.
                                             </div>
@@ -107,8 +112,8 @@ class editAccount extends View
                                     <div class="row mt-4">
                                         <div class="col-md-6">
                                             <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                                            <label for="form_currentPasswordrepeat" class="form-label">Huidig wachtwoord</label>
-                                            <input id="form_currentPasswordrepeat" type="password" name="currentPassword" class="form-control" placeholder="Voer huidig wachtwoord in" required>
+                                            <label for="form_currentPasswordrepeat" class="form-label"><?= $translator->__('Huidig wachtwoord') ?></label>
+                                            <input id="form_currentPasswordrepeat" type="password" name="currentPassword" class="form-control" placeholder="<?= $translator->__('Voer huidig wachtwoord in') ?>" required>
                                             <div class="invalid-feedback">
                                                 Dit veld is verplicht.
                                             </div>
@@ -117,8 +122,8 @@ class editAccount extends View
 
                                     <div class="row mt-4">
                                         <div class="d-flex justify-content-end mt-3">
-                                            <a href="../index.php" class="btn btn-cancel shadow-sm mx-3">Annuleer</a>
-                                            <button class="btn btn-credits shadow-sm" name="submit" type="submit">Opslaan</button>
+                                            <a href="../index.php" class="btn btn-cancel shadow-sm mx-3"><?= $translator->__('Annuleer') ?></a>
+                                            <button class="btn btn-credits shadow-sm" name="submit" type="submit"><?= $translator->__('Opslaan') ?></button>
                                         </div>
                                     </div>
                                     <?php
@@ -158,7 +163,7 @@ class editAccount extends View
                                     <div class="d-flex justify-content-start">
                                         <!-- Button trigger modal -->
                                         <a href="#" type="button" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
-                                            Verwijder account
+                                            <?= $translator->__('Verwijder account') ?>
                                         </a>
                                     </div>
                                 </div>
@@ -167,7 +172,7 @@ class editAccount extends View
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title fs-5">Bevestig verwijderen van account</h1>
+                                                <h5 class="modal-title fs-5"><?= $translator->__('Bevestig verwijderen van account') ?></h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
@@ -178,11 +183,11 @@ class editAccount extends View
                                                 $_SESSION["randomNumbers"] = $randomNumber;
                                                 ?>
                                                 <form action="../includes/deleteAccount.inc.php" method="post" class="needs-validation" novalidate>
-                                                    <input id="form_userConfirmNumbers" type="text" name="userConfirmNumbers" class="form-control border-1" placeholder="Voer de 5 cijfers in ter bevestiging om uw account te verwijderen" maxlength="5" required>
+                                                    <input id="form_userConfirmNumbers" type="text" name="userConfirmNumbers" class="form-control border-1" placeholder="<?= $translator->__('Voer de 5 cijfers in ter bevestiging') ?>" maxlength="5" required>
                                                     <div class="row">
                                                         <div class="d-flex justify-content-end">
-                                                            <button type="button" class="btn btn-cancel shadow-sm mt-3" data-bs-dismiss="modal">Annuleer</button>
-                                                            <button type="submit" name="submit" class="btn btn-credits shadow-sm mt-3">Bevestig</button>
+                                                            <button type="button" class="btn btn-cancel shadow-sm mt-3" data-bs-dismiss="modal"><?= $translator->__('Annuleer') ?></button>
+                                                            <button type="submit" name="submit" class="btn btn-credits shadow-sm mt-3"><?= $translator->__('Bevestig') ?></button>
                                                         </div>
                                                     </div>
                                                 </form>
