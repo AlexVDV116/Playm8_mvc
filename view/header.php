@@ -84,14 +84,14 @@ class header extends View
                 <nav id="top-bar" class="navbar">
                     <div class="container navbar-expand">
                         <ul class="navbar-nav align-items-center usp-nav my-0 px-0">
-                            <li class="nav-item me-3">
+                            <li class="me-3">
                                 <i class="fa-solid fa-map-location me-2"></i>
                                 <span><?= $translator->__('Alles voor je dier op de wandelkaart') ?></span>
                             </li>
                         </ul>
                         <div class="dropdown">
                             <ul class="navbar-nav align-items-center usp-nav my-0 px-0">
-                                <li class="nav-item-lang pl-3 pr-1">
+                                <li class="pl-3 pr-1">
                                     <i class="fa-solid fa-earth-americas"></i>
                                     <a class="dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                                         <?= $translator->__('Taal') ?>
