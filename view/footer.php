@@ -51,13 +51,12 @@ class footer extends View
                     </div>
                 </div>
             </div>
-
             <div class="row text-center">
                 <div class="col">
                     <a href="https://www.freepik.com/free-photo/wonderful-european-female-model-chilling-with-puppy-indoor-portrait-debonair-girl-enjoying-portraitshoot-with-her-cute-pet_11934743.htm#query=girl%20and%20dog&position=1&from_view=search&track=sph">
-                        Image by lookstudio</a> on Freepik <br>
-                    <a href="https://www.freepik.com/free-photo/young-stylish-couple-walking-with-dog-street-man-woman-happy-together-with-husky-breed_9699446.htm#query=pet%20walk%202%20people&position=6&from_view=search&track=ais">Image
-                        by marymarkevich</a> on Freepik
+                        <?= $translator->__('Afbeelding via') ?> lookstudio</a> <?= $translator->__('op') ?> Freepik <br>
+                    <a href="https://www.freepik.com/free-photo/young-stylish-couple-walking-with-dog-street-man-woman-happy-together-with-husky-breed_9699446.htm#query=pet%20walk%202%20people&position=6&from_view=search&track=ais">
+                        <?= $translator->__('Afbeelding via') ?> marymarkevich</a> <?= $translator->__('op') ?> Freepik
                 </div>
             </div>
         </section>
