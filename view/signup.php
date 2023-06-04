@@ -72,7 +72,7 @@ class signup extends View
                                             <div class="d-flex flex-row align-items-center mb-4">
                                                 <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                                 <div class="form-outline flex-fill mb-0">
-                                                    <label for="form_username" class="form-label"><?= $translator->__('Gebruikersnaam') ?></label>
+                                                    <label for="form_username" class="form-label"><?= $translator->__('Gebruikersnaam:') ?></label>
                                                     <input id="username" type="text" name="username" class="form-control" value="<?php if (isset($username)) {
                                                                                                                                         echo $username;
                                                                                                                                     } ?>" required>
@@ -85,7 +85,7 @@ class signup extends View
                                             <div class="d-flex flex-row align-items-center mb-4">
                                                 <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                                 <div class="form-outline flex-fill mb-0">
-                                                    <label for="form_email" class="form-label"><?= $translator->__('E-mailadres') ?></label>
+                                                    <label for="form_email" class="form-label"><?= $translator->__('E-mailadres:') ?></label>
                                                     <input id="form_email" type="email" name="email" class="form-control" value="<?php if (isset($email)) {
                                                                                                                                         echo $email;
                                                                                                                                     } ?>" required>
@@ -98,7 +98,7 @@ class signup extends View
                                             <div class="d-flex flex-row align-items-center mb-4">
                                                 <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                                                 <div class="form-outline flex-fill mb-0">
-                                                    <label for="form_password" class="form-label"><?= $translator->__('Wachtwoord') ?></label>
+                                                    <label for="form_password" class="form-label"><?= $translator->__('Wachtwoord:') ?></label>
                                                     <input id="form_password" type="password" name="password" class="form-control" required>
                                                     <div class="invalid-feedback">
                                                         Dit veld is verplicht.
@@ -109,7 +109,7 @@ class signup extends View
                                             <div class="d-flex flex-row align-items-center mb-4">
                                                 <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                                                 <div class="form-outline flex-fill mb-0">
-                                                    <label for="form_passwordrepeat" class="form-label"><?= $translator->__('Herhaal uw wachtwoord') ?></label>
+                                                    <label for="form_passwordrepeat" class="form-label"><?= $translator->__('Herhaal uw wachtwoord:') ?></label>
                                                     <input id="form_passwordrepeat" type="password" name="passwordrepeat" class="form-control" required>
                                                     <div class="invalid-feedback">
                                                         Dit veld is verplicht.
@@ -125,7 +125,7 @@ class signup extends View
                                             </div>
 
                                             <div class="form-button-row d-flex justify-content-center flex-row mt-3">
-                                                <button class="btn btn-credits shadow-sm my-2" type="submit" name="submit">Registreren</button>
+                                                <button class="btn btn-credits shadow-sm my-2" type="submit" name="submit"><?= $translator->__('Registreren') ?></button>
                                             </div>
                                             <?php
                                             if (isset($_GET["error"])) {
