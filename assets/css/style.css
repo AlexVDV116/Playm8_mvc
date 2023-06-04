@@ -152,10 +152,6 @@ header.fixed-top {
     );
 }
 
-.nav-item-lang {
-    list-style: none;
-}
-
 .dropdown {
     z-index: 1010;
 }
