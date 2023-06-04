@@ -5,7 +5,7 @@ $lang = [
     "Alles voor je dier op de wandelkaart" => "Everything for your pet on our map",
     "Taal" => "Language",
     "Over ons" => "About us",
-    "App features" => "App features",
+    "App Features" => "App features",
     "Impressie" => "Impression",
     "Abbonementen" => "Payment plans",
     "Betatesters" => "Betatesters",
@@ -20,7 +20,7 @@ $lang = [
     "Inloggen" => "Login",
 
     // Banner
-    "Binnenkort beschikbaar voor iOS en Android" => "Available for iOS and Android soon!",
+    "Binnenkort beschikbaar voor iOS en Android!" => "Available for iOS and Android soon!",
     "De meet-up app voor" => "The meet-up app for",
     "jou en je viervoeter" => "you and your pet",
     "Playm8 is de app waarbij je connecties aangaat samen met je huisdier. Swipe, like, chat en ontmoet baasjes en hun huisdieren bij jou in je buurt. Op zoek naar de dichtstbijzijnde dierenvoorziening? Een last minute oppas? Een beschikbare uitlaatservice? Playm8 heeft het." =>
@@ -64,6 +64,7 @@ $lang = [
     // Beta form
     "Registreer je nu!" => "Register now!",
     "Gebruikersnaam" => "Username",
+    "E-mailadres" => "Email",
     "Dit veld is verplicht" => "This field is required",
     "Voer een geldig e-mailadres in." => "Enter a valid email adress",
     "Ik ga akkoord met het " => "I agree with the ",
@@ -88,7 +89,9 @@ $lang = [
     // Footer
     "Heeft u vragen, problemen of feedback voor ons?" => "Questions, problems or feedback?",
     "Contacteer ons via onze socials of gebruik ons " => "Contact us trough our socials or use our ",
-    "contact-formulier." => "contact form",
+    "contactformulier." => "contact form.",
+    "Afbeelding via" => "Image by",
+    "op" => "on",
 
     // Signup page
     "Gebruikersnaam:" => "Username:",
@@ -99,6 +102,12 @@ $lang = [
     // Login page
     "Wachtwoord vergeten?" => "Forgot password?",
 
+    // Forgot password page
+    "Wachtwoord vergeten?" => "Forgot your password?",
+    "Je kunt je wachtwoord opnieuw instellen, voer hiervoor je e-mailadres in en volg de daarna de instructies die je via de e-mail krijgt toegestuurd." => "Enter your email and follow the instructions sent to you by email to reset your password.",
+    "Verstuur verzoek" => "Send request",
+
+
     // Contact form
     "Contactformulier" => "Contact form",
     "Voornaam:" => "First name:",
@@ -107,7 +116,7 @@ $lang = [
     "Voer uw achternaam in" => "Enter your last name",
     "Voer uw e-mailadres in" => "Enter your email",
     "Voer een geldig e-mailadres in" => "Enter a valid email",
-    "Onderwerp" => "Subject",
+    "Onderwerp:" => "Subject:",
     "Kies een onderwerp" => "Choose subject",
     "Suggestie / Feedback" => "Suggestion / Feedback",
     "Klacht" => "Complaint",
@@ -156,21 +165,5 @@ $lang = [
     "Dit veld is verplicht. (20 - 500 karakters)" => "This field is required. (20 - 500 characters)",
     "Verwijder gebruikersprofiel" => "Delete userprofile",
     "Bevestig verwijderen van gebruikersprofiel" => "Confirm userprofile deletion"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ];
