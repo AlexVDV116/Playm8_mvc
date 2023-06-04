@@ -119,6 +119,45 @@ $lang = [
     "Schrijf hier uw bericht. (20 - 500 karakters)" => "Write your message here (20 - 500 characters)",
     "Dit veld is verplicht. (20 - 500 karakters)" => "This field is required (20 - 500 characters)",
 
+    // Account page
+    "Wijzig account" => "Edit account",
+    "Wijzig hier je gebruikersnaam, email en wachtwoord." => "Edit your username, email and password.",
+    "Nieuw wachtwoord" => "New password",
+    "Herhaal nieuw wachtwoord" => "Repeat new password",
+    "Huidig wachtwoord" => "Current password",
+    "Voer nieuw wachtwoord in" => "Enter new password",
+    "Voer huidig wachtwoord in" => "Enter current password",
+    "Annuleer" => "Cancel",
+    "Opslaan" => "Save",
+    "Verwijder account" => "Delete account",
+    "Bevestig verwijderen van account" => "Confirm account deletion",
+    "Voer de 5 cijfers in ter bevestiging" => "Enter the 5 digits to confirm",
+    "Bevestig" => "Confirm",
+
+    // Userprofile Page
+    "Wijzig profiel" => "Edit profile",
+    "Recente afbeeldingen" => "Recent images",
+    "Alle afbeeldingen weergeven" => "Show all images",
+
+    // Edit userprofile page
+    "Wijzig gebruikersprofiel" => "Edit userprofile",
+    "Wijzig hier de gegevens van het gebruikersprofiel dat aan andere Playm8 gebruikers wordt getoond." => "Edit the content of your userprofile page displayed to other Playm8 users.",
+    "Wijzig profielfoto" => "Edit profile picture",
+    "Stad:" => "City:",
+    "Voer uw stad in" => "Enter your city",
+    "Land:" => "Country:",
+    "Voer uw land in" => "Enter your country",
+    "Telefoonnummer:" => "Phonenumber:",
+    "Voer uw telefoonnummer in" => "Enter your phonenumber",
+    "Geboortedatum:" => "Date of birth:",
+    "Over mij koptekst:" => "About me header:",
+    "Voer de titel van uw profielpagina in" => "Enter the title of your profile page",
+    "Over mij:" => "About me:",
+    "Vertel hier over de favoriete activiteiten, uitlaatplaatsen of andere leuke feitjes over jou en je huisdier! (20 - 255 karakters)" => "Tell other user about your favorite activities, dog parks or other fun facts about you or your pet! (20 - 255 characters)",
+    "Dit veld is verplicht. (20 - 500 karakters)" => "This field is required. (20 - 500 characters)",
+    "Verwijder gebruikersprofiel" => "Delete userprofile",
+    "Bevestig verwijderen van gebruikersprofiel" => "Confirm userprofile deletion"
+
 
 
 
