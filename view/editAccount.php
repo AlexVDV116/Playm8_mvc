@@ -67,7 +67,7 @@ class editAccount extends View
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                                                <label for="form_newUsername" class="form-label"><?= $translator->__('Gebruikersnaam') ?></label>
+                                                <label for="form_newUsername" class="form-label"><?= $translator->__('Gebruikersnaam:') ?></label>
                                                 <input id="form_newUsername" type="text" name="newUsername" class="form-control" value="<?php if (isset($account)) {
                                                                                                                                             echo $account->get("username");
                                                                                                                                         } ?>" required>
@@ -79,7 +79,7 @@ class editAccount extends View
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                                                <label for="form_newEmail" class="form-label"><?= $translator->__('E-mailadres') ?></label>
+                                                <label for="form_newEmail" class="form-label"><?= $translator->__('E-mailadres:') ?></label>
                                                 <input id="form_newEmail" type="email" name="newEmail" class="form-control" value="<?php if (isset($account)) {
                                                                                                                                         echo $account->get("email");
                                                                                                                                     } ?>" required>
@@ -93,7 +93,7 @@ class editAccount extends View
                                     <div class="row mt-4">
                                         <div class="col-md-6">
                                             <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                                            <label for="form_newPassword" class="form-label"><?= $translator->__('Nieuw wachtwoord') ?></label>
+                                            <label for="form_newPassword" class="form-label"><?= $translator->__('Nieuw wachtwoord:') ?></label>
                                             <input id="form_newPassword" type="password" name="newPassword" class="form-control" placeholder="<?= $translator->__('Voer nieuw wachtwoord in') ?>">
                                             <div class="invalid-feedback">
                                                 Dit veld is verplicht.
@@ -101,7 +101,7 @@ class editAccount extends View
                                         </div>
                                         <div class="col-md-6">
                                             <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                                            <label for="form_newPasswordrepeat" class="form-label"><?= $translator->__('Herhaal nieuw wachtwoord') ?></label>
+                                            <label for="form_newPasswordrepeat" class="form-label"><?= $translator->__('Herhaal nieuw wachtwoord:') ?></label>
                                             <input id="form_newPasswordrepeat" type="password" name="newPasswordrepeat" class="form-control" placeholder="<?= $translator->__('Herhaal nieuw wachtwoord') ?>">
                                             <div class="invalid-feedback">
                                                 Dit veld is verplicht.
@@ -112,7 +112,7 @@ class editAccount extends View
                                     <div class="row mt-4">
                                         <div class="col-md-6">
                                             <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                                            <label for="form_currentPasswordrepeat" class="form-label"><?= $translator->__('Huidig wachtwoord') ?></label>
+                                            <label for="form_currentPasswordrepeat" class="form-label"><?= $translator->__('Huidig wachtwoord:') ?></label>
                                             <input id="form_currentPasswordrepeat" type="password" name="currentPassword" class="form-control" placeholder="<?= $translator->__('Voer huidig wachtwoord in') ?>" required>
                                             <div class="invalid-feedback">
                                                 Dit veld is verplicht.
