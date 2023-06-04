@@ -40,13 +40,32 @@ $header = new header();
 
                 <br>
                 <div class="download-buttons d-flex flex-row justify-content-start">
-                    <a href="./index.html#">
-                        <img class="ios-button" src="./assets/images/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg" alt="Download-apple-store">
-                    </a>
+                    <?php
+                    $lang = $_SESSION['lang'];
 
-                    <a href="./index.html#" class="mx-3">
-                        <img class="android-button" src="./assets/images/Google_Play_Store_badge_EN.svg" alt="Download-play-store">
-                    </a>
+                    switch ($lang) {
+                        case 'nl':
+                            echo "<div><a href=#><img src='https://play.google.com/intl/en_us/badges/static/images/badges/nl_badge_web_generic.png' alt='Ontdek het op Google Play' width='200px' height='78px' /></a></div>";
+                            echo "<div class='mx-3'><a href=#><img src='https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/nl-nl?size=250x83&amp;releaseDate=1598227200' alt='Download on the App Store' width='180px' height='78px' ></a></div>";
+                            break;
+                        case 'en':
+                            echo "<div><a href=#><img src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' alt='Get it on Google Play' width='200px' /></a></div>";
+                            echo "<div class='mx-3'><a href=#><img src='https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1598227200' alt='Download on the App Store' width='180px' height='78px' ></a></div>";
+                            break;
+                        case 'fr':
+                            echo "<div><a href=#><img src='https://play.google.com/intl/en_us/badges/static/images/badges/fr_badge_web_generic.png' alt='Disponible sur Google Play' width='200px' /></a></div>";
+                            echo "<div class='mx-3'><a href=#><img src='https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/fr-fr?size=250x83&amp;releaseDate=1598227200' alt='Download on the App Store' width='180px' height='78px' ></a></div>";
+                            break;
+                        case 'es':
+                            echo "<div><a href=#><img src='https://play.google.com/intl/en_us/badges/static/images/badges/es_badge_web_generic.png' alt='Disponible en Google Play' width='200px' /></a></div>";
+                            echo "<div class='mx-3'><a href=#><img src='https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/es-es?size=250x83&amp;releaseDate=1598227200' alt='Download on the App Store'width='180px' height='78px' ></a></div>";
+                            break;
+                        case 'zh':
+                            echo "<div><a href=#><img src='https://play.google.com/intl/en_us/badges/static/images/badges/zh-cn_badge_web_generic.png' alt='下载应用，请到 Google Play' width='200px' /></a></div>";
+                            echo "<div class='mx-3'><a href=#><img src='https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/zh-cn?size=250x83&amp;releaseDate=1598227200' alt='Download on the App Store' width='180px' height='78px' ></a></div>";
+                            break;
+                    }
+                    ?>
                 </div>
 
             </div>
@@ -261,7 +280,7 @@ $header = new header();
                             </div>
                         </div>
                         <div class="col">
-                            <input type="email" class="form-control mt-2 border-0" id="email" name="email" placeholder="E-mail" required>
+                            <input type="email" class="form-control mt-2 border-0" id="email" name="email" placeholder="<?= $translator->__('E-mailadres') ?>" required>
                             <div class="invalid-feedback">
                                 <?= $translator->__('Voer een geldig e-mailadres in.') ?>
                             </div>
