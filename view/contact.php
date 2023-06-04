@@ -81,7 +81,7 @@ class contact extends View
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
-													<label for="form_lastname"><?= $translator->__('Achternaam') ?>:</label>
+													<label for="form_lastname"><?= $translator->__('Achternaam:') ?></label>
 													<input id="form_lastname" type="text" name="lastname" class="form-control border-0" placeholder="<?= $translator->__('Voer uw achternaam in') ?>" value="<?php if (isset($form_data)) {
 																																																					echo $form_data['lastname'];
 																																																				} ?>" required>
@@ -95,7 +95,7 @@ class contact extends View
 										<div class="row mt-3">
 											<div class="col-md-6">
 												<div class="form-group">
-													<label for="form_email"><?= $translator->__('E-mailadres') ?></label>
+													<label for="form_email"><?= $translator->__('E-mailadres:') ?></label>
 													<input id="form_email" type="email" name="email" class="form-control border-0" placeholder="<?= $translator->__('Voer uw e-mailadres in') ?>" value="<?php if (isset($form_data)) {
 																																																				echo $form_data['email'];
 																																																			} ?>" required>
