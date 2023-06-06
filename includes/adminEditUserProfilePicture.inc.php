@@ -9,6 +9,11 @@ require_once '../vendor/autoload.php';
 // Import classes this script depends on
 use Controller\profilePictureController;
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+
 // Include script that handles the user pictures upload
 session_start();
 $userProfileID = $_SESSION["adminEditUserProfile"]["userProfileID"];
@@ -24,5 +29,5 @@ if (isset($_POST["submit"])) {
     $fileError = $_FILES["file"]["error"];
 
     $profilePictureController = new profilePictureController($userProfileID, $file);
-    $fileConprofilePictureControllertroller->run();
+    $profilePictureController->run();
 }
