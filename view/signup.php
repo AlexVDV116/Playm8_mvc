@@ -36,16 +36,8 @@ class signup extends View
 
     public function show()
     {
-        // Setting the ROOT directory for this file so the relative paths used in included pages will still work
-        $ROOT = '../';
-
-        // Used to translate page content
-        $translator = new translatorController;
-        // Use the getLanguageFile method of the languageSelector and require the correct language file
-        require $ROOT . $translator->getLanguageFile();
-
-        // Include the header
-        $header = new header();
+        global $translator;
+        new header();
 
         // If a session variable array exists store the contents in the form_data variable
         // So we can retain the form values for better user experience
