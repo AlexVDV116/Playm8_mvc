@@ -15,19 +15,32 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// listAccounts class that lists all accounts in the accounts table and gives the administrator the option to edit each one of them
+// adminImportCSV class that uses the CSVcontroller to read the CSV and echo the data in a HTML table
 class adminImportCSV extends View
 {
 
     public function show()
     {
+        // Remove any old files from previous imports
+        // Get all files in the directory and iterate over them
+        $files = glob('../uploads/csv/*');
+        foreach ($files as $file) {
+            if (is_file($file)) {
+                // If the file creation date is older then now - 2 hours
+                $file_creation_date = filectime($file);
+                if (time() - filemtime($file) > 2 * 3600) {
+                    // Delete the file
+                    unlink($file);
+                }
+            }
+        }
 
 ?>
         <div class="mb-4">
             <h4>Importeer CSV</h4>
         </div>
         <div>
-            <p>Importeer een CSV bestand met tabel data om deze hier te weergeven. <br> Dit bestand kan vervolgens geupload worden naar ede MySQL database.</p>
+            <p>Importeer een CSV bestand met tabel data om deze hier te weergeven. <br> Dit bestand kan vervolgens geupload worden naar de MySQL database.</p>
         </div>
         <div class="col-4 mx-5">
             <form action="../includes/adminImportCSV.inc.php" method="post" enctype="multipart/form-data">
@@ -44,6 +57,7 @@ class adminImportCSV extends View
 
             $CSVController = new CSVController($accountID);
             echo $CSVController->readCSV($fileName, true); // Set $header to true if you want to include the header row
+
         ?>
             <div class="d-flex justify-content-end">
                 <!-- form that handles the submission of the serializeAccountsArray -->
