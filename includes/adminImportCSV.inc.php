@@ -22,12 +22,7 @@ if (isset($_POST["submit"])) {
 
     // Grab the data of the file
     $file = $_FILES["file"];
-    $fileName = $_FILES["file"]["name"];
-    $fileTmpName = $_FILES["file"]["tmp_name"];
-    $fileSize = $_FILES["file"]["size"];
-    $fileType = $_FILES["file"]["type"];
-    $fileError = $_FILES["file"]["error"];
 
     $CSVController = new CSVController($accountID);
-    $CSVController->uploadCSV($file);
+    $CSVController->importCSV($file);
 }
