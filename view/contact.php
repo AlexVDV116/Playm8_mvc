@@ -70,7 +70,7 @@ class contact extends View
 										<div class="row">
 											<div class="col-md-6">
 												<div class="form-group">
-													<label for="form_name"><?= $translator->__('Voornaam:') ?></label>
+													<label for="form_name"><?= $translator->__('Voornaam') ?></label>
 													<input id="form_name" type="text" name="name" class="form-control border-0" placeholder="<?= $translator->__('Voer uw voornaam in') ?>" value="<?php if (isset($form_data)) {
 																																																		echo $form_data['name'];
 																																																	} ?>" required>
@@ -81,7 +81,7 @@ class contact extends View
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
-													<label for="form_lastname"><?= $translator->__('Achternaam:') ?></label>
+													<label for="form_lastname"><?= $translator->__('Achternaam') ?></label>
 													<input id="form_lastname" type="text" name="lastname" class="form-control border-0" placeholder="<?= $translator->__('Voer uw achternaam in') ?>" value="<?php if (isset($form_data)) {
 																																																					echo $form_data['lastname'];
 																																																				} ?>" required>
@@ -95,7 +95,7 @@ class contact extends View
 										<div class="row mt-3">
 											<div class="col-md-6">
 												<div class="form-group">
-													<label for="form_email"><?= $translator->__('E-mailadres:') ?></label>
+													<label for="form_email"><?= $translator->__('E-mailadres') ?></label>
 													<input id="form_email" type="email" name="email" class="form-control border-0" placeholder="<?= $translator->__('Voer uw e-mailadres in') ?>" value="<?php if (isset($form_data)) {
 																																																				echo $form_data['email'];
 																																																			} ?>" required>
@@ -106,7 +106,7 @@ class contact extends View
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
-													<label for="form_need"><?= $translator->__('Onderwerp:') ?></label>
+													<label for="form_need"><?= $translator->__('Onderwerp') ?></label>
 													<select id="form_need" name="need" class="form-control border-0" required>
 														<option value="" selected disabled>-- <?= $translator->__('Kies een onderwerp') ?> --</option>
 														<option value="Suggestie / Feedback" <?php echo (isset($form_data) && $form_data['need'] == 'Suggestie / Feedback') ? 'selected' : ''; ?>><?= $translator->__('Suggestie / Feedback') ?></option>
@@ -124,7 +124,7 @@ class contact extends View
 										<div class="row mt-3">
 											<div class="col-md-12">
 												<div class="form-group">
-													<label for="form_message"><?= $translator->__('Bericht:') ?></label>
+													<label for="form_message"><?= $translator->__('Bericht') ?></label>
 													<textarea id="form_message" name="message" class="form-control border-0" placeholder="<?= $translator->__('Schrijf hier uw bericht. (20 - 500 karakters)') ?>" rows="4" required><?php if (isset($form_data)) {
 																																																											echo $form_data['message'];
 																																																										} ?></textarea>
