@@ -62,7 +62,7 @@ class adminImportCSV extends View
             <div class="d-flex justify-content-end">
                 <!-- form that handles the submission of the serializeAccountsArray -->
                 <form method='post' action='../includes/adminUploadCSVtoDB.inc.php'>
-                    <input type='submit' class="btn btn-credits shadow-sm my-2" value='Upload CSV naar Database' name='Export'>
+                    <input type='submit' class="btn btn-credits shadow-sm my-2" value='Upload CSV naar Database' name='exportSubmit'>
                     <input type="hidden" name="fileName" value="<?= $fileName ?>">
                 </form>
             </div>
