@@ -47,4 +47,26 @@ class databaseHandler
         $stmt = $this->prepare($sql);
         return $stmt->execute($args);
     }
+
+    // Function that returns an array containing all database tables
+    public function getAllTables(): array
+    {
+        $stmt = $this->prepare("SHOW tables");
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+
+        return $result;
+    }
+
+    // Function that returns an array containing all collumns in a table
+    public function getAllCollumns($table): array
+    {
+        $stmt = $this->prepare("SELECT COLUMN_NAME
+            FROM INFORMATION_SCHEMA.COLUMNS
+            WHERE TABLE_SCHEMA = 'playm8' AND TABLE_NAME = ?;");
+        $stmt->execute([$table]);
+        $result = $stmt->fetchAll();
+
+        return $result;
+    }
 }
