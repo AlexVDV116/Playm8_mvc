@@ -9,6 +9,7 @@ require_once '../vendor/autoload.php';
 // Import classes this class depends on
 
 use DAO\accountDAO;
+use DAO\csvDAO;
 use Framework\Controller;
 
 ini_set('display_errors', 1);
@@ -38,7 +39,7 @@ class CSVController extends Controller
         return;
     }
 
-    public function uploadCSV(array $file): void
+    public function importCSV(array $file): void
     {
         $fileName = $file["name"];
         $fileTmpName = $file["tmp_name"];
@@ -80,7 +81,7 @@ class CSVController extends Controller
                     header("location: ../view/admin.php?view=adminImportCSV&error=filesize");
                     exit();
                 }
-                // // File error is not equal to 0, redirect with role dependent error message
+                // File error is not equal to 0, redirect with role dependent error message
             } else {
                 header("location: ../view/admin.php?view=adminImportCSV&error=" . $fileError);
                 exit();
@@ -92,7 +93,7 @@ class CSVController extends Controller
         }
     }
 
-    function readCSV($fileName, $header = false): string
+    public function readCSV($fileName, $header = false): string
     {
         $filePath = "../uploads/csv/" . $fileName;
         $html = '<div class="table-responsive mt-5"><table class="table table-sm table-striped table-bordered table-hover">';
@@ -119,13 +120,26 @@ class CSVController extends Controller
 
             $html .= '</table></div>';
 
-            // Close and delete the file
+            // Close the file, but keep it in its directory in case user wants to upload to DB
+            // Files older then 2 hours get deleted adminImportCSV.php runs
             fclose($handle);
-            unlink($filePath);
         } else {
             $error = "File not found.";
             return $error;
         }
         return $html;
+    }
+
+    public function uploadCSVtoDB()
+    {
+        // Get all tables in database
+
+        // For each table in the database get the collum names
+
+        // Check first row in CSV if data matches collum names
+
+        // Drop all rows in that table
+
+        // Insert the new data
     }
 }
