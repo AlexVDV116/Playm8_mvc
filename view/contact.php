@@ -35,14 +35,8 @@ class contact extends View
 
 	public function show()
 	{
-		$ROOT = '../';
-
-		// Used to translate page content
-		$translator = new translatorController;
-		// Use the getLanguageFile method of the languageSelector and require the correct language file
-		require $ROOT . $translator->getLanguageFile();
-
-		$header = new header();
+		global $translator;
+		new header();
 
 		// If a session variable array exists store the contents in the form_data variable
 		// So we can retain the form values for better user experience
