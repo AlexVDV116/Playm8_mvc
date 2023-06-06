@@ -116,7 +116,7 @@ class editUserProfile extends View
                                     <div class="row mt-4">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="form_name"><?= $translator->__('Voornaam:') ?></label>
+                                                <label for="form_name"><?= $translator->__('Voornaam') ?>:</label>
                                                 <input id="form_name" type="text" name="firstName" class="form-control border-0" placeholder="<?= $translator->__('Voer uw voornaam in') ?>" value="<?php if (isset($userProfile)) {
                                                                                                                                                                                                         echo $userProfile->get("firstName");
                                                                                                                                                                                                     } ?>" required>
@@ -127,7 +127,7 @@ class editUserProfile extends View
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="form_lastname"><?= $translator->__('Achternaam:') ?></label>
+                                                <label for="form_lastname"><?= $translator->__('Achternaam') ?>:</label>
                                                 <input id="form_lastname" type="text" name="lastName" class="form-control border-0" placeholder="<?= $translator->__('Voer uw achternaam in') ?>" value="<?php if (isset($userProfile)) {
                                                                                                                                                                                                                 echo $userProfile->get("lastName");
                                                                                                                                                                                                             } ?>" required>
@@ -141,7 +141,7 @@ class editUserProfile extends View
                                     <div class="row mt-4">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="form_city"><?= $translator->__('Stad:') ?></label>
+                                                <label for="form_city"><?= $translator->__('Stad') ?>:</label>
                                                 <input id="form_city" type="text" name="city" class="form-control border-0" placeholder="<?= $translator->__('Voer uw stad in') ?>" value="<?php if (isset($userProfile)) {
                                                                                                                                                                                                 echo $userProfile->get("city");
                                                                                                                                                                                             } ?>" required>
@@ -152,7 +152,7 @@ class editUserProfile extends View
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="form_country"><?= $translator->__('Land:') ?></label>
+                                                <label for="form_country"><?= $translator->__('Land') ?>:</label>
                                                 <input id="form_country" type="text" name="country" class="form-control border-0" placeholder="<?= $translator->__('Voer uw land in') ?>" value="<?php if (isset($userProfile)) {
                                                                                                                                                                                                         echo $userProfile->get("country");
                                                                                                                                                                                                     } ?>" required>
@@ -166,7 +166,7 @@ class editUserProfile extends View
                                     <div class="row mt-4">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="form_phoneNumber"><?= $translator->__('Telefoonnummer:') ?></label><br>
+                                                <label for="form_phoneNumber"><?= $translator->__('Telefoonnummer') ?>:</label><br>
                                                 <input id="form_phoneNumber" type="tel" name="phoneNumber" class="form-control border-0" placeholder="<?= $translator->__('Voer uw telefoonnummer in') ?>" value="<?php if (isset($userProfile)) {
                                                                                                                                                                                                                         echo $userProfile->get("phoneNumber");
                                                                                                                                                                                                                     } ?>">
@@ -199,7 +199,7 @@ class editUserProfile extends View
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="form_dateOfBirth"><?= $translator->__('Geboortedatum:') ?></label>
+                                                <label for="form_dateOfBirth"><?= $translator->__('Geboortedatum') ?>:</label>
                                                 <input id="form_dateOfBirth" type="date" name="dateOfBirth" class="form-control border-0" placeholder="Voer uw geboortedatum in" value="<?php if (isset($userProfile)) {
                                                                                                                                                                                             echo $userProfile->get("dateOfBirth");
                                                                                                                                                                                         } ?>" required>
@@ -213,7 +213,7 @@ class editUserProfile extends View
                                     <div class="row mt-4">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="form_aboutMeTitle"><?= $translator->__('Over mij koptekst:') ?></label>
+                                                <label for="form_aboutMeTitle"><?= $translator->__('Over mij koptekst') ?>:</label>
                                                 <input id="form_aboutMeTitle" type="aboutMeTitle" name="aboutMeTitle" class="form-control border-0" placeholder="<?= $translator->__('Voer de titel van uw profielpagina in') ?>" value="<?php if (isset($userProfile)) {
                                                                                                                                                                                                                                                 echo $userProfile->get("aboutMeTitle");
                                                                                                                                                                                                                                             } ?>" required>
@@ -227,7 +227,7 @@ class editUserProfile extends View
                                     <div class="row mt-4 mb-5">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="form_aboutMeText"><?= $translator->__('Over mij:') ?></label>
+                                                <label for="form_aboutMeText"><?= $translator->__('Over mij') ?>:</label>
                                                 <textarea id="form_aboutMeText" name="aboutMeText" class="form-control border-0" placeholder="<?= $translator->__('Vertel hier over de favoriete activiteiten, uitlaatplaatsen of andere leuke feitjes over jou en je huisdier! (20 - 255 karakters)') ?>" rows="4" maxlength="10000" required><?php if (isset($userProfile)) {
                                                                                                                                                                                                                                                                                                                                                     echo $userProfile->get("aboutMeText");
                                                                                                                                                                                                                                                                                                                                                 } ?></textarea>
