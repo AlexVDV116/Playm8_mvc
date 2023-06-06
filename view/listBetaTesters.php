@@ -36,7 +36,7 @@ class listBetaTesters extends View
             <h4>Beta accounts</h4>
         </div>
         <div>
-            <p>Total number of beta users: <?= $betaCount ?></p>
+            <p>Total aantal beta-users: <?= $betaCount ?></p>
         </div>
 
         <div class="class-responsive">
