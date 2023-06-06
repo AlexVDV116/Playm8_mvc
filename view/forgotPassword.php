@@ -29,14 +29,8 @@ class forgotPassword extends View
 
     public function show()
     {
-        $ROOT = '../';
-
-        // Used to translate page content
-        $translator = new translatorController;
-        // Use the getLanguageFile method of the languageSelector and require the correct language file
-        require $ROOT . $translator->getLanguageFile();
-
-        $header = new header();
+        global $translator;
+        new header();
 ?>
 
         <section>
