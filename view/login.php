@@ -35,14 +35,8 @@ class login extends View
 
     public function show()
     {
-        $ROOT = '../';
-
-        // Used to translate page content
-        $translator = new translatorController;
-        // Use the getLanguageFile method of the languageSelector and require the correct language file
-        require $ROOT . $translator->getLanguageFile();
-
-        $header = new header();
+        global $translator;
+        new header();
 ?>
 
         <section>
@@ -61,7 +55,7 @@ class login extends View
                                             <div class="d-flex flex-row align-items-center mb-4">
                                                 <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                                 <div class="form-outline flex-fill mb-0">
-                                                    <label for="form_email" class="form-label"><?= $translator->__('E-mailadres') ?></label>
+                                                    <label for="form_email" class="form-label"><?= $translator->__('E-mailadres') ?>:</label>
                                                     <input id="form_email" type="email" name="email" class="form-control" required>
                                                     <div class="invalid-feedback">
                                                         Voer een geldig e-mailadres in.
@@ -72,7 +66,7 @@ class login extends View
                                             <div class="d-flex flex-row align-items-center mb-4">
                                                 <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                                                 <div class="form-outline flex-fill mb-0">
-                                                    <label for="form_password" class="form-label"><?= $translator->__('Wachtwoord') ?></label>
+                                                    <label for="form_password" class="form-label"><?= $translator->__('Wachtwoord') ?>:</label>
                                                     <input id="form_password" type="password" name="password" class="form-control" required>
                                                     <div class="invalid-feedback">
                                                         Dit veld is verplicht.
