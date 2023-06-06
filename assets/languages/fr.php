@@ -94,10 +94,10 @@ $lang = [
     "op" => "sur",
 
     // Signup page
-    "Gebruikersnaam" => "Nom d'utilisateur ",
-    "E-mailadres" => "Adresse e-mail ",
-    "Wachtwoord" => "Mot de passe ",
-    "Herhaal uw wachtwoord" => "Répétez votre mot de passe ",
+    "Gebruikersnaam" => "Nom d'utilisateur",
+    "E-mailadres" => "Adresse e-mail",
+    "Wachtwoord" => "Mot de passe",
+    "Herhaal uw wachtwoord" => "Répétez votre mot de passe",
 
     // Login page
     "Wachtwoord vergeten?" => "Mot de passe oublié ?",
