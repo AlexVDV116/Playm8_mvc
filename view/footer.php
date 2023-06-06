@@ -35,7 +35,7 @@ class footer extends View
                     </h4>
                     <p>
                         <?= $translator->__('Contacteer ons via onze socials of gebruik ons ') ?>
-                        <a href="<?= $ROOT ?>view/contact.php"><?= $translator->__('contactformulier.') ?></a>.
+                        <a href="<?= $ROOT ?>view/contact.php"><?= $translator->__('contactformulier') ?></a>.
                     </p>
                     <div class="social-container mt-4">
                         <ul class="social-icons">
