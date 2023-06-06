@@ -16,9 +16,6 @@ ini_set('display_errors', 1);
 // Data Abstraction Object for a Role object
 // Can access the database create, read, update, or delete data (CRUD) on the roles table
 
-require_once '../framework/DAO.php';
-require_once '../model/Role.php';
-
 class roleDAO extends DAO
 {
 
