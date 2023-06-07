@@ -290,8 +290,6 @@ DELETE FROM `loginAttempts`
 WHERE loginAttempts.accountID = accountID$$
 DELIMITER ;
 
-
-
 --
 -- Permissions
 --
@@ -380,11 +378,6 @@ CREATE PROCEDURE `deleteRole`(
     IN `roleID` int(16))
 DELETE FROM `roles` 
 WHERE roles.roleID = roleID$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE PROCEDURE `getAllRolesOrderByRoleID`()
-SELECT * FROM roles ORDER BY roles.roleID$$
 DELIMITER ;
 
 --
