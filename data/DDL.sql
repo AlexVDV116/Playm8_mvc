@@ -297,11 +297,6 @@ DELIMITER ;
 --
 
 DELIMITER $$
-CREATE PROCEDURE `getAllPermissionsOrderByPermissionID`()
-SELECT * FROM permissions ORDER BY permissions.permissionID$$
-DELIMITER ;
-
-DELIMITER $$
 CREATE PROCEDURE `updatePermission`(
   IN `permissionName` varchar(500), 
   IN `permissionDescription` varchar(500),
