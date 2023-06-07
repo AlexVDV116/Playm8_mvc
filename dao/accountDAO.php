@@ -166,6 +166,22 @@ class accountDAO extends DAO
         return $resultCheck;
     }
 
+    // Select all records with a matchin accountID's: return true if a row is returned
+    public function knownAccountID(string $accountID): bool
+    {
+        $stmt = $this->prepare("SELECT * FROM accounts WHERE accountID = ?");
+        $stmt->execute([$accountID]);
+        $result = $stmt->fetch();
+
+        $resultCheck = null;
+        if ($result) {
+            $resultCheck = true;
+        } else {
+            $resultCheck = false;
+        }
+        return $resultCheck;
+    }
+
     // Select all records with a matchin e-mailadress AND isBetaUser set to 1: return true if a row is returned
     public function isBeta(string $email): bool
     {
