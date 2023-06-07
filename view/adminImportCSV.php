@@ -26,23 +26,31 @@ class adminImportCSV extends View
         $files = glob('../uploads/csv/*');
         foreach ($files as $file) {
             if (is_file($file)) {
-                // If the file creation date is older then now - 2 hours
+                // If the file creation date is older then now - 1 hours
                 $file_creation_date = filectime($file);
-                if (time() - filemtime($file) > 2 * 3600) {
+                if (time() - filemtime($file) > 3600) {
                     // Delete the file
                     unlink($file);
                 }
             }
         }
-
 ?>
         <div class="mb-4">
             <h4>Importeer CSV</h4>
         </div>
         <div>
-            <p>Importeer een CSV bestand met tabel data om deze hier te weergeven. <br> Dit bestand kan vervolgens geupload worden naar de MySQL database.</p>
+            <p>Importeer een CSV bestand met tabel data om deze hier te weergeven. <br> Dit bestand kan vervolgens worden geupload naar de MySQL database.</p>
+            <p>
+            <ol><strong>Upload voorwaarden:</strong>
+                <li>Gebruiker dient de rol van admin te hebben;</li>
+                <li>Bestand moet een .csv extensie hebben;</li>
+                <li>De eerste lijn van het .csv bestand <u>moet</u> de kollom namen in de juiste volgorde bevatten van de desbetreffende tabel;</li>
+                <li>Records met een nieuwe primary key worden toegevoegd;</li>
+                <li>Record met een reeds bestaande primary key worden geupdate.</li>
+            </ol>
+            </p>
         </div>
-        <div class="col-4 mx-5">
+        <div class="col-4 mx-5 mt-4">
             <form action="../includes/adminImportCSV.inc.php" method="post" enctype="multipart/form-data">
                 <input type="file" class="form-control form-control-sm" id="formFile" name="file">
                 <input type="submit" class="form-control form-control-sm" name="submit" value="Importeer CSV">
@@ -67,6 +75,19 @@ class adminImportCSV extends View
                 </form>
             </div>
 <?php
+        }
+        if (isset($_GET["upload"])) {
+            if ($_GET["upload"] == "success") {
+                echo '<br><p class="form-success"><i class="fa-solid fa-circle-exclamation"></i>' . $_GET["updates"] . ' Updates & ' . $_GET["inserts"] . ' Inserts succesvol geupload naar de database.</p>';
+            }
+        }
+        if (isset($_GET["error"])) {
+            if ($_GET["error"] == "nomatchingheaders") {
+                echo '<br><p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Headers matchen niet met kollom namen in de database.</p>';
+            }
+            if ($_GET["error"] == "insuffPerm") {
+                echo '<br><p class="form-error"><i class="fa-solid fa-circle-exclamation"></i> Onvoldoende permissie, contacteer een administrator.</p>';
+            }
         }
     }
 }
