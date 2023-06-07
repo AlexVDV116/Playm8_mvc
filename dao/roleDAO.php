@@ -147,4 +147,20 @@ class roleDAO extends DAO
 
         return $result[0];
     }
+
+    // Select all records with a matchin roleID: return true if a row is returned
+    public function knownRoleID(int $roleID): bool
+    {
+        $stmt = $this->prepare("SELECT * FROM roles WHERE roleID = ?");
+        $stmt->execute([$roleID]);
+        $result = $stmt->fetch();
+
+        $resultCheck = null;
+        if ($result) {
+            $resultCheck = true;
+        } else {
+            $resultCheck = false;
+        }
+        return $resultCheck;
+    }
 }
