@@ -13,11 +13,11 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-/* Echo session variables for development purposes
+/* Echo session variables for development purposes */
 echo '<pre>';
 var_dump($_SESSION);
 echo '</pre>';
-*/
+
 
 // Setting the ROOT directory for this file so the relative paths used in included pages will still work
 global $ROOT;
@@ -142,10 +142,13 @@ class header extends View
                                         <?= $translator->__('Betatesters') ?></a>
                                 </li>
                                 <!-- If user is logged in show account name and logout button -->
-                                <!-- If user is logged in as admin href leads to admin panel, user leads to profile page -->
+                                <!-- If user is logged in as admin or moderator href leads to admin panel, user leads to profile page -->
                                 <!-- Else show regular register and login button -->
                                 <?php
-                                if (isset($_SESSION["auth_user"]) && in_array(3, $_SESSION["auth_role"])) {
+                                if (
+                                    isset($_SESSION["auth_user"]) && in_array(3, $_SESSION["auth_role"]) ||
+                                    isset($_SESSION["auth_user"]) && in_array(2, $_SESSION["auth_role"])
+                                ) {
                                 ?>
                                     <div class="dropdown">
                                         <li class="nav-item pl-3 pr-1">
