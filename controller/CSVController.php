@@ -9,8 +9,15 @@ require_once '../vendor/autoload.php';
 // Import classes this class depends on
 
 use DAO\accountDAO;
-use DAO\csvDAO;
+use DAO\permissionDAO;
+use DAO\roleDAO;
+
 use Framework\Controller;
+use Framework\databaseHandler;
+
+use Model\Account;
+use Model\Permission;
+use Model\Role;
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -130,16 +137,155 @@ class CSVController extends Controller
         return $html;
     }
 
-    public function uploadCSVtoDB()
+    public function uploadCSV($filePath): void
     {
-        // Get all tables in database
+        // Check if user is logged in if false redirect to index page else check if user has the correct admin role
+        if (!in_array(3, $_SESSION["auth_role"])) {
+            // Redirect user back to the importcsv page with error message
+            header("location: ../view/admin.php?view=adminimportcsv&error=insuffPerm");
+            exit();
+        }
 
-        // For each table in the database get the collum names
+        // Get all database tables
+        $dbHeaders = [];
+        $dbh = new databaseHandler();
+        $tables = $dbh->getAllTables();
 
-        // Check first row in CSV if data matches collum names
+        // For each table in the database get the collum names and add these collum names to the array as the value
+        foreach ($tables as $table) {
+            $tableName = $table[0];
+            $collumns = $dbh->getAllCollumns($tableName);
+            $dbHeaders[$tableName] = [];
+            foreach ($collumns as $collumn) {
+                array_push($dbHeaders[$tableName], $collumn[0]);
+            }
+        }
 
-        // Drop all rows in that table
+        // Open uploaded CSV file with read-only mode
+        $handle = fopen($filePath, 'r') or
+            header("location: ../view/admin.php?view=adminimportcsv&error=cannotopenfile&file=" . $filePath);
 
-        // Insert the new data
+        // Check if the headers on the first row of the CSV file match the exact collum names of one of the tables in our DB
+        $csvHeaders = fgetcsv($handle);
+
+        // If the headers match the collumn names of one of our tables
+        // Instantiate the right DAO depending on the table being uploaded
+        if ($csvHeaders === $dbHeaders['accounts']) {
+            $accountDAO = new accountDAO;
+            $updates = 0;
+            $inserts = 0;
+
+            // Parse data from CSV file line by line        
+            while (($getData = fgetcsv($handle, 10000, ",")) !== FALSE) {
+                // Skip any blank lines (fgetcsv returns empty lines as an non-empty array with a NULL element inside)
+                if ($getData[0] == NULL) {
+                    continue;
+                }
+
+                // Generate an associative array containing the data from the csv file
+                $data = array(
+                    "accountID" => $getData[0],
+                    "username" => $getData[1],
+                    "email" => $getData[2],
+                    "password" => $getData[3],
+                    "isBetaUser" => $getData[4],
+                    "isActive" => $getData[5],
+                    "activationCode" => $getData[6],
+                    "activationExpiry" => $getData[7],
+                    "activatedAt" => $getData[8]
+                );
+
+                // Create a new empty Account object with the user data
+                $account = new Account($data);
+
+                // Check if that accountID already exists, if true update the account, else insert a new record
+                if ($accountDAO->knownAccountID($getData[0])) {
+                    $accountDAO->update($account);
+                    $updates += 1;
+                } else {
+                    $accountDAO->insert($account);
+                    $inserts += 1;
+                }
+            }
+            // Close and delete opened CSV file and redirect user with success message
+            fclose($handle);
+            unlink($filePath);
+            header("location: ../view/admin.php?view=adminImportCSV&upload=success&updates=" . $updates . "&inserts=" . $inserts);
+        } elseif ($csvHeaders === $dbHeaders['permissions']) {
+            $permissionDAO = new permissionDAO;
+            $updates = 0;
+            $inserts = 0;
+
+            // Parse data from CSV file line by line        
+            while (($getData = fgetcsv($handle, 10000, ",")) !== FALSE) {
+                // Skip any blank lines (fgetcsv returns empty lines as an non-empty array with a NULL element inside)
+                if ($getData[0] == NULL) {
+                    continue;
+                }
+
+                // Generate an associative array containing the data from the csv file
+                $data = array(
+                    "permissionID" => $getData[0],
+                    "permissionName" => $getData[1],
+                    "permissionDescription" => $getData[2],
+                );
+
+                // Create a new empty Account object with the user data
+                $permission = new permission($data);
+
+                // Check if that permissionID already exists, if true update the account, else insert a new record
+                if ($permissionDAO->knownPermissionID($getData[0])) {
+                    $permissionDAO->update($permission);
+                    $updates += 1;
+                } else {
+                    $permissionDAO->insertNewPermission($permission);
+                    $inserts += 1;
+                }
+            }
+            // Close and delete opened CSV file and redirect user with success message
+            fclose($handle);
+            unlink($filePath);
+            header("location: ../view/admin.php?view=adminImportCSV&upload=success&updates=" . $updates . "&inserts=" . $inserts);
+        } elseif ($csvHeaders === $dbHeaders['roles']) {
+            $roleDAO = new roleDAO;
+            $updates = 0;
+            $inserts = 0;
+
+            // Parse data from CSV file line by line        
+            while (($getData = fgetcsv($handle, 10000, ",")) !== FALSE) {
+                // Skip any blank lines (fgetcsv returns empty lines as an non-empty array with a NULL element inside)
+                if ($getData[0] == NULL) {
+                    continue;
+                }
+
+                // Generate an associative array containing the data from the csv file
+                $data = array(
+                    "roleID" => $getData[0],
+                    "roleName" => $getData[1],
+                    "roleDescription" => $getData[2],
+                );
+
+                // Create a new empty Account object with the user data
+                $role = new role($data);
+
+                // Check if that permissionID already exists, if true update the account, else insert a new record
+                if ($roleDAO->knownRoleID($getData[0])) {
+                    $roleDAO->update($role);
+                    $updates += 1;
+                } else {
+                    $roleDAO->insertNewRole($role);
+                    $inserts += 1;
+                }
+            }
+            // Close and delete opened CSV file and redirect user with success message
+            fclose($handle);
+            unlink($filePath);
+            header("location: ../view/admin.php?view=adminImportCSV&upload=success&updates=" . $updates . "&inserts=" . $inserts);
+        } else {
+            // Generate error message
+            fclose($handle);
+            unlink($filePath);
+            header("location: ../view/admin.php?view=adminImportCSV&error=nomatchingheaders");
+        }
     }
 }
