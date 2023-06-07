@@ -121,4 +121,20 @@ class permissionDAO extends DAO
 
         return $result[0];
     }
+
+    // Select all records with a matchin permissionID: return true if a row is returned
+    public function knownPermissionID(int $permissionID): bool
+    {
+        $stmt = $this->prepare("SELECT * FROM permissions WHERE permissionID = ?");
+        $stmt->execute([$permissionID]);
+        $result = $stmt->fetch();
+
+        $resultCheck = null;
+        if ($result) {
+            $resultCheck = true;
+        } else {
+            $resultCheck = false;
+        }
+        return $resultCheck;
+    }
 }
