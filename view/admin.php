@@ -12,22 +12,20 @@ use Framework\View;
 // Session start and error headings because we do not include the header.php in this file
 session_start();
 
-/* Echo session variables for development purposes
+/* Echo session variables for development purposes */
 echo '<pre>';
 var_dump($_SESSION);
 echo '</pre>';
-*/
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-
-// Check if user is logged in if false redirect to index page else check if user has the correct admin role
+// Check if user is logged in if false redirect to index page else check if user has the correct admin or moderator role
 if ($_SESSION["auth"] == false) {
     header("location: ../index.php");
     exit();
-} elseif (!in_array(3, $_SESSION["auth_role"])) {
+} elseif (!in_array(3, $_SESSION["auth_role"]) && !in_array(2, $_SESSION["auth_role"])) {
     // Redirect user back to the index page if not admin
     header("location: ../index.php");
     exit();
