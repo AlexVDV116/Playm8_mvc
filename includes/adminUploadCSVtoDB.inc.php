@@ -21,8 +21,9 @@ $accountID = $_SESSION["auth_user"]["email"];
 if (isset($_POST["exportSubmit"])) {
 
     // Grab the data of the file
-    $file = $_FILES["file"];
+    $fileName = $_POST["fileName"];
+    $filePath = '../uploads/csv/' . $fileName;
 
     $CSVController = new CSVController($accountID);
-    $CSVController->uploadCSV($file);
+    $CSVController->uploadCSV($filePath);
 }
