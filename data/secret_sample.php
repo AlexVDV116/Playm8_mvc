@@ -8,7 +8,7 @@ namespace Data;
 // Make sure the name 'secret.php' is in .gitignore
 
 // Class containing database credentials
-class secret
+class Secret
 {
     const DB_HOST = 'localhost';
     const DB_NAME = 'playm8';
