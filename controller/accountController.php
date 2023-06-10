@@ -212,6 +212,7 @@ class accountController extends Controller
             }
 
             header("location: ../view/editAccount.php?usernameChange=success");
+            exit();
         }
     }
 
@@ -378,6 +379,7 @@ class accountController extends Controller
             $accountDAO->delete($userAccountID);
             // Redirect user to admin page with success message
             header("location: ../view/admin.php?view=listAccounts&deleteAccount=success");
+            exit();
         }
     }
 
