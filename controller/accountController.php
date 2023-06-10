@@ -108,6 +108,8 @@ class accountController extends Controller
         // Grab the account from the DB
         $accountDAO = new AccountDAO();
         $account = $accountDAO->get($email);
+        $userNameChange = false;
+        $passwordChange = false;
 
         // use PHP built in method to check if the given password matches the hashed password stored in the DB (returns bool)
         $checkPwd = password_verify($currentPassword, $account->get("password"));
