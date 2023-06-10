@@ -11,7 +11,7 @@ require_once '../vendor/autoload.php';
 // Make sure the name 'secret.php' is in .gitignore
 
 // Class containing database credentials
-class secret
+class Secret
 {
     const DB_HOST = 'localhost';
     const DB_NAME = 'playm8';
@@ -21,7 +21,7 @@ class secret
 }
 
 // Class containing PHPMailer email credentials and configuration
-class MailConfig
+class mailConfig
 {
     const CONFIG = [
         'email' => [
