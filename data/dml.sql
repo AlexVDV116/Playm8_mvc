@@ -2,12 +2,12 @@
 -- Data Manipulations Lanuage voor database `Playm8`
 --
 
-USE `playm8`;
+USE `codeby_playm8`;
 
 -- Disable foreign key checks globally in order to prevent ERROR 1452: Foreign key constraint fail
 -- Setting this option for the session does not work
 -- SET FOREIGN_KEY_CHECKS=0;
-SET GLOBAL FOREIGN_KEY_CHECKS = 0;
+-- SET GLOBAL FOREIGN_KEY_CHECKS = 0;
 
 
 -- Insert data into the 'accounts' table
@@ -177,4 +177,4 @@ INSERT INTO `accountsRoles`(`accountID`, `roleID`) VALUES
   
 
 -- Enable Foreign Key Checks Globally
-SET GLOBAL FOREIGN_KEY_CHECKS=1;
+-- SET GLOBAL FOREIGN_KEY_CHECKS=1;
