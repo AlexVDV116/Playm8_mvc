@@ -139,7 +139,7 @@ class admin extends View
                                         </li>
                                         <hr>
                                         <li class="nav-item">
-                                            <a href="?view=ListAccounts" class="nav-link">
+                                            <a href="?view=listAccounts" class="nav-link">
                                                 Bekijk accounts
                                             </a>
                                         </li>
