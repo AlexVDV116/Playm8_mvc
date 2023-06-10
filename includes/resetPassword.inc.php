@@ -27,6 +27,11 @@ if (isset($_POST["submit"])) {
 
     // Running server side validation, error handling and reset the password
     $reset->run();
+
+    // Redirect user back to the front page when sucsessfull
+    header("location: ../view/login.php?reset=success");
+    exit();
 } else {
     header("location: ../index.php");
+    exit();
 }
