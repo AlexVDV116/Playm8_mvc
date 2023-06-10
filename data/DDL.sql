@@ -2,8 +2,8 @@
 -- Data Definition Lanuage voor database `Playm8`
 --
 
-DROP DATABASE IF EXISTS `playm8`;
-CREATE DATABASE IF NOT EXISTS `playm8`; 
+DROP DATABASE IF EXISTS `codeby_playm8`;
+CREATE DATABASE IF NOT EXISTS `code_byplaym8`; 
 
 USE `codeby_playm8`;
 
@@ -155,22 +155,6 @@ ALTER TABLE `loginAttempts`
   ADD CONSTRAINT `loginAttempts_ibfk_1` FOREIGN KEY (`accountID`) REFERENCES `accounts` (`accountID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 COMMIT;
-
---
--- Creating database users
---
-
-DROP USER IF EXISTS
-  'user_read'@'%',
-  'user_write'@'%',
-  'admin_ddl'@'%',
-  'admin_dcl'@'%';
-
-CREATE USER
-  'user_read'@'%' IDENTIFIED BY 'M0vuw@u2Z0Tf5S]N',
-  'user_write'@'%' IDENTIFIED BY 'p-RCj/_G!7uGjfHN',
-  'admin_ddl'@'%' IDENTIFIED BY '6br0IMwuoar_999W',
-  'admin_dcl'@'%' IDENTIFIED BY 'eWROy_8C9KavY*rE';
 
 --
 -- Creating stored procedures
@@ -504,3 +488,19 @@ CREATE TRIGGER `foundMatch` BEFORE INSERT ON `likes`
     END IF;
   END
 DELIMITER ;
+
+--
+-- Creating database users
+--
+
+DROP USER IF EXISTS
+  'user_read'@'%',
+  'user_write'@'%',
+  'admin_ddl'@'%',
+  'admin_dcl'@'%';
+
+CREATE USER
+  'user_read'@'%' IDENTIFIED BY 'M0vuw@u2Z0Tf5S]N',
+  'user_write'@'%' IDENTIFIED BY 'p-RCj/_G!7uGjfHN',
+  'admin_ddl'@'%' IDENTIFIED BY '6br0IMwuoar_999W',
+  'admin_dcl'@'%' IDENTIFIED BY 'eWROy_8C9KavY*rE';
