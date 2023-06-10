@@ -338,7 +338,7 @@ class accountDAO extends DAO
 
         // Next we generate a resetlink that contains the selector and unhashed token
         $resetLink = mailConfig::APP_URL;
-        $resetLink .= "Playm8_mvc/view/resetPassword.php?selector={$selector}&validator=" . bin2hex($token);
+        $resetLink .= "view/resetPassword.php?selector={$selector}&validator=" . bin2hex($token);
 
         // We generate a token expiry date that is now + 1 hour
         $tokenExpiryDate = date("Y-m-d H:i:s", strtotime('+1 hours')); // ExpiryDate = now + 1 hours 
