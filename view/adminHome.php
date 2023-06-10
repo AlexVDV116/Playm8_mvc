@@ -11,7 +11,7 @@ use Framework\View;
 
 // Home class that displays various messages to the administrator.
 
-class home extends View
+class adminHome extends View
 {
 
     public function show()
@@ -23,4 +23,4 @@ class home extends View
 <?php
     }
 }
-new home();
+new adminHome();
