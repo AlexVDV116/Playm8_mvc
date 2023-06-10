@@ -3,6 +3,14 @@
 // Define the namespace of this script
 namespace Includes;
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
 require_once '../vendor/autoload.php';
 
@@ -13,8 +21,6 @@ use Controller\accountController;
 // Uses this data to instantiate a accountController object
 // The accountController will run several server side validations
 // If no errors return user to the signup.php with a success message
-
-session_start();
 
 if (isset($_POST["submit"])) {
 
@@ -32,11 +38,13 @@ if (isset($_POST["submit"])) {
     $accountController = new accountController($username, $email, $password, $passwordrepeat);
 
     // Running server side validation, error handling and user sign up
-    if ($accountController->run() === true) {
+    if ($accountController->run() !== false) {
         $accountController->addAccount();
     }
 
+    unset($_SESSION['signup_form']);
+
     // Redirect user back to the front page when sucsessfull
     header("location: ../view/login.php?error=none");
-    unset($_SESSION['signup_form']);
+    exit();
 }
