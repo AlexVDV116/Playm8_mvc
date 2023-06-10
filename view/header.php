@@ -75,7 +75,7 @@ class header extends View
             <link rel="stylesheet" href=<?= $ROOT . "./assets/css/style.css" ?>>
 
             <title>Playm8</title>
-            <link rel="icon" type="image/png" href=<?= $ROOT . './assets/images/Playm8_favicon_32x32.ico?1' ?>>
+            <link rel="icon" type="image/png" href=<?= $ROOT . './assets/images/Playm8_favicon_32x32.ico' ?>>
         </head>
 
         <body>
