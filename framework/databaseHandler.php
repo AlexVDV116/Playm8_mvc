@@ -7,7 +7,7 @@ namespace Framework;
 require_once '../vendor/autoload.php';
 
 // Import classes this class depends on
-use Data\secret;
+use Data\Secret;
 use PDO;
 use PDOException;
 
@@ -22,7 +22,7 @@ class databaseHandler
     public function __construct()
     {
         if (self::$pdo === null) {
-            $this->connect(secret::DB_HOST, secret::DB_NAME, secret::DB_USERNAME, secret::DB_PASSWORD);
+            $this->connect(Secret::DB_HOST, Secret::DB_NAME, Secret::DB_USERNAME, Secret::DB_PASSWORD);
         }
     }
 
