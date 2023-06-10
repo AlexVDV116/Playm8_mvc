@@ -3,12 +3,15 @@
 // Define the namespace of this class
 namespace Data;
 
+// Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
+require_once '../vendor/autoload.php';
+
 // Rename this file, or create a new file named secret.php
 // Copy this template to to 'secret.php' and fill in your own database credentials and mail configuration
 // Make sure the name 'secret.php' is in .gitignore
 
 // Class containing database credentials
-class Secret
+class secret
 {
     const DB_HOST = 'localhost';
     const DB_NAME = 'playm8';
@@ -18,7 +21,7 @@ class Secret
 }
 
 // Class containing PHPMailer email credentials and configuration
-class mailConfig
+class MailConfig
 {
     const CONFIG = [
         'email' => [
@@ -32,5 +35,5 @@ class mailConfig
 
     // Fill in your localhost APP URL in order to get right activation link in the accountDAO mailActivationCode method
     // This should point to the playm8_mvc/ folder
-    const APP_URL = 'http://localhost/Coding_projects/GitHub%20Repositories/';
+    const APP_URL = 'http://localhost/Coding_projects/GitHub%20Repositories/Playm8_mvc/';
 }
