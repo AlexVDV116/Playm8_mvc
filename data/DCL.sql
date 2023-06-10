@@ -2,7 +2,7 @@
 -- Data Control Lanuage voor database `Playm8`
 --
 
-USE `playm8`;
+USE `codeby_playm8`;
 
 GRANT SELECT ON `playm8`.* TO `user_read`@`%`;
 
