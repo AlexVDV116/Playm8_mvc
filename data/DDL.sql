@@ -5,7 +5,7 @@
 DROP DATABASE IF EXISTS `playm8`;
 CREATE DATABASE IF NOT EXISTS `playm8`; 
 
-USE `playm8`;
+USE `codeby_playm8`;
 
 CREATE TABLE IF NOT EXISTS `accounts` (
   `accountID` varchar(500) NOT NULL,
