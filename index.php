@@ -201,7 +201,7 @@ $header = new header();
         </div>
 
         <div class="row">
-            <div class="col">
+            <div class="col text-center">
                 <img class="img-fluid" src="./assets/images/impressie.jpg" alt="impressie" loading="lazy">
             </div>
         </div>
