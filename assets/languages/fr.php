@@ -163,6 +163,10 @@ $lang = [
     "Vertel hier over de favoriete activiteiten, uitlaatplaatsen of andere leuke feitjes over jou en je huisdier! (20 - 255 karakters)" => "Parlez de vos activités préférées, des lieux de promenade ou d'autres anecdotes amusantes vous concernant, vous et votre animal de compagnie ! (20 - 255 caractères)",
     "Dit veld is verplicht. (20 - 500 karakters)" => "Ce champ est obligatoire. (20 - 500 caractères)",
     "Verwijder gebruikersprofiel" => "Supprimer le profil d'utilisateur",
-    "Bevestig verwijderen van gebruikersprofiel" => "Confirmer la suppression du profil utilisateur"
+    "Bevestig verwijderen van gebruikersprofiel" => "Confirmer la suppression du profil utilisateur",
+
+    // Reset password page
+    "Reset wachtwoord" => "Réinitialiser le mot de passe",
+    "Uw wachtwoord moet uit ten minste 8 tekens (maximaal 32) en ten minste één cijfer, één letter en één speciaal karakter bestaan." => "Votre mot de passe doit avoir une longueur minimale de 8 caractères (maximum de 32) et contenir au moins un chiffre et un caractère spécial."
 
 ];
