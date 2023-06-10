@@ -70,7 +70,7 @@ class accountDAO extends DAO
     // Returns a new Account object if no email provided
     // Else select all records from accounts table where the email matches the given email
     // Returns an instance of the Account model with the property names set to the data from the selected record
-    public function get(?string $email): Account
+    public function get(?string $email)
     {
         if (empty($email)) {
             return new Account();
@@ -272,7 +272,7 @@ class accountDAO extends DAO
     public function mailActivationCode(string $email, string $activationCode): void
     {
         $activationLink = mailConfig::APP_URL;
-        $activationLink .= "Playm8_mvc/includes/activate.inc.php?email={$email}&activationCode={$activationCode}";
+        $activationLink .= "includes/activate.inc.php?email={$email}&activationCode={$activationCode}";
 
         $senderName = "Playm8 Account Activation";
         $senderEmail = mailConfig::CONFIG['email']['username'];
