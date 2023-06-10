@@ -28,6 +28,8 @@ if (isset($_POST["submit"])) {
 
     // Redirect user back to the front page when sucsessfull
     header("location: ../view/forgotPassword.php?forgot=success");
+    exit();
 } else {
     header("location: ../index.php");
+    exit();
 }
