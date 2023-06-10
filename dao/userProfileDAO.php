@@ -80,7 +80,7 @@ class userProfileDAO extends DAO
 
     public function checkRecordExists(string $userProfileID): bool
     {
-        $stmt = $this->prepare('SELECT * FROM `UserProfiles` WHERE `userProfileID` = ?');
+        $stmt = $this->prepare('SELECT * FROM `userProfiles` WHERE `userProfileID` = ?');
         $stmt->execute([$userProfileID]);
         $result = $stmt->fetch();
         $stmt->closeCursor();
