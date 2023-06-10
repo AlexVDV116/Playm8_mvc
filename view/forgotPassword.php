@@ -47,7 +47,7 @@ class forgotPassword extends View
                                             <p><?= $translator->__('Je kunt je wachtwoord opnieuw instellen, voer hiervoor je e-mailadres in en volg de daarna de instructies die je via de e-mail krijgt toegestuurd.') ?></p>
                                         </div>
 
-                                        <form action="../includes/forgotpassword.inc.php" method="post" class="needs-validation mx-1 mx-md-4" novalidate>
+                                        <form action="../includes/forgotPassword.inc.php" method="post" class="needs-validation mx-1 mx-md-4" novalidate>
                                             <div class="d-flex flex-row align-items-center mb-4">
                                                 <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                                 <div class="form-outline flex-fill mb-0">
