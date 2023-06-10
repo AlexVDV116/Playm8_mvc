@@ -8,13 +8,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Controller\\": "controller/",
+            "controller\\": "controller/",
             "DAO\\": "dao/",
-            "Data\\": "data/",
-            "Framework\\": "framework/",
-            "Includes\\": "includes/",
-            "Model\\": "model/",
-            "View\\": "view/"
+            "data\\": "data/",
+            "framework\\": "framework/",
+            "includes\\": "includes/",
+            "model\\": "model/",
+            "view\\": "view/"
         }
     },
     "authors": [
