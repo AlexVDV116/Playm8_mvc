@@ -12,7 +12,6 @@ use Model\Account;
 use Model\Mail;
 use PDO;
 use Data\mailConfig;
-use DateTime;
 
 ini_set('display_errors', 1);
 
@@ -259,34 +258,6 @@ class accountDAO extends DAO
         $roles = array_column($result, '0');
 
         return $roles;
-    }
-
-    // Generate a uniquely random activation code, random bytes converted to a hexadecimal format
-    // This code will be emailed to the user, a hash of this code will be stored in the db
-    public function generateActivationCode(): string
-    {
-        return bin2hex(random_bytes(16));
-    }
-
-    // Send the activation code to the email registered
-    public function mailActivationCode(string $email, string $activationCode): void
-    {
-        $activationLink = mailConfig::APP_URL;
-        $activationLink .= "includes/activate.inc.php?email={$email}&activationCode={$activationCode}";
-
-        $senderName = "Playm8 Account Activation";
-        $senderEmail = mailConfig::CONFIG['email']['username'];
-        $senderEmailPassword = mailConfig::CONFIG['email']['password'];
-
-        $recieverEmail = $email;
-        $subject = "Verify your email-adress.";
-        $body = "<p><strong>Thank you for registering at Playm8!</strong></p>";
-        $body .= "<p>Please follow this link to activate your account:<br>";
-        $body .= "{$activationLink}</p>";
-        $body .= "<p>This link will expire in 1 hour.</p>";
-
-        $activationMail = new Mail($senderName, $senderEmail, $senderEmailPassword);
-        $activationMail->sendMail($recieverEmail, $subject, $body);
     }
 
     // Delete account with matching accountID and isActive set to 0
