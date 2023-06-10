@@ -373,8 +373,6 @@ class accountDAO extends DAO
 
         $activationMail = new Mail($senderName, $senderEmail, $senderEmailPassword);
         $activationMail->sendMail($recieverEmail, $subject, $body);
-
-        header("location: ../view/resetPassword.php?reset=success");
     }
 
     // Validate the user by comparing the validator from to our hashed token in the database
@@ -425,8 +423,6 @@ class accountDAO extends DAO
                     $stmt->execute([$tokenEmail]);
                     $stmt->closeCursor();
                 }
-                // Redirect user back to the front page when sucsessfull
-                header("location: ../view/login.php?reset=success");
             }
         }
     }
