@@ -11,6 +11,8 @@ use Framework\Controller;
 use DAO\accountDAO;
 use DAO\roleDAO;
 use Model\Account;
+use Model\Mail;
+use Data\mailConfig;
 
 // Controller class that handles user input when registering an account
 // Connects to the database trough an instance of the accountDAO class
@@ -69,7 +71,7 @@ class accountController extends Controller
         // Generate an activation code for email activation
         // Generate an expiry date that is now + 24 hours for the activation code expiry date
         $accountDAO = new accountDAO();
-        $activationCode = $accountDAO->generateActivationCode();
+        $activationCode = $this->generateActivationCode();
         $expiryDate = date("Y-m-d H:i:s", strtotime('+1 hour')); // ExpiryDate = now + 1 hour
 
         // Generate an unique ID with the prefix AID for AccountID
@@ -98,7 +100,7 @@ class accountController extends Controller
         $accountDAO->setRoleID($account->get("accountID"), [1]);
 
         // Send email to user with activation code and link to activate the account
-        $accountDAO->mailActivationCode($this->email, $activationCode);
+        $this->mailActivationCode($this->email, $activationCode);
     }
 
     public function editAccount(string $email, string $currentPassword): void
@@ -139,12 +141,12 @@ class accountController extends Controller
                     exit();
                 }
 
-                // Update email, set account inactive, resent activation mil
+                // Update email, set account inactive, resent activation mail
                 $account->set("email", $this->email);
                 $account->set("isActive", false);
 
                 // Generate a new activationcode and expirydate
-                $activationCode = $accountDAO->generateActivationCode();
+                $activationCode = $this->generateActivationCode();
                 $hashedActivationCode = password_hash($activationCode, PASSWORD_DEFAULT);
                 $expiryDate = date("Y-m-d H:i:s", strtotime('+24 hours')); // ExpiryDate = now + 24 hours
 
@@ -153,7 +155,7 @@ class accountController extends Controller
                 $account->set("activationExpiry", $expiryDate);
 
                 // Send email to user with activation code and link to activate the account
-                $accountDAO->mailActivationCode($this->email, $activationCode);
+                $this->mailActivationCode($this->email, $activationCode);
 
                 $emailChange = true;
             }
@@ -270,7 +272,7 @@ class accountController extends Controller
                 $userAccount->set("email", $this->email);
 
                 // Generate a new activationcode and expirydate
-                $activationCode = $accountDAO->generateActivationCode();
+                $activationCode = $this->generateActivationCode();
                 $hashedActivationCode = password_hash($activationCode, PASSWORD_DEFAULT);
                 $expiryDate = date("Y-m-d H:i:s", strtotime('+24 hours')); // ExpiryDate = now + 24 hours
 
@@ -279,7 +281,7 @@ class accountController extends Controller
                 $userAccount->set("activationExpiry", $expiryDate);
 
                 // Send email to user with activation code and link to activate the account
-                $accountDAO->mailActivationCode($this->email, $activationCode);
+                $this->mailActivationCode($this->email, $activationCode);
 
                 $emailChange = true;
             }
@@ -377,6 +379,34 @@ class accountController extends Controller
             // Redirect user to admin page with success message
             header("location: ../view/admin.php?view=listAccounts&deleteAccount=success");
         }
+    }
+
+    // Generate a uniquely random activation code, random bytes converted to a hexadecimal format
+    // This code will be emailed to the user, a hash of this code will be stored in the db
+    public function generateActivationCode(): string
+    {
+        return bin2hex(random_bytes(16));
+    }
+
+    // Send the activation code to the email registered
+    public function mailActivationCode(string $email, string $activationCode): void
+    {
+        $activationLink = mailConfig::APP_URL;
+        $activationLink .= "includes/activate.inc.php?email={$email}&activationCode={$activationCode}";
+
+        $senderName = "Playm8 Account Activation";
+        $senderEmail = mailConfig::CONFIG['email']['username'];
+        $senderEmailPassword = mailConfig::CONFIG['email']['password'];
+
+        $recieverEmail = $email;
+        $subject = "Verify your email-adress.";
+        $body = "<p><strong>Thank you for registering at Playm8!</strong></p>";
+        $body .= "<p>Please follow this link to activate your account:<br>";
+        $body .= "{$activationLink}</p>";
+        $body .= "<p>This link will expire in 1 hour.</p>";
+
+        $activationMail = new Mail($senderName, $senderEmail, $senderEmailPassword);
+        $activationMail->sendMail($recieverEmail, $subject, $body);
     }
 
     // Method that checks if for any empty inputs: returns true if empty inputs found
