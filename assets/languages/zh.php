@@ -164,6 +164,10 @@ $lang = [
     "Vertel hier over de favoriete activiteiten, uitlaatplaatsen of andere leuke feitjes over jou en je huisdier! (20 - 255 karakters)" => "在这里分享关于您和您的宠物的喜爱活动、遛狗场所或其他有趣的事实！（20 - 255 个字符）",
     "Dit veld is verplicht. (20 - 500 karakters)" => "此字段为必填项（20 - 500 个字符",
     "Verwijder gebruikersprofiel" => "删除用户个人资料",
-    "Bevestig verwijderen van gebruikersprofiel" => "确认删除用户个人资料"
+    "Bevestig verwijderen van gebruikersprofiel" => "确认删除用户个人资料",
+
+    // Reset password page
+    "Reset wachtwoord" => "重設密碼",
+    "Uw wachtwoord moet uit ten minste 8 tekens (maximaal 32) en ten minste één cijfer, één letter en één speciaal karakter bestaan." => "您的密碼至少應包含 8 個字符（最多 32 個字符），並至少包含一個數字和特殊字符."
 
 ];
