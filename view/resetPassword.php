@@ -3,17 +3,25 @@
 // Define the namespace of this class
 namespace View;
 
-// Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
-require_once '../vendor/autoload.php';
-
-// Import classes this class depends on
-use Framework\View;
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Setting the ROOT directory for this file so the relative paths used in included pages will still work
 $ROOT = '../';
 
-// Include the header
-include_once '../header.php';
+// Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
+require_once $ROOT . 'vendor/autoload.php';
+
+// Import classes this class depends on
+use Framework\View;
+use View\header;
+use Controller\translatorController;
+
+// Used to translate the header on this page
+$translator = new translatorController;
+// Use the getLanguageFile method of the languageSelector and require the correct language file
+require $ROOT . $translator->getLanguageFile();
 
 // resetPassword class that handles the reset password process
 // Contains a form where the user can reset his password
@@ -23,6 +31,8 @@ class resetPassword extends View
 
     public function show()
     {
+        global $translator;
+        new header();
 
         if ((isset($_GET['selector'])) && (isset($_GET['validator']))) {
 
@@ -36,10 +46,7 @@ class resetPassword extends View
                 header("location: ../view/resetPassword.php?reset=fail");
             } else {
                 if (ctype_xdigit($selector) !== false && ctype_xdigit($validator) !== false) {
-
-
 ?>
-
                     <section>
                         <div class="container h-100">
                             <div class="row d-flex justify-content-center align-items-center h-100">
@@ -50,8 +57,8 @@ class resetPassword extends View
                                                 <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
                                                     <div class="mx-4 mb-5">
-                                                        <h3 class="text-center mb-2">Reset wachtwoord</h3>
-                                                        <p>Uw wachtwoord moet uit ten minste 8 tekens (maximaal 32) en ten minste één cijfer, één letter en één speciaal karakter bestaan.</p>
+                                                        <h3 class="text-center mb-2"><?= $translator->__('Reset wachtwoord') ?></h3>
+                                                        <p><?= $translator->__('Uw wachtwoord moet uit ten minste 8 tekens (maximaal 32) en ten minste één cijfer, één letter en één speciaal karakter bestaan.') ?></p>
                                                     </div>
 
                                                     <form action="../includes/resetPassword.inc.php" method="post" class="needs-validation mx-1 mx-md-4" novalidate>
@@ -62,9 +69,9 @@ class resetPassword extends View
                                                             <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                                             <div class="form-outline flex-fill mb-0">
                                                                 <input id="form_password" type="password" name="password" class="form-control" required>
-                                                                <label for="form_password" class="form-label">Wachtwoord</label>
+                                                                <label for="form_password" class="form-label"><?= $translator->__('Wachtwoord') ?>:</label>
                                                                 <div class="invalid-feedback">
-                                                                    Dit veld is verplicht.
+                                                                    <?= $translator->__('Dit veld is verplicht.') ?>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -73,15 +80,15 @@ class resetPassword extends View
                                                             <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                                             <div class="form-outline flex-fill mb-0">
                                                                 <input id="form_passwordrepeat" type="password" name="passwordrepeat" class="form-control" required>
-                                                                <label for="form_passwordrepeat" class="form-label">Herhaal wachtwoord</label>
+                                                                <label for="form_passwordrepeat" class="form-label"><?= $translator->__('Herhaal uw wachtwoord') ?>:</label>
                                                                 <div class="invalid-feedback">
-                                                                    Dit veld is verplicht.
+                                                                    <?= $translator->__('Dit veld is verplicht.') ?>
                                                                 </div>
                                                             </div>
                                                         </div>
 
                                                         <div class="form-button-row d-flex justify-content-center flex-row mt-3">
-                                                            <button class="btn btn-credits shadow-sm my-2" type="submit" name="submit">Reset wachtwoord</button>
+                                                            <button class="btn btn-credits shadow-sm my-2" type="submit" name="submit"><?= $translator->__('Reset wachtwoord') ?></button>
                                                         </div>
                                                         <?php
                                                         if (isset($_GET["error"])) {
@@ -116,7 +123,6 @@ class resetPassword extends View
                             </div>
                         </div>
                     </section>
-
 <?php
                 }
             }
@@ -124,4 +130,5 @@ class resetPassword extends View
     }
 }
 new resetPassword();
-include_once '../footer.php';
+// Include the footer
+$footer = new footer();
