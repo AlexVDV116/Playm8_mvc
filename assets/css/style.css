@@ -332,6 +332,11 @@ label > a:visited {
     padding-top: 75px;
 }
 
+.app-icons {
+    display: flex;
+    align-items: center;
+}
+
 /** =================================================================
 *
 *    Features section
