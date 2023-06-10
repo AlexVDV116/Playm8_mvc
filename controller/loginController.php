@@ -45,7 +45,6 @@ class loginController extends Controller
         }
         $accountDAO = new accountDAO();
         $account = $accountDAO->get($this->email);
-        $accountID = $account->get("accountID");
 
         // If query gets no result exit script and redirect user to index with error message
         if (!$account) {
@@ -53,6 +52,8 @@ class loginController extends Controller
             header("location: ../view/login.php?error=accountnotfound");
             exit();
         };
+
+        $accountID = $account->get("accountID");
 
         // use PHP built in method to check if the given password matches the hashed password stored in the DB (returns bool)
         $checkPwd = password_verify($this->password, $account->get("password"));
