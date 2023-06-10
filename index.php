@@ -71,7 +71,7 @@ $header = new header();
             </div>
 
             <div class="col-lg-6 order-1 order-lg-2">
-                <img class="img-fluid rounded-4 shadow-sm" src="./assets/images/hero-img.jpeg" alt="Banner image">
+                <img class="img-fluid rounded-4 shadow-sm" src="./assets/images/hero-img.jpg" alt="Banner image" loading="lazy">
             </div>
 
         </div>
@@ -82,13 +82,13 @@ $header = new header();
     <div class="container">
         <div class="row mb-5">
             <div class="col">
-                <img src="./assets/images/paws.png" alt="paws" class="img-fluid paws d-block mx-auto">
+                <img src="./assets/images/paws.jpg" alt="paws" class="img-fluid paws d-block mx-auto" loading="lazy">
             </div>
         </div>
 
         <div class="row mt-5">
             <div class="col-lg-5 order-1 order-lg-1 gx-5">
-                <img class="img-fluid hero-app-image rounded-4" src="./assets/images/data-img.png" alt="Is data image">
+                <img class="img-fluid hero-app-image rounded-4" src="./assets/images/data-img.jpg" alt="Is data image" loading="lazy">
             </div>
 
             <div class="col-lg-7 order-2 order-lg-2 gx-5">
@@ -202,7 +202,7 @@ $header = new header();
 
         <div class="row">
             <div class="col">
-                <img class="img-fluid" src="./assets/images/impressie.png" alt="impressie">
+                <img class="img-fluid" src="./assets/images/impressie.jpg" alt="impressie" loading="lazy">
             </div>
         </div>
     </div>
