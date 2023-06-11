@@ -39,7 +39,7 @@ $header = new header();
                 </p>
 
                 <br>
-                <div class="download-buttons d-flex flex-row justify-content-start">
+                <div class="d-flex flex-row justify-content-start">
                     <?php
                     $buttonLang = $_SESSION['lang'];
 
@@ -49,20 +49,20 @@ $header = new header();
                             echo "<div class='app-icons mx-3'><a href=#><img class='img-fluid' src='https://apple-resources.s3.amazonaws.com/media-badges/download-on-the-app-store/black/nl-nl.svg' alt='Download on the App Store' width='164px' height='60px' ></a></div>";
                             break;
                         case 'en':
-                            echo "<div class='app-icons'><a href=#><img class='img-fluid' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' alt='Get it on Google Play' width='180px' height='60px' /></a></div>";
-                            echo "<div class='mx-3'><a href=#><img class='img-fluid' src='https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1598227200' alt='Download on the App Store' width='164px' height='60px' ></a></div>";
+                            echo "<div class='app-icons'><a href=#><img class='img-fluid' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' alt='Ontdek het op Google Play' width='200px' height='80px' /></a></div>";
+                            echo "<div class='app-icons mx-3'><a href=#><img class='img-fluid' src='https://apple-resources.s3.amazonaws.com/media-badges/download-on-the-app-store/black/en-us.svg' alt='Download on the App Store' width='164px' height='60px' ></a></div>";
                             break;
                         case 'fr':
                             echo "<div class='app-icons'><a href=#><img class='img-fluid' src='https://play.google.com/intl/en_us/badges/static/images/badges/fr_badge_web_generic.png' alt='Disponible sur Google Play' width='180px' height='60px' /></a></div>";
-                            echo "<div class='mx-3'><a href=#><img class='img-fluid' src='https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/fr-fr?size=250x83&amp;releaseDate=1598227200' alt='Download on the App Store' width='164px' height='60px' ></a></div>";
+                            echo "<div class='app-icons mx-3'><a href=#><img class='img-fluid' src='https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/fr-fr?size=250x83&amp;releaseDate=1598227200' alt='Download on the App Store' width='164px' height='60px' ></a></div>";
                             break;
                         case 'es':
                             echo "<div class='app-icons'><a href=#><img class='img-fluid' src='https://play.google.com/intl/en_us/badges/static/images/badges/es_badge_web_generic.png' alt='Disponible en Google Play' width='180px' height='60px' /></a></div>";
-                            echo "<div class='mx-3'><a href=#><img class='img-fluid' src='https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/es-es?size=250x83&amp;releaseDate=1598227200' alt='Download on the App Store' width='164px' height='60px' ></a></div>";
+                            echo "<div class='app-icons mx-3'><a href=#><img class='img-fluid' src='https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/es-es?size=250x83&amp;releaseDate=1598227200' alt='Download on the App Store' width='164px' height='60px' ></a></div>";
                             break;
                         case 'zh':
                             echo "<div class='app-icons'><a href=#><img class='img-fluid' src='https://play.google.com/intl/en_us/badges/static/images/badges/zh-cn_badge_web_generic.png' alt='下载应用，请到 Google Play' width='180px' height='60px' /></a></div>";
-                            echo "<div class='mx-3'><a href=#><img class='img-fluid' src='https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/zh-cn?size=250x83&amp;releaseDate=1598227200' alt='Download on the App Store' width='164px' height='60px' ></a></div>";
+                            echo "<div class='app-icons mx-3'><a href=#><img class='img-fluid' src='https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/zh-cn?size=250x83&amp;releaseDate=1598227200' alt='Download on the App Store' width='164px' height='60px' ></a></div>";
                             break;
                     }
                     ?>
