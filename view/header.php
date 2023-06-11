@@ -13,11 +13,11 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-/* Echo session variables for development purposes */
+/* Echo session variables for development purposes 
 echo '<pre>';
 var_dump($_SESSION);
 echo '</pre>';
-
+*/
 
 // Setting the ROOT directory for this file so the relative paths used in included pages will still work
 global $ROOT;
@@ -179,7 +179,9 @@ class header extends View
                                                 ?>
                                                     <li><a class="dropdown-item" href="<?= $ROOT ?>view/userProfilePage.php"><?= $translator->__('Gebruikersprofiel') ?></a></li>
                                                     <li><a class="dropdown-item" href="<?= $ROOT ?>view/editUserProfile.php"><?= $translator->__('Wijzig profiel') ?></a></li>
-                                                    <li><a class="dropdown-item" href="#"><?= $translator->__('Vind matches') ?></a></li>
+                                                    <li><a class="dropdown-item" href="<?= $ROOT ?>view/matchProfiles.php"><?= $translator->__('Vind matches') ?></a></li>
+                                                    <li><a class="dropdown-item" href="#"><?= $translator->__('Mijn matches') ?></a></li>
+
                                                 <?php
                                                 } else {
                                                 ?>
