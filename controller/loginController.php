@@ -79,18 +79,26 @@ class loginController extends Controller
             // If the password is correct
         } elseif ($checkPwd == true) {
 
-            // If the account is disabled check if the last login attempt was longer then 30 mins ago
-            if ($accountDAO->isActive($this->email) === false) {
 
-                if (strtotime($accountDAO->getLastLoginAttempt($accountID)) < strtotime("-30 minutes")) {
-                    // Remove record from loginAttempts, set account active and log in user
-                    $accountDAO->resetFailedLoginAttempts($accountID);
-                    $accountDAO->enableAccount($accountID);
-                    $account->set("isActive", true);
+            // If the account is disabled check if there was a last login attemp,
+            // If true check if it was longer then 30 mins ago, else redirect with account not activate message
+            if ($accountDAO->isActive($this->email) === false) {
+                if ($accountDAO->getLastLoginAttempt($accountID) === null) {
+                    // echo "Account niet geactiveerd";
+                    header("location: ../view/login.php?error=accountnotactivated");
+                    exit;
                 } else {
-                    // echo "Account geblokkeerd wegens te veel foutieve inlogpogingen.";
-                    header("location: ../view/login.php?error=blockedaccount");
-                    exit();
+
+                    if (strtotime($accountDAO->getLastLoginAttempt($accountID)) < strtotime("-30 minutes")) {
+                        // Remove record from loginAttempts, set account active and log in user
+                        $accountDAO->resetFailedLoginAttempts($accountID);
+                        $accountDAO->enableAccount($accountID);
+                        $account->set("isActive", true);
+                    } else {
+                        // echo "Account geblokkeerd wegens te veel foutieve inlogpogingen.";
+                        header("location: ../view/login.php?error=blockedaccount");
+                        exit();
+                    }
                 }
             } else {
                 $accountDAO->resetFailedLoginAttempts($accountID);
