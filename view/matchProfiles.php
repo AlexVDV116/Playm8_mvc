@@ -56,7 +56,7 @@ class matchProfiles extends View
                 $match = $userProfileDAO->get($_POST['likedUserProfileID']);
                 echo "<div class='text-center'>";
                 echo "<h1>Match!</h1>";
-                echo "<p> Je hebt een match met " . $match->get("firstName") . "," . $match->get("lastName") . "</p>";
+                echo "<p> Je hebt een match met " . $match->get("firstName") . " " . $match->get("lastName") . "</p>";
                 echo "</div>";
             }
 
