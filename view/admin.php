@@ -71,7 +71,7 @@ class admin extends View
             <link rel="stylesheet" href="../assets/css/style.css">
 
             <title>Playm8</title>
-            <link rel="icon" type="image/x-icon" href="../assets/images/Playm8_favicon_32x32.png">
+            <link rel="icon" type="image/png" href=<?= $ROOT . './assets/images/Playm8_favicon_32x32.ico' ?>>
         </head>
 
         <body class="light-bg">
