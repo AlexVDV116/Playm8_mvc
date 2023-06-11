@@ -563,6 +563,10 @@ form i.fa-key {
     margin-bottom: -2rem;
 }
 
+.match-icon {
+    font-size: 7rem;
+}
+
 /** =================================================================
 *
 *    Alerts
@@ -695,6 +699,19 @@ form i.fa-key {
 .btn-cancel:hover {
     color: #fff;
     background-color: #d6004a;
+}
+
+/** =================================================================
+*
+*    Match Profiles page
+*
+*  ================================================================= */
+
+.match-button {
+    border: none !important;
+    color: #d6004a;
+    padding: 0;
+    background: none;
 }
 
 /** =================================================================
