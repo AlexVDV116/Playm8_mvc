@@ -37,6 +37,7 @@ class admin extends View
 
     public function show()
     {
+
         $view = filter_input(INPUT_GET, 'view');
         if (empty($view)) {
             $view = 'adminHome';
@@ -71,7 +72,7 @@ class admin extends View
             <link rel="stylesheet" href="../assets/css/style.css">
 
             <title>Playm8</title>
-            <link rel="icon" type="image/png" href=<?= $ROOT . './assets/images/Playm8_favicon_32x32.ico' ?>>
+            <link rel="icon" type="image/png" href='../assets/images/Playm8_favicon_32x32.ico'>
         </head>
 
         <body class="light-bg">
