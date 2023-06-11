@@ -12,10 +12,11 @@ use Framework\View;
 // Session start and error headings because we do not include the header.php in this file
 session_start();
 
-/* Echo session variables for development purposes */
+/* Echo session variables for development purposes
 echo '<pre>';
 var_dump($_SESSION);
 echo '</pre>';
+*/
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
