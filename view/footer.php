@@ -41,7 +41,7 @@ class footer extends View
                         <ul class="social-icons">
                             <li><a href="https://instagram.com/" target="_blank"><i class="fa fa-instagram"></i></a></li>
                             <li><a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="https://github.com/playm8-avans" target="_blank"><i class="fa fa-github"></i></a></li>
+                            <li><a href="https://github.com/playm8-avans/Playm8_mvc" target="_blank"><i class="fa fa-github"></i></a></li>
                             <li><a href="<?= $ROOT ?>view/contact.php"><i class="fa-regular fa-envelope"></i></a>
                             </li>
                         </ul>
