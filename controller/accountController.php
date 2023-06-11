@@ -108,7 +108,7 @@ class accountController extends Controller
         // Grab the account from the DB
         $accountDAO = new AccountDAO();
         $account = $accountDAO->get($email);
-        $userNameChange = false;
+        $emailChange = false;
         $passwordChange = false;
 
         // use PHP built in method to check if the given password matches the hashed password stored in the DB (returns bool)
@@ -132,20 +132,19 @@ class accountController extends Controller
                 // Check if email is valid
                 if ($this->hasInvalidEmail() == true) {
                     // echo "Onjuist email format.";
-                    header("location: ../view/editAccount.php?error=invalidemail");
+                    header("location: ../view/admin.php?view=adminEditAccount&account=" . $currentUserEmail . "&error=invalidemail");
                     exit();
                 }
 
                 // Check if email is already registered with us
                 if ($this->isKnownEmail() == true) {
                     // echo "Email bestaat al in ons bestand.";
-                    header("location: ../view/editAccount.php?error=emailalreadyexists");
+                    header("location: ../view/admin.php?view=adminEditAccount&account=" . $currentUserEmail . "&error=emailalreadyexists");
                     exit();
                 }
 
-                // Update email, set account inactive, resent activation mail
+                // Update email, resent activation mail
                 $account->set("email", $this->email);
-                $account->set("isActive", false);
 
                 // Generate a new activationcode and expirydate
                 $activationCode = $this->generateActivationCode();
@@ -185,6 +184,11 @@ class accountController extends Controller
                     $account->set("password", $hashedPassword);
                     $passwordChange = true;
                 }
+            }
+
+            // If the email has changed set the account isActive to false
+            if ($emailChange == true) {
+                $account->set("isActive", false);
             }
 
             // Update the database with the new account object 
