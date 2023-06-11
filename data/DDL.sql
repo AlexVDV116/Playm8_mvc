@@ -2,10 +2,10 @@
 -- Data Definition Lanuage voor database `Playm8`
 --
 
-DROP DATABASE IF EXISTS `codeby_playm8`;
-CREATE DATABASE IF NOT EXISTS `code_byplaym8`; 
+DROP DATABASE IF EXISTS `playm8`;
+CREATE DATABASE IF NOT EXISTS `playm8`; 
 
-USE `codeby_playm8`;
+USE `playm8`;
 
 CREATE TABLE IF NOT EXISTS `accounts` (
   `accountID` varchar(500) NOT NULL,
@@ -475,18 +475,51 @@ BEGIN
 END$$
 DELIMITER ;
 
+DELIMITER $$
+CREATE PROCEDURE `getAllUserProfileIDs`()
+SELECT userProfiles.userProfileID FROM userProfiles$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `addLike`(
+  IN `liker` varchar(500), 
+  IN `liked` varchar(500)
+)
+INSERT INTO `likes` (
+    liker, liked)
+     VALUES (liker, liked)$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `getLikes`(
+    IN `userProfileID` varchar(500)
+)
+SELECT liked FROM `likes` WHERE liker = userProfileID$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `checkMatch`(
+  IN `liker` varchar(500), 
+  IN `liked` varchar(500)
+)
+SELECT * FROM matches WHERE liker = matches.userProfileID_A AND liked = matches.userProfileID_B OR
+liker = matches.userProfileID_B AND liked = matches.userProfileID_A$$
+DELIMITER ;
+
 --
 -- foundMatch trigger
 --
 
 DELIMITER $$
-CREATE TRIGGER `foundMatch` BEFORE INSERT ON `likes`
-  FOR EACH ROW 
-  BEGIN
-    IF EXISTS( SELECT * FROM likes WHERE NEW.liker = likes.liked AND NEW.liked = likes.liker ) THEN 
-        INSERT INTO matches (userProfileID_A, userProfileID_B) VALUES (NEW.liker, NEW.liked);
-    END IF;
-  END
+CREATE TRIGGER `FoundMatch` BEFORE INSERT ON `likes`
+FOR EACH ROW
+BEGIN
+  IF EXISTS(
+    SELECT * FROM likes WHERE NEW.liker = likes.liked AND NEW.liked = likes.liker
+  ) THEN
+    INSERT INTO matches (userProfileID_A, userProfileID_B) VALUES (NEW.liker, NEW.liked);
+  END IF;
+END$$
 DELIMITER ;
 
 --
