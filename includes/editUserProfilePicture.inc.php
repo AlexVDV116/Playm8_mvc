@@ -11,7 +11,10 @@ use Controller\profilePictureController;
 
 // Include script that handles the user pictures upload
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 $userProfileID = $_SESSION["auth_user"]["userProfileID"];
 
 if (isset($_POST["submit"])) {

@@ -9,7 +9,9 @@ require_once '../vendor/autoload.php';
 // Import classes this script depends on
 use Controller\userProfileController;
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Check if user is logged in and form is submitted
 if (isset($_SESSION["auth_user"]) && isset($_POST["submit"])) {
@@ -34,6 +36,7 @@ if (isset($_SESSION["auth_user"]) && isset($_POST["submit"])) {
 
     // Redirect user back to his profile page when sucsessfull
     header("location: ../view/admin.php?view=adminEditUserProfile&userProfileID=" . $userProfileID . "&accountID=" . $accountID . "&error=none");
+    exit();
 } else {
     // Redirect user to the index page
     header("location: ../index.php");

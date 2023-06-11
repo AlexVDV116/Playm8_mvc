@@ -15,7 +15,9 @@ use Controller\accountController;
 // The accountController will run several server side validations
 // If no errors return user to the index page with a success message
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 if (isset($_POST["submit"])) {
 

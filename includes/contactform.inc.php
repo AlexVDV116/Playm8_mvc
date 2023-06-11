@@ -15,7 +15,9 @@ use Controller\contactFormController;
 // The contactFormController will run several server side validations
 // If no errors return user to the contact.php with a success message
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 if (isset($_POST["submit"])) {
 
@@ -43,4 +45,5 @@ if (isset($_POST["submit"])) {
 
     // Redirect user back to the contact page when successfull with a success message
     header("Location: ../view/contact.php?error=none");
+    exit();
 }

@@ -10,7 +10,9 @@ require_once '../vendor/autoload.php';
 use Framework\View;
 
 // Session start and error headings because we do not include the header.php in this file
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 /* Echo session variables for development purposes
 echo '<pre>';

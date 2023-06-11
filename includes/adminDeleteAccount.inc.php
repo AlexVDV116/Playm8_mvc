@@ -9,7 +9,9 @@ require_once '../vendor/autoload.php';
 // Import classes this class depends on
 use Controller\accountController;
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);

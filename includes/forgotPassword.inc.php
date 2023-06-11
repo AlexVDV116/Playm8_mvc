@@ -9,6 +9,10 @@ require_once '../vendor/autoload.php';
 // Import classes this script depends on
 use Controller\forgotPasswordController;
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 // PHP script that grabs the data from the form
 // Instantiates the Controller that runs the server side validations
 // If there are no errors in the controller script redirect user 

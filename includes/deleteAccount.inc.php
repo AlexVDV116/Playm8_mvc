@@ -9,7 +9,9 @@ require_once '../vendor/autoload.php';
 // Import classes this script depends on
 use DAO\accountDAO;
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 if (isset($_POST["submit"])) {
 
@@ -37,4 +39,5 @@ if (isset($_POST["submit"])) {
 
     // Redirect user to register page with success message
     header("location: ../view/signup.php?deleteAccount=success");
+    exit();
 }

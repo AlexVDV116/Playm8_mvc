@@ -33,4 +33,5 @@ if (isset($_POST["submit"])) {
 
     // Redirect user back to the front page when successfull with a success message
     header("location: ../index.php?beta=success#tester-section");
+    exit();
 }

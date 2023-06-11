@@ -14,7 +14,9 @@ use Controller\accountController;
 // The accountController will run several server side validations
 // If no errors return user to the signup.php with a success message
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 if (isset($_POST["submit"])) {
 
@@ -35,4 +37,5 @@ if (isset($_POST["submit"])) {
 
     // Redirect user back to the front page when sucsessfull
     header("location: ../view/admin.php?view=listAccounts&addAccount=success");
+    exit();
 }

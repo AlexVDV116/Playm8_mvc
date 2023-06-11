@@ -9,6 +9,10 @@ require_once '../vendor/autoload.php';
 // Import classes this script depends on
 use Controller\resetPasswordController;
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 // Include script that handles user input when resetting the password
 // Instantiaties a resetPasswordController with the user input as parameters
 

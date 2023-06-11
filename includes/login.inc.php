@@ -9,6 +9,10 @@ require_once '../vendor/autoload.php';
 // Import classes this script depends on
 use Controller\loginController;
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 // An include file that runs a PHP script
 // Gets the data from the loginform trough the $_POST method
 // Uses this data to instantiate a loginController object
@@ -31,4 +35,5 @@ if (isset($_POST["submit"])) {
 
     // Redirect user back to the front page when sucsessfull
     header("location: ../index.php");
+    exit();
 }

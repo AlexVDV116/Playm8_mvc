@@ -10,7 +10,9 @@ require_once '../vendor/autoload.php';
 use DAO\userProfileDAO;
 use DAO\accountDAO;
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 if (isset($_POST["submit"])) {
 
@@ -39,5 +41,6 @@ if (isset($_POST["submit"])) {
 
         // Redirect user to index page with success message
         header("location: ../view/admin.php?view=listAccounts&deleteUserProfile=success");
+        exit();
     }
 }

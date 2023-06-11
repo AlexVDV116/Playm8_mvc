@@ -10,7 +10,9 @@ require_once '../vendor/autoload.php';
 use Model\userProfile;
 use DAO\userProfileDAO;
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 if ($_SESSION["auth_user"]["userProfileID"] !== "test") {
 
@@ -42,6 +44,8 @@ if ($_SESSION["auth_user"]["userProfileID"] !== "test") {
     $userProfileDAO->setUserProfileInfo($userProfile);
 
     header("location: ../view/editUserProfile.php?createUserProfile=success");
+    exit();
 } else {
     header("location: ../index.php?createUserProfile=fail");
+    exit();
 }

@@ -3,6 +3,10 @@
 // Define the namespace of this class
 namespace Includes;
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 // Include the autoload.php file composer automatically generates specifying PSR-4 autoload information set in composer.json
 require_once '../vendor/autoload.php';
 
@@ -34,7 +38,9 @@ if ((isset($_GET['email'])) && (isset($_GET['activationCode']))) {
     // activate the account using the activateAccount method and redirect user with success message
     if ($user && $accountDAO->activateAccount($user['accountID'])) {
         header("location: ../view/login.php?activation=success");
+        exit();
     } else {
         header("location: ../view/signup.php?activation=fail");
+        exit();
     }
 }

@@ -9,7 +9,9 @@ require_once '../vendor/autoload.php';
 // Import classes this script depends on
 use DAO\userProfileDAO;
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 if (isset($_POST["submit"])) {
 
@@ -34,4 +36,5 @@ if (isset($_POST["submit"])) {
 
     // Redirect user to index page with success message
     header("location: ../index.php?deleteUserProfile=success");
+    exit();
 }
