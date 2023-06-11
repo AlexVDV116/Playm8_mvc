@@ -15,6 +15,7 @@ $lang = [
     "Gebruikersprofiel" => "Userprofile",
     "Wijzig profiel" => "Edit userprofile",
     "Vind matches" => "Find matches",
+    "Mijn matches" => "My matchces",
     "Creëer gebruikersprofiel" => "Create userprofile",
     "Registreren" => "Sign up",
     "Inloggen" => "Login",
@@ -168,6 +169,11 @@ $lang = [
 
     // Reset password page
     "Reset wachtwoord" => "Reset password",
-    "Uw wachtwoord moet uit ten minste 8 tekens (maximaal 32) en ten minste één cijfer, één letter en één speciaal karakter bestaan." => "Your password should have a minimum length of 8 characters (maximum of 32) and contain at least one number and special character."
+    "Uw wachtwoord moet uit ten minste 8 tekens (maximaal 32) en ten minste één cijfer, één letter en één speciaal karakter bestaan." => "Your password should have a minimum length of 8 characters (maximum of 32) and contain at least one number and special character.",
 
+    // matchProfiles page
+    "Negeer" => "Dislike",
+    "Match" => "Like",
+    "Geen gebruikersprofielen meer" => "Out of userprofiles",
+    "Wacht een tijdje tot er nieuwe gebruikers registreren om meer matches te vinden." => "Wait untill new users have signed up to find more matches."
 ];
