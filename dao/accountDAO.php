@@ -478,15 +478,19 @@ class accountDAO extends DAO
         $stmt->closeCursor();
     }
 
-    // Get the datetime of the last login attempt
-    public function getLastLoginAttempt(string $accountID): string
+    // Get the datetime of the last login attempt, if no record return null
+    public function getLastLoginAttempt(string $accountID): mixed
     {
         $stmt = $this->prepare('CALL getLastLoginAttempt(?);');
         $stmt->execute([$accountID]);
         $result = $stmt->fetch();
         $stmt->closeCursor();
 
-        return $result[0];
+        if ($result) {
+            return $result[0];
+        } else {
+            return null;
+        }
     }
 
     // Enable an acount by setting the isActive value to true
