@@ -15,6 +15,7 @@ $lang = [
     "Gebruikersprofiel" => "Perfil de usuario",
     "Wijzig profiel" => "Editar perfil",
     "Vind matches" => "Encuentra coincidencias",
+    "Mijn matches" => "Mis partidos",
     "Creëer gebruikersprofiel" => "Crear perfil de usuario",
     "Registreren" => "Registrarse",
     "Inloggen" => "Iniciar sesión",
@@ -167,6 +168,12 @@ $lang = [
 
     // Reset password page
     "Reset wachtwoord" => "Restablecer la contraseña",
-    "Uw wachtwoord moet uit ten minste 8 tekens (maximaal 32) en ten minste één cijfer, één letter en één speciaal karakter bestaan." => "Su contraseña debe tener una longitud mínima de 8 caracteres (máximo de 32) y contener al menos un número y un carácter especial."
+    "Uw wachtwoord moet uit ten minste 8 tekens (maximaal 32) en ten minste één cijfer, één letter en één speciaal karakter bestaan." => "Su contraseña debe tener una longitud mínima de 8 caracteres (máximo de 32) y contener al menos un número y un carácter especial.",
+
+    // matchProfiles page
+    "Negeer" => "Néguer",
+    "Match" => "Como",
+    "Geen gebruikersprofielen meer" => "No más perfiles de usuario",
+    "Wacht een tijdje tot er nieuwe gebruikers registreren om meer matches te vinden." => "Espere un momento para que los nuevos usuarios se registren para encontrar más coincidencias."
 
 ];
