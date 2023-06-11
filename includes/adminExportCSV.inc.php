@@ -40,16 +40,16 @@ if ($fileName === "accounts.csv") {
 // Grab the table headers from the associative array and move them to the front of the array
 array_unshift($tableData, array_keys($tableData[0]));
 
-// Open a file handle that writes to the output buffer instead of creating a actual file 
-$file = fopen('php://output', "w") or
-    header("location: ../view/admin.php?view=home&error=cannotopenfile&file=" . $fileName);
-
 // Set the response header to specify that the file should be downloaded as an attachment
 header("Content-Description: File Transfer");
 header("Content-Disposition: attachment; filename=" . $fileName);
 
 // Set the content type to CSV
-header("Content-Type: application/octet-stream");
+header("Content-Type: application/csv; ");
+
+// Open a file handle that writes to the output buffer instead of creating a actual file 
+$file = fopen('php://output', "w") or
+    header("location: ../view/admin.php?view=home&error=cannotopenfile&file=" . $fileName);
 
 // For each line in our multidimensional array containing our account data
 // Format this line as CSV data and write to file
