@@ -152,6 +152,7 @@ class CSVController extends Controller
         $tables = $dbh->getAllTables();
 
         // For each table in the database get the collum names and add these collum names to the array as the value
+        // IMPORTANT: Change database name in databaseHandler getAllCollumns class to match webhost/localhost database name
         foreach ($tables as $table) {
             $tableName = $table[0];
             $collumns = $dbh->getAllCollumns($tableName);
@@ -165,7 +166,7 @@ class CSVController extends Controller
         $handle = fopen($filePath, 'r') or
             header("location: ../view/admin.php?view=adminimportcsv&error=cannotopenfile&file=" . $filePath);
 
-        // Check if the headers on the first row of the CSV file match the exact collum names of one of the tables in our DB
+        // Check if the headers on the first row of the CSV file match the exact collum names of the tables in our DB
         $csvHeaders = fgetcsv($handle);
 
         // If the headers match the collumn names of one of our tables
@@ -211,6 +212,7 @@ class CSVController extends Controller
             fclose($handle);
             unlink($filePath);
             header("location: ../view/admin.php?view=adminImportCSV&upload=success&updates=" . $updates . "&inserts=" . $inserts);
+            exit();
         } elseif ($csvHeaders === $dbHeaders['permissions']) {
             $permissionDAO = new permissionDAO;
             $updates = 0;
@@ -246,6 +248,7 @@ class CSVController extends Controller
             fclose($handle);
             unlink($filePath);
             header("location: ../view/admin.php?view=adminImportCSV&upload=success&updates=" . $updates . "&inserts=" . $inserts);
+            exit();
         } elseif ($csvHeaders === $dbHeaders['roles']) {
             $roleDAO = new roleDAO;
             $updates = 0;
@@ -281,11 +284,13 @@ class CSVController extends Controller
             fclose($handle);
             unlink($filePath);
             header("location: ../view/admin.php?view=adminImportCSV&upload=success&updates=" . $updates . "&inserts=" . $inserts);
+            exit();
         } else {
             // Generate error message
             fclose($handle);
             unlink($filePath);
             header("location: ../view/admin.php?view=adminImportCSV&error=nomatchingheaders");
+            exit();
         }
     }
 }
