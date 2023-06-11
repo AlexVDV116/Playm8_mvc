@@ -2,7 +2,7 @@
 -- Data Manipulations Lanuage voor database `Playm8`
 --
 
-USE `codeby_playm8`;
+USE `playm8`;
 
 -- Disable foreign key checks globally in order to prevent ERROR 1452: Foreign key constraint fail
 -- Setting this option for the session does not work
@@ -20,13 +20,13 @@ INSERT INTO `accounts` (`accountID`, `username`, `email`, `password`, `isBetaUse
   ('AID644e579c94b95', 'pieter', 'pieterjeeeee@gmail.com', '$2y$10$.EGzPDlybCZUAtOAe3/CouXfA5V3NphZBkHPu5H7R.NxAo314AUtW', 1, 'UID644e579c94b95', 1, "$2y$10$lSrE1fPry.tViDMu7Ve1pum2kBtLMe3/gdeC39PWGHMOysgfWYh2i", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
   ('AID644e579c94b96', 'Petertjeeeee', 'petertjeeee@hotmail.com', '$2y$10$Sghx.UpH1fpeMNBbYd9Nbue9ioKZ6QuVzkcpLfX2pedS09UmavN0W', 0, 'UID644e579c94b96', 1, "$2y$10$GU7Vgj6ljTE60tIzxpkgo.1dxkHpvgefGWFap/Ye.llCgGNy4EK2S", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
   ('AID644e579c94b97', 'Marit_123', 'maritdeboer@hotmail.com', '$2y$10$tUXFyfsk/1wp2dmx00og3uoFWjsG8sY7FOu2wSGUrDNE1FATIqW6.', 0, 'UID644e579c94b97', 1, "$2y$10$JAIQDG9DP0XR1/D6iSbqo.wKXkVCz4mpY3LzwkHAt8/0.AK.eiroC", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
-  ('AID644e579c94b98', 'donut12', 'poloooo@gmail.com', '$2y$10$Wkg3OKaATFkhIZeRXyLg7eq599HSVcaIUA7WskHoeXcxkjcNRRMN6', 0, 'UID644e579c94b98', 1, "$2y$10$xDPKxwCNY/nznOT7.gsx5eERC/xmXKgUxfAv2WgAtG6vSv1UU/xy.", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
+  ('AID644e579c94b98', 'ChrisPeeters', 'poloooo@gmail.com', '$2y$10$Wkg3OKaATFkhIZeRXyLg7eq599HSVcaIUA7WskHoeXcxkjcNRRMN6', 0, 'UID644e579c94b98', 1, "$2y$10$xDPKxwCNY/nznOT7.gsx5eERC/xmXKgUxfAv2WgAtG6vSv1UU/xy.", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
   ('AID644e579c94b99', 'richard21', 'richard@gmail.com', '$2y$10$vN9nq8iah1/jt0oFrtqBo.SoIoP8mooeVqqIOGBvdfziO6eMRJYLS', 0, 'UID644e579c94b99', 1, "$2y$10$ycMV6qWzRAv15NerSYD36.uRrov8Cx9nClSO46T5lMJv7dC7uEXCG", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
-  ('AID644e579c94b9a', 'i<3dogs', 'chihuahua213@gmail.com', '$2y$10$4mij1qqSuR1bLm.OhKYDrO/iFRG882ijwxXAs9PSIhrVvbi7JSTbm', 1, 'UID644e579c94b9a', 1, "$2y$10$NI1PyEHICwtedW6CFFb8ROej2fDYboGsDgas51SAGRh2ZKT9mngGW", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
-  ('AID644e579c94b9b', 'banaan22', 'banaantjee@gmail.com', '$2y$10$Dtjewcor/Smp7inPNYcewOTMP4x8e/E8LUzg/JakmDT5EEHOb3KlC', 1, 'UID644e579c94b9b', 1, "$2y$10$4AnNzxd8MXXsJqIyq5IxrexTUTVvZkmFD/FD3KGUiJknUS1YrposW", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
-  ('AID644e579c94b9c', 'kareldeboer', 'kareltje@email.com', '$2y$10$SD2sAr7W12dvE1saupbKDu5fNZ/I7eg6R6yqvh9KnOtbhITTs9wUW', 0, 'UID644e579c94b9c', 1, "$2y$10$haNuEOjypCqWw.x7kTDd5OnX2qr7NItiU0Tfs3YdPAPi54q/g0YBi", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
-  ('AID644e579c94ba0', 'chrisjjee', 'chrisjee_3213@hotmail.com', '$2y$10$dV48fzD0CYxO80ERMMbAm.RoeYXW0c8TxE5JC6rzWjbC/M/mEBC42', 0, 'UID644e579c94ba0', 1, "$2y$10$t1jPI905mc34ImEgVdKemOwDd2mN0qKGGu8zxIZKWc9nySgqqe2w6", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
-  ('AID644e579c94ba1', 'banaanaa', 'chiquitabanana@hotmail.com', '$2y$10$niMTxstvGyYBjZZQ/6hK8ei4P4FltVlt8zAT2Ts8XaZGyXoaA45mC', 0, 'UID644e579c94ba1', 1, "$2y$10$/6ogbuuLxH/wASmAEHbkGOFyPAMX.K7KQ9oc9mYCdefhw0kRgnm4W", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
+  ('AID644e579c94b9a', 'paulaa_89', 'chihuahua213@gmail.com', '$2y$10$4mij1qqSuR1bLm.OhKYDrO/iFRG882ijwxXAs9PSIhrVvbi7JSTbm', 1, 'UID644e579c94b9a', 1, "$2y$10$NI1PyEHICwtedW6CFFb8ROej2fDYboGsDgas51SAGRh2ZKT9mngGW", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
+  ('AID644e579c94b9b', 'sjaakD', 'banaantjee@gmail.com', '$2y$10$Dtjewcor/Smp7inPNYcewOTMP4x8e/E8LUzg/JakmDT5EEHOb3KlC', 1, 'UID644e579c94b9b', 1, "$2y$10$4AnNzxd8MXXsJqIyq5IxrexTUTVvZkmFD/FD3KGUiJknUS1YrposW", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
+  ('AID644e579c94b9c', 'jessicasmit', 'jess@gmail.com', '$2y$10$SD2sAr7W12dvE1saupbKDu5fNZ/I7eg6R6yqvh9KnOtbhITTs9wUW', 0, 'UID644e579c94b9c', 1, "$2y$10$haNuEOjypCqWw.x7kTDd5OnX2qr7NItiU0Tfs3YdPAPi54q/g0YBi", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
+  ('AID644e579c94ba0', 'maurice_vos', 'maurice_3213@hotmail.com', '$2y$10$dV48fzD0CYxO80ERMMbAm.RoeYXW0c8TxE5JC6rzWjbC/M/mEBC42', 0, 'UID644e579c94ba0', 1, "$2y$10$t1jPI905mc34ImEgVdKemOwDd2mN0qKGGu8zxIZKWc9nySgqqe2w6", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
+  ('AID644e579c94ba1', 'michelle_1996', 'chiquitabanana@hotmail.com', '$2y$10$niMTxstvGyYBjZZQ/6hK8ei4P4FltVlt8zAT2Ts8XaZGyXoaA45mC', 0, 'UID644e579c94ba1', 1, "$2y$10$/6ogbuuLxH/wASmAEHbkGOFyPAMX.K7KQ9oc9mYCdefhw0kRgnm4W", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
   ('AID644e579c94ba2', 'connor', 'connorh@gmail.com', '$2y$10$YCHr7ZA8iHic1zdwLdd5zu1JSxG/Msa139I5QNvTwQb3Qcm09T0qG', 0, 'UID644e579c94ba2', 1, "$2y$10$oVOodTV6.UzmZzt4cHJ5SurCApL2PuLyazg4InlVg8Sfow8qnjoEC", "2023-04-24 15:41:16", "2023-04-23 11:16:21"),
   ('AID644e579c94ba3', 'falcooo1991', 'falcoo_1991@email.com', '$2y$10$I/ZQpbJ3eCgehf6D1lRNj.uus3t.rXK16QTcSoQdOXOigLTDfEZMK', 0, NULL, 1, "$2y$10$.0YmIpOMccc3GXlb/Nt.5.hnDFmz.0BrxbHBdvSzJ2Nd3HlAvPlp6", "2023-04-24 15:41:16", "2023-04-23 11:16:21");
 
@@ -51,15 +51,12 @@ INSERT INTO `userProfiles`(`userProfileID`, `firstName`, `lastName`, `city`, `co
 
 -- Insert data into the 'likes' table
 
+/* Disabling default inserts into likes table testing like functionality
+
 INSERT INTO `likes` (`liker`, `liked`) VALUES
   ('UID644e579c94b98', 'UID644e579c94ba1'),
   ('UID644e579c94b98', 'UID644e579c94b99'),
   ('UID644e579c94b98', 'UID644e579c94b95'),
-  ('UID644e579c94b98', 'UID644e5491179ca'),
-  ('UID644e579c94ba3', 'UID644e579c94b97'),
-  ('UID644e579c94ba3', 'UID644e579c94b95'),
-  ('UID644e579c94ba3', 'UID644e579c94b9a'),
-  ('UID644e579c94ba3', 'UID644e579c94ba2'),
   ('UID644e579c94ba2', 'UID644e579c94b9a'),
   ('UID644e579c94ba2', 'UID644e579c94b97'),
   ('UID644e579c94ba2', 'UID644e579c94b95'),
@@ -74,20 +71,17 @@ INSERT INTO `likes` (`liker`, `liked`) VALUES
   ('UID644e579c94b97', 'UID644e5491179ca'),
   ('UID644e579c94ba0', 'UID644e579c94ba2'),
   ('UID644e579c94ba0', 'UID644e579c94b96'),
-  ('UID644e579c94ba0', 'UID644e579c94ba3'),
   ('UID644e579c94ba1', 'UID644e579c94b98'),
   ('UID644e579c94ba1', 'UID644e579c94b99'),
   ('UID644e579c94ba1', 'UID644e5491179ca'),
   ('UID644e579c94ba1', 'UID644e579c94b96'),
   ('UID644e579c94b9a', 'UID644e579c94ba2'),
   ('UID644e579c94b9a', 'UID644e579c94b96'),
-  ('UID644e579c94b9a', 'UID644e579c94ba3'),
   ('UID644e579c94b9a', 'UID644e579c94b99'),
   ('UID644e579c94b96', 'UID644e579c94b98'),
   ('UID644e579c94b96', 'UID644e579c94ba0'),
   ('UID644e579c94b96', 'UID644e579c94b9b'),
   ('UID644e579c94b95', 'UID644e579c94b9c'),
-  ('UID644e579c94b95', 'UID644e579c94ba3'),
   ('UID644e579c94b95', 'UID644e579c94ba1'),
   ('UID644e579c94b99', 'UID644e579c94b98'),
   ('UID644e579c94b99', 'UID644e579c94b9c'),
@@ -95,22 +89,29 @@ INSERT INTO `likes` (`liker`, `liked`) VALUES
   ('UID644e579c94b9b', 'UID644e5491179ca'),
   ('UID644e579c94b9b', 'UID644e579c94b9c'),
   ('UID644e579c94b9b', 'UID644e579c94ba1'),
-  ('UID644e5491179ca', 'UID644e579c94ba3'),
   ('UID644e5491179ca', 'UID644e579c94b9b'),
-  ('UID644e5491179ca', 'UID644e579c94b9c'),
-  ('UID644e5491179ca', 'UID644e579c94ba3');
+  ('UID644e5491179ca', 'UID644e579c94b9c');
+
+  */
 
 -- Insert data into the 'matches' table
 
+/* Disabling default inserts into matches testing matching functionality
+
 INSERT INTO `matches` (`userProfileID_A`, `userProfileID_B`) VALUES
-  ('UID644e579c94b98', 'UID644e579c94ba1'),
-  ('UID644e579c94b98', 'UID644e579c94b99'),
-  ('UID644e579c94ba3', 'UID644e579c94b95'),
-  ('UID644e579c94ba3', 'UID644e579c94b9a'),
-  ('UID644e579c94ba2', 'UID644e579c94b9a'),
-  ('UID644e579c94b9c', 'UID644e5491179ca'),
-  ('UID644e579c94ba0', 'UID644e579c94b96'),
-  ('UID644e579c94b9b', 'UID644e5491179ca');
+('UID644e579c94ba2', 'UID644e579c94b9a'),
+('UID644e579c94ba1', 'UID644e579c94b98'),
+('UID644e579c94ba0', 'UID644e579c94b96'),
+('UID644e579c94b9c', 'UID644e5491179ca'),
+('UID644e579c94b9b', 'UID644e5491179ca'),
+('UID644e579c94b9a', 'UID644e579c94ba2'),
+('UID644e579c94b99', 'UID644e579c94b98'),
+('UID644e579c94b98', 'UID644e579c94ba1'),
+('UID644e579c94b98', 'UID644e579c94b99'),
+('UID644e579c94b96', 'UID644e579c94ba0'),
+('UID644e5491179ca', 'UID644e579c94b9b'),
+('UID644e5491179ca', 'UID644e579c94b9c');
+*/
 
 -- Insert data into the 'permissions' table
  
