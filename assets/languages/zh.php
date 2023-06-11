@@ -15,6 +15,7 @@ $lang = [
     "Gebruikersprofiel" => "使用者個人檔案",
     "Wijzig profiel" => "編輯使用者個人檔案",
     "Vind matches" => "尋找匹配",
+    "Mijn matches" => "我的比賽",
     "Creëer gebruikersprofiel" => "建立使用者個人檔案",
     "Registreren" => "註冊",
     "Inloggen" => "登入",
@@ -168,6 +169,13 @@ $lang = [
 
     // Reset password page
     "Reset wachtwoord" => "重設密碼",
-    "Uw wachtwoord moet uit ten minste 8 tekens (maximaal 32) en ten minste één cijfer, één letter en één speciaal karakter bestaan." => "您的密碼至少應包含 8 個字符（最多 32 個字符），並至少包含一個數字和特殊字符."
+    "Uw wachtwoord moet uit ten minste 8 tekens (maximaal 32) en ten minste één cijfer, één letter en één speciaal karakter bestaan." => "您的密碼至少應包含 8 個字符（最多 32 個字符），並至少包含一個數字和特殊字符.",
+
+    // matchProfiles page
+    "Negeer" => "忽略",
+    "Match" => "喜歡",
+    "Geen gebruikersprofielen meer" => "沒有更多的用戶資料",
+    "Wacht een tijdje tot er nieuwe gebruikers registreren om meer matches te vinden." => "等待新用戶註冊以查找更多匹配項."
+
 
 ];
